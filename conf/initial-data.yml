@@ -1,0 +1,6 @@
+Ingredient(agurk):
+  amount: 1
+  description: Agurk
+Ingredient(paprika):
+  amount: 2
+  description: Paprika

@@ -1,0 +1,52 @@
+*{ Display a recipe in one of these modes: 'full', 'home' or 'teaser' }*
+
+<div class="recipe ${_as == 'teaser' ? 'teaser' : ''}">
+    <h2 class="recipe-title">
+        <a href="@{Application.show(_recipe.id)}">${_recipe.title}</a>
+    </h2>
+
+    <div class="recipe-metadata">
+        #{if _recipe.author}
+        <span class="recipe-author">av ${_recipe.author.fullname}</span>,
+        #{/if}
+        #{if _recipe.postedAt}
+        <span class="recipe-date">${_recipe.postedAt.format('dd MMM yy')}</span>
+        #{/if}
+        #{if _recipe.tags}
+    <span class="recipe-tags">
+         Merket med
+        #{list items:_recipe.tags, as:'tag'}
+            <a href="@{Application.listTagged(tag.name)}">${tag}</a>${tag_isLast ? '' : ', '}
+        #{/list}
+    </span>
+        #{/if}
+        #{if _as != 'full'}
+            <span class="recipe-comments">
+                ${_recipe.ingredients.size() > 0 ?: 'ingen'}
+                ingredienser
+            </span>
+        #{/if}
+    </div>
+    #{if _as != 'teaser'}
+    <div class="recipe-content">
+        <div class="about">Detaljer:</div>
+        ${_recipe.description.nl2br()}
+    </div>
+    #{/if}
+</div>
+
+#{if _as == 'full'}
+<div class="recipe-comments">
+    <h3>
+        ${_recipe.ingredients.size() > 0 ?: 'ingen'}
+        ingredienser
+    </h3>
+
+    #{list items:_recipe.ingredients, as:'ingredient'}
+    <div class="recipe-comment">
+        ${ingredient.description.escape().nl2br()}
+    </div>
+    #{/list}
+
+</div>
+#{/if}        

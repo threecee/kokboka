@@ -1,7 +1,14 @@
-# you describe your data using the YAML notation here
-# and then load them using Fixtures.load("data.yml")
+Recipe(tofu):
+  description:tofu
+  steps:  >
+          Først lager du en kake
+          så putter du den i ommern.
 
-# User(bob):
-#   email: bob@gmail.com
-#   password: secret
-#   fullname: Bob
+Ingredient(agurk):
+  recipe:tofu
+  amount: 1
+  description: Agurk
+Ingredient(paprika):
+  recipe:tofu
+  amount: 2
+  description: Paprika

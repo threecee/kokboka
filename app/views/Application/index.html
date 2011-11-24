@@ -1,4 +1,25 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{welcome /}
+#{if frontRecipe}
+
+    #{display recipe:frontRecipe, as:'home' /}
+
+    #{if olderRecipes.size()}
+        <div class="older-recipes">
+            <h3>Flere oppskrifter <span class="from">fra denne siden:</span></h3>
+
+            #{list items:olderRecipes, as:'oldRecipe'}
+                #{display recipe:oldRecipe, as:'teaser' /}
+            #{/list}
+        </div>
+
+    #{/if}
+
+#{/if}
+
+#{else}
+    <div class="empty">
+        Finner ingen oppskrifter!
+    </div>
+#{/else}

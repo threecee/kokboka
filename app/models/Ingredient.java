@@ -6,13 +6,16 @@ import javax.persistence.*;
 import play.db.jpa.*;
 
 @Entity
-@Table(name="my_ingredient")
 public class Ingredient extends Model {
 
     public String amount;
     public String description;
 
-    public Ingredient(String amount, String description) {
+    @ManyToOne
+    public Recipe recipe;
+
+    public Ingredient(Recipe recipe, String amount, String description) {
+        this.recipe = recipe;
         this.amount = amount;
         this.description = description;
     }

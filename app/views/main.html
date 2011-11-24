@@ -11,6 +11,29 @@
         #{get 'moreScripts' /}
     </head>
     <body>
-        #{doLayout /}
-    </body>
+       <div id="header">
+            <div id="logo">
+                <a class="logolink" href="@{Application.index()}">Kokboka.</a>
+            </div>
+            <ul id="tools">
+                <li>
+                    <a href="#">Logg in for å redigere</a>
+                </li>
+            </ul>
+            <div id="title">
+                <span class="about">om</span>
+                <h2>Hold orden på oppskrifter, menyer og handlelister</h2>
+            </div>
+        </div>
+      <div id="main">
+            #{doLayout /}
+        </div>
+
+        <p id="footer">
+            Kokboka er noe Anja og Calle bruker for å holde orden på oppskriftene sine.
+        </p>    </body>
 </html>
+
+
+
+

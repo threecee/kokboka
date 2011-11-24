@@ -1,6 +1,57 @@
+User(bob):
+email: bob@bob.com
+password: zwob
+fullname: bobby
+
+Tag(play):
+name: Play
+
+Tag(architecture):
+name: Architecture
+
+Tag(test):
+name: Test
+
+Tag(mvc):
+name: MVC
+
+Recipe(tofu):
+author: bob
+title: Tofumat
+description: TofuserGodt serru serru
+steps: bake smake
+source: http://vg.no
+tags:
+- play
+- architecture
+- mvc
+postedAt: 2011-10-10
+
+Recipe(kake):
+author: bob
+title: supersaupkake
+description: kake er godt
+steps: bake smake snakke ake
+source: http://vg.no
+tags: play
+postedAt: 2010-01-03
+
 Ingredient(agurk):
-  amount: 1
-  description: Agurk
+recipe: tofu
+amount: 1
+description: Agurker
+
 Ingredient(paprika):
-  amount: 2
-  description: Paprika
+recipe: tofu
+amount: 2
+description: Paprikas
+
+Ingredient(melis):
+recipe: kake
+amount: 1
+description: Melisergodt
+
+Ingredient(berries):
+recipe: kake
+amount: 2
+description: PaprikaErGodt

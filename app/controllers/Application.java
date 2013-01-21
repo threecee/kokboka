@@ -10,11 +10,10 @@ import java.util.List;
 public class Application extends Controller {
 
     public static void index() {
-        Recipe frontRecipe = Recipe.find("order by postedAt desc").first();
-        List<Recipe> olderRecipes = Recipe.find(
+        List<Recipe> recipes = Recipe.find(
                 "order by postedAt desc"
-        ).from(1).fetch(10);
-        render(frontRecipe, olderRecipes);
+        ).from(0).fetch(10);
+        render(recipes);
     }
 
     public static void show(Long id) {

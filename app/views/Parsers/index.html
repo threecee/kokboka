@@ -1,14 +1,7 @@
 #{extends 'admin.html' /}
- 
-<h3>Velkommen ${user}, <span>du har ${recipes.size() > 0 ? 'skrevet '+ recipes.size(): 'ikke skrevet noen'}
-oppskrifter så langt</span></h3>
- 
-#{list items:recipes, as:'recipe'}
-    <p class="recipe ${recipe_parity}">
-        <a href="@{Admin.form(recipe.id)}">${recipe.title}</a>
+
+    <p class="recipe">
+        <a href="@{Parsers.importRema1000()}">Kjør rema1000-import</a>
     </p>
-#{/list}
- 
-<p id="newrecipe" >
-    <a href="@{form()}"><span>+</span> legg inn en ny oppskrift</a>
-</p>
+
+

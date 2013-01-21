@@ -20,21 +20,21 @@ author: bob
 title: Tofumat
 description: TofuserGodt serru serru
 steps: bake smake
-source: http://vg.no
+source: httpvg.no
 tags:
 - play
 - architecture
 - mvc
-postedAt: 2011-10-10
+postedAt: 10.10.2011
 
 Recipe(kake):
 author: bob
 title: supersaupkake
 description: kake er godt
 steps: bake smake snakke ake
-source: http://vg.no
-tags: play
-postedAt: 2010-01-03
+source: httpvg.no
+tags: [play]
+postedAt: 01.03.2010
 
 Ingredient(agurk):
 recipe: tofu

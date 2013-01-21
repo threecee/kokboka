@@ -1,3 +1,4 @@
+import controllers.Parsers;
 import models.Ingredient;
 import models.Recipe;
 import models.Tag;
@@ -35,6 +36,16 @@ public class BasicTest extends UnitTest {
 
 
     @Test
+    public void parseRecipe(){
+        new User("bob2@gmail.com", "secret", "Bob").save();
+
+        // Retrieve the user with e-mail address bob@gmail.com
+        User bob = User.find("byEmail", "bob2@gmail.com").first();
+        // new Parsers().parseRecipe(bob, "http://www.rema.no/under100/Kampanjer/Wok_Bangkok_style/article66229.ece");
+
+    }
+
+    @Test
     public void tryConnectAsUser() {
         // Create a new user and save it
         new User("bob@gmail.com", "secret", "Bob").save();
@@ -54,7 +65,7 @@ public class BasicTest extends UnitTest {
 
         ArrayList<String> ingredients = new ArrayList<String>();
         ArrayList<String> steps = new ArrayList<String>();
-        new Recipe(bob, "Tofu", "info om tofu", "bake kake søte", "http://www.dinmat.no").save();
+        new Recipe(bob, "Tofu", "info om tofu", "bake kake søte", "http://www.dinmat.no", 2, "liter").save();
 
         Recipe rep = Recipe.find("byTitle", "Tofu").first();
 
@@ -68,10 +79,10 @@ public class BasicTest extends UnitTest {
     public void createRecipe() {
 
         User bob = new User("bob@gmail.com", "secret", "Bob").save();
-        Recipe rep = new Recipe(bob, "Kake", "info om kake", "bake smake kake", "http://www.dinmat.no").save();
+        Recipe rep = new Recipe(bob, "Kake", "info om kake", "bake smake kake", "http://www.dinmat.no", 20, "stk").save();
 
-        rep.addIngredient("1", "agurk").save();
-        rep.addIngredient("2", "sitroner").save();
+        rep.addIngredient("1", "stk", "agurk").save();
+        rep.addIngredient("2", "stk", "sitroner").save();
 
         // Retrieve all comments
         List<Ingredient> tofuIngredients = Ingredient.find("byRecipe", rep).fetch();
@@ -97,8 +108,8 @@ public class BasicTest extends UnitTest {
         User bob = new User("bob@gmail.com", "secret", "Bob").save();
 
         // Create a new post
-        Recipe rep = new Recipe(bob, "Kake", "info om kake", "bake smake kake", "http://www.dinmat.no").save();
-        Recipe rep2 = new Recipe(bob, "Saft", "info om saft", "drikke saft", "http://www.dinmat.no").save();
+        Recipe rep = new Recipe(bob, "Kake", "info om kake", "bake smake kake", "http://www.dinmat.no", 2, "stk").save();
+        Recipe rep2 = new Recipe(bob, "Saft", "info om saft", "drikke saft", "http://www.dinmat.no", 10, "liter").save();
 
         // Well
         assertEquals(0, Recipe.findTaggedWith("Red").size());

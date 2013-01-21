@@ -1,3 +1,18 @@
 # You can specialize this file for each language.
 # For example, for French create a messages.fr file
 #
+title=Tittel
+description=Beskrivelse
+postedAt=Lagt inn
+author=Forfatter
+Recipe=Relatert oppskrift
+tags=Merket med
+name=Navn
+email=Epost
+password=Passord
+fullname=Fullt navn
+isAdmin=Bruker er administrator
+
+secure.username=Din epost:
+secure.password=Ditt passord:
+secure.signin=Logg inn

@@ -2,4 +2,6 @@
 
 require:
     - play
-    - module.crud
+    - play -> crud
+    - play -> secure
+    - net.sourceforge.htmlcleaner -> htmlcleaner 2.2

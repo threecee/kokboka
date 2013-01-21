@@ -17,8 +17,19 @@ GET     /recipes.json                                  Application.recipes_json
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
-# Import CRUD routes
-*      /admin              module:crud
+
+# Import Secure routes
+*       /                                       module:secure
+
+# Administration
+GET     /admin/?                                Admin.index
+*       /admin                                  module:crud
+
+GET     /admin/mineoppskrifter/{id}                 Admin.form
+POST    /admin/mineoppskrifter/{id}                 Admin.save
+GET     /admin/new                          Admin.form
+POST    /admin/new                          Admin.save
+
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public

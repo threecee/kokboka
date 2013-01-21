@@ -10,13 +10,15 @@ public class Ingredient extends Model {
 
     public String amount;
     public String description;
+    public String unit;
 
     @ManyToOne
     public Recipe recipe;
 
-    public Ingredient(Recipe recipe, String amount, String description) {
+    public Ingredient(Recipe recipe, String amount, String unit, String description) {
         this.recipe = recipe;
         this.amount = amount;
+        this.unit = unit;
         this.description = description;
     }
 

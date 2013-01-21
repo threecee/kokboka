@@ -1,20 +1,5 @@
 *{ Display a recipe in one of these modes: 'full', 'home' or 'teaser' }*
-#{if _as == 'teaser'}
-			<div class="recipeListItem">
-				<div class="recipeItem">
-					<div class="recipeImage">
-						<div class="cimg">
-							<a href="@{Application.show(_recipe.id)}">
-								<img src="@{Recipes.recipePhotoThumb(_recipe.id)}" alt="oppskrift bilde" width="100" height="100"/>
-                                <span class="recipeTime">${_recipe.title}</span>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
 
-#{/if}
-#{if _as == 'full'}
 <div class="recipe ${_as == 'teaser' ? 'teaser' : ''}">
     <h2 class="recipe-title">
         <a href="@{Application.show(_recipe.id)}">${_recipe.title}</a>
@@ -45,6 +30,7 @@
     </div>
 </div>
 
+#{if _as == 'full'}
 <div class="recipe-metadata">
  <span class="recipe-tags">
 Oppskriften holder til ${_recipe.serves} ${_recipe.servesUnit}

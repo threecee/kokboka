@@ -1,11 +1,24 @@
 package controllers;
 
-/**
- * Created by IntelliJ IDEA.
- * User: carl c. christensen
- * Date: 11/24/11
- * Time: 9:58 PM
- * To change this template use File | Settings | File Templates.
- */
-public class Security {
+import models.User;
+
+public class Security extends Secure.Security {
+
+    static boolean authenticate(String username, String password) {
+    /*    if (User.connect(username, password) == null)
+        {
+            new User(username, password, "Bob").save();
+
+        }
+    */
+        return User.connect(username, password) != null;
+    }
+
+    static void onDisconnected() {
+        Application.index();
+    }
+
+    static void onAuthenticated() {
+        Admin.index();
+    }
 }

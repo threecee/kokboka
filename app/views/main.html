@@ -5,9 +5,10 @@
         <title>#{get 'title' /}</title>
         <meta charset="${_response_encoding}">
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/middagsplanleggeren.css'}">
         #{get 'moreStyles' /}
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-        <script src="@{'/public/javascripts/jquery-1.5.2.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="http://cdn.jquerytools.org/1.2.6/jquery.tools.min.js" type="text/javascript" charset="${_response_encoding}"></script>
         #{get 'moreScripts' /}
     </head>
     <body>
@@ -17,13 +18,26 @@
             </div>
             <ul id="tools">
                 <li>
-                    <a href="#">Logg in for å redigere</a>
+                    <a href="@{Admin.index()}">Logg inn</a>
                 </li>
             </ul>
-            <div id="title">
-                <span class="about">om</span>
-                <h2>Hold orden på oppskrifter, menyer og handlelister</h2>
-            </div>
+           <ul id="menu">
+               <li class="${request.controller == 'Application' ? 'selected' : ''}">
+                   <a href="@{Application.index()}">Oppskrifter</a>
+               </li>
+               #{secure.check 'admin'}
+                   <li class="${request.controller == 'Tags' ? 'selected' : ''}">
+                       <a href="@{Tags.list()}">Merkelapper</a>
+                   </li>
+                   <li class="${request.controller == 'Ingredients' ? 'selected' : ''}">
+                       <a href="@{Ingredients.list()}">Ingredienser</a>
+                   </li>
+                   <li class="${request.controller == 'Users' ? 'selected' : ''}">
+                       <a href="@{Users.list()}">Brukere</a>
+                   </li>
+               #{/secure.check}
+           </ul>
+
         </div>
       <div id="main">
             #{doLayout /}

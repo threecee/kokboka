@@ -1,10 +1,56 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<head>
-    <title></title>
-</head>
-<body>
+    <head>
+        <title>Administration</title>		
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        #{get 'moreStyles' /}	
+        <link rel="stylesheet" type="text/css" media="screen" 
+                href="@{'/public/stylesheets/main.css'}" />
+        <link rel="shortcut icon" type="image/png" 
+                href="@{'/public/images/favicon.png'}" />
+        <script src="http://cdn.jquerytools.org/1.2.6/jquery.tools.min.js" type="text/javascript" charset="${_response_encoding}"></script>
+        #{get 'moreScripts' /}
+    </head>
+    <body id="admin">
+        
+        <div id="header">
+            <div id="logo">
+                <a class="logolink" href="@{Application.index()}">Kokboka.</a><span>admin</span>
+            </div>
+            <ul id="tools">
+                <li>
+                    <a href="@{Secure.logout()}">Logg ut</a>
+                </li>
+            </ul>
+        </div>
+        
+ <div id="main">
 
-</body>
+    <ul id="adminMenu">
+        <li class="${request.controller == 'Admin' ? 'selected' : ''}">
+            <a href="@{Admin.index()}">Oppskrifter</a>
+        </li>
+        #{secure.check 'admin'}
+            <li class="${request.controller == 'Tags' ? 'selected' : ''}">
+                <a href="@{Tags.list()}">Merkelapper</a>
+            </li>
+            <li class="${request.controller == 'Ingredients' ? 'selected' : ''}">
+                <a href="@{Ingredients.list()}">Ingredienser</a>
+            </li>
+            <li class="${request.controller == 'Users' ? 'selected' : ''}">
+                <a href="@{Users.list()}">Brukere</a>
+            </li>
+            <li class="${request.controller == 'Parsers' ? 'selected' : ''}">
+                <a href="@{Parsers.index()}">Import</a>
+            </li>
+        #{/secure.check}
+    </ul>
+
+    #{doLayout /}
+</div>
+
+        <p id="footer">
+        </p>
+        
+    </body>
 </html>

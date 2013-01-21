@@ -1,0 +1,3186 @@
+
+/* START reset */
+/* http://meyerweb.com/eric/tools/css/reset/
+ v2.0 | 20110126
+ License: none (public domain)
+ */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+.clear {
+	clear: both;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+
+blockquote, q {
+    quotes: none;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+hr {
+	border: 0;
+	border-top: 1px dashed #ccc;
+	margin-bottom: 15px;
+}
+
+.header h2
+{
+	font-size: 25px;
+}
+
+/* END reset */
+
+
+
+
+
+/* START general style */
+
+.customButton{
+	background:url(buttonSkin.png) no-repeat;
+	width:200px !important;
+	color:#000;
+  	font-weight: normal !important;
+  	font-size:14px !important;
+  	text-align: center;
+  	height:30px;
+  	padding-top:2px;
+  	cursor: pointer;
+  	margin:0 20px 10px 0;
+  	border:0;
+}
+
+
+.customButton:hover{
+	background:url(buttonSkin_over.png) no-repeat;
+	width:200px !important;
+	color:#000;
+  	font-weight: normal !important;
+  	font-size:14px !important;
+  	text-align: center;
+  	height:30px;
+  	padding-top:2px;
+  	cursor: pointer;
+  	margin:0 20px 10px 0;
+  	border:0;
+}
+
+.customButton:active{
+	background:url(buttonSkin_down.png) no-repeat;
+	width:200px !important;
+	color:#000;
+  	font-weight: normal !important;
+  	font-size:14px !important;
+  	text-align: center;
+  	height:30px;
+  	padding-top:2px;
+  	cursor: pointer;
+  	margin:0 20px 10px 0;
+  	border:0;
+}
+
+.customButtonLong{
+	background:url(buttonSkinLong.png) no-repeat;
+	width:380px !important;
+	color:#000;
+  	font-weight: normal !important;
+  	font-size:14px !important;
+  	text-align: center;
+  	height:30px;
+  	padding-top:2px;
+  	cursor: pointer;
+  	margin:0 20px 10px 0;
+  	border:0;
+}
+
+.customButtonLong:hover{
+	background:url(buttonSkinLong_over.png) no-repeat;
+	width:380px !important;
+	color:#000;
+  	font-weight: normal !important;
+  	font-size:14px !important;
+  	text-align: center;
+  	height:30px;
+  	padding-top:2px;
+  	cursor: pointer;
+  	margin:0 20px 10px 0;
+  	border:0;
+}
+
+.customButtonLong:active{
+	background:url(buttonSkinLong_down.png) no-repeat;
+	width:380px !important;
+	color:#000;
+  	font-weight: normal !important;
+  	font-size:14px !important;
+  	text-align: center;
+  	height:30px;
+  	padding-top:2px;
+  	cursor: pointer;
+  	margin:0 20px 10px 0;
+  	border:0;
+}
+
+.saveFamilySettings .customButton{
+	padding-top:6px !important;
+}
+
+.profileSavedMsg{
+	width: auto !important; 
+	margin-left:110px;
+	margin-top:5px;
+}
+
+.profileDelete_wrapper #warningImg {
+	background-image: url(advarselstrekant.png);
+	background-repeat: no-repeat;
+	width: 25px;
+	height: 25px;
+	position: absolute;
+}
+
+.profileDelete_wrapper h3 {
+	padding-top: 3px;
+	margin-left: 30px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+h1,
+h2 {
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 17px;
+}
+
+h3,
+h3 a {
+    font-weight: bold;
+	font-size: 17px;
+	color: #222;
+	line-height: 1.2;
+}
+
+.width {
+    width: 1000px;
+	margin: 0 auto;
+}
+
+img {
+    border: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+	margin: 5px 0 10px 0;
+	padding: 0;
+}
+
+#container {
+	padding-bottom: 190px;
+	overflow: hidden;
+	min-height: 1060px;
+}
+
+.smallBtn
+{
+	background-image: url(btn_normal.png);
+	background-repeat: no-repeat;
+	width:100px;
+	height:40px;
+	text-align: center;
+	color: #FFF;
+	line-height: 38px;
+	line-height: 38px;
+	cursor: pointer;
+	font-size:17px;
+	float: right;
+	margin-right: 5px;
+}
+
+.smallBtn:active
+{
+	background-image: url(btn_click.png);
+}
+
+.smallBtnInaktiv,
+.smallBtnInaktiv:active
+{
+	background-image: url(btn_inaktiv.png);
+}
+
+/* END general style */
+
+
+
+
+
+
+/* START #top */
+
+#top {
+    background: url(topBkgrnd.png) repeat-x top;
+    height: 118px;
+}
+
+#top h1#logo a{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: url(logo.png) no-repeat left top;
+    width: 200px;
+    height: 150px;
+}
+
+#top h1#logo strong {
+    font-size: 35px;
+    color: #fff;
+    display: block;
+    margin-left: 210px;
+    width: 380px; 
+    margin-top: 20px;
+    line-height: 1.1;
+	background: url(logo_middagsplanleggeren.png) no-repeat top left;
+	text-indent: -1000px;
+	overflow: hidden;
+}
+
+
+
+#top h1#logo strong em {
+    font-size: 13px;
+    color: #fff;
+    display: inline-block;
+	vertical-align: top;
+	line-height: 25px;
+}
+
+#top h1#logo span {
+    font-size: 14px;
+    color: #7899bc;
+    display: block;
+    margin-left: 209px;
+    width: 300px;
+}
+
+#top #search {
+    float: right;
+    margin-top: 30px;
+    position: relative;
+}
+
+#top #search .inputText {
+    background: #fff;
+    border: none;
+    line-height: 1;
+    padding: 7px 5px 5px 10px;
+    margin: 0;
+    border-radius: 15px;
+    width: 280px;
+}
+
+#top #search .inputSubmit {
+    background: url(searchSubmit.png) no-repeat;
+    position: absolute;
+    top: 6px;
+    right: 7px;
+    text-indent: 1000px;
+    height: 17px;
+    width: 17px;
+    overflow: hidden;
+    border: none;
+}
+
+
+#top #linkCollection {
+	position: absolute;
+	top: 70px;
+	right: 0;
+    width: 295px;
+}
+
+
+#top #linkCollection a{
+    background: url(tilbakemelding.png) no-repeat top left;
+    border: none;
+    line-height: 28px;
+    padding: 0 10px 0 30px;
+	text-align: center;
+	height: 28px;
+    width: 100px;
+	display: block;
+	overflow: hidden;
+	color: #b7c8d9;
+}
+
+#top #linkCollection a.rema{
+    background: url(rema.png) no-repeat top left;
+    padding: 0 20px 0 20px;
+	float: right;
+}
+
+#top #linkCollection a:hover{
+    color: #fff;
+}
+
+
+/* END #top */
+
+
+
+
+
+/* START #menu */
+
+#menu {
+    background: url(topBkgrndBottom.png) repeat-x top;
+    height: 55px;
+	margin-bottom: 25px;
+}
+
+#menu ul, #menu ul li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+
+#menu ul {
+	display: block;
+	float: right;
+	width: 780px; 
+    position: relative;
+}
+
+
+
+#menu ul li {
+    display: block;
+    background: url(menuSeparator.png) repeat-y right;
+	float: left;
+}
+
+#menu ul li a{
+    display: inline-block;
+    color: #ccd3d9;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 55px;
+    background: url(menuSeparator.png) repeat-y right;
+    padding: 0 13px 0 14px;
+}
+
+#menu .loggedIn ul li  a {
+
+    padding: 0 23px 0 24px;
+
+}
+
+#menu ul li a .nyhet {
+    background: url(nyhet.png) no-repeat;
+    display: block;
+	position: absolute;
+	top: -16px;
+	margin-left: -5px;
+	line-height: 1;
+	width: 76px;
+	height: 31px;
+	text-indent: -1000px;
+	overflow: hidden;
+}
+
+#menu ul li.first a {
+    padding-left: 0;
+}
+
+
+#menu ul li.last {
+	right: 0;
+	text-align: center;	
+}
+
+
+
+#menu ul li.loggedin  a{
+	padding-right: 20px;
+}
+
+
+
+
+#menu ul li.last a{
+}
+
+
+#menu ul li.active a,
+#menu ul li a:hover {
+    color: #fff;
+	background: url(menuActive.png) no-repeat bottom center;
+}
+
+
+
+/*
+#menu ul li a {
+    display: inline-block;
+    color: #ccd3d9;
+    font-family: FlamaSemicondensedMedium;
+    font-size: 17px;
+    line-height: 55px;
+    padding: 0 14px 0 13px;
+    background: url(menuSeparator.png) repeat-y right;
+}
+
+#menu ul li:first-child a {
+    padding-left: 0;
+}
+
+#menu ul li.active a,
+#menu ul li a:hover {
+    color: #fff;
+	background: url(menuActive.png) no-repeat bottom center;
+}
+*/
+/* END #menu */
+
+
+
+
+
+
+/* START #campaignSections & settingsSections */
+#settingsSection,
+#campaignSections {
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+#settingsSection ul,
+#settingsSection ul li,
+#campaignSections ul,
+#campaignSections ul li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: inline; 
+}
+
+
+#settingsSection ul li span,
+#campaignSections ul li span{
+	background: url(oppskriftListe_seksjonInaktiv.png) no-repeat top;
+	display: block;
+	width: 305px;
+	height: 53px;
+	float: left;
+	padding: 10px;
+	padding-top: 12px;
+    font-size: 17px;
+    line-height: 33px;
+	color: #999;
+	margin-right: 12px;
+	cursor: pointer;
+	text-align: center;
+}
+
+
+#settingsSection ul li span{
+	background: url(oppskriftListe_seksjonInaktivSmall.png) no-repeat top;
+	height: 40px;
+	width: 227px;
+	line-height: 18px;
+	margin-right: 0px;
+	margin-left: 11px;
+}
+
+
+#campaignSections ul li.active span,
+#campaignSections ul li:hover span{
+	background: url(oppskriftListe_seksjonAktiv.png) no-repeat top;
+	color: #fff;
+}
+
+#settingsSection ul li.active span,
+#settingsSection ul li:hover span{
+	background: url(oppskriftListe_seksjonAktivSmall.png) no-repeat top;
+	color: #fff;
+}
+
+
+
+#settingsSection li.inactive span,
+#settingsSection li.inactive:hover span{
+	background: url(oppskriftListe_seksjonInaktivSmall.png) no-repeat top;
+	color: #999;
+	cursor: default;
+}
+
+
+
+#campaignSections ul li span strong{
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	margin-right: -40px; 
+	float: left;
+	margin-top: 1px;
+}
+
+#campaignSections ul li span#section1 strong{
+	background: url(seksjonsIcons.png) no-repeat 0px -40px;
+}
+	#campaignSections ul li span#section1:hover strong,	
+	#campaignSections ul li.active span#section1 strong{
+		background: url(seksjonsIcons.png) no-repeat 0px 0px;
+	}
+
+#campaignSections ul li span#section2 strong{
+	background: url(seksjonsIcons.png) no-repeat -40px -40px;
+}
+	
+	#campaignSections ul li span#section2:hover strong,
+	#campaignSections ul li.active span#section2 strong{
+		background: url(seksjonsIcons.png) no-repeat -40px 0px;
+	}
+
+#campaignSections ul li span#section3 strong{
+	background: url(seksjonsIcons.png) no-repeat -120px -40px;
+}
+	#campaignSections ul li span#section3:hover strong,
+	#campaignSections ul li.active span#section3 strong{
+		background: url(seksjonsIcons.png) no-repeat -120px 0px;
+	}
+
+#campaignSections ul li span#section3 {
+	margin-right: 0;
+	float: right;
+}
+
+#settingsSection ul li span#favoritter
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-left: -1px;
+}
+
+#settingsSection ul li span#loginregistrer,
+#settingsSection ul li span#dineinnstillinger
+{
+	padding-right: 5px;
+	padding-left: 5px;
+	margin-right: 0px;
+}
+
+#settingsSection ul li span#dineinnstillinger
+{
+	width: 225px;
+	margin-left: 13px;
+}
+
+
+/* END #campaignSections */
+
+
+
+
+
+
+
+
+/* START #campaignBanner */
+
+#campaignBanner {
+	width: 100%;
+	height: 250px;
+	clear: both;
+	overflow: hidden;
+	background-repeat:no-repeat;
+	position: relative;
+}
+
+#campaignBanner #campaignBanner_content{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#campaignBanner #campaignBanner_content img{
+	width: 776px;
+	height: 250px;
+}
+
+#campaignBanner #campaignBanner_menu {
+	width: 237px;
+	float: right;
+}
+
+#campaignBanner #campaignBanner_menu ul li span{
+	display: block;
+	height: 42px;
+	width: 100%;
+	color: #fff;
+	line-height: 42px;
+	text-indent: 30px;
+	cursor: pointer;
+    font-size: 17px;
+}
+
+#campaignBanner #campaignBanner_menu ul li:hover span,
+#campaignBanner #campaignBanner_menu ul li.active span{
+}
+
+/* END #campaignBanner */
+
+/*
+
+#recipe_container{
+	position:relative;
+	z-index:20;
+	top:190px;	
+}
+
+*/
+
+#section1content #recipe_container{
+	top:0px;
+}
+
+
+
+
+/* START #tags */
+
+#tags {
+	overflow: hidden;
+	clear: both;
+	margin-bottom: -15px;
+	overflow: hidden;
+	position:absolute;
+	/* z-index:25; */
+	height:900px;
+}
+
+#tags > div {
+	position: relative;
+}
+
+#tags .scrollUp {
+	background: url(kampanjeOppAktiv.png) no-repeat;
+	position: absolute;
+	top: 0px;
+	left: 95px;
+	text-indent: 1000px;
+	width: 44px;
+	height: 14px;
+	overflow: hidden; 
+}
+
+#tags .scrollDown {
+	background: url(kampanjeNedAktiv.png) no-repeat;
+	position: absolute;
+	bottom: 0px;
+	left: 95px;
+	text-indent: 1000px;
+	width: 44px;
+	height: 14px;
+	overflow: hidden;
+}
+
+
+
+#tags #tagsRaavare {
+	width: 509px;
+	float: left;
+}
+
+#tags #tagsSamling,
+#tags #tagsKampanje {
+	width: 237px;
+	float: left;
+}
+
+#tags #tagsKampanje {
+	margin-left:11px;
+}
+
+#tags ul li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: inline;
+}
+
+#tags ul {
+	margin: 0;
+	overflow: hidden;
+	display: block;
+}
+
+#tags #tagsRaavare ul {
+	overflow: hidden;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: inline;
+}
+
+#tags #tagsSamling ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: inline;
+}
+
+
+#tags ul li span {
+	float: left;
+	background: url(tagsListe_inaktiv.png) no-repeat top;
+	display: block;
+	width: 217px;
+	height: 30px; 
+	padding: 10px;
+	padding-top: 0px;
+    line-height: 39px;
+	color: #333;
+	cursor: pointer;
+	margin-bottom: 8px;
+	font-weight: bold;
+}
+
+#tags ul li em {
+	float: right;
+	color: #fff;
+	background: url(roundnumber_general.png) top no-repeat;
+	border: 2px solid #fff;
+	padding: 2px;
+	display: inline-block;
+	border-radius: 18px;
+	line-height: 20px;
+	min-width: 18px;
+	text-align: center;
+	font-weight: bold;
+	margin-top: 6px;
+}
+
+#tags #tagsRaavare ul li span{
+	margin-right: 17px;
+}
+
+#tags ul li:hover span,
+#tags ul li.active span {
+	background: url(tagsListe_aktiv.png) no-repeat top;
+	color: #fff;
+}
+
+#tags ul li span img{
+	width: 30px;
+	height: 30px;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+
+#tags #tagsKampanje #campaign_archive_container{
+	/*position:absolute; */
+	background-color:#184984;
+	border-radius:10px;
+	padding:10px 2px 5px 2px;
+	margin-top:-9px;
+	z-index: 28;
+	position: absolute;
+}
+
+#recipe_container.recipeArchive {
+/*	position: absolute;
+	top: 386px;
+	width: 1000px;    */
+	position: relative;
+	top: 210px;
+}
+
+#campaign_archive_container span{
+	background:url(tagsListe_inaktiv_spesialtema2.png) no-repeat top !important;
+	width:213px !important;
+	margin:0 0 5px 0 !important;
+	border-radius:15px;
+	behavior: url(/under100/css/PIE.htc);
+}
+
+#campaign_archive_container .active span{
+	background:url(tagsListe_aktiv.png) no-repeat top !important;
+	width:213px !important;
+	margin:0 0 5px 0 !important;
+	border-radius:15px;
+	behavior: url(/under100/css/PIE.htc);
+}
+
+#campaign_archive_container span:hover,
+#campaign_archive_container span:hover {
+	color: #000;
+	background:url(tagsListe_aktiv.png) no-repeat top !important;
+}
+
+
+
+/*
+#tags ul li span {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	float: left;
+	background: url(tagsIcons.png) no-repeat 0px -40px;
+}
+*/
+
+
+
+
+
+/*
+	
+	#tags ul li span#tag1 strong	{ background: url(tagsIcons.png) no-repeat 0px -40px; }
+	#tags ul li span#tag2 strong	{ background: url(tagsIcons.png) no-repeat -40px -40px; }
+	#tags ul li span#tag3 strong	{ background: url(tagsIcons.png) no-repeat -80px -40px; }
+	#tags ul li span#tag4 strong	{ background: url(tagsIcons.png) no-repeat -120px -40px; }
+	#tags ul li span#tag5 strong	{ background: url(tagsIcons.png) no-repeat -160px -40px; }
+	#tags ul li span#tag6 strong	{ background: url(tagsIcons.png) no-repeat -200px -40px; }
+	#tags ul li span#tag7 strong	{ background: url(tagsIcons.png) no-repeat -240px -40px; }
+	#tags ul li span#tag8 strong	{ background: url(tagsIcons.png) no-repeat -280px -40px; }
+	#tags ul li span#tag9 strong	{ background: url(tagsIcons.png) no-repeat -320px -40px; }
+	
+	#tags ul li span#tag1:hover strong,	#tags ul li.active span#tag1 strong	{ background: url(tagsIcons.png) no-repeat 0px 0; }
+	#tags ul li span#tag2:hover strong,	#tags ul li.active span#tag2 strong	{ background: url(tagsIcons.png) no-repeat -40px 0; }
+	#tags ul li span#tag3:hover strong,	#tags ul li.active span#tag3 strong	{ background: url(tagsIcons.png) no-repeat -80px 0; }
+	#tags ul li span#tag4:hover strong,	#tags ul li.active span#tag4 strong	{ background: url(tagsIcons.png) no-repeat -120px 0; }
+	#tags ul li span#tag5:hover strong,	#tags ul li.active span#tag5 strong	{ background: url(tagsIcons.png) no-repeat -160px 0; }
+	#tags ul li span#tag6:hover strong,	#tags ul li.active span#tag6 strong	{ background: url(tagsIcons.png) no-repeat -200px 0; }
+	#tags ul li span#tag7:hover strong,	#tags ul li.active span#tag7 strong	{ background: url(tagsIcons.png) no-repeat -240px 0; }
+	#tags ul li span#tag8:hover strong,	#tags ul li.active span#tag8 strong	{ background: url(tagsIcons.png) no-repeat -280px 0; }
+	#tags ul li span#tag9:hover strong,	#tags ul li.active span#tag9 strong	{ background: url(tagsIcons.png) no-repeat -320px 0; }
+*/
+
+/* END #tags */
+
+
+
+
+
+/* START #recipeList */
+
+#recipeList {
+	background: url(oppskriftListe_border.png) repeat-y;
+	margin-top: 20px;
+	overflow: hidden;
+}
+
+#tags #recipe_container #recipeList{
+	margin-top:0px !important;
+}
+
+#recipeList .recipeListItem {
+/*
+	width: 309px;
+	height: 190px;
+
+*/
+	padding-right: 10px;
+	padding-left: 13px;
+	overflow: hidden;
+/*
+	border-bottom: 1px dashed #ccc;
+	border-right: 1px dashed #ccc;
+    border-top: 1px dashed #ccc;
+*/
+	padding-top: 10px;
+	padding-bottom: 10px;
+	float: left;
+}
+
+.recipeItem {
+	position: relative;
+}
+
+.recipeItem .recipeImage {
+	position: relative;
+	float: right;
+	width: 140px;
+	height: 140px;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+
+.recipeItem .recipeImage img{
+	width: 140px;
+	height: 140px;
+}
+
+.recipeItem .recipeImage .recipeTime {
+	display: block;
+	position: absolute;
+	left: 0;
+	bottom: 12px;
+	width: 140px;
+    font-weight: bold;
+	font-size: 13px;
+	text-align: center;
+	color: #222;
+}
+
+.recipeItem .recipePrice {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 30px;
+	overflow: hidden;
+	border-radius: 8px;
+	border: 2px solid #fff;
+	background: #aedef9;
+	padding: 2px;
+}
+
+
+.recipeItem .recipePrice .recipePriceElements{
+	color: #fff;
+	background: #004993 url(price_small_bkgrnd.jpg) left top no-repeat;
+	overflow: hidden;
+	height: 50px;
+	text-align: center;
+	border-radius: 5px;
+}
+
+
+/* START Om oppskrift er litt over hundrelappen */
+.recipeItem .recipePrice .recipePriceElements.littOverHundrelappen {
+	background: #fff url(priceOver_small_bkgrnd.jpg) left top no-repeat;
+	color: #1e6aa9;
+}
+/* END Om oppskrift er litt over hundrelappen */
+ 
+
+.recipeItem .recipePrice .recipePriceElements .kr{
+	line-height: 35px;
+    font-weight: bold;
+	font-size: 25px;
+	letter-spacing: -0.05em;
+	display: inline-block;
+	margin-left: 5px;
+	height: 32px;
+}
+
+.recipeItem .recipePrice .recipePriceElements .ore{
+	font-weight: bold;
+	font-size: 10px;
+	margin-top: 8px;
+	text-align: left;
+	line-height: 6px;
+	padding-bottom: 3px;
+	border-bottom: 2px solid #fff;
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 5px; 
+}
+
+/* START Om oppskrift er litt over hundrelappen */
+.recipeItem .recipePrice .recipePriceElements.littOverHundrelappen .ore{
+	border-bottom: 2px solid #1e6aa9;
+}
+/* END Om oppskrift er litt over hundrelappen */
+
+.recipeItem .recipePrice .recipePriceElements .middag{
+	text-align: center;
+	font-size: 8px;
+	line-height: 8px;
+	font-weight: bold;
+	background: #004993;
+	background: #fff;
+	display: block;
+	border-top: 2px solid #aedef9;
+	padding: 4px 3px 7px 3px; 
+	color: #fff;
+	color: #004993;
+}
+
+.recipeItem #recipe
+{
+	position: absolute;
+	top: 154px;
+	right: 114px;
+}
+
+/* START Om slider ikke er 2+2 */
+.recipeItem .recipePrice .recipePriceElements .default{
+	background: #d90009;
+	color: #fff;
+}
+/* END Om slider ikke er 2+2 */
+
+
+.recipeItem h3{
+	width: 150px;
+	margin-top: 8px;
+	float: left;
+}
+
+.recipeItem p{
+	width: 150px;
+	margin-top: 7px;
+	color: #777;
+	float: left;
+}
+
+	.ui-draggable-dragging {
+		margin-left: 60px;
+	}
+	
+	.ui-draggable-dragging {
+	}
+	
+	
+	.ui-draggable-dragging .recipeImage img{
+		width: 77px;
+		height: 77px;
+		margin: 0;
+		position: relative;
+		float: none;
+		display: block;
+		background: url(draggableDrag2.png) no-repeat top center;
+		padding: 8px 8px 30px 8px;
+	}
+	
+	.ui-draggable-dragging h3,
+	.ui-draggable-dragging p,
+	.ui-draggable-dragging .recipePrice,
+	.ui-draggable-dragging .recipeImage .recipeTime {
+		display: none;
+	}
+
+/* END #recipeList */
+
+
+
+
+
+
+
+.section  {
+	width: 1000px;
+	clear: both;
+}
+
+.section h2,
+.section h3 {
+	line-height: 1.1;
+}
+
+.section h2 {
+    font-weight: bold;
+	font-size: 40px;
+}
+
+.section h3 {
+	margin-bottom: 0;
+}
+
+.section .leftColumn {
+	float: left;
+	overflow: hidden;
+}
+
+.section .rightColumn {
+	width: 635px;
+	margin-top: 20px;
+	margin-right: 10px;
+	float: right;
+	overflow: hidden;
+}
+
+
+.leftColumnSmall {
+	width: 48%;
+	float: left;
+}
+
+.rightColumnSmall {
+	width: 48%;
+	float: right;
+}
+
+
+.section p.ingress {
+	font-size: 17px;
+}
+
+
+
+
+.section#section2content .temakokk,
+.section#section2content .temateam{
+	background: #f8f8f8;
+	overflow: hidden;
+	border-radius: 8px;
+	border: 1px solid #c9c9c9;
+	position: relative;
+}
+
+.section#section2content .temateam{
+	background: #fff; 
+}
+
+.section#section2content .temateam .leftColumn img {
+	float: left;
+}
+
+.section#section2content .temakokk .leftColumn img.temakokkImage {
+	float: left;
+}
+
+.section#section2content .temakokk .leftColumn img.temaLogo {
+	position: absolute;
+	top: 20px;
+	left: 160px;
+}
+
+.section#section2content .temakokk h2 { 
+	font-size: 70px;
+}
+
+.section#section2content strong {
+    font-weight: bold;
+}
+
+.section#section2content .temakokk p.ingress strong {
+    font-weight: bold;
+}
+
+
+
+.section#section3content .tip{
+	float: left;
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+
+.section#section3content .video{
+	float: left;
+	width: 324px;
+	margin-left: 6px; 
+}
+
+
+
+.section#section3content .last{
+	float: right;
+	margin: 0; 
+}
+
+.section#section3content .textContent_tipIngress{
+	border:none;
+	font-weight: normal;
+	border:none;
+	padding:auto;
+	margin: 20px 0 20px 0;
+}
+
+.section#section3content .textContent_tipIngress ul{
+	list-style-type: disc;
+	padding-left:15px;
+}
+.section#section3content .textContent_tipIngress ol{
+	list-style-type: decimal;
+	padding-left:15px;
+}
+
+
+.section#section3content .temaTips {
+	top:20px;
+	position:relative;
+}
+
+.section#section3content .temaTips .ingressImg{
+	overflow: auto;
+	float:none;
+	width: auto;
+	max-height:none;
+	margin-top:20px;
+}
+
+.section#section3content .temaTips img{
+	overflow: hidden;
+	float: left;
+	width: 50%;
+	max-height: 290px;
+}
+
+
+
+.section#section3content .textContent{
+	overflow: hidden;
+	border-bottom-right-radius: 8px;
+	border-top-right-radius: 8px;
+	border: 1px solid #c9c9c9;
+	padding: 10px;
+	min-height: 268px;
+}
+
+
+/*begin - nyttige tips*/
+
+#section3content #campaignContainer {
+	overflow: hidden;
+	padding-bottom: 20px;
+	float:left;
+}
+
+#section3content #campaignContainer #contentLeft {
+	width: 263px;
+	float: left;
+	overflow: hidden;
+	font-weight: bold;
+	padding: 30px;
+	margin-right: 12px;
+}
+
+#section3content #campaignContainer #contentLeft .campaignLogo {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+#section3content #campaignContainer #contentLeft h2 {
+	font-size: 30px;
+	margin-bottom: 20px;
+	line-height: 1;
+}
+
+#section3content #campaignContainer #contentLeft ul {
+	list-style: outside;
+	margin: 10px;
+}
+
+#section3content #campaignContainer #contentLeft ul li {
+	margin: 10px;
+}
+
+#section3content #campaignContainer #contentRight {
+	float: left;
+	overflow: hidden;
+	width: 665px;
+}
+
+#section3content #campaignContainer #contentRight .campaignText {
+	margin-left: 20px;
+}
+
+#section3content #campaignContainer #contentRight .campaignText h2 {
+	font-size: 60px;
+}
+
+#section3content #campaignContainer #contentRight .campaignText .signatur
+	{
+	margin-top: 10px;
+}
+
+.section#section3content .videoContainer .videoRow, .section#section3content .videoContainer .videoRowThreeItems {
+	float:left;
+	width:100%;
+	padding-bottom:10px;
+
+}
+
+.section#section3content .videoContainer .videoRow .videoLeft{
+	float:left;
+	background-color:#000;
+	height:320px;
+	width:490px;
+}
+
+.section#section3content .videoContainer .videoRow .videoRight{
+	float:right;
+	background-color:#000;
+	height:320px;
+	width:490px;
+}
+
+
+.section#section3content .videoContainer .videoRowThreeItems .videoLeft{
+	float:left;
+	background-color:#000;
+	height:225px;
+	width:325px;
+	margin-right:12px;
+	
+}
+
+.section#section3content .videoContainer .videoRowThreeItems .videoCenter{
+	margin:0 auto;
+	background-color:#000;
+	height:225px;
+	width:325px;
+	
+}
+
+.section#section3content .videoContainer .videoRowThreeItems .videoRight{
+	float:right;
+	background-color:#000;
+	height:225px;
+	width:325px;
+}
+
+
+/*end - nyttige tips*/
+
+.section#section3content .textContent h3{
+	margin: 10px 0;
+	display: block;
+}
+
+.section .video .videoThumb {
+	position: relative;
+	display: block;
+}
+
+.section#section3content .temaTips .video img{
+	overflow: hidden;
+	float: left;
+	width: 324px;
+	max-height: 290px;
+}
+
+.section .video .startVideo {
+	position: absolute; 
+	left: 130px;
+	top: 80px;
+	width: 60px;
+	height: 60px;
+	display: block;
+	overflow: hidden;
+	background: url(startVideo.png) no-repeat;
+	text-indent: -1000px;
+}
+
+.section#section3content .videoContainer{
+	
+}
+.section#section3content .videoContainer #video1{
+	float:left;
+	background-color:#000;
+	height:320px;
+	width:490px;
+}
+
+.section#section3content .videoContainer #video2{
+	float:right;
+	background-color:#000;
+	height:320px;
+	width:490px;
+}
+
+.section#section3content .videoContainer .description{
+	color:#FFF;
+	padding:10px
+}
+
+.section#section3content .videoContainer .description h3{
+	color:#FFF;
+	padding-bottom:0px;
+}
+
+
+.section#section3content #informationContainer{
+	padding-top:400px;
+}
+
+
+
+.section#section3content #informationContainer #redBar{
+
+	width:365px;
+	height:613px;
+	float:left;
+	background-image: url(kjokkentavle.png);
+	background-repeat:no-repeat;
+	margin-top:-250px;
+	margin-left:20px;
+	
+}
+
+.section#section3content #informationContainer #bannerImage{
+
+	background-image: url(illustrasjons_italia_landsby.png);
+	background-repeat:no-repeat;
+	width:1000px;
+	height:326px;
+}
+
+
+.section#section3content #informationContainer #bannerDescriptionStamp
+{
+
+	background-image: url(italia_logo.png);
+	background-repeat:no-repeat;
+	width:187px;
+	height:187px;
+	margin-left:-115px;
+}
+
+.section#section3content #informationContainer #bannerStamp{
+
+	background-image: url(kokk.png);
+	background-repeat:no-repeat;
+	width:350px;
+	height:350px;
+	float:right;
+	margin-top:-300px;
+	margin-right:20px;
+}
+
+
+.section#section3content #informationContainer #italiaContainer ul li{
+	list-style:disc;
+	color:#c19f3b;
+	margin-bottom:10px;
+}
+
+.section#section3content #informationContainer #italiaContainer ul li span{
+	color:#000;
+}
+.section#section3content #informationContainer #italiaContainer{
+	background-color:#fef9e9;
+	height:400px;
+}
+	
+.section#section3content #informationContainer #italiaContainer #content{
+	margin-left:450px;
+	padding-top:65px;
+}	
+
+.section#section3content #informationContainer #italiaContainer #content #header{
+	color:#c19f3b;
+	font-size:20px;
+	font-weight: bold;
+}	
+
+/* START #recipe */
+#recipe {
+}
+
+#recipe .leftColumn {
+	width: 620px;
+	float: left;
+	overflow: hidden;
+}
+
+#recipe .leftColumn .recipeImage{
+	width: 620px;
+	height: 490px;
+	position: relative;
+	overflow: hidden;
+}
+
+
+#recipe .leftColumn .recipeImage .recipePrice{
+	position: absolute;
+	min-width: 150px;
+	overflow: hidden;
+	top: 310px;
+	right: 30px;
+	border-radius: 25px;
+	border: 5px solid #fff;
+	background: #aedef9;
+	padding: 5px;
+}
+
+
+#recipe .leftColumn .recipeImage .recipePrice .recipePriceElements{
+	color: #fff;
+	background: #004993 url(price_big_bkgrnd.jpg) left top no-repeat;
+	overflow: hidden;
+	height: 150px;
+	text-align: center;
+	border-radius: 15px;
+}
+
+/* START Om oppskrift er litt over hundrelappen */
+#recipe .leftColumn .recipeImage .recipePrice .recipePriceElements.littOverHundrelappen{
+	background: #fff url(priceOver_big_bkgrnd.jpg) left top no-repeat;
+	color: #1e6aa9;
+}
+/* END Om oppskrift er litt over hundrelappen */
+ 
+
+#recipe .leftColumn .recipeImage .recipePrice .recipePriceElements .kr{
+	line-height: 110px;
+    font-weight: bold;
+	font-size: 100px;
+	letter-spacing: -0.05em;
+	display: inline-block;
+	margin-left: 10px;
+	height: 105px;
+}
+
+#recipe .leftColumn .recipeImage .recipePrice .recipePriceElements .ore{
+	font-weight: bold;
+	font-size: 30px;
+	margin-top: 16px;
+	text-align: left;
+	line-height: 30px;
+	padding-bottom: 3px;
+	border-bottom: 5px solid #fff;
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 10px; 
+}
+
+
+/* START Om oppskrift er litt over hundrelappen */
+#recipe .leftColumn .recipeImage .recipePrice .recipePriceElements.littOverHundrelappen .ore{
+	border-bottom: 5px solid #1e6aa9;
+}
+/* END Om oppskrift er litt over hundrelappen */
+ 
+ 
+#recipe .leftColumn .recipeImage .recipePrice .recipePriceElements .middag{
+	text-align: center;
+	font-size: 17px;
+	line-height: 17px;
+	font-weight: bold;
+	background: #004993;
+	background: #fff;
+	display: block;
+	border-top: 5px solid #aedef9;
+	padding: 12px 8px 14px 8px;
+	color: #fff;
+	color: #004993;
+}
+
+/* START Om slider ikke er 2+2 */
+#recipe .leftColumn .recipeImage .recipePrice .recipePriceElements .default{
+	background: #d90009;
+	color: #fff;
+}
+/* END Om slider ikke er 2+2 */
+
+
+
+
+
+
+
+#recipe .leftColumn .recipeImage #recipeTags{
+	background: url(tidsbruk_bkgrnd.png);
+	color: #000;
+	border-top-right-radius: 8px;
+	display: block;
+	position: absolute;
+	bottom: 60px;
+	left: 0;
+	padding: 5px ;
+	height: 50px;
+	overflow: hidden;
+}
+
+#recipe .leftColumn .recipeImage #recipeTags img{
+	height: 50px;
+	float: left;
+	display: block;
+	margin-right: 5px;
+}
+
+
+
+#recipe .leftColumn .recipeImage #recipeTags .tidsbruk{
+	display: block;
+	float: left;
+	height: 30px;
+	background: #fff;
+	padding: 8px;
+	text-align: center;
+	border-radius: 5px;
+	margin: 2px;
+}
+
+#recipe .leftColumn .recipeImage #recipeTags .tidsbruk strong{
+	font-weight: bold;
+	font-size: 20px;
+	display: block;
+	line-height: 20px; 
+}
+
+
+
+
+
+
+
+#recipe .leftColumn .recipeTags {
+	background: #ccc;
+}
+
+#recipe .leftColumn .recipeTags img{
+	float: left;
+	height: 25px;
+}
+
+
+
+#recipe .leftColumn #ingress {
+	width: 100%;
+	font-size: 17px;
+	color: #666;
+}
+
+#recipe .leftColumn #ingress h3 {
+	display: none;
+}
+
+#recipe .leftColumn #ingress p{
+	padding: 20px;
+	padding-left: 0;
+	width: 340px;
+}
+
+
+
+
+
+#recipe .rightColumn {
+	width: 350px;
+	float: right;
+	overflow: hidden;
+}
+
+
+#recipe h2{
+	color: #1e6aa9;
+	font-size: 40px;
+	line-height: 40px;
+	margin-bottom: 30px;
+}
+
+#recipe h3,
+#recipe h4{
+	color: #1e6aa9;
+    font-weight: bold;
+	font-size: 17px;
+	margin-bottom: 10px;
+}
+
+
+
+
+#recipe .leftColumn #fremgangsmote h3 {
+	display: none;
+}
+
+#recipe .leftColumn #fremgangsmote .stepByStepItem {
+	clear: both;
+	border-bottom: 1px dashed #ccc;
+	overflow: hidden;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+#recipe .leftColumn #fremgangsmote .stepByStepItem h4{
+	padding-top: 10px;
+	margin-bottom: 0;
+	width: 370px;
+	float: right;
+}
+
+#recipe .leftColumn #fremgangsmote .stepByStepItem p{
+	width: 370px;
+	float: right;
+}
+
+#recipe .leftColumn #fremgangsmote .stepByStepItem img {
+	width: 235px;
+	height: 125px;
+	float: left;
+}
+
+
+#recipe .leftColumn #fremgangsmote .stepByStepItem_noImage{
+	clear: both;
+	border-bottom: 1px dashed #ccc;
+	overflow: hidden;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+#recipe .leftColumn #fremgangsmote .stepByStepItem_noImage h4{
+	float: left;
+	width: 60px;
+}
+
+#recipe .leftColumn #fremgangsmote .stepByStepItem_noImage p{
+	display: block; 
+	float: left; 
+	width: 550px;
+}
+
+
+
+#recipe .leftColumn #kokkensTips {
+	background: url(kokkensTips.png) no-repeat center left;
+	padding-left: 60px;
+	min-height: 50px;
+}
+
+
+#recipe .leftColumn #kokkensTips h3{
+	font-size: 13px;
+	padding-top: 7px;
+	margin: 0;
+	margin-bottom: 2px;
+}
+
+#recipe .leftColumn #kokkensTips p{
+	margin: 0;
+	line-height: 1.5;
+}
+
+#recipe #recipeToolbar{
+		
+}
+
+#recipe #recipeToolbar a{
+	float: left;
+	margin-right: 4px;
+	cursor: pointer;
+	display: block;
+	height: 32px;
+	width: 32px;
+
+}
+
+.addToFav,
+.removeFromFav
+{
+	background-color: #666666;
+	position: absolute;
+	color: #FFF;
+	color: #FFF;
+	margin-top: 5px;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 5px;
+	left: -9999px;	
+	width: 125px;
+	padding: 2px 1px 2px 1px;
+}
+
+
+#recipe .favoriserBtn{
+	background:url(buttons/default_fav_.png) no-repeat;
+}
+
+#recipe .favoriserBtn:hover,
+#recipe .favoriserBtn_favorisert{
+	background:url(buttons/onclick_fav_.png) no-repeat;
+}
+
+#recipe .fb_share_button { 
+	position: absolute;
+	float: left;
+	width: 190px !important;
+}
+
+
+#recipe .twitterShare{
+   width: 105px;
+   position: absolute;
+   left: 90px;
+}
+
+
+#recipe .print_button{
+    background: url(buttons/default_print_.png) no-repeat;
+    margin-left: 105px;
+}
+
+#recipe .print_button:hover,
+#recipe .print_button:active{
+    background: url(buttons/onclick_print_.png) no-repeat;
+}
+
+#recipe #slider,
+#recipe #ingredient,
+#recipe #fromCupboard{
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	background: #f9f9f9;
+	overflow: hidden;
+	padding: 10px;
+	margin-bottom: 20px;
+	color: #666;
+	font-size: 17px;
+}
+
+#recipe #slider strong {
+	display: block;
+	width: 100px;
+	float: left;
+	height: 32px; 
+	line-height: 32px; 
+}
+
+.ui-slider-horizontal .ui-slider-range { background: #1e6aa9 url(slider.png) center left} 
+.ui-slider .ui-slider-handle {
+	background: #eee!important; 
+	border: 2px solid #ccc!important;
+} 
+.ui-slider .ui-slider-handle:hover { 
+	background: #eee!important; 
+	border: 2px solid #ccc!important;
+} 
+.ui-slider-horizontal .ui-slider-handle { top: -.4em; margin-left: -.5em; }
+
+
+
+#recipe #slider > div {
+	width: 190px;
+	float: left;
+	height: 8px;
+	margin-top: 12px;
+}
+
+#recipe #slider span {
+    font-weight: bold;
+	float: right;
+	display: block;
+	height: 32px; 
+	line-height: 32px; 
+	color: #1e6aa9;
+	margin-right: 7px;
+}
+
+#recipe #ingredient,
+ #recipe #fromCupboard {
+	padding: 0;
+}
+
+#recipe .ingredient_parent{
+	border-bottom: 1px solid #ccc;
+	clear: both;
+	overflow: hidden;
+	padding: 5px 10px;
+	color: #999;
+	position: relative;
+	color: #666;
+}
+#recipe .ingredient_parent:last-child {
+	border: none;
+}
+
+#recipe .mengdeEnhet {
+	float: left; 
+	width: 95px;
+	height: 52px;
+	line-height: 45px;
+	font-size: 17px;
+}
+
+#recipe .produktnavn {
+    font-weight: bold;
+	color: #222;
+	float: left;
+	width: 184px;
+	font-size: 13px;
+	margin-top: 15px;
+}
+
+#recipe .standardEnhetPris {
+	font-size: 13px;
+	display: block;
+	overflow: hidden;
+	float: left;
+	width: 200px;
+}
+
+#recipe .endeligPris {
+	width: 40px;
+	height: 45px;
+	line-height: 45px;
+    font-weight: bold;
+	text-align: right;
+	position: absolute;
+	top: 5px;
+	right: 15px;
+	color: #1e6aa9;
+}
+
+#recipe #fromCupboard .produktnavn{
+	margin-top: 15px;
+}
+
+
+
+
+.visualBox {
+	width: auto;
+	padding: 15px 15px 25px 15px;
+	overflow: hidden;
+	background: url(visual_draggableDrag.png) top!important;
+	border-radius: 8px;
+	border: none!important;
+}
+
+.visualBox .recipeItem {
+	margin: 0;
+}
+
+.visualBox .recipeItem h3,
+.visualBox .recipeItem p {
+	color: #fff!important;
+}
+
+.visualBox .recipeItem h3 {
+}
+
+
+.ui-draggable-dragging img{
+	width: 77px;
+	height: 77px;
+	margin: 0;
+	position: relative;
+	float: none;
+	display: block;
+	background: url(draggableDrag2.png) no-repeat top center!important;
+	padding: 8px 8px 50px 8px!important;
+}
+
+.ui-draggable-dragging .recipeTime {
+	display: none;
+}
+
+
+
+.sidebox_price {
+	position: absolute; 
+	top: 5px; 
+	left: 20px; 
+	font-size: 30px;
+}
+
+
+
+
+#recipe #video .vidItem{
+	margin:10px 0 30px 0;
+	min-height: 150px;
+}
+
+#recipe #video .vidImg{
+	position:absolute;
+	float:left;
+}
+
+#recipe #video .vidTitle{
+	position: relative;
+	display: block;
+	float:right;
+	width:370px;
+	margin-top:25px;
+}
+
+
+#recipe #video .vidDescription{
+	position: relative;
+	display: block;
+	float:right;
+	width:370px;
+}
+
+#recipe #video .vidItem .playerIcon {
+   position:absolute;
+   display:block;
+   
+   background-image: url(play.png);
+   background-repeat: no-repeat;
+   height: 60px;
+   width: 60px;
+   z-index:25;
+   opacity:0.7;
+   margin:65px 0 0 87px;
+   border-radius: 8px;
+   behavior: url(/under100/css/PIE.htc);
+}
+
+#recipe #video .vidItem .playerIcon:hover {
+   position:absolute;
+   display:block;
+   
+   background-image: url(play.png);
+   background-repeat: no-repeat;
+   height: 60px;
+   width: 60px;
+   z-index:25;
+   opacity:1;
+   margin:65px 0 0 87px;
+   border-radius: 8px;
+   behavior: url(/under100/css/PIE.htc);
+}
+
+#recipe #video .vidItem .vidBlindTop{
+	width: 235px;
+	height: 26px;
+	position:absolute;	
+	z-index:25;
+	background-color:#FFF;
+}
+
+#recipe #video .vidItem .vidBlindBottom{
+	width: 235px;
+	height:23px;
+	position:absolute;
+	z-index:25;
+	margin-top:169px;
+	background-color: #FFF;
+}
+
+
+
+
+/* END #recipe */
+
+
+/* START #middagsplanlegger */
+
+#middagsplanlegger {
+	position: relative;
+	margin-top: 22px;
+}
+
+#middagsplanlegger .prev_planner {
+	z-index: 1000;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 15px;
+	overflow: hidden;
+	height: 100px;
+	background: url(dagPrev.png) no-repeat center left;
+	margin-left: -30px; 
+	cursor: pointer;
+}
+ 
+#middagsplanlegger .prev_planner span{
+	display: none;
+}
+
+#middagsplanlegger .next_planner {
+	z-index: 1000;
+	position: absolute;
+	top: 0;
+	right: 178px;
+	width: 15px;
+	overflow: hidden; 
+	height: 100px;
+	background: url(dagNext.png) no-repeat center right;
+	cursor: pointer;
+}
+
+#middagsplanlegger .next_planner span{
+	display: none;
+}
+
+#middagsplanlegger #mycarousel_days,
+#middagsplanlegger #mycarousel_days li{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#middagsplanlegger #mycarousel_days {
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+}
+
+#middagsplanlegger #mycarousel_days .carouselitem_planner {
+	width: 100px;
+	height: 100px;
+	border-radius: 8px;
+	overflow: hidden;
+	display: block;
+	position: relative;
+	margin: 0 15px 0 0;
+	padding: 0;
+}
+
+#middagsplanlegger #mycarousel_days li{
+	display: block;
+	float: left;
+}
+
+
+#middagsplanlegger #mycarousel_days .carouselitem_planner .cheader_day {
+	background: url(dinnerPlanner_dayBkgrnd.png) no-repeat bottom;
+	color: #fff;
+	display: block;
+	position: absolute;
+	bottom: 0;
+	height: 31px;
+	width: 100%;
+    font-weight: bold;
+	font-size: 17px;
+	text-align: center;
+	line-height: 1.7;
+	z-index: 2000;
+}
+
+
+
+
+
+
+#middagsplanlegger #mycarousel_days .carouselitem_planner .cimg > img{
+	width: 100px;
+	height: 100px;
+}
+
+.ui-state-hover {
+	width: 97px;
+	height: 98px;
+	border-radius: 8px;
+	border: none!important;
+	margin-left: 2px;
+	background: #49aada!important;
+}
+
+
+/*
+.ui-droppable {
+	background: #0f0;
+}
+*/
+
+.ui-state-hover *{
+	display: none!important;
+}
+
+
+
+#middagsplanlegger .weekplanner_buttons  {
+	float: right;
+	width: 141px;
+	text-align: center;
+	color: #fff;
+}
+
+#middagsplanlegger .weekplanner_buttons a{
+	background: url(handlelappBtn.png) no-repeat;
+	width: 141px;
+	height: 38px;
+	color: #000;
+	display: block;
+	color: #fff;
+    font-weight: bold;
+	font-size: 13px;
+	line-height: 38px;
+	padding-left: 5px; 
+	margin-top: 4px;
+}
+
+#middagsplanlegger .weekplanner_buttons a#tilInstillinger{
+	background: url(instillingerBtn.png) no-repeat;
+	margin-top: 13px;
+	float: left;
+}
+
+/* END #middagsplanlegger */
+
+
+
+
+
+/* START profile_wrapper */
+.profile_wrapper {
+}
+
+.profile_wrapper h2{
+	font-size: 25px;
+	margin-bottom: 20px;
+}
+
+
+.profile_wrapper .login,
+.profile_wrapper .register {
+	float: left; 
+	width: 435px;
+	border-radius: 8px;
+	border: 1px solid #c9c9c9;
+	background: #f8f8f8;
+	padding: 20px;
+	padding-bottom: 10px;
+	min-height: 137px;
+}
+
+.profile_wrapper .register{
+	float: right; 
+}
+
+.profile_wrapper label{
+	display: inline-block;
+	width: 140px;
+	margin-bottom: 10px;
+}
+
+.profile_wrapper input{
+	display: inline-block;
+	width: 140px;
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+
+.profile_wrapper .errors{
+	padding: 10px;
+	background: red;
+	border-radius: 5px;
+	color: #fff;
+	margin-top: 10px;
+}
+
+.profile_wrapper .personvernTekst{
+	margin-top:20px;
+	float:left;
+	
+}
+
+/* END profile_wrapper */
+
+
+/* START retningslinjer */
+
+.retningslinjer_header{
+	float:left;
+	font-size:14px;
+	
+}
+
+.retningslinjer_content{
+	padding:10px 20px 0 20px;
+	margin-bottom:20px;
+	float:left;
+	line-height:16px;
+}
+
+/* END retningslinjer */
+
+
+
+
+/* START sendFeedback */
+
+#sendFeedback {
+}
+
+#sendFeedback .error{
+	color: red;
+}
+
+#sendFeedback label{
+	display: block;
+	width: 140px;
+	margin-bottom: 5px;
+}
+
+
+#sendFeedback input{
+	display: block;
+	width: 300px;
+}
+
+#sendFeedback textarea{
+	width: 500px;
+	height: 300px;
+}
+
+#sendFeedback input.submit{
+	width: auto;
+}
+
+/* END sendFeedback */
+
+
+
+/* START Finn din butikk HACK */
+
+.iframeContent {
+	position: relative;
+	overflow: hidden;
+}
+
+.iframeContent .coverOver{
+	width: 100%;
+	border: none;
+	margin: 0;
+	padding: 0;
+	height: 120px;
+	overflow: hidden;
+	background: #fff;
+	position: absolute;
+	display: none;
+}
+
+.iframeContent iframe{
+	width: 980px;
+	border: none;
+	margin: 0;
+	padding: 0;
+	height: 800px;
+	overflow: hidden;
+	margin-top: -120px;
+}
+
+
+/* END Finn din butikk HACK */
+
+
+ 
+ 
+ 
+ 
+ 
+ /* START velg dager */
+
+#velgDager h2{
+	font-size: 25px;
+}
+
+#velgDager .disclaimer {
+	width: 430px;
+}
+
+#velgDager h3{
+	margin-bottom: 10px;
+}
+
+#velgDager .handlelapp_recipe_container{
+	margin-bottom: 20px;
+	clear: both;
+	overflow: hidden;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	background: #f8f8f8;
+} 
+
+#velgDager .handlelapp_recipe_container .date{
+	width: 150px;
+	float: left;
+	width: 100px;
+	text-align: center;
+	height: 100px;
+	color: #1e6aa9;
+}
+
+#velgDager .handlelapp_recipe_container .date strong{
+	font-size: 35px;
+	font-weight: bold;
+	display: block;
+	margin-top: 25px;
+	line-height: 1;
+}
+
+#velgDager .handlelapp_recipe_container .date span{
+	font-size: 17px;
+	font-weight: normal;
+}
+
+#velgDager .handlelapp_recipe_container .oppskriftsBilde{
+	width: 150px;
+	float: left;
+	margin-right: 20px;
+}
+
+#velgDager .handlelapp_recipe_container .recipe_content h5
+{
+	font-size: 17px; 
+	margin: 0;
+	margin-top: 20px;
+}
+
+#historikk .recipeItem .text .day h5{
+	font-size: 17px; 
+
+	margin-top: 15px;
+}
+
+#velgDager .handlelapp_recipe_container .recipe_content h4 {
+	font-size: 17px; 
+	font-weight: bold;
+	margin: 0;
+	line-height: 1;
+}
+
+#velgDager .handlelapp_recipe_container .recipe_content h4 a,
+#historikk .recipeItem .text .title h4 a {
+	color: #1e6aa9;
+	font-size: 17px;
+}
+
+#velgDager .handlelapp_recipe_container .recipe_content .checkBox_container {
+	float: right;
+	margin-right: 20px;
+}
+
+#velgDager .handlelapp_recipe_container .recipe_content .checkBox_container label{
+	vertical-align: text-bottom; 
+	display: inline-block;
+}
+
+#velgDager .handlelapp_recipe_container .recipe_content .checkBox_container input{
+	vertical-align: text-bottom; 
+	display: inline-block;
+}
+
+#velgDager .submit_button {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 100%;
+	color: #fff;
+	font-size: 17px;
+	width: 238px;
+	height: 38px; 
+	display: block;
+	line-height: 38px;
+	text-align: center;
+	margin-bottom: 30px;
+	border: 0;
+	cursor: pointer;
+}
+
+#velgDager .blue_button{
+    background: url(submit.png) no-repeat;
+}
+#velgDager .grey_button{
+    background: url(submit-grey-light.png) no-repeat;
+}
+
+#velgDager #deling
+{
+    position:relative;
+    left:242px;
+    top:-68px;
+}
+
+
+/* END velg dager */
+
+
+
+
+ 
+/* START handlelapp */
+
+#handlelapp h2{
+	font-size: 25px;
+}
+
+#handlelapp h3 {
+	margin-bottom: 10px;
+}
+
+#handlelapp h3 span{
+	font-weight: normal;
+}
+
+
+#handlelapp .recipe_item {
+	display: none;
+}
+
+#handlelapp #ingrediens,
+#handlelapp #fromCupboard,
+#handlelapp #rememberThis{
+	margin-bottom: 20px;
+	overflow: hidden;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	background: #f8f8f8;
+}
+
+
+#handlelapp .product_item {
+	border-bottom: 1px solid #ccc;
+	clear: both;
+	overflow: hidden;
+}
+
+#handlelapp .product_item .productImage{
+	width: 40px;
+	height: 40px;
+	background: #fff;
+	overflow: hidden;
+	text-align: center;
+	margin-right: 20px;
+	float: left;
+}
+
+#handlelapp .product_item .productImage img{
+	max-width: 40px;
+	max-height: 40px;
+}
+
+
+#handlelapp .product_item:last-child {
+	border: none;
+}
+
+#handlelapp .product_item .info{
+	float: left;
+	width: 400px;
+	margin-top: 10px;
+}
+
+#handlelapp .product_item .info input{
+	float: right;
+}
+
+#handlelapp .product_item .info span{
+	display: inline-block;
+	width: 50px;
+}
+
+#handlelapp #rememberThis { 
+	padding: 10px;
+}
+
+#handlelapp #rememberThis textarea{
+	width: 99%;
+	height: 200px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+}
+
+#handlelapp #rememberThis #remeberThisContainer
+{
+	width:210px;
+	float:right;
+}
+
+#handlelapp #rememberThis #remeberThisContainer #loginTip
+{
+	margin: 12px 0 0 -245px;
+}
+
+#handlelapp #deling a
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 100%;
+	color: #fff;
+	font-size: 17px;
+	width: 238px;
+	height: 38px; 
+	display: block;
+	line-height: 38px;
+	text-align: center;
+	margin-bottom: 10px;
+	border: 0;
+	cursor: pointer;
+	float: left;
+}
+
+#handlelapp #deling a#sms_d {
+	cursor: default;
+	opacity: 0.4;
+}
+
+#handlelapp #deling .blue_button{
+    background: url(submit.png) no-repeat;
+}
+
+#handlelapp #printing .grey_button{
+    background: url(submit-grey-light.png) no-repeat;
+}
+
+#handlelapp #printing a
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 100%;
+	color: #fff;
+	font-size: 17px;
+	width: 238px;
+	height: 38px; 
+	display: block;
+	line-height: 38px;
+	text-align: center;
+	margin-bottom: 10px;
+	border: 0;
+	cursor: pointer;
+	float: left;
+
+}
+
+#handlelapp #deling a:first-child,
+#handlelapp #printing a:first-child {
+	margin-right: 4px;
+}
+
+#handlelapp .shareContainer
+{
+	text-align: center;
+}
+
+#handlelapp .shareContainer #printing,
+#handlelapp .shareContainer #deling
+{
+	display: inline-block;
+	width: 258px;
+}
+
+#handlelapp .shareContainer hr
+{
+	padding: 10px 0 10px 0;
+}
+
+/* END handlelapp */
+
+
+
+
+
+#hva_er_underhundrelappen {
+	line-height: 1.6;
+}
+
+#hva_er_underhundrelappen .promoImage {
+	float: right;
+	width: 577px;
+	margin-top: 40px;
+	position: relative;
+}
+
+#hva_er_underhundrelappen .promoText {
+	float: left;
+	width: 400px;
+	margin-top: 60px;
+}
+
+#hva_er_underhundrelappen .promoImage strong{
+	width: 180px;
+	height: 180px;
+	background: url(20nyeoppskrifter.png) no-repeat;
+	display: block;
+	text-indent: -1000px;
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	top: -60px;
+}
+
+
+#hva_er_underhundrelappen .promoText h2{
+	font-size: 35px;
+	font-weight: normal;
+	margin-bottom: 20px;
+	line-height: 1.2;
+}
+
+#hva_er_underhundrelappen .promoText h2 strong{
+	font-weight: bold;
+}
+
+
+
+
+#hva_er_underhundrelappen h4 {
+    font-weight: bold;
+	font-size: 17px;
+	line-height: 1.1;
+	margin: 10px 0;
+}
+
+
+
+#hva_er_underhundrelappen .bullets div{
+	float: left;
+	width: 308px;
+	margin-right: 35px;
+}
+
+#hva_er_underhundrelappen .bullets div.step3{
+	margin: 0;
+	float: right;
+}
+
+
+#hva_er_underhundrelappen .bullets div strong {
+	background: url(onetwothree.png) no-repeat;
+	display: block;
+	width: 70px;
+	height: 70px;
+}
+
+#hva_er_underhundrelappen .bullets .step2 strong {
+	background: url(onetwothree.png) no-repeat -70px 0;
+}
+
+#hva_er_underhundrelappen .bullets .step3 strong {
+	background: url(onetwothree.png) no-repeat -140px 0;
+}
+
+
+
+
+
+
+
+
+#app_for_mobil {
+	line-height: 1.6;
+}
+
+
+#app_for_mobil .topBkgrnd {
+	background: url(bkgrnd_appForMobil.png) bottom repeat-x;
+	overflow: hidden;
+}
+
+
+#app_for_mobil .promoImage {
+	float: right;
+	width: 436px;
+	margin-top: 30px;
+	position: relative;
+	overflow: hidden;
+}
+#app_for_mobil .promoImage img{
+	display: block;
+	float: right;
+}
+
+#app_for_mobil .promoText {
+	float: left;
+	width: 510px;
+	margin-top: 25px;
+}
+
+#app_for_mobil .promoText h3{
+	font-size: 35px;
+	font-weight: normal;
+	line-height: 1.2;
+}
+
+#app_for_mobil .promoText h2{
+	font-size: 80px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	line-height: 1;
+	letter-spacing: -0.04em;
+}
+
+#app_for_mobil .promoText p{
+}
+
+
+#app_for_mobil h4{
+	font-size: 17px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+
+#app_for_mobil .ikon{
+	float: left;
+	margin-right: 10px;
+	width: 60px;
+}
+
+#app_for_mobil .downloadBox{
+	float: left;
+}
+
+
+#app_for_mobil .iphone {
+	margin-top: 8px;
+}
+
+
+
+#app_for_mobil .iphone em{
+	float: left;
+	line-height: 1.4;
+	color: #555;
+}
+
+#app_for_mobil ul{
+	width: 420px;
+}
+
+#app_for_mobil ul li{
+	padding-left: 30px;
+	list-style: none;
+	margin-bottom: 15px;
+	background: url(appForMobil_bullet.png) no-repeat left 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* HACKS START */
+.debug {
+	display: none;
+} 
+
+
+
+#intro {
+	position: absolute;
+	top: 100px;
+	left: 0;
+	z-index: 9999;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#intro .content{
+	margin: 0 auto;
+	background: #034a8f url(frame.png) no-repeat top left;
+	width: 415px;
+	color: #fff;
+	padding: 40px;
+	border-radius: 15px;
+	position: relative;
+	margin-top: 16px;
+}
+
+#intro .content #closeWelcome {
+	background: url(close.png) no-repeat;
+	width: 33px;
+	height: 33px;
+	overflow: hidden;
+	text-indent: -1000px;
+	position: absolute;
+	top: -15px;
+	right: -15px;
+	cursor: pointer;
+}
+
+
+#intro .content h2.logo {
+    background: url(logo_welcome.png) no-repeat left top;
+    width: 400px;
+    height: 100px;
+	text-indent: -1000px;
+	overflow: hidden;
+}
+
+
+#intro .content div{
+	clear: both;
+	margin: 30px 0;
+	overflow: hidden;
+}
+
+
+#intro .content div img{
+	float: left;
+}
+
+#intro .content div p {
+	float: left;
+	background: #034a8f;
+	border-radius: 8px;
+	color: #fff;
+	padding: 60px 20px 20px 20px;
+	width: 150px;
+	margin: 1px 0 0 10px;
+	height: 62px;
+	font-weight: bold;
+	text-align: center;
+}
+
+
+
+#intro .content div strong{
+	background: url(onetwothree.png) no-repeat;
+	display: block;
+	width: 70px;
+	height: 70px;
+	position: absolute;
+	margin-left: 280px;
+	margin-top: -20px;
+	overflow: hidden;
+	text-indent: -1000px;
+}
+
+#intro .content div.explain2 strong{
+	background: url(onetwothree.png) no-repeat -70px 0;
+}
+
+#intro .content div.explain3 strong{
+	background: url(onetwothree.png) no-repeat -140px 0;
+}
+
+
+
+
+
+
+
+#pagination {
+	text-align: center;
+	margin: 20px 0;
+	font-size: 17px;
+}
+
+#pagination a{
+	color: #666;
+	margin: 0 2px;
+}
+
+#pagination .active{
+	border-bottom: 2px solid #666;
+}
+
+
+#pagination .prev{
+	margin-right: 20px;
+}
+
+#pagination .next{
+	margin-left: 20px;
+}
+
+
+#pagination a:hover{
+	color: #333;
+}
+
+
+.profileSettings h2{
+	font-size: 25px;
+}
+
+.saveFamilySettings input{
+	margin-bottom: 20px;
+
+}
+
+
+.profileSettings .loggedIn{
+	font-size: 17px;
+}
+.profileSettings .loggedIn strong{
+	font-weight: bold;
+	display: inline-block;
+	margin-bottom: 15px;
+	clear: both;
+}
+
+.profileSettings #slider strong,
+.profileSettings #slider span{
+	width: 100px;
+	float: left;
+	font-weight: bold;
+	font-size: 17px;
+}
+
+.profileSettings #slider_adult,
+.profileSettings #slider_child{
+	width: 300px;
+	float: left;
+	margin-right: 20px;
+	margin-top: 6px;
+}
+
+
+/*Historikk*/
+
+#historikk #leftColumn .bold
+{
+	font-weight: bold;
+}
+
+#historikk #leftColumn
+{
+	width: 235px;
+	float: left;
+	overflow: hidden; 
+	background-color: #f3f4f4;
+	margin-top: 15px;
+}
+
+#historikk #leftColumn .content .historyYear
+{
+	font-size: 18px;
+}
+
+#historikk #leftColumn .content .historyMonth
+{
+	font-size: 14px;
+}
+
+#historikk #leftColumn .content,
+#historikk a:link,
+#historikk a:visited
+{
+	color: #226883;
+}
+
+
+#historikk #rightColumn
+{
+	width: 747px;
+	float: right;
+	overflow: hidden; 
+}
+
+#historikk #rightColumn .recipeItem
+{
+	margin-bottom: 20px;
+	clear: both;
+	overflow: hidden;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	background: #f8f8f8;
+	height: 100px;
+}
+
+
+
+#historikk #rightColumn .recipeItem .content,
+#historikk #leftColumn .content 
+{
+	padding: 10px;
+}
+
+#historikk #rightColumn .weekAndDate
+{
+	height: 40px;
+	background: url(historikk_ukeDato.png) repeat-x;
+	color: #FFF;
+	margin: 15px 0 15px 0;
+}
+
+#historikk #rightColumn .weekAndDate .content
+{
+	padding: 13px;
+	font-weight: bold;
+}
+
+#historikk #rightColumn .weekAndDate .content .date
+{
+	float: right;
+}
+
+#historikk #rightColumn .recipeItem .content div 
+{
+	float: left;
+}
+
+#historikk #rightColumn .recipeItem .content .date
+{
+	width: 99px;
+	text-align:center;
+	margin:8px 0 0 -10px;
+}
+
+
+#historikk #rightColumn .recipeItem .content .date span
+{
+	display: block;
+	color: #1E6AA9;
+}
+
+#historikk #rightColumn .recipeItem .content .date .number
+{
+	font-size:35px;
+	font-weight: bold;
+	color: #1E6AA9;
+}
+
+#historikk #rightColumn .recipeItem .content .date .month
+{
+	font-size:17px;
+	margin: -6px 0 0 4px;
+	font-weight: normal;
+	font-color: #1E6AA9;
+}
+
+#historikk #rightColumn .recipeItem .content .thumb
+{
+	width: 100px;
+	margin-top:-10px;
+}
+
+#historikk #rightColumn .recipeItem .content .text
+{
+	margin:-7px 0 0 70px;	
+}
+
+
+
+#historikk #rightColumn .recipeItem .content .arrow 
+{
+	float: right;
+	width: 90px;
+}
+
+
+
+/*print*/
+
+.oppskriftsdata-print, span.print {
+	
+	display:none;
+	
+}
+
+
+
+

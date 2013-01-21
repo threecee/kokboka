@@ -7,3 +7,9 @@ test-result/
 lib/
 tmp/
 modules/
+out/
+.DS_Store
+app/.DS_Store
+public/.DS_Store
+kokebok.iml
+.idea/

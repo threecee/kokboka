@@ -1,0 +1,142 @@
+#{extends 'admin.html' /}
+
+#{ifnot recipe?.id}
+<h3>Legg inn <span>en ny oppskrift</span></h3>
+#{/ifnot}
+#{else}
+<h3>Rediger <span>oppskrift</span></h3>
+#{/else}
+
+
+#{form @save(recipe?.id), enctype:'multipart/form-data'}
+ 
+    #{ifErrors}
+        <p class="error">
+            Vennligst rett opp disse feilene.
+        </p>
+    #{/ifErrors}
+     
+    <p>
+        #{field 'title'}
+        <label>Oppskriftens tittel:</label>
+        <input type="text" name="${field.name}" 
+            value="${recipe?.title}" class="${field.errorClass}" size="100" />
+        #{/field}
+    </p>
+ 
+    <p>
+        #{field 'description'}
+        <label>Beskriv oppskriften her:</label>
+        <textarea name="${field.name}" 
+            class="${field.errorClass}">${recipe?.description}</textarea>
+        #{/field}
+    </p>
+
+<p>
+    #{field 'serves'}
+    <label>Oppskriften gir (antall og enhet):</label>
+    <input type="text" name="${field.name}"
+        class="${field.errorClass}" value="${recipe?.serves}"/>
+    #{/field}
+    #{field 'servesUnit'}
+    <input type="text" name="${field.name}" class="${field.errorClass}" value="${recipe?.servesUnit}"/>
+    #{/field}
+</p>
+<p>
+
+
+<table>
+<tr>
+<th><label>Mengde</label></th><th><label>Enhet</label></th><th><label>Ingrediens</label></th>
+</tr>
+    #{list items:recipe?.ingredients, as:'ingredient'}
+
+    <tr>
+        <td>
+            #{field 'amounts'}
+                <input type="text" name="${field.name}" value="${ingredient.amount}" size="1" class="${field.errorClass}" />
+            #{/field}
+        </td>
+        <td>
+            #{field 'units'}
+                <input type="text" name="${field.name}"
+                     value="${ingredient.unit}" size="1" class="${field.errorClass}" />
+            #{/field}
+        </td>
+        <td>
+        #{field 'ingredients'}
+        <input type="text" name="${field.name}"
+             value="${ingredient.description}" class="${field.errorClass}" size="100"/>
+        #{/field}
+        </td>
+    </tr>
+    #{/list}
+
+
+    <tr>
+        <td>
+            #{field 'amounts'}
+                <input type="text" name="${field.name}"
+                     size="1" class="${field.errorClass}" />
+            #{/field}
+        </td>
+        <td>
+            #{field 'units'}
+                <input type="text" name="${field.name}"
+                     size="1" class="${field.errorClass}" />
+            #{/field}
+        </td>
+        <td>
+        #{field 'ingredients'}
+        <input type="text" name="${field.name}"
+             class="${field.errorClass}" size="100" />
+        #{/field}
+        </td>
+    </tr>
+
+
+</table>
+
+</p>
+
+<p>
+    #{field 'steps'}
+    <label>Beskriv tilbereding av oppskriften her:</label>
+    <textarea name="${field.name}"
+        class="${field.errorClass}">${recipe?.steps}</textarea>
+    #{/field}
+</p>
+<p>
+    #{field 'source'}
+    <label>Oppskriftens kilde, navn eller url:</label>
+    <input type="text" name="${field.name}"
+        value="${recipe?.source}" class="${field.errorClass}" />
+    #{/field}
+</p>
+
+    <p>
+        #{field 'tags'}
+        <label>Legg inn noen merkelapper:</label>
+        <input type="text" size="50" 
+            name="${field.name}" value="${recipe?.tags?.join(' ')}" />
+        #{/field}
+    </p>
+
+<p>
+#{if recipe?.photo }
+    <img src="@{Recipes.recipePhoto(recipe?.id)}">
+#{/if}
+
+    #{field 'photo'}
+    <label>Last opp bilde:</label>
+    <input type="file" name="${field.name}">
+    #{/field}
+</p>
+
+
+
+    <p>
+        <input type="submit" value="Publisér oppskriften til kokeboka" />
+    </p>
+    
+#{/form}

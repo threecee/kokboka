@@ -1,6 +1,6 @@
 package models;
 
 
-public enum Days {
+public enum MenuDay {
      Mandag, Tirsdag, Onsdag, Torsdag, Fredag, Lørdag, Søndag;
 }

@@ -5,11 +5,51 @@
         <title>#{get 'title' /}</title>
         <meta charset="${_response_encoding}">
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/middagsplanleggeren.css'}">
+
+<script type="text/javascript" language="javascript" src="@{'/public/javascripts/date.format.js'}"></script>
+      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-1.7.min.js'}"></script>
+      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jcarousellite_1.0.1.min.js'}"></script>
+      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/portal.js'}"></script>
+          <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-ui.min.js'}"></script>
+      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.ui.touch-punch.min.js'}"></script>
+          <script type="text/javascript" language="javascript" src="@{'/public/javascripts/middagsplanlegger.js'}"></script>
+      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.json-2.3.min.js'}"></script>
+      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.cookie.js'}"></script>
+      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.jsoncookie.js'}"></script>
+      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.getParams.js'}"></script>
+          <script type="text/javascript" language="javascript" src="@{'/public/javascripts/fancybox/jquery.fancybox-1.0.0.js'}"></script>
+          <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.tinysort.min.js'}"></script>
+          <script type="text/javascript" language="javascript" src="@{'/public/javascripts/fancybox/swfobject.js'}"></script>
+          <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.colorbox-min.js'}"></script>
+          <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.style-switcher.js'}"></script>
+
+
+          <link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/javascripts/fancybox/fancy.css'}">
+      	<link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/stylesheets/colorbox.css'}">
+      	<link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/stylesheets/middagsplanleggeren.css'}">
+      	<link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/stylesheets/jquery/jquery-ui-1.8.16.custom.css'}">
+      	<link rel="stylesheet" title="printsetting" id="theme" type="text/css" media="print" href="@{'/public/stylesheets/middagsplanleggeren_print_recipes.css'}">
+      	<link rel="stylesheet" id="active" href="@{'/public/stylesheets/active/active1.css'}" media="screen, handheld" type="text/css">
+      	<!--[if IE 7]>
+      	<link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/stylesheets/stylesheet_ie7.css'}">
+      	<![endif]-->
+      	<!--[if IE 8]>
+      	<link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/stylesheets/stylesheet_ie8.css'}">
+      	<![endif]-->
+
+
         #{get 'moreStyles' /}
+
+
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-        <script src="http://cdn.jquerytools.org/1.2.6/jquery.tools.min.js" type="text/javascript" charset="${_response_encoding}"></script>
+
+
         #{get 'moreScripts' /}
+
+
+        <script type="text/javascript">
+       	 var mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
+       	</script>
     </head>
     <body>
        <div id="header">
@@ -41,13 +81,10 @@
         </div>
       <div id="main">
             #{doLayout /}
-        </div>
 
-        <p id="footer">
-            Kokboka er noe Anja og Calle bruker for å holde orden på oppskriftene sine.
-        </p>    </body>
+      </div>
+       #{if request.controller == 'Application'}
+           #{planningFooter menu:menu /}
+       #{/if}
+    </body>
 </html>
-
-
-
-

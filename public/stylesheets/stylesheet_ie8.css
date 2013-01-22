@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/* CSS Document */
+
+#tags ul li em{
+	border: 0px !important;
+	border-radius: 0px !important;
+	min-width: 22px !important;
+}
+
+
+#tags ul li em {
+	float: right;
+	color: #fff;
+	background: url(roundnumber_ie78.png) top no-repeat !important;
+	padding: 2px 1px 2px 1px !important;
+	display: inline-block;
+	line-height: 24px !important;
+	min-width: 25px !important;
+	text-align: center;
+	font-weight: bold;
+	margin-top: 6px;
+}
+

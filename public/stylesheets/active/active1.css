@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+.recipe_tema2,
+.recipe_tema3,
+.recipe_tema4
+{
+	opacity:0.4;
+}
+
+.recipe_tema2:hover,
+.recipe_tema3:hover,
+.recipe_tema4:hover
+{
+	opacity:1;
+}
+
+
+.recipe_tema1
+{
+	opacity:1;
+}

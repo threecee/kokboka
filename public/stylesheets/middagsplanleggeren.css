@@ -2111,6 +2111,85 @@ p.recipeTitle{
 /* END #recipe */
 
 
+/* START # */
+
+#footer .historikkSplashContainer
+{
+	position: absolute;
+	width: 100%;
+	margin-top: -34px;
+	padding: 15px 0 15px 0;
+	font-weight: bold;
+	background-color: #16528e;
+	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#0c4581', startColorstr='#20619c', gradientType='0');
+
+	background-image: linear-gradient(top, rgb(32,97,156), rgb(12,69,129) 100%);
+	background-image: -o-linear-gradient(top, rgb(32,97,156), rgb(12,69,129) 100%);
+	background-image: -moz-linear-gradient(top, rgb(32,97,156), rgb(12,69,129) 100%);
+	background-image: -webkit-linear-gradient(top, rgb(32,97,156), rgb(12,69,129) 100%);
+	background-image: -ms-linear-gradient(top, rgb(32,97,156), rgb(12,69,129) 100%);
+}
+
+#footer #historikkSplash
+{
+	color: #FFF;
+	text-align: center;
+	font-weight: bold;
+}
+#footer #historikkSplash a:link,
+#footer #historikkSplash a:visited
+{
+	color: #CCD3D9;
+	font-weight: bold;
+	border-bottom: 2px;
+	border-style: solid;
+	padding-bottom: 2px;
+}
+
+#footer #historikkSplash a:hover
+{
+	color: #FFF;
+	font-weight: bold;
+}
+
+#footer #historikkSplash .lukk
+{
+	position: absolute;
+	margin: -12px 0 0 45px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 130px;
+    width: 100%;
+    background: url(footerBkgrnd.png) ;
+	padding-top: 30px;
+	clear: both;
+	z-index: 30;
+}
+
+#footer.alleOppskrifter{
+
+}
+
+	/* START ie6*/ * html #footer {
+	    position: absolute;
+	    top: expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
+	}
+	/* END ie6*/
+
+/* END #footer */
+
+
+
+
+
+
+
 /* START #middagsplanlegger */
 
 #middagsplanlegger {

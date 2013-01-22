@@ -1,0 +1,917 @@
+<div id="container">
+
+<div class="width">
+
+
+<div id="footer" class="alleOppskrifter">
+
+
+
+
+
+
+
+
+	<div class="historikkSplashContainer" style="display: none;">
+			<div id="historikkSplash">
+				<span>Nyhet: nå kan du finne igjen dine tidligere planlagte middager og merke oppskrifter med favoritt. <a href="/under100?service=loginOrRegister">Registrer / logg inn her</a> for å bruke de nye funksjonene.<span class="lukk">[X]</span>
+				</span>
+
+			</div>
+	</div>
+<div class="width">
+		<div id="middagsplanlegger">
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	$.get("/under100/dinnerplan", function(data) {
+   		$('#middagsplanlegger').append(data, loadContent());
+   	});
+
+	function loadContent()
+	{
+
+		$.getScript('/under100/js/jcarousellite_1.0.1.min.js' , function(){
+			$.getScript('/under100/js/middagsplanlegger.js');
+		});
+
+		if($("#footer").is(":hidden"))
+			$('#footer').show();
+
+	}
+
+
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="weekplanner_buttons">
+    <a href="http://www.rema.no/under100/?service=handleliste&amp;action=velgDager" id="tilHandlelappen">
+        Handlelapp
+    </a>
+
+    <a href="http://www.rema.no/under100/?service=showProfile" id="tilInstillinger">
+        Innstillinger
+    </a>
+</div>
+
+<div class="weekplanner_days" style="visibility: visible; overflow: hidden; position: relative; z-index: 2; left: 0px; width: 805px;">
+    <ul id="mycarousel_days" class="jcarousel-skin-tango" style="margin: 0px; padding: 0px; position: relative; list-style-type: none; z-index: 1; width: 1610px; left: 0px;">
+
+
+
+
+            <li id="2013-01-22" style="overflow: hidden; float: left; width: 115px; height: 100px;">
+                <div class="carouselitem_planner">
+
+                    <span class="cheader_day">
+                        <span class="weekName">
+
+                            tir
+                        </span>
+                        <span class="weekDay">
+                            22
+                        </span>
+                    </span>
+
+
+                    <div class="recipe_details_box" style="position: absolute; display: none;">
+                        <div class="viewBtn" style="position:absolute;">
+                            <a href="http://www.rema.no/under100/Kampanjer/Januar/article59260.ece?day=2013-01-22">
+                                <img src="http://www.rema.no/under100/gfx/images/btns/view_btn.png" style="width:50px; height:35px; margin-left:25px;" alt="View Recipe">
+                            </a>
+                        </div>
+                        <div class="delBtn" style="cursor: pointer;">
+                            <img src="http://www.rema.no/under100/gfx/images/btns/del_btn.png" style="width:49px; height:33px; margin-left:26px; margin-top:35px" alt="View Recipe">
+                        </div>
+                    </div>
+
+                    <div class="cimg ui-droppable" id="1">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <img src="http://www.rema.no/under100/incoming/article61070.ece/BINARY/RecipeIconPngCompressed/Italiensk-gronnsakssuppe---111024Under100_-18810_F---Januar-2012---oppskrift-ikon---endringApp.png" alt="oppskriftsbilde" width="100" height="100">
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li id="2013-01-23" style="overflow: hidden; float: left; width: 115px; height: 100px;">
+                <div class="carouselitem_planner">
+
+                    <span class="cheader_day">
+                        <span class="weekName">
+
+                            ons
+                        </span>
+                        <span class="weekDay">
+                            23
+                        </span>
+                    </span>
+
+
+                    <div class="recipe_details_box" style="position: absolute; display: none;">
+                        <div class="viewBtn" style="position:absolute;">
+                            <a href="#">
+                                <img src="http://www.rema.no/under100/gfx/images/btns/view_btn.png" style="width:50px; height:35px; margin-left:25px;" alt="View Recipe">
+                            </a>
+                        </div>
+                        <div class="delBtn" style="cursor: pointer;">
+                            <img src="http://www.rema.no/under100/gfx/images/btns/del_btn.png" style="width:49px; height:33px; margin-left:26px; margin-top:35px" alt="View Recipe">
+                        </div>
+                    </div>
+
+                    <div class="cimg ui-droppable" id="2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <img src="http://www.rema.no/under100/gfx/drophere.png" class="dropBilde">
+
+
+
+
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li id="2013-01-24" style="overflow: hidden; float: left; width: 115px; height: 100px;">
+                <div class="carouselitem_planner">
+
+                    <span class="cheader_day">
+                        <span class="weekName">
+
+                            tor
+                        </span>
+                        <span class="weekDay">
+                            24
+                        </span>
+                    </span>
+
+
+                    <div class="recipe_details_box" style="position: absolute; display: none;">
+                        <div class="viewBtn" style="position:absolute;">
+                            <a href="#">
+                                <img src="http://www.rema.no/under100/gfx/images/btns/view_btn.png" style="width:50px; height:35px; margin-left:25px;" alt="View Recipe">
+                            </a>
+                        </div>
+                        <div class="delBtn" style="cursor: pointer;">
+                            <img src="http://www.rema.no/under100/gfx/images/btns/del_btn.png" style="width:49px; height:33px; margin-left:26px; margin-top:35px" alt="View Recipe">
+                        </div>
+                    </div>
+
+                    <div class="cimg ui-droppable" id="3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <img src="http://www.rema.no/under100/gfx/drophere.png" class="dropBilde">
+
+
+
+
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li id="2013-01-25" style="overflow: hidden; float: left; width: 115px; height: 100px;">
+                <div class="carouselitem_planner">
+
+                    <span class="cheader_day">
+                        <span class="weekName">
+
+                            fre
+                        </span>
+                        <span class="weekDay">
+                            25
+                        </span>
+                    </span>
+
+
+                    <div class="recipe_details_box" style="position: absolute; display: none;">
+                        <div class="viewBtn" style="position:absolute;">
+                            <a href="#">
+                                <img src="http://www.rema.no/under100/gfx/images/btns/view_btn.png" style="width:50px; height:35px; margin-left:25px;" alt="View Recipe">
+                            </a>
+                        </div>
+                        <div class="delBtn" style="cursor: pointer;">
+                            <img src="http://www.rema.no/under100/gfx/images/btns/del_btn.png" style="width:49px; height:33px; margin-left:26px; margin-top:35px" alt="View Recipe">
+                        </div>
+                    </div>
+
+                    <div class="cimg ui-droppable" id="4">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <img src="http://www.rema.no/under100/gfx/drophere.png" class="dropBilde">
+
+
+
+
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li id="2013-01-26" style="overflow: hidden; float: left; width: 115px; height: 100px;">
+                <div class="carouselitem_planner">
+
+                    <span class="cheader_day">
+                        <span class="weekName">
+
+                            lør
+                        </span>
+                        <span class="weekDay">
+                            26
+                        </span>
+                    </span>
+
+
+                    <div class="recipe_details_box" style="position: absolute; display: none;">
+                        <div class="viewBtn" style="position:absolute;">
+                            <a href="#">
+                                <img src="http://www.rema.no/under100/gfx/images/btns/view_btn.png" style="width:50px; height:35px; margin-left:25px;" alt="View Recipe">
+                            </a>
+                        </div>
+                        <div class="delBtn" style="cursor: pointer;">
+                            <img src="http://www.rema.no/under100/gfx/images/btns/del_btn.png" style="width:49px; height:33px; margin-left:26px; margin-top:35px" alt="View Recipe">
+                        </div>
+                    </div>
+
+                    <div class="cimg ui-droppable" id="5">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <img src="http://www.rema.no/under100/gfx/drophere.png" class="dropBilde">
+
+
+
+
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li id="2013-01-27" style="overflow: hidden; float: left; width: 115px; height: 100px;">
+                <div class="carouselitem_planner">
+
+                    <span class="cheader_day">
+                        <span class="weekName">
+
+                            søn
+                        </span>
+                        <span class="weekDay">
+                            27
+                        </span>
+                    </span>
+
+
+                    <div class="recipe_details_box" style="position: absolute; display: none;">
+                        <div class="viewBtn" style="position:absolute;">
+                            <a href="#">
+                                <img src="http://www.rema.no/under100/gfx/images/btns/view_btn.png" style="width:50px; height:35px; margin-left:25px;" alt="View Recipe">
+                            </a>
+                        </div>
+                        <div class="delBtn" style="cursor: pointer;">
+                            <img src="http://www.rema.no/under100/gfx/images/btns/del_btn.png" style="width:49px; height:33px; margin-left:26px; margin-top:35px" alt="View Recipe">
+                        </div>
+                    </div>
+
+                    <div class="cimg ui-droppable" id="6">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <img src="http://www.rema.no/under100/gfx/drophere.png" class="dropBilde">
+
+
+
+
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li id="2013-01-28" style="overflow: hidden; float: left; width: 115px; height: 100px;">
+                <div class="carouselitem_planner">
+
+                    <span class="cheader_day">
+                        <span class="weekName">
+
+                            man
+                        </span>
+                        <span class="weekDay">
+                            28
+                        </span>
+                    </span>
+
+
+                    <div class="recipe_details_box" style="position: absolute; display: none;">
+                        <div class="viewBtn" style="position:absolute;">
+                            <a href="#">
+                                <img src="http://www.rema.no/under100/gfx/images/btns/view_btn.png" style="width:50px; height:35px; margin-left:25px;" alt="View Recipe">
+                            </a>
+                        </div>
+                        <div class="delBtn" style="cursor: pointer;">
+                            <img src="http://www.rema.no/under100/gfx/images/btns/del_btn.png" style="width:49px; height:33px; margin-left:26px; margin-top:35px" alt="View Recipe">
+                        </div>
+                    </div>
+
+                    <div class="cimg ui-droppable" id="7">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <img src="http://www.rema.no/under100/gfx/drophere.png" class="dropBilde">
+
+
+
+
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li id="2013-01-29" style="overflow: hidden; float: left; width: 115px; height: 100px;">
+                <div class="carouselitem_planner">
+
+                    <span class="cheader_day">
+                        <span class="weekName">
+
+                            tir
+                        </span>
+                        <span class="weekDay">
+                            29
+                        </span>
+                    </span>
+
+
+                    <div class="recipe_details_box" style="position: absolute; display: none;">
+                        <div class="viewBtn" style="position:absolute;">
+                            <a href="#">
+                                <img src="http://www.rema.no/under100/gfx/images/btns/view_btn.png" style="width:50px; height:35px; margin-left:25px;" alt="View Recipe">
+                            </a>
+                        </div>
+                        <div class="delBtn" style="cursor: pointer;">
+                            <img src="http://www.rema.no/under100/gfx/images/btns/del_btn.png" style="width:49px; height:33px; margin-left:26px; margin-top:35px" alt="View Recipe">
+                        </div>
+                    </div>
+
+                    <div class="cimg ui-droppable" id="8">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <img src="http://www.rema.no/under100/gfx/drophere.png" class="dropBilde">
+
+
+
+
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li id="2013-01-30" style="overflow: hidden; float: left; width: 115px; height: 100px;">
+                <div class="carouselitem_planner">
+
+                    <span class="cheader_day">
+                        <span class="weekName">
+
+                            ons
+                        </span>
+                        <span class="weekDay">
+                            30
+                        </span>
+                    </span>
+
+
+                    <div class="recipe_details_box" style="position: absolute; display: none;">
+                        <div class="viewBtn" style="position:absolute;">
+                            <a href="#">
+                                <img src="http://www.rema.no/under100/gfx/images/btns/view_btn.png" style="width:50px; height:35px; margin-left:25px;" alt="View Recipe">
+                            </a>
+                        </div>
+                        <div class="delBtn" style="cursor: pointer;">
+                            <img src="http://www.rema.no/under100/gfx/images/btns/del_btn.png" style="width:49px; height:33px; margin-left:26px; margin-top:35px" alt="View Recipe">
+                        </div>
+                    </div>
+
+                    <div class="cimg ui-droppable" id="9">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <img src="http://www.rema.no/under100/gfx/drophere.png" class="dropBilde">
+
+
+
+
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li id="2013-01-31" style="overflow: hidden; float: left; width: 115px; height: 100px;">
+                <div class="carouselitem_planner">
+
+                    <span class="cheader_day">
+                        <span class="weekName">
+
+                            tor
+                        </span>
+                        <span class="weekDay">
+                            31
+                        </span>
+                    </span>
+
+
+                    <div class="recipe_details_box" style="position: absolute; display: none;">
+                        <div class="viewBtn" style="position:absolute;">
+                            <a href="#">
+                                <img src="http://www.rema.no/under100/gfx/images/btns/view_btn.png" style="width:50px; height:35px; margin-left:25px;" alt="View Recipe">
+                            </a>
+                        </div>
+                        <div class="delBtn" style="cursor: pointer;">
+                            <img src="http://www.rema.no/under100/gfx/images/btns/del_btn.png" style="width:49px; height:33px; margin-left:26px; margin-top:35px" alt="View Recipe">
+                        </div>
+                    </div>
+
+                    <div class="cimg ui-droppable" id="10">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <img src="http://www.rema.no/under100/gfx/drophere.png" class="dropBilde">
+
+
+
+
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li id="2013-02-01" style="overflow: hidden; float: left; width: 115px; height: 100px;">
+                <div class="carouselitem_planner">
+
+                    <span class="cheader_day">
+                        <span class="weekName">
+
+                            fre
+                        </span>
+                        <span class="weekDay">
+                            1
+                        </span>
+                    </span>
+
+
+                    <div class="recipe_details_box" style="position: absolute; display: none;">
+                        <div class="viewBtn" style="position:absolute;">
+                            <a href="#">
+                                <img src="http://www.rema.no/under100/gfx/images/btns/view_btn.png" style="width:50px; height:35px; margin-left:25px;" alt="View Recipe">
+                            </a>
+                        </div>
+                        <div class="delBtn" style="cursor: pointer;">
+                            <img src="http://www.rema.no/under100/gfx/images/btns/del_btn.png" style="width:49px; height:33px; margin-left:26px; margin-top:35px" alt="View Recipe">
+                        </div>
+                    </div>
+
+                    <div class="cimg ui-droppable" id="11">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <img src="http://www.rema.no/under100/gfx/drophere.png" class="dropBilde">
+
+
+
+
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li id="2013-02-02" style="overflow: hidden; float: left; width: 115px; height: 100px;">
+                <div class="carouselitem_planner">
+
+                    <span class="cheader_day">
+                        <span class="weekName">
+
+                            lør
+                        </span>
+                        <span class="weekDay">
+                            2
+                        </span>
+                    </span>
+
+
+                    <div class="recipe_details_box" style="position: absolute; display: none;">
+                        <div class="viewBtn" style="position:absolute;">
+                            <a href="#">
+                                <img src="http://www.rema.no/under100/gfx/images/btns/view_btn.png" style="width:50px; height:35px; margin-left:25px;" alt="View Recipe">
+                            </a>
+                        </div>
+                        <div class="delBtn" style="cursor: pointer;">
+                            <img src="http://www.rema.no/under100/gfx/images/btns/del_btn.png" style="width:49px; height:33px; margin-left:26px; margin-top:35px" alt="View Recipe">
+                        </div>
+                    </div>
+
+                    <div class="cimg ui-droppable" id="12">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <img src="http://www.rema.no/under100/gfx/drophere.png" class="dropBilde">
+
+
+
+
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li id="2013-02-03" style="overflow: hidden; float: left; width: 115px; height: 100px;">
+                <div class="carouselitem_planner">
+
+                    <span class="cheader_day">
+                        <span class="weekName">
+
+                            søn
+                        </span>
+                        <span class="weekDay">
+                            3
+                        </span>
+                    </span>
+
+
+                    <div class="recipe_details_box" style="position: absolute; display: none;">
+                        <div class="viewBtn" style="position:absolute;">
+                            <a href="#">
+                                <img src="http://www.rema.no/under100/gfx/images/btns/view_btn.png" style="width:50px; height:35px; margin-left:25px;" alt="View Recipe">
+                            </a>
+                        </div>
+                        <div class="delBtn" style="cursor: pointer;">
+                            <img src="http://www.rema.no/under100/gfx/images/btns/del_btn.png" style="width:49px; height:33px; margin-left:26px; margin-top:35px" alt="View Recipe">
+                        </div>
+                    </div>
+
+                    <div class="cimg ui-droppable" id="13">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <img src="http://www.rema.no/under100/gfx/drophere.png" class="dropBilde">
+
+
+
+
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li id="2013-02-04" style="overflow: hidden; float: left; width: 115px; height: 100px;">
+                <div class="carouselitem_planner">
+
+                    <span class="cheader_day">
+                        <span class="weekName">
+
+                            man
+                        </span>
+                        <span class="weekDay">
+                            4
+                        </span>
+                    </span>
+
+
+                    <div class="recipe_details_box" style="position: absolute; display: none;">
+                        <div class="viewBtn" style="position:absolute;">
+                            <a href="#">
+                                <img src="http://www.rema.no/under100/gfx/images/btns/view_btn.png" style="width:50px; height:35px; margin-left:25px;" alt="View Recipe">
+                            </a>
+                        </div>
+                        <div class="delBtn" style="cursor: pointer;">
+                            <img src="http://www.rema.no/under100/gfx/images/btns/del_btn.png" style="width:49px; height:33px; margin-left:26px; margin-top:35px" alt="View Recipe">
+                        </div>
+                    </div>
+
+                    <div class="cimg ui-droppable" id="14">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <img src="http://www.rema.no/under100/gfx/drophere.png" class="dropBilde">
+
+
+
+
+
+                    </div>
+                </div>
+            </li>
+
+    </ul>
+</div>
+
+<div class="prev_planner">
+    <span>Forrige</span>
+</div>
+
+<div class="next_planner">
+    <span>Neste</span>
+</div>
+</div>
+	</div>
+</div>
+
+</div>
+</div>

@@ -1,0 +1,295 @@
+body {
+	background: #FFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	line-height: 1.3;
+	margin-top: 80px;
+}
+
+img {
+	display: none!important;
+}
+
+#top {
+	display: none;
+}
+
+#menu {
+	display: none;
+}
+
+#settingsSection{ 
+
+	display:none;
+}
+
+
+
+h2 {
+	position: absolute;
+	top: 0;
+	font-size: 20px;
+}
+
+
+a {
+
+	display:none;
+}
+
+
+
+/* START Recipe */
+
+#slider {
+	display: none;
+}
+
+.recipePrice {
+	display: block;
+}
+
+.recipePrice .kr{
+	font-size: 20px;
+	vertical-align: top;
+}
+
+.recipePrice .ore{
+	vertical-align: top;
+}
+
+.recipePrice .middag {
+	margin: 10px 0;
+	display: block;
+}
+
+#fremgangsmote .stepByStepItem_noImage *,
+#fremgangsmote .stepByStepItem *{
+	display: inline;
+}
+
+
+#fremgangsmote .stepByStepItem_noImage,
+#fremgangsmote .stepByStepItem {
+	border-bottom: 1px dashed #bbb;
+	overflow: hidden;
+	padding: 10px 0;
+}
+
+#fremgangsmote .stepByStepItem_noImage h4,
+#fremgangsmote .stepByStepItem h4{
+	float: left;
+	width: 30px;
+	margin: 0;
+	padding: 0;
+}
+
+#fremgangsmote .stepByStepItem_noImage p,
+#fremgangsmote .stepByStepItem p{
+	overflow: hidden;
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+
+
+
+.tilbakeTilOppskrifter {
+	display: none;
+}
+
+#ingredient .ingredient_parent,
+#fromCupboard .ingredient_parent{
+	border-bottom: 1px dashed #bbb;
+	overflow: hidden;
+	line-height: 2;
+}
+#ingredient .ingredient_parent *,
+#fromCupboard .ingredient_parent *{
+	display: inline-block;
+}
+
+#ingredient .ingredient_parent .mengdeEnhet,
+#fromCupboard .ingredient_parent .mengdeEnhet{
+	width: 130px;
+}
+
+
+
+
+#ingredient .ingredient_parent .standardEnhetPris,
+#fromCupboard .ingredient_parent .standardEnhetPris{
+	margin-left: 10px;
+	color: #555;
+}
+
+
+
+
+#ingredient .ingredient_parent .endeligPris,
+#fromCupboard .ingredient_parent .endeligPris{
+	float: right;
+}
+
+
+.visualBox {
+	display: none;
+}
+
+.debug {
+	display: none;
+}
+
+
+/* verkt�ylinje for deling og print */
+
+#recipeToolbar {
+
+  display:none
+}
+
+/* END Recipe */
+
+
+
+
+/* START Handlelapp*/
+
+#handlelapp #recipe_container *{
+	/*display: none;*/
+}
+
+#handlelapp br {
+	display: none;
+}
+
+#handlelapp #recipe_container .recipe_item h3 {
+	display: block!important;
+	border-bottom: 1px solid #ccc;
+	overflow: hidden;
+	line-height: 2;
+	margin: 0;
+}
+
+#handlelapp #recipe_container .recipe_item br {
+	display: none;
+}
+
+#handlelapp #recipe_container hr{
+	display: none;
+}
+
+#handlelapp h3 {
+	margin-top: 20px;
+}
+
+
+#handlelapp .leftColumnSmall{
+	display: block;
+	float: left;
+	width: 47%;
+}
+
+#handlelapp .rightColumnSmall{
+	display: block;
+	float: right;
+	width: 47%;
+}
+
+
+#handlelapp #ingrediens input,
+#handlelapp #fromCupboard input{
+	display: none;
+}
+
+#handlelapp #ingrediens .product_item,
+#handlelapp #fromCupboard .product_item{
+	display: block!important;
+	border-bottom: 1px dashed #bbb;
+	overflow: hidden;
+	line-height: 2;
+	padding-left: 10px;
+}
+
+#handlelapp #ingrediens span,
+#handlelapp #fromCupboard span{
+	display: inline-block;
+	width: 50px;
+}
+
+#deling {
+	display: none;
+}
+
+#handlelapp #ingrediens .product_item.unselect,
+#handlelapp #fromCupboard .product_item.unselect {
+
+   display: none!important;
+}
+
+#handlelapp span.print {
+
+	display:block!important;
+	float: left;
+	clear: both;
+	font-size: 14px;
+	font-weight: bold;
+	margin-top:30px;
+	
+
+	
+
+}
+
+
+#handlelapp #printing{
+display: none;
+}
+
+
+/* END Handlelapp */
+
+
+/* Velg dager */
+
+.recipe_content, 
+.handlelapp_recipe_container .date, 
+.checkBox_container, 
+#velgDager h2, 
+#velgDager p.disclaimer, 
+.submit_button, 
+.checkbox {
+   display: none;
+}
+
+#velgDager > form > h3 {
+
+	position: absolute;
+	top: 0;
+	font-size: 20px;
+
+}
+
+
+
+.oppskriftsdata-print.selected {
+	
+	display: block!important;
+	float:left;
+	clear:both;
+}
+
+.oppskriftsdata-print.selected #ingredient .ingredient_parent .endeligPris{
+	display: none;
+}
+
+
+
+
+/* END  Velg dager */
+
+
+#footer {
+	display: none;
+}
+

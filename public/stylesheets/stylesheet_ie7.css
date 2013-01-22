@@ -1,0 +1,79 @@
+@charset "UTF-8";
+/* CSS Document */
+
+#tags ul li em{
+	margin-top:-32px !important;
+	border: 0px !important;
+	border-radius: 0px !important;
+	min-width:22px !important;
+}
+
+#tags #tagsKampanje #campaign_archive_container{
+	background: none;
+}
+
+#tags ul li em {
+	background: url(roundnumber_ie78.png) top no-repeat !important;
+	padding: 2px 4px 4px 4px !important;
+	line-height: 24px !important;
+	min-width: 24px !important;
+	}
+
+#tags #tagsKampanje #currentCampaignUl{
+	padding-bottom:8px !important;
+}
+
+#tags #tagsKampanje #overHundreHverdagsMiddagerUl{
+	padding-bottom: 8px !important;
+}
+
+.recipeItem #recipe
+{
+	position: absolute;
+	top: 154px;
+	right: 114px;
+	margin-top: 15px;
+}
+
+/* Oppskriftsarkiv */
+
+#recipe_container.recipeArchive {
+	position: relative;
+	top: auto;
+	width: auto;
+}
+
+#tags {
+	position:relative;
+}
+
+#tags #tagsKampanje #campaign_archive_container{
+	z-index: auto;
+	position: relative;
+}
+
+
+/* Nyttige tips og videoer */
+
+.section#section3content #informationContainer #italiaContainer #content{
+	margin-left:auto !important;
+	padding-top:65px;
+}
+
+.section#section3content #informationContainer #italiaContainer{
+	width:570px;
+	padding-left:40px;
+	margin-top:-60px;
+	background-color:transparent !important;
+}
+
+
+#footer .historikkSplashContainer
+{
+	background-color: #212229;
+	position:relative !important;
+	
+	margin-top: -34px;
+	padding: 15px 0 15px 0;
+}
+

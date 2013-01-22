@@ -49,8 +49,8 @@
     #{doLayout /}
 </div>
 
-        <p id="footer">
-        </p>
-        
+            #{if request.controller == 'Admin'}
+                #{planningFooter menu:menu /}
+            #{/if}
     </body>
 </html>

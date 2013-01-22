@@ -79,7 +79,8 @@ public class Recipe extends Model {
     }
 
     public Recipe tagItWith(String name) {
-        tags.add(Tag.findOrCreateByName(name));
+        if(!tags.contains(name))
+        {tags.add(Tag.findOrCreateByName(name));}
         return this;
     }
 

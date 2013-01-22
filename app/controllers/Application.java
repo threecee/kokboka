@@ -12,7 +12,7 @@ public class Application extends Controller {
     public static void index() {
         List<Recipe> recipes = Recipe.find(
                 "order by postedAt desc"
-        ).from(0).fetch(10);
+        ).fetch();
         render(recipes);
     }
 

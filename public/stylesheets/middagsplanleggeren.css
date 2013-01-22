@@ -954,6 +954,7 @@ p {
 .recipeItem .recipeImage img{
 	width: 140px;
 	height: 140px;
+    border-radius:8px;
 }
 
 .recipeItem .recipeImage .recipeTime {
@@ -967,6 +968,29 @@ p {
 	text-align: center;
 	color: #222;
 }
+
+div.recipeTitleBox{
+	position:absolute; /* absolute position (so we can position it where we want)*/
+	bottom:0px; /* position will be on bottom */
+	left:0px;
+	width:140px;
+	/* styling bellow */
+	background-color:black;
+	font-family: 'tahoma';
+ 	font-size: 12px;
+	text-align: center;
+    color:white;
+	opacity:0.6; /* transparency */
+	filter:alpha(opacity=60); /* IE transparency */
+    border-radius:0px 0px 8px 8px;
+}
+p.recipeTitle{
+	padding:5px;
+	margin:0px;
+    opacity:1; /* transparency */
+    filter:alpha(opacity=100); /* IE transparency */
+}
+
 
 .recipeItem .recipePrice {
 	position: absolute;
@@ -1063,12 +1087,13 @@ p {
 	float: left;
 }
 
+/*
 .recipeItem p{
 	width: 150px;
 	margin-top: 7px;
 	color: #777;
 	float: left;
-}
+} */
 
 	.ui-draggable-dragging {
 		margin-left: 60px;

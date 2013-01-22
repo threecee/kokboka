@@ -17,15 +17,10 @@ public class Recipes extends CRUD {
     }
     public static void recipePhotoThumb(long id) {
            final Recipe recipe = Recipe.findById(id);
-            if(recipe != null && recipe.photo != null){
-                render("/images/food-plate-icons.jpg");
-            }
-            else{
            notFoundIfNull(recipe);
            notFoundIfNull(recipe.photoThumb);
            response.setContentTypeIfNotSet(recipe.photoThumb.type());
            renderBinary(recipe.photoThumb.get());
-            }
         }
 
     public static boolean recipeHasPhoto(long id) {

@@ -6,7 +6,8 @@
 						<div class="cimg">
 							<a href="@{Application.show(_recipe.id)}">
 								<img src="@{Recipes.recipePhotoThumb(_recipe.id)}" alt="oppskrift bilde" width="100" height="100"/>
-                                <span class="recipeTime">${_recipe.title}</span>
+                                <div class="recipeTitleBox"><p class="recipeTitle">${_recipe.title}</p></div>
+                                <!--span class="recipeTime">${_recipe.title}</span-->
 							</a>
 						</div>
 					</div>

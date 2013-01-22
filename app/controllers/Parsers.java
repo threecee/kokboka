@@ -21,6 +21,7 @@ import play.mvc.With;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 @With(Secure.class)
 public class Parsers extends Controller {
@@ -136,6 +137,11 @@ public class Parsers extends Controller {
     private static void tagRecipes(Node event) {
         String url = XPath.selectText("a/@href", event);
         String name = XPath.selectText("a/span", event);
+        List<Node> nameNodes = XPath.selectNodes("a/span", event);
+        if(name != null && name.trim().isEmpty())
+        {
+            name = nameNodes.get(0).getChildNodes().item(2).getTextContent();
+        }
         ArrayList<String> tagUrls;
         if (url != null && name != null && !url.isEmpty() && !name.isEmpty()) {
             url = url.replaceAll(" ", "%20");

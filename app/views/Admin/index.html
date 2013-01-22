@@ -12,3 +12,15 @@ oppskrifter så langt</span></h3>
 <p id="newrecipe" >
     <a href="@{form()}"><span>+</span> legg inn en ny oppskrift</a>
 </p>
+
+
+
+#{list items:menus, as:'menu'}
+    <p class="recipe ${recipe_parity}">
+        <a href="@{Admin.menuform(menu.id)}">${menu.title}</a>
+    </p>
+#{/list}
+
+<p id="newmenu" >
+    <a href="@{Admin.menuform()}"><span>+</span> legg inn en ny meny</a>
+</p>

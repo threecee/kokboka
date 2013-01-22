@@ -1,9 +1,6 @@
 package controllers;
 
-import models.Ingredient;
-import models.Recipe;
-import models.Tag;
-import models.User;
+import models.*;
 import play.db.jpa.Blob;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -26,7 +23,8 @@ public class Admin extends Controller {
     public static void index() {
         String user = Security.connected();
         List<Recipe> recipes = Recipe.find("author.email", user).fetch();
-        render(recipes);
+        List<Menu> menus = Menu.find("author.email", user).fetch();
+        render(recipes, menus);
     }
 
 
@@ -38,7 +36,72 @@ public class Admin extends Controller {
         render();
     }
 
+    public static void menuform(Long id) {
+        if (id != null) {
+            Menu menu = Menu.findById(id);
+            render(menu);
+        }
+        render();
+    }
 
+
+    public static void saveMenu(Long id, String title, String[] usedForDays, Long[] recipes) {
+        Menu menu;
+
+        if (id == null) {
+            User author = User.find("byEmail", Security.connected()).first();
+            menu = new Menu(author, title);
+            menu.save();
+        } else {
+            // Retrieve menu
+            menu = Menu.findById(id);
+            // Edit
+            menu.title = title;
+        }
+
+        List<RecipeInMenu> recipeInMenuList = RecipeInMenu.find("byMenu", menu).fetch();
+        for (int i = 0; i < usedForDays.length; i++) {
+
+            RecipeInMenu currentRecipeInMenu = null;
+            if (recipeInMenuList.size() > i) {
+                currentRecipeInMenu = recipeInMenuList.get(i);
+                if (isValid(usedForDays[i], recipes[i])
+                        ) {
+
+                    currentRecipeInMenu.usedForDay = MenuDay.valueOf(usedForDays[i]);
+                    currentRecipeInMenu.recipe = Recipe.findById(recipes[i]);
+
+                    currentRecipeInMenu.save();
+                } else {
+                    currentRecipeInMenu.delete();
+                }
+
+            } else if(isValid(recipes[i])) {
+                Recipe recipe = Recipe.findById(recipes[i]);
+                menu.save();
+                currentRecipeInMenu = new RecipeInMenu(menu, recipe, MenuDay.valueOf(usedForDays[i]));
+                currentRecipeInMenu.save();
+            }
+        }
+
+
+        // Validate
+        validation.valid(menu);
+        if (validation.hasErrors()) {
+            render("@menuform", menu);
+        }
+        // Save
+        menu.save();
+        index();
+    }
+
+    private static boolean isValid(Long recipe) {
+        return recipe != null && recipe >= 0;
+    }
+
+    private static boolean isValid(String usedForDay, Long recipe) {
+        return usedForDay != null && usedForDay.length() > 0 && recipe != null && recipe >= 0;
+    }
 
     public static void save(Long id, String title, String description, double serves, String servesUnits, String[] amounts, String[] units, String[] ingredients, String steps, String source, String tags, Blob photo) {
         Recipe recipe;
@@ -60,6 +123,7 @@ public class Admin extends Controller {
             recipe.tags.clear();
         }
 
+        recipe.save();
         List<Ingredient> ingredientList = Ingredient.find("byRecipe", recipe).fetch();
         for (int i = 0; i < amounts.length; i++) {
             System.out.println("position " + i);

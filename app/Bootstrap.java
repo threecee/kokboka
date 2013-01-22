@@ -1,4 +1,5 @@
 import controllers.Parsers;
+import org.apache.log4j.Level;
 import play.*;
 import play.jobs.*;
 import play.test.*;
@@ -28,7 +29,6 @@ public class Bootstrap extends Job {
           calle  = new User(email, "secret", "Calle").save();
 
         }
-
 
     //    new Parsers().parseRecipe(calle, "http://www.rema.no/under100/Kampanjer/Wok_Bangkok_style/article66229.ece");
 

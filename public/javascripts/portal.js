@@ -58,7 +58,7 @@ $(document).ready(function() {
 				  {
 				      $.ajax({
 			              type: "GET",
-			              url: "/under100/setFavorite",
+			              url: "/recipes/setFavorite",
 			              data: "recipeId=" + $(favoriserButton).attr('id'),
 			              dataType: 'xml',
 			              success: function(xml) {      				
@@ -78,7 +78,7 @@ $(document).ready(function() {
 				  {
 				  	$.ajax({
 			              type: "GET",
-			              url: "/under100/unFavorite",
+			              url: "/recipes/unFavorite",
 			               data: "recipeId=" + $(favoriserButton).attr('id'),
 			              dataType: 'xml',
 			              success: function(xml) {      				
@@ -166,12 +166,12 @@ $(document).ready(function() {
 	}
 	
 
-		
+/*
 		setInterval(function() {
 			
 			$.ajax({
 				   type: "GET",
-				   url: "/under100/checkstatus",
+				   url: "/admin/checkstatus",
 				   data: "profileLastmodified=" + jQuery.parseJSON(JSON.stringify($.JSONCookie("familyprofile"))).lastModified,
 				   dataType: "xml",
 				   success: function(xml){   
@@ -182,7 +182,7 @@ $(document).ready(function() {
 					   if(status == 'doSynch')
 						   {
 						  
-						   	$.get("/under100/dinnerplan", function(data) {
+						   	$.get("/menus/dinnerplan", function(data) {
 						   		$('#middagsplanlegger').fadeTo(300, 0.2,"swing", function(){ 
 						   		
 						   			$('#middagsplanlegger').empty().append(data, loadContent());
@@ -208,13 +208,13 @@ $(document).ready(function() {
 				   }
 			    });
 		}, 30000);
-
+*/
 
 	function loadContent()
 	{
-		$.getScript('/under100/js/jcarousellite_1.0.1.min.js' , function(){
+		$.getScript('/public/javascripts/jcarousellite_1.0.1.min.js' , function(){
 			
-			$.getScript('/under100/js/middagsplanlegger.js');
+			$.getScript('/public/javascripts/middagsplanlegger.js');
 			$('#middagsplanlegger').fadeTo(1200, 1.0, "swing");
 		});
 	}

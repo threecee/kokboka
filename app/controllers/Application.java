@@ -15,6 +15,10 @@ public class Application extends Controller {
         ).fetch();
         render(recipes);
     }
+    public static void index(String[] tags) {
+        List<Recipe> recipes = Recipe.findTaggedWith(tags);
+        render(tags, recipes);
+     }
 
     public static void show(Long id) {
         Recipe recipe = Recipe.findById(id);

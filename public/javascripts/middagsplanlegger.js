@@ -7,7 +7,7 @@
  *  - Draggable
  *  - Droppable
  * 
- * Ajax (lagring på server) 
+ * Ajax (lagring pï¿½ server) 
  * 
  * Cookies (lagring lokalt )
  * 
@@ -46,9 +46,9 @@ $(function() {
 	
 	/* Draggable events (lar brukeren dra i en oppskrift vha mouse-events)
 	 * 
-	 * funksjonen under kalles når oppskriften velges ved å dra i :
-	 * - thumbnail på artikkeliste (selector: #recipeList .recipeItem .recipeImage) 
-	 * - thumbnail på artikkelvisning (selector: div.dtp_bilde)   
+	 * funksjonen under kalles nï¿½r oppskriften velges ved ï¿½ dra i :
+	 * - thumbnail pï¿½ artikkeliste (selector: #recipeList .recipeItem .recipeImage) 
+	 * - thumbnail pï¿½ artikkelvisning (selector: div.dtp_bilde)   
 	 * */
 	
 	$("#recipeList .recipeItem .recipeImage, div.dtp_bilde ").draggable({
@@ -63,8 +63,8 @@ $(function() {
 		stop: fadeItIn
 	}); 
 	
-	/* funksjonen under kalles når oppskriften velges ved å dra i :
-	 * hovedbilde på artikkeliste (selector: .recipeImageDraggable)  
+	/* funksjonen under kalles nï¿½r oppskriften velges ved ï¿½ dra i :
+	 * hovedbilde pï¿½ artikkeliste (selector: .recipeImageDraggable)  
 	 * */
 	
 	$(".recipeImageDraggable").draggable({
@@ -79,8 +79,8 @@ $(function() {
 		stop: fadeItIn
 	});
 	
-	/* funksjonen under kalles når oppskriften velges ved å dra i :
-	 * thumbnail på historikksiden (selector: .recipeItem .thumb .cimg)  
+	/* funksjonen under kalles nï¿½r oppskriften velges ved ï¿½ dra i :
+	 * thumbnail pï¿½ historikksiden (selector: .recipeItem .thumb .cimg)  
 	 * */	
 	
 	
@@ -99,23 +99,23 @@ $(function() {
 	/* end Draggable events*/
 	
 	
-	/* Droppable event (lar brukeren slippe en oppskrift i spesifiserte områder på web siden.)
+	/* Droppable event (lar brukeren slippe en oppskrift i spesifiserte omrï¿½der pï¿½ web siden.)
 	 * 
 	 * 
-	 * Når en oppskrift er valgt, skjer fålgende:
+	 * Nï¿½r en oppskrift er valgt, skjer fï¿½lgende:
 	 * 
-	 * - Oppskriften lagres på server og/eller lokalt, avhengig av om brukeren er logget inn eller ikke.
-	 * - Det legges til verktøknapper på oppskriften i middagsplanleggren, med knapper for 'Se' og 'Slett'.
+	 * - Oppskriften lagres pï¿½ server og/eller lokalt, avhengig av om brukeren er logget inn eller ikke.
+	 * - Det legges til verktï¿½knapper pï¿½ oppskriften i middagsplanleggren, med knapper for 'Se' og 'Slett'.
 	 * - Div animering 
 	 * 
-	 * funksjonen under kalles når en oppskrift slippes i middagsplanlegger (selector: ul#mycarousel_days div.carouselitem_planner div.cimg)
+	 * funksjonen under kalles nï¿½r en oppskrift slippes i middagsplanlegger (selector: ul#mycarousel_days div.carouselitem_planner div.cimg)
 	 * */
 	
 	$("ul#mycarousel_days div.carouselitem_planner div.cimg").droppable({ 
 		hoverClass : 'ui-state-hover',
 		drop : function(event, ui) {
 			
-			/* Kaller funksjon for å vise splash for historikk */
+			/* Kaller funksjon for ï¿½ vise splash for historikk */
 			droppableShowHistorySplash();
 			
 			$(this).fadeTo(300, 0.2,"swing", addRecipe);
@@ -169,7 +169,7 @@ $(function() {
 			}
 			
 
-			/* Når oppskriftren velges fra historikksiden:
+			/* Nï¿½r oppskriftren velges fra historikksiden:
 			 * -  Antall porsjoner leses fra DOM  
 			 *  - recideId leses fra DOM
 			 *  */
@@ -178,7 +178,7 @@ $(function() {
 				   recipeId = $(ui.helper).attr('id');
 			
 			
-			/* Når oppskriftren velges fra artikkelliste: 
+			/* Nï¿½r oppskriftren velges fra artikkelliste: 
 			 *  - recideId leses fra DOM
 			 *  */
 			
@@ -205,12 +205,12 @@ $(function() {
 			}
 
 
-			/* Lagrer valgt oppskrift på server / lokalt*/
+			/* Lagrer valgt oppskrift pï¿½ server / lokalt*/
 			$.ajax({
 				
 				   type: "POST",
-				   url: "/under100/planrecipe",
-				   data: "service=ws" + "&item=planRecipe" + "&recipeId=" + recipeId + "&day="+day + "&adults=" + adults + "&children=" + children,
+				   url: "/menus/planrecipe",
+				   data: "recipeId=" + recipeId + "&day="+day,
 				   dataType: "xml",
 				   success: function(xml){   
 				   	  
@@ -248,14 +248,14 @@ $(function() {
 				$(this).siblings(".recipe_details_box").remove();
 				
 				
-				// Når oppskirften velges fra artikkelvisningssiden
+				// Nï¿½r oppskirften velges fra artikkelvisningssiden
 				if($(ui.draggable).hasClass('dtp_bilde') || $(ui.draggable).hasClass('recipeImageDraggable'))
 				{
 					element = $(ui.helper).children("a").children("img");
 					url = $(ui.helper).children('a').attr('href');
 				}
 				
-				// Når oppskirften velges fra artikkellistesiden
+				// Nï¿½r oppskirften velges fra artikkellistesiden
 				else if($(draggedItem).hasClass('recipeImage'))
 				{   
 					element = $(ui.helper).find(".cimg").children("a").children("img");
@@ -263,7 +263,7 @@ $(function() {
 				}
 
 				
-				// Når oppskirften velges fra historikksiden
+				// Nï¿½r oppskirften velges fra historikksiden
 				else if($(draggedItem).hasClass('cimg'))
 				{   
 					
@@ -273,8 +273,8 @@ $(function() {
                 
 				var newDiv = '<div style="position: absolute; display: none;" class="recipe_details_box">' + 
                 			 '<div style="position:absolute;" class="viewBtn"><a href="' + url + '?day=' + $(this).closest('li').attr('id') + '">' + 
-                			 '<img alt="View Recipe" style="width:50px; height:35px; margin-left:25px;" src="/under100/gfx/images/btns/view_btn.png"></a></div>' +
-                			 '<div style="cursor: pointer;" class="delBtn"><img alt="View Recipe" style="width:49px; height:33x; margin-left:26px; margin-top:35px" src="/under100/gfx/images/btns/del_btn.png"></div>' +
+                			 '<img alt="View Recipe" style="width:50px; height:35px; margin-left:25px;" src="/public/images/view_btn.png"></a></div>' +
+                			 '<div style="cursor: pointer;" class="delBtn"><img alt="View Recipe" style="width:49px; height:33x; margin-left:26px; margin-top:35px" src="/public/images/del_btn.png"></div>' +
                 			 '</div>';
 
 			
@@ -294,7 +294,7 @@ $(function() {
 			
 			/* droppableShowHistorySplash ()
 			 *
-			 * funksjonen sjekker om splashen har blitt vist fÃ¸r. Hvis ikke skal den vises nå.
+			 * funksjonen sjekker om splashen har blitt vist fÃ¸r. Hvis ikke skal den vises nï¿½.
 			 * */
 			function droppableShowHistorySplash()
 			{
@@ -307,7 +307,7 @@ $(function() {
 			
 			/* ShowHistorySplash ()
 			 *
-			 * funksjonen sjekker om splashen har blitt vist fÃ¸r. Hvis ikke skal den vises nå.
+			 * funksjonen sjekker om splashen har blitt vist fÃ¸r. Hvis ikke skal den vises nï¿½.
 			 *
 			 *
 			 * */
@@ -323,9 +323,9 @@ $(function() {
 			 		
 			 }
 			
-			/* click-event for lukkeknappen på historikksplash
+			/* click-event for lukkeknappen pï¿½ historikksplash
 			 * 
-			 *	Når knappen trykkes vil man kalle på hideHistorySplash for å skjule splashbaren og lage en cookie
+			 *	Nï¿½r knappen trykkes vil man kalle pï¿½ hideHistorySplash for ï¿½ skjule splashbaren og lage en cookie
 			 **/
 			 
 			 $('.historikkSplashContainer .lukk').click(function(){
@@ -348,25 +348,25 @@ $(function() {
 
 /* deleteRecipe()
  * 
- * Funksjonen kalles når en oppskrift fjernes fra middagsplanleggeren. FÃ¸lgende gjøres da:
+ * Funksjonen kalles nï¿½r en oppskrift fjernes fra middagsplanleggeren. FÃ¸lgende gjï¿½res da:
  * 
- * - Diverse animering for å bytte ut oppskriftsbilde med "Dra ned oppskrift" - bildet
- * - Brukerens middagsplan oppdateres på server og/eller lokalt.
+ * - Diverse animering for ï¿½ bytte ut oppskriftsbilde med "Dra ned oppskrift" - bildet
+ * - Brukerens middagsplan oppdateres pï¿½ server og/eller lokalt.
  * 
  * */
 
 function deleteRecipe() {
 
 	$(this).closest('.carouselitem_planner').find('.cimg').empty();
-	$(this).closest('.carouselitem_planner').find('.cimg').append('<img src="/under100/gfx/drophere.png" class="dropBilde" width="100" height="100" />');
+	$(this).closest('.carouselitem_planner').find('.cimg').append('<img src="/public/images/drophere.png" class="dropBilde" width="100" height="100" />');
 	$(this).closest(".recipe_details_box").slideUp("slow");
 	
 	var day=$(this).closest("li").attr('id'); 
 	
 	$.ajax({
 			   type: "POST",
-			   url: "/under100/unplanrecipe",
-			   data: "service=ws" + "&item=unplanRecipe" +  "&day="+day,
+			   url: "/menus/unplanrecipe",
+			   data: "day="+day,
 			   dataType: "xml",
 			   success: function(xml){
 	
@@ -393,7 +393,7 @@ function deleteRecipe() {
 }/*end deleteRecipe ()*/
 
 
-/* Funksjoner for nedtoning på siden når en oppskrift dras. Nedtoningen tilbakestilles når oppskriften slippes. */
+/* Funksjoner for nedtoning pï¿½ siden nï¿½r en oppskrift dras. Nedtoningen tilbakestilles nï¿½r oppskriften slippes. */
 
 function fadeItOut() {
 	$("#recipeList, .leftColumn").fadeTo("fast", 0.3);

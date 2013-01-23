@@ -1838,12 +1838,12 @@ p.recipeTitle{
 
 
 #recipe .favoriserBtn{
-	background:url(buttons/default_fav_.png) no-repeat;
+	background:url(default_fav_.png) no-repeat;
 }
 
 #recipe .favoriserBtn:hover,
 #recipe .favoriserBtn_favorisert{
-	background:url(buttons/onclick_fav_.png) no-repeat;
+	background:url(onclick_fav_.png) no-repeat;
 }
 
 #recipe .fb_share_button { 
@@ -1861,16 +1861,16 @@ p.recipeTitle{
 
 
 #recipe .print_button{
-    background: url(buttons/default_print_.png) no-repeat;
+    background: url(default_print_.png) no-repeat;
     margin-left: 105px;
 }
 
 #recipe .print_button:hover,
 #recipe .print_button:active{
-    background: url(buttons/onclick_print_.png) no-repeat;
+    background: url(onclick_print_.png) no-repeat;
 }
 
-#recipe #slider,
+#slider,
 #recipe #ingredient,
 #recipe #fromCupboard{
 	border-radius: 8px;
@@ -1883,7 +1883,7 @@ p.recipeTitle{
 	font-size: 17px;
 }
 
-#recipe #slider strong {
+#slider strong {
 	display: block;
 	width: 100px;
 	float: left;
@@ -1904,14 +1904,14 @@ p.recipeTitle{
 
 
 
-#recipe #slider > div {
+#slider > div {
 	width: 190px;
 	float: left;
 	height: 8px;
 	margin-top: 12px;
 }
 
-#recipe #slider span {
+#slider span {
     font-weight: bold;
 	float: right;
 	display: block;
@@ -2245,8 +2245,8 @@ p.recipeTitle{
 }
 
 #middagsplanlegger #mycarousel_days .carouselitem_planner {
-	width: 100px;
-	height: 100px;
+	width: 97px;
+	height: 97px;
 	border-radius: 8px;
 	overflow: hidden;
 	display: block;
@@ -2267,10 +2267,12 @@ p.recipeTitle{
 	display: block;
 	position: absolute;
 	bottom: 0;
-	height: 31px;
+	height: 23px;
 	width: 100%;
+/*
     font-weight: bold;
 	font-size: 17px;
+*/
 	text-align: center;
 	line-height: 1.7;
 	z-index: 2000;
@@ -2522,10 +2524,10 @@ p.recipeTitle{
 }
 
 #velgDager .handlelapp_recipe_container .date strong{
-	font-size: 35px;
+	font-size: 22px;
 	font-weight: bold;
 	display: block;
-	margin-top: 25px;
+	margin-top: 60px;
 	line-height: 1;
 }
 
@@ -2652,7 +2654,7 @@ p.recipeTitle{
 	clear: both;
 	overflow: hidden;
 }
-
+  /*
 #handlelapp .product_item .productImage{
 	width: 40px;
 	height: 40px;
@@ -2667,7 +2669,7 @@ p.recipeTitle{
 	max-width: 40px;
 	max-height: 40px;
 }
-
+      */
 
 #handlelapp .product_item:last-child {
 	border: none;
@@ -2675,17 +2677,18 @@ p.recipeTitle{
 
 #handlelapp .product_item .info{
 	float: left;
-	width: 400px;
-	margin-top: 10px;
+	/*width: 400px;*/
+	margin-left: 10px;
 }
 
-#handlelapp .product_item .info input{
-	float: right;
+#handlelapp .product_item input{
+	float: left;
+    margin-left: 10px;
 }
 
 #handlelapp .product_item .info span{
 	display: inline-block;
-	width: 50px;
+	width: 75px;
 }
 
 #handlelapp #rememberThis { 

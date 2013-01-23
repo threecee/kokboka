@@ -1,0 +1,63 @@
+<div class="weekplanner_buttons">
+    <a href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
+        Handlelapp
+    </a>
+    
+    <a href="http://www.rema.no/under100/?service=showProfile" id="tilInstillinger">
+        Innstillinger
+    </a>
+</div>
+
+<div class="weekplanner_days">
+    <ul id="mycarousel_days" class="jcarousel-skin-tango">
+
+    #{list items:0..6, as:'i'}
+
+
+            <li id="${utils.DateUtil.addDays(menu.usedFromDate, i).format("yyyy-MM-dd")}">
+                <div class="carouselitem_planner">
+                    
+                    <span class="cheader_day">
+                        <span class="weekName">
+                        ${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}
+                        </span>
+                        <span class="weekDay">
+                        ${utils.DateUtil.dayOfMonth(utils.DateUtil.addDays(menu.usedFromDate, i))}
+                        </span>
+                    </span>
+                    
+                    
+                    <div class="recipe_details_box" style="position: absolute; display: none;">
+                        <div class="viewBtn" style="position:absolute;">
+                            <a href="#">
+                                <img src="@{'/public/images/view_btn.png'}" style="width:50px; height:35px; margin-left:25px;" alt="View Recipe" />
+                            </a>
+                        </div>
+                        <div class="delBtn" style="cursor: pointer;">
+                            <img src="@{'/public/images/del_btn.png'}" style="width:49px; height:33px; margin-left:26px; margin-top:35px" alt="View Recipe" />
+                        </div>
+                    </div>
+                    
+                    <div class="cimg" id="${i}">
+                        #{if menu.getRecipeForDay(i) != null}
+                            <img src="@{Recipes.recipePhotoThumb(menu.getRecipeForDay(i).id)}" alt="oppskrift bilde" width="100" height="100">
+                        #{/if}
+                        #{else}
+                            <img src="@{'/public/images/drophere.png'}" class="dropBilde">
+                        #{/else}
+                    </div>
+                </div>
+            </li>
+        
+    #{/list}
+
+    </ul>
+</div>
+
+<div class="prev_planner">
+    <span>Forrige</span>
+</div>
+
+<div class="next_planner">
+    <span>Neste</span>
+</div>

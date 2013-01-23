@@ -1,7 +1,7 @@
 *{ Display a recipe in one of these modes: 'full', 'home' or 'teaser' }*
 #{if _as == 'teaser'}
 			<div class="recipeListItem">
-				<div class="recipeItem">
+				<div id="${_recipe.id}" class="recipeItem">
 					<div class="recipeImage">
 						<div class="cimg">
 							<a href="@{Application.show(_recipe.id)}">

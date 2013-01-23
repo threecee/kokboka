@@ -1,8 +1,11 @@
 package models;
 
+import org.hibernate.annotations.ManyToAny;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User extends Model {
@@ -11,6 +14,9 @@ public class User extends Model {
     public String password;
     public String fullname;
     public boolean isAdmin;
+
+    @ManyToOne
+    public Menu activeMenu;
 
     public User(String email, String password, String fullname) {
         this.email = email;

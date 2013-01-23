@@ -18,18 +18,19 @@ public class Menu extends Model {
     @ManyToOne
     public User author;
 
-    public String title;
     public Date createdAt;
 
-    @ElementCollection
-    public List<Date> usedFromDates;
+    public Date usedFromDate;
+
+    @OneToOne
+    public ShoppingList shoppingList;
 
 
-    public Menu(User author, String title) {
+    public Menu(User author, Date usedFromDate) {
         this.author = author;
-        this.title = title;
         this.createdAt = new Date();
-        usedFromDates = new ArrayList<Date>();
+        this.usedFromDate = usedFromDate;
+        this.recipesInMenu = new ArrayList<RecipeInMenu>();
 
     }
 
@@ -41,10 +42,34 @@ public class Menu extends Model {
 
     }
 
-    public Menu addUsedFromDate(Date usedFromDate) {
-        this.usedFromDates.add(usedFromDate);
-        this.save();
-        return this;
-
+    public Recipe getRecipeForDay(int day)
+    {
+        MenuDay menuDay = MenuDay.values()[day];
+        for(RecipeInMenu recipeInMenu:recipesInMenu)
+        {
+             if(recipeInMenu.usedForDay.compareTo(menuDay) == 0)
+             {
+                 return recipeInMenu.recipe;
+             }
+        }
+        return null;
     }
+
+    public void deleteRecipeForDay(int day)
+     {
+         MenuDay menuDay = MenuDay.values()[day];
+         for(RecipeInMenu recipeInMenu:recipesInMenu)
+         {
+              if(recipeInMenu.usedForDay.compareTo(menuDay) == 0)
+              {
+                  recipesInMenu.remove(recipeInMenu);
+                  recipeInMenu.delete();
+                  save();
+                  break;
+                  //recipeInMenu.delete();
+
+              }
+         }
+     }
+
 }

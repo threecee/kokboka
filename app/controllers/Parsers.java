@@ -239,7 +239,7 @@ public class Parsers extends Controller {
 
             String produktnavn = XPath.selectText("div[@class='produktnavn']", event);
             if (produktnavn != null) {
-                ingredientName = produktnavn;
+                ingredientName = cleanProductNames(produktnavn);
             }
 
             recipe.addIngredient(amount, unit, ingredientName);
@@ -264,6 +264,12 @@ public class Parsers extends Controller {
         return recipe;
 
 
+    }
+
+    private static String cleanProductNames(String produktnavn) {
+        produktnavn = produktnavn.replaceAll(" *REMA 1000 *","");
+        produktnavn = produktnavn.replaceAll(" *Tine *","");
+        return produktnavn.trim();
     }
 
     private static String getStep(Node event) {

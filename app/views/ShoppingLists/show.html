@@ -1,0 +1,157 @@
+#{extends 'main.html' /}
+
+<div id="container">
+<div class="width">
+	<div id="handlelapp">
+		<h2>Handlelapp</h2>
+		<br class="clear">
+		<!-- START leftColumnSmall -->
+		<div class="leftColumnSmall">
+			<h3>Ingredienser</h3>
+			<div id="ingrediens">
+
+            #{list items:shoppingList, as:'ingredient'}
+				<div class="product_item" id="1">
+                    <input type="checkbox" ${ingredient.checked?'checked':''} value="${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit} ${ingredient.description}" name="produkt" autocomplete="off"/>
+                        <div class="info">
+                            <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span> ${ingredient.description}<br/>
+                        </div>
+				</div>
+            #{/list}
+			</div>
+
+		<h3>Notater</h3> 
+		<div id="rememberThis">
+			<textarea id="husk" placeholder="Skriv her.." onkeyup="javascript:$(this).addClass('modified');"></textarea>
+		  	<div id="remeberThisContainer">
+				<div id="saveMsg" class="smallBtn smallBtnInaktiv">Lagre</div>
+				<div id="clearMsg" class="smallBtn">Tøm</div>
+				<div id="loginTip"><a href="/under100/?service=loginOrRegister">Logg inn / registrer deg</a></div>
+			</div>
+		</div>	
+	</div>
+	<div class="section">	
+	 <script type="text/javascript">
+	    $(document).ready(function(){
+	      $('#printing').styleSwitcher();
+	      /*Lukke lightbox for sms/epost når brukeren trykker på send */          
+	      $("#cboxClose").click(function(){   
+	            $("#colorbox, #cboxOverlay").hide(); 
+	       });
+	      $("div#deling a.inline").colorbox({inline:true, width:"420", height:"500",opacity:0.5});
+	      $("div#deling a.sbtn").click(function() { 
+	        $("#colorbox, #cboxOverlay").show();        
+	        $("#mailboks").val('Din handlelapp');
+	        $("input:checked[name='produkt']").each(function() {
+	            $("#mailboks").val($("#mailboks").val() + '\n' + $(this).attr('value'));
+	        });
+	        $("#mailboks").val($("#mailboks").val() + '\n\nFra kjøkkenskapet ditt');
+	        $("input:checked[name='k_produkt']").each(function() {
+	         $("#mailboks").val($("#mailboks").val() + '\n' + $(this).attr('value'));      
+	        });
+	        if($.trim($("textarea#husk").val())) {
+	          $("#mailboks").val($("#mailboks").val()+ '\n\nHusk også\n');
+	          $("#mailboks").val($("#mailboks").val()+ $("textarea#husk").val());
+	        }
+	        $("#mailboks").val($("#mailboks").val() + '\n\n');
+	        $("#mailboks").val($("#mailboks").val()+ 'God middag, hilsen REMA 1000');
+	      });
+	      /* Sende handleliste som epost */
+	      $("#sendHandlelisteSomMail").submit(function(event) {
+	        /* stop form from submitting normally */
+	        event.preventDefault ? event.preventDefault() : event.returnValue = false;
+	        /* get some values from elements on the page: */
+	        var $form = $(this);
+	        var from = $form.find('input[name="from"]').val();
+	        var to = $form.find('input[name="to"]').val();
+	        var message = $form.find('textarea[id="mailboks"]').val().replace(/\&/g, 'og');
+	        /* validate the email-fields*/
+	        if(!validateEmail(to))
+	          $("span#errormsgToEmail").text("Ikke en gyldig epostadresse");
+	        else 
+	          $("span#errormsgToEmail").text("");
+	        if(validateEmail(to)){
+	        	/* OBS: epost vil bli sent som text/plain. */
+	      	    $.ajax({
+	                          type: "GET",
+	                          url: "/under100/template/web/include/handleliste/deling/sendHandlelisteEpost.jsp",
+	                          data: "to=" + to + "&message_plain=" + encodeURIComponent(message),
+	                          success: function() {
+	                                  $("#colorbox").hide(); 
+	                                  alert("Handlelappen er sendt.");
+	                                  $("#cboxOverlay").hide(); 
+	                          }
+	               });
+	        }
+	      });
+	      $("div#deling a.inline").colorbox({inline:true, width:"420", height:"500",opacity:0.5});
+	      $("div#deling a.sbtn").click(function() {
+	   		$("#smsboks").val('Din handlelapp');
+	        $("input:checked[name='produkt']").each(function() {
+	            $("#smsboks").val($("#smsboks").val() + '\n' + $(this).attr('value'));
+	        });
+	        $("#smsboks").val($("#smsboks").val() + '\n\nFra kjøkkenskapet ditt');
+	        $("input:checked[name='k_produkt']").each(function() {
+	            $("#smsboks").val($("#smsboks").val() + '\n' + $(this).attr('value'));
+	        });
+	        if($.trim($("textarea#husk").val())) {
+	              $("#smsboks").val($("#smsboks").val()+ '\n\nHusk også:\n');
+	              $("#smsboks").val($("#smsboks").val()+ $("textarea#husk").val());
+	        }
+	        $("#smsboks").val($("#smsboks").val()+ '\n\nGod middag, hilsen REMA 1000');
+	      });
+	   });
+	  $("div#saveMsg").click(function() {
+	        alert("Du må logge inn for å lagre dine notater");
+	  });
+	  $("div#clearMsg").click(function() {
+	      $("textarea#husk").val("").removeClass('modified');
+	      $.ajax({
+	          type: "GET",
+	          url: "/under100/template/web/include/handleliste/deling/sletteHuskeListe.jsp",
+	          success: function() {
+	          }
+	        });
+	  });
+	 </script>
+	    <div class="shareContainer">
+	    <hr>
+	        <div id="printing">
+	            <a href="#" onclick="window.print(); return false;" id="middagsplanleggeren_print_recipes_basic" rel="print_recipes" class=" grey_button">Skriv ut enkel handlelapp</a>
+	            <a href="#" onclick="window.print(); return false;" id="middagsplanleggeren_print_all" rel="print_all" class=" grey_button">Skriv ut oppskrifter</a>
+	        </div>
+	        <div id="deling">
+	            	<a id="sms_d" class="sms blue_button" title="Du må registrere / logge inn for å dele handlelapp på sms">Del handlelapp på sms</a>
+	            <a href="#inline_content" id="epost" class="sbtn mail inline blue_button cboxElement">Del handlelapp på e-post</a>
+	        </div>
+	    </div>
+			<div style="display:none">
+				<div id="inline_content">
+					<form name="sendHandlelisteSomMail" id="sendHandlelisteSomMail" method="get" action="/">
+						Til (epostadresse)<span id="errormsgToEmail" style="color:#f00;margin-left:10px;"></span><br>
+						<input class="txt" name="to" type="text" size="50"><br>
+				 		<p>
+						<textarea rows="17" cols="40" id="mailboks">Skriv her</textarea> 
+						<input type="submit" name="Send" value="Send">
+					</p></form>
+				</div>
+			      <div id="inline_content_sms">
+			        <form name="ShoppinglistForm" method="GET" action="/under100/sendSMS.do" accept-charset="UTF-8">
+			          <input type="hidden" name="baseUrl" value="http://sms.dextella.net/smsxmit.jsp">
+			          <input type="hidden" name="successUrl" value="/?service=handleliste&amp;day-2013-01-23=63017&amp;day-2013-01-23-p=4&amp;plannedDay-2013-01-23=Onsdag+23+jan&amp;plannedDay-2013-01-23-adults=2&amp;plannedDay-2013-01-23-children=0&amp;sendSMS=ok">
+			          <input type="hidden" name="errorUrl" value="/?service=handleliste&amp;day-2013-01-23=63017&amp;day-2013-01-23-p=4&amp;plannedDay-2013-01-23=Onsdag+23+jan&amp;plannedDay-2013-01-23-adults=2&amp;plannedDay-2013-01-23-children=0&amp;sendSMS=error">
+			          <input type="hidden" name="urlEncoding" value="iso-8859-1">
+			          Til telefonnummer<br>
+			          <input type="text" name="smsRecipient" value="" style="width:200px;">
+			          <input type="hidden" name="header" value="">
+			          <div class="errormsgsmall" id="errorfield(recipient)">
+			          </div>
+			          <textarea name="ingredients" cols="40" rows="17" id="smsboks"></textarea><br>
+			          <input class="buttonsmall" type="submit" value="send" onclick="validateSMSForm(); return false;">
+			        </form>
+			      </div>
+			</div>
+	</div>
+
+  </div>
+</div>

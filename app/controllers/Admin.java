@@ -6,6 +6,7 @@ import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.With;
 
+import java.util.Date;
 import java.util.List;
 
 @With(Secure.class)
@@ -45,18 +46,18 @@ public class Admin extends Controller {
     }
 
 
-    public static void saveMenu(Long id, String title, String[] usedForDays, Long[] recipes) {
+    public static void saveMenu(Long id, Date usedFromDate, String[] usedForDays, Long[] recipes) {
         Menu menu;
 
         if (id == null) {
             User author = User.find("byEmail", Security.connected()).first();
-            menu = new Menu(author, title);
+            menu = new Menu(author, usedFromDate);
             menu.save();
         } else {
             // Retrieve menu
             menu = Menu.findById(id);
             // Edit
-            menu.title = title;
+            menu.usedFromDate = usedFromDate;
         }
 
         List<RecipeInMenu> recipeInMenuList = RecipeInMenu.find("byMenu", menu).fetch();

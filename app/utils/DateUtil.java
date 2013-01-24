@@ -25,6 +25,13 @@ public class DateUtil {
        return MenuDay.fromIndex(cal.get(Calendar.DAY_OF_WEEK)-1) + "";
     }
 
+    public static int weekOfYear(Date date)
+    {
+        Calendar cal = setupCalendar();
+        cal.setTime(date);
+        return  cal.get(Calendar.WEEK_OF_YEAR) ;
+
+    }
 
     public static String monthOfYear(Date date)
     {
@@ -32,6 +39,7 @@ public class DateUtil {
         cal.setTime(date);
         return MenuMonth.values()[cal.get(Calendar.MONTH)].name();
     }
+
     public static String monthOfYearShort(Date date)
     {
         Calendar cal = setupCalendar();
@@ -69,4 +77,33 @@ public class DateUtil {
         cal.setFirstDayOfWeek(Calendar.MONDAY);
         return cal;
     }
+    public static Date getStartingDay() {
+
+         Calendar cal = setupCalendar();
+         cal.set(Calendar.HOUR_OF_DAY, 0); // ! clear would not reset the hour of day !
+         cal.clear(Calendar.MINUTE);
+         cal.clear(Calendar.SECOND);
+         cal.clear(Calendar.MILLISECOND);
+
+         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
+         cal.add(Calendar.WEEK_OF_YEAR, 1);
+
+         return cal.getTime();
+     }
+
+    public static Date getStartingDayThisWeek(Date date) {
+
+         Calendar cal = setupCalendar();
+        cal.setTime(date);
+         cal.set(Calendar.HOUR_OF_DAY, 0); // ! clear would not reset the hour of day !
+         cal.clear(Calendar.MINUTE);
+         cal.clear(Calendar.SECOND);
+         cal.clear(Calendar.MILLISECOND);
+
+         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
+
+         return cal.getTime();
+     }
+
+
 }

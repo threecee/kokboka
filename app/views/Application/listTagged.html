@@ -1,22 +1,25 @@
 #{extends 'main.html' /}
 #{set title:'Oppskrifer merket med ' + tag /}
- 
+
 *{********* Tittel ********* }*
- 
+
 #{if recipes.size() > 1}
-   <h3>${recipes.size()} oppskrifter er merket med '${tag}'</h3>
-#{/if} 
+<h3>${recipes.size()} oppskrifter er merket med '${tag}'</h3>
+#{/if}
 #{elseif recipes}
-    <h3>1 oppskrift er merket med '${tag}'</h3>
+<h3>1 oppskrift er merket med '${tag}'</h3>
 #{/elseif}
 #{else}
-    <h3>Ingen oppskrifter er merket med '${tag}'</h3>
+<h3>Ingen oppskrifter er merket med '${tag}'</h3>
 #{/else}
- 
+
 *{********* Posts list *********}*
- 
-<div class="older-recipes">
+
+<div id="recipe_container">
+    <div id="recipeList">
     #{list items:recipes, as:'recipe'}
         #{display recipe:recipe, as:'teaser' /}
     #{/list}
-</div> 
+    </div>
+</div>
+</div>

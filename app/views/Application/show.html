@@ -1,4 +1,10 @@
 #{extends 'main.html' /}
+
+#{if recipe != null}
 #{set title:recipe.title /}
 
 #{display recipe:recipe, as:'full' /}
+#{/if}
+#{else }
+<h2>Fant ikke oppskrift!</h2>
+#{/else}

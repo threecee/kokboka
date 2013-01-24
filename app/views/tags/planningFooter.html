@@ -1,49 +1,41 @@
 <div id="container">
 
-<div class="width">
+    <div class="width">
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $.get("/menus/dinnerplan", function (data) {
+                    $('#middagsplanlegger').append(data, loadContent());
+                });
+
+                function loadContent() {
+
+                    //	$.getScript('/public/javascripts/jcarousellite_1.0.1.min.js' , function(){
+                    		$.getScript('/public/javascripts/middagsplanlegger.js');
+                    //	});
+
+                    if ($("#footer").is(":hidden"))
+                        $('#footer').show();
+
+                }
 
 
-<div id="footer" class="alleOppskrifter">
+            });
+
+        </script>
 
 
-<div class="width">
-		<div id="middagsplanlegger">
+        <div id="footer" class="alleOppskrifter">
 
 
-<script type="text/javascript">
+            <div class="width">
+                <div id="middagsplanlegger">
 
-$(document).ready(function() {
+                </div>
+            </div>
+        </div>
 
-	$.get("/menus/dinnerplan", function(data) {
-   		$('#middagsplanlegger').append(data, loadContent());
-   	});
-
-	function loadContent()
-	{
-
-		$.getScript('/public/javascripts/jcarousellite_1.0.1.min.js' , function(){
-			$.getScript('/public/javascripts/middagsplanlegger.js');
-		});
-
-		if($("#footer").is(":hidden"))
-			$('#footer').show();
-
-	}
-
-
-});
-
-</script>
-
-
-
-
-
-
-
-</div>
-	</div>
-</div>
-
-</div>
+    </div>
 </div>

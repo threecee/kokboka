@@ -1,14 +1,16 @@
 package controllers;
 
 
-import models.*;
+import models.Menu;
+import models.MenuDay;
+import models.Recipe;
+import models.User;
 import play.mvc.Before;
 import play.mvc.With;
 import utils.DateUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -30,8 +32,7 @@ public class Menus extends CRUD {
     public static void planrecipe(Long recipeId, String day) throws ParseException {
         User user = User.find("byEmail", Security.connected()).first();
 
-        initMenu(user);
-        Menu menu = user.activeMenu; //getMenu(user);
+        Menu menu = Menu.findById(user.activeMenu.getId());
 
         Date useDate = dateFormat.parse(day);
         int distance = DateUtil.distance(menu.usedFromDate, useDate);
@@ -42,54 +43,48 @@ public class Menus extends CRUD {
 
         menu.save();
     }
-    public static void unplanrecipe(String day) throws ParseException {
-         User user = User.find("byEmail", Security.connected()).first();
 
-         initMenu(user);
-         Menu menu = user.activeMenu; //getMenu(user);
+    public static void unplanrecipe(String day) throws ParseException {
+        User user = User.find("byEmail", Security.connected()).first();
+
+        Menu menu = Menu.findById(user.activeMenu.getId());
 
         Date useDate = dateFormat.parse(day);
-         int distance = DateUtil.distance(menu.usedFromDate, useDate);
+        int distance = DateUtil.distance(menu.usedFromDate, useDate);
 
-         menu.deleteRecipeForDay(distance);
-     }
+        menu.deleteRecipeForDay(distance);
+    }
 
-    public static void dinnerplan() {
+    public static void dinnerplan(String fromDate) throws ParseException {
         User user = User.find("byEmail", Security.connected()).first();
 
         Menu menu;
-        initMenu(user);
-        //menu = new Menu(user, getStartingDay()).save();
 
-        //  menu = getMenu(user);
+        initMenu(user, fromDate);
+
         menu = Menu.findById(user.activeMenu.getId());
         render(menu);
     }
 
-    private static void initMenu(User user) {
-        Menu menu;
 
-        if (user.activeMenu == null) {
-            menu = new Menu(user, getStartingDay()).save();
-            user.activeMenu = menu;
-            user.save();
+    private static void initMenu(User user, String startingDayString) throws ParseException {
+        Menu menu = null;
+
+        if (startingDayString != null) {
+            Date startingDay = dateFormat.parse(startingDayString);
+            menu = Menu.find("usedFromDate = ?", startingDay).first();
+
+            if (menu == null) menu = new Menu(user, startingDay).save();
+        } else if (user.activeMenu != null) {
+            menu = Menu.findById(user.activeMenu.getId());
+
+            if (menu == null || (DateUtil.distance(DateUtil.getStartingDay(), menu.usedFromDate) < 0)) {
+                menu = new Menu(user, DateUtil.getStartingDay()).save();
+            }
         }
+        user.activeMenu = menu;
+        user.save();
     }
 
-
-    private static Date getStartingDay() {
-
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 0); // ! clear would not reset the hour of day !
-        cal.clear(Calendar.MINUTE);
-        cal.clear(Calendar.SECOND);
-        cal.clear(Calendar.MILLISECOND);
-
-        cal.setFirstDayOfWeek(Calendar.MONDAY);
-        cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
-        cal.add(Calendar.WEEK_OF_YEAR, 1);
-
-        return cal.getTime();
-    }
 
 }

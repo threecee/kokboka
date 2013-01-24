@@ -697,9 +697,9 @@ p {
 	clear: both;
 	margin-bottom: -15px;
 	overflow: hidden;
-	position:absolute;
+
 	/* z-index:25; */
-	height:900px;
+
 }
 
 #tags > div {
@@ -1642,12 +1642,11 @@ p.recipeTitle{
 	bottom: 60px;
 	left: 0;
 	padding: 5px ;
-	height: 50px;
 	overflow: hidden;
 }
 
 #recipe .leftColumn .recipeImage #recipeTags img{
-	height: 50px;
+    height: 50px;
 	float: left;
 	display: block;
 	margin-right: 5px;
@@ -1658,7 +1657,7 @@ p.recipeTitle{
 #recipe .leftColumn .recipeImage #recipeTags .tidsbruk{
 	display: block;
 	float: left;
-	height: 30px;
+	height: 16px;
 	background: #fff;
 	padding: 8px;
 	text-align: center;
@@ -1666,16 +1665,10 @@ p.recipeTitle{
 	margin: 2px;
 }
 
-#recipe .leftColumn .recipeImage #recipeTags .tidsbruk strong{
+#recipe .leftColumn .recipeImage #recipeTags .tidsbruk a{
 	font-weight: bold;
-	font-size: 20px;
-	display: block;
-	line-height: 20px; 
+	color:#666;
 }
-
-
-
-
 
 
 
@@ -1703,7 +1696,7 @@ p.recipeTitle{
 #recipe .leftColumn #ingress p{
 	padding: 20px;
 	padding-left: 0;
-	width: 340px;
+	width: 80%;
 }
 
 
@@ -1885,10 +1878,10 @@ p.recipeTitle{
 
 #slider strong {
 	display: block;
-	width: 100px;
 	float: left;
 	height: 32px; 
-	line-height: 32px; 
+	line-height: 32px;
+    font-size: 16px;
 }
 
 .ui-slider-horizontal .ui-slider-range { background: #1e6aa9 url(slider.png) center left} 

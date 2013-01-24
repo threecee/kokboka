@@ -1,90 +1,98 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="${_response_encoding}">
-        <!--link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}"-->
+<head>
+    <title>#{get 'title' /}</title>
+    <meta charset="${_response_encoding}">
+    <!--link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}"-->
 
-<script type="text/javascript" language="javascript" src="@{'/public/javascripts/date.format.js'}"></script>
-      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-1.7.min.js'}"></script>
-      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jcarousellite_1.0.1.min.js'}"></script>
-      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/portal.js'}"></script>
-          <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-ui.min.js'}"></script>
-      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.ui.touch-punch.min.js'}"></script>
-          <script type="text/javascript" language="javascript" src="@{'/public/javascripts/middagsplanlegger.js'}"></script>
-      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.json-2.3.min.js'}"></script>
-      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.cookie.js'}"></script>
-      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.jsoncookie.js'}"></script>
-      	<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.getParams.js'}"></script>
-          <script type="text/javascript" language="javascript" src="@{'/public/javascripts/fancybox/jquery.fancybox-1.0.0.js'}"></script>
-          <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.tinysort.min.js'}"></script>
-          <script type="text/javascript" language="javascript" src="@{'/public/javascripts/fancybox/swfobject.js'}"></script>
-          <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.colorbox-min.js'}"></script>
-          <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.style-switcher.js'}"></script>
-
-
-          <link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/javascripts/fancybox/fancy.css'}">
-      	<link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/stylesheets/colorbox.css'}">
-      	<link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/stylesheets/middagsplanleggeren.css'}">
-      	<link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/stylesheets/jquery/jquery-ui-1.8.16.custom.css'}">
-      	<link rel="stylesheet" title="printsetting" id="theme" type="text/css" media="print" href="@{'/public/stylesheets/middagsplanleggeren_print_recipes.css'}">
-      	<link rel="stylesheet" id="active" href="@{'/public/stylesheets/active/active1.css'}" media="screen, handheld" type="text/css">
-      	<!--[if IE 7]>
-      	<link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/stylesheets/stylesheet_ie7.css'}">
-      	<![endif]-->
-      	<!--[if IE 8]>
-      	<link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/stylesheets/stylesheet_ie8.css'}">
-      	<![endif]-->
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/date.format.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-1.7.min.js'}"></script>
+    <script type="text/javascript" language="javascript"
+            src="@{'/public/javascripts/jcarousellite_1.0.1.min.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/portal.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-ui.min.js'}"></script>
+    <script type="text/javascript" language="javascript"
+            src="@{'/public/javascripts/jquery.ui.touch-punch.min.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/middagsplanlegger.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.json-2.3.min.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.cookie.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.jsoncookie.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.getParams.js'}"></script>
+    <script type="text/javascript" language="javascript"
+            src="@{'/public/javascripts/fancybox/jquery.fancybox-1.0.0.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.tinysort.min.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/fancybox/swfobject.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.colorbox-min.js'}"></script>
+    <script type="text/javascript" language="javascript"
+            src="@{'/public/javascripts/jquery.style-switcher.js'}"></script>
 
 
-        #{get 'moreStyles' /}
+    <link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/javascripts/fancybox/fancy.css'}">
+    <link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/stylesheets/colorbox.css'}">
+    <link rel="stylesheet" type="text/css" media="screen, handheld"
+          href="@{'/public/stylesheets/middagsplanleggeren.css'}">
+    <link rel="stylesheet" type="text/css" media="screen, handheld"
+          href="@{'/public/stylesheets/jquery/jquery-ui-1.8.16.custom.css'}">
+    <link rel="stylesheet" title="printsetting" id="theme" type="text/css" media="print"
+          href="@{'/public/stylesheets/middagsplanleggeren_print_recipes.css'}">
+    <link rel="stylesheet" id="active" href="@{'/public/stylesheets/active/active1.css'}" media="screen, handheld"
+          type="text/css">
+    <!--[if IE 7]>
+    <link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/stylesheets/stylesheet_ie7.css'}">
+    <![endif]-->
+    <!--[if IE 8]>
+    <link rel="stylesheet" type="text/css" media="screen, handheld" href="@{'/public/stylesheets/stylesheet_ie8.css'}">
+    <![endif]-->
 
 
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+#{get 'moreStyles' /}
 
 
-        #{get 'moreScripts' /}
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
 
 
-        <script type="text/javascript">
-       	 var mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
-       	</script>
-    </head>
-    <body>
-       <div id="header">
-            <div id="logo">
-                <a class="logolink" href="@{Application.index()}">Kokboka.</a>
-            </div>
-            <ul id="tools">
-                <li>
-                    <a href="@{Admin.index()}">Logg inn</a>
+#{get 'moreScripts' /}
+
+
+    <script type="text/javascript">
+        var mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
+    </script>
+</head>
+<body>
+
+<div id="container">
+
+    <div id="settingsSection">
+        <ul>
+            <a href="@{Application.index()}">
+                <li class="${request.action == 'Application.index' ? 'active' : ''}"><span
+                        id="Oppskrifter"><strong></strong>Oppskrifter</span></li>
+            </a>
+            <a href="@{ShoppingLists.showCurrent()}">
+                <li class="${request.controller == "ShoppingLists" ? 'active' : ''}"><span
+                        id="vishandlelapp"><strong></strong>Handlelappen</span></li>
+            </a>
+            <a href="@{Recipes.showCurrent()}">
+                <li class="${request.action == "Recipes.showCurrent" ? 'active' : ''}"><span
+                        id="visoppskrift"><strong></strong>Dagens oppskrift</span></li>
+            </a>
+        #{secure.check 'admin'}
+            <a href="@{Users.list()}">
+                <li class="${request.controller == 'Users' ? 'active' : ''}"><span id="visbrukere"><strong></strong>Brukere</span>
                 </li>
-            </ul>
-           <ul id="menu">
-               <li class="${request.controller == 'Application' ? 'selected' : ''}">
-                   <a href="@{Application.index()}">Oppskrifter</a>
-               </li>
-               #{secure.check 'admin'}
-                   <li class="${request.controller == 'Tags' ? 'selected' : ''}">
-                       <a href="@{Tags.list()}">Merkelapper</a>
-                   </li>
-                   <li class="${request.controller == 'Ingredients' ? 'selected' : ''}">
-                       <a href="@{Ingredients.list()}">Ingredienser</a>
-                   </li>
-                   <li class="${request.controller == 'Users' ? 'selected' : ''}">
-                       <a href="@{Users.list()}">Brukere</a>
-                   </li>
-               #{/secure.check}
-           </ul>
+            </a>
+        #{/secure.check}
+        </ul>
+    </div>
 
-        </div>
-      <div id="main">
-            #{doLayout /}
+    <div class="width">
+    #{doLayout /}
+    </div>
 
-      </div>
-       #{if request.controller == 'Application'}
-           #{planningFooter menu:menu /}
-       #{/if}
-    </body>
+</div>
+#{if request.controller == 'Application'}
+    #{planningFooter menu:menu /}
+#{/if}
+</body>
 </html>

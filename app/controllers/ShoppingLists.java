@@ -3,18 +3,43 @@ package controllers;
 
 import models.*;
 import play.Logger;
+import play.mvc.Before;
 import play.mvc.With;
+import utils.DateUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 @With(Secure.class)
 public class ShoppingLists extends CRUD{
 
+    @Before
+    static void setConnectedUser() {
+        if (Security.isConnected()) {
+            User user = User.find("byEmail", Security.connected()).first();
+            if (user != null)
+                renderArgs.put("user", user.fullname);
+        }
+    }
+
     public static void show(Long listId)
     {
         List<ShoppingListIngredient> shoppingList = ShoppingListIngredient.find("shoppingList is ? order by description", ShoppingList.findById(listId)).fetch();
-        render(shoppingList);
+        Menu menu = Menu.find("shoppingList is ?", ShoppingList.findById(listId)).first();
+        render(shoppingList, menu);
+    }
+
+    public static void showCurrent()
+    {
+        User user = User.find("byEmail", Security.connected()).first();
+
+        Menu menu = Menu.find("usedFromDate = ?", DateUtil.getStartingDay()).first();
+
+        ShoppingList shoppingListItem = ShoppingList.find("menu = ?", menu).first();
+
+        List<ShoppingListIngredient> shoppingList = ShoppingListIngredient.find("shoppingList is ? order by description", shoppingListItem).fetch();
+        render("ShoppingLists/show.html", shoppingList, menu);
     }
 
     public static void list(Long menuId)
@@ -69,6 +94,9 @@ public class ShoppingLists extends CRUD{
                 }
         }
 
+        shoppingList.shoppingListIngredients = new ArrayList<ShoppingListIngredient>();
+        shoppingList.save();
+
 
         for(Object[] objects:ingredientMap.values())
         {
@@ -76,5 +104,7 @@ public class ShoppingLists extends CRUD{
         }
 
         shoppingList.save();
+
+        show(shoppingList.id);
     }
 }

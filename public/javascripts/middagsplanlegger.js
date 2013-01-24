@@ -24,6 +24,7 @@ $(function() {
 	var startIndex = getStartIndex();
 	
 	/* jquery bind events*/
+/*
 	$(".weekplanner_days").jCarouselLite({
 		btnNext : ".next_planner",
 		btnPrev : ".prev_planner",
@@ -31,7 +32,11 @@ $(function() {
 		start: startIndex,
 		afterEnd: weekplanner_afterEndCallback
 	});			
-	
+*/
+
+
+
+
 	$(".cimg").click(function() {
 		if($(this).children("img").attr('class') != 'dropBilde')
 		{   
@@ -51,7 +56,7 @@ $(function() {
 	 * - thumbnail p� artikkelvisning (selector: div.dtp_bilde)   
 	 * */
 	
-	$("#recipeList .recipeItem .recipeImage, div.dtp_bilde ").draggable({
+	$(".recipeItem .recipeImage, div.dtp_bilde ").draggable({
 		revert : 'invalid',
 		opacity : 1,
 		cursor : 'hand',

@@ -1,0 +1,75 @@
+#{extends 'main.html' /}
+
+        <div class="profile_wrapper">
+        	<div class="login">
+        		<h3>Logg inn</h3>
+            #{form @authenticate()}
+
+            		#{if flash.error}
+            			<p class="error">
+            				&{flash.error}
+            			</p>
+            		#{/if}
+            		#{if flash.success}
+            			<p class="success">
+            				&{flash.success}
+            			</p>
+            		#{/if}
+
+
+        			<br clear="all">
+
+        			<label>Brukernavn</label>
+                    <input type="text" name="username" id="username" value="${flash.username}" />
+        			<br clear="all">
+
+        			<label>Passord</label>
+                    <input type="password" name="password" id="password" value="" />
+        			<br clear="all"><br>
+        			<br>
+                    <input type="checkbox" name="remember" id="remember" value="true" checked="true" style="display: none" />
+
+        			<input type="submit" class="customButton" value="Logg inn">
+            #{/form}
+        	</div>
+
+
+<!--
+        	<div class="register">
+        		<h3>Ny konto</h3>
+
+        			<form action="/under100/createUser.do" method="post" name="UserForm">
+
+
+        				<br clear="all">
+
+        				<label>Ønsket brukernavn</label>
+        				<input type="text" value="" name="userName">
+        				<br clear="all">
+
+        				<label>Ønsket passord</label>
+        				<input type="password" name="password">
+
+        				<br clear="all">
+
+        				<label>Epostadresse</label>
+        				<input type="text" value="" name="email">
+        				<br clear="all"><br>
+
+                        <label>Ønsker å motta nyhetsbrev</label>
+                        <input type="checkbox" value="on" name="newsletter" autocomplete="off">
+
+                        <br clear="all"><br>
+
+        				<input type="submit" class="customButton" value="Registrer">
+
+        				<input type="hidden" value="/?service=registration_success" name="successUrl">
+        				<input type="hidden" value="/?service=loginOrRegister&amp;action=register" name="errorUrl">
+        			</form>
+
+
+        	</div>
+-->
+
+
+    </div>

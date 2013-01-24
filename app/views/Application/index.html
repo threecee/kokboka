@@ -2,6 +2,27 @@
 #{set title:'Home' /}
 
 #{if recipes}
+<div id="tags">
+		<ul>
+            #{list items:models.Tag.findAll(), as:'tag'}
+                #{if !selectedTags.contains(tag) }
+			    <li>
+					<a href="@{Application.index(selectedTags, tag)}">
+						<span>${tag.name}</span>
+					</a>
+				</li>
+                #{/if}
+            #{/list}
+				<li>
+				<a href="/under100/?page=favoritter">
+				<span>
+					Favoritter
+				</span>
+				</a>
+			</li>
+		</ul>
+</div>
+
 <div id="recipe_container">
 		<div id="recipeList">
             #{list items:recipes, as:'recipe'}

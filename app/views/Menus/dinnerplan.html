@@ -1,7 +1,49 @@
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".next_planner").click(function() {
+             $.get("/menus/dinnerplan?fromDate="+$(this).attr('id'), function(data) {
+          						   		$('#middagsplanlegger').fadeTo(300, 0.2,"swing", function(){
+
+          						   			$('#middagsplanlegger').empty().append(data, loadContent());
+                                                 $('#middagsplanlegger').fadeTo(300,1,"swing");
+
+          						   		});
+          						   	});
+         	});
+        $(".prev_planner").click(function() {
+             $.get("/menus/dinnerplan?fromDate="+$(this).attr('id'), function(data) {
+          						   		$('#middagsplanlegger').fadeTo(300, 0.2,"swing", function(){
+
+          						   			$('#middagsplanlegger').empty().append(data,loadContent());
+                                                 $('#middagsplanlegger').fadeTo(300,1,"swing");
+
+          						   		});
+          						   	});
+         	});
+
+        function loadContent() {
+            $.getScript('/public/javascripts/middagsplanlegger.js');
+
+                if ($("#footer").is(":hidden"))
+                    $('#footer').show();
+
+            }    });
+
+</script>
+
 <div class="weekplanner_buttons">
-    <a href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
+    #{if menu.shoppingList != null }
+    <a href="@{ShoppingLists.show(menu.shoppingList.id)}" id="tilHandlelappen">
         Handlelapp
     </a>
+    #{/if}
+    #{else}
+        <a href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
+            Handlelapp
+        </a>
+    #{/else}
     
     <a href="http://www.rema.no/under100/?service=showProfile" id="tilInstillinger">
         Innstillinger
@@ -53,11 +95,12 @@
 
     </ul>
 </div>
-
-<div class="prev_planner">
+#{if true || (utils.DateUtil.weekOfYear(new Date())+1) < utils.DateUtil.weekOfYear(menu.usedFromDate)}
+<div class="prev_planner" id="${utils.DateUtil.addDays(menu.usedFromDate, -7).format('yyyy-MM-dd')}">
     <span>Forrige</span>
 </div>
+#{/if}
 
-<div class="next_planner">
+<div class="next_planner" id="${utils.DateUtil.addDays(menu.usedFromDate, 7).format('yyyy-MM-dd')}">
     <span>Neste</span>
 </div>

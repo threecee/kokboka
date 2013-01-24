@@ -1,5 +1,6 @@
 import controllers.Parsers;
 import org.apache.log4j.Level;
+import org.h2.jdbc.JdbcCallableStatement;
 import play.*;
 import play.jobs.*;
 import play.test.*;
@@ -27,6 +28,9 @@ public class Bootstrap extends Job {
         if(calle == null)
         {
           calle  = new User(email, "secret", "Calle").save();
+                  calle.isAdmin = true;
+         calle.save();
+
 
         }
 

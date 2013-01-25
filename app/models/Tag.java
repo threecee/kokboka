@@ -6,24 +6,32 @@ import javax.persistence.*;
 import play.db.jpa.*;
  
 @Entity
+@Table(name = "my_tag")
 public class Tag extends Model implements Comparable<Tag> {
  
     public String name;
-    
+    public String nameHash;
+
     private Tag(String name) {
         this.name = name;
+        this.nameHash = hashName(name);
     }
-    
+
+    public static String hashName(String name)
+    {
+       return name.replaceAll(" ","_");
+    }
+
     public String toString() {
         return name;
     }
     
     public int compareTo(Tag otherTag) {
-        return name.compareTo(otherTag.name);
+        return nameHash.compareTo(otherTag.nameHash);
     }
 
     public static Tag findOrCreateByName(String name) {
-    Tag tag = Tag.find("byName", name).first();
+    Tag tag = Tag.find("nameHash = ?", hashName(name)).first();
     if(tag == null) {
         tag = new Tag(name);
     }
@@ -33,7 +41,7 @@ public class Tag extends Model implements Comparable<Tag> {
 public static List<Map> getCloud() {
     List<Map> result = Tag.find(
         "select new map(t.name as tag, count(p.id) as pound) " +
-        "from Recipe p join p.tags as t group by t.name order by t.name"
+        "from Recipe p join p.tags as t group by t.nameHash order by t.nameHash"
     ).fetch();
     return result;
 }

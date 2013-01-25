@@ -4,8 +4,10 @@ import play.db.jpa.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "my_shopping_list_ingredient")
 public class ShoppingListIngredient extends Model {
 
     public double amount;

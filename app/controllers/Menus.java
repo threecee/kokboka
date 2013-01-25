@@ -58,11 +58,15 @@ public class Menus extends CRUD {
     public static void dinnerplan(String fromDate) throws ParseException {
         User user = User.find("byEmail", Security.connected()).first();
 
-        Menu menu;
+        Menu menu = null;
 
         initMenu(user, fromDate);
 
-        menu = Menu.findById(user.activeMenu.getId());
+        if(user != null && user.activeMenu != null)
+        {
+            menu = Menu.findById(user.activeMenu.getId());
+        }
+
         render(menu);
     }
 

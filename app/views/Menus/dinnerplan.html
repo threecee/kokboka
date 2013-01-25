@@ -32,6 +32,8 @@
             }    });
 
 </script>
+#{if menu != null }
+
 
 <div class="weekplanner_buttons">
     #{if menu.shoppingList != null }
@@ -104,3 +106,5 @@
 <div class="next_planner" id="${utils.DateUtil.addDays(menu.usedFromDate, 7).format('yyyy-MM-dd')}">
     <span>Neste</span>
 </div>
+
+#{/if}

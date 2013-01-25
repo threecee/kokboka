@@ -20,10 +20,16 @@ public class Bootstrap extends Job {
 
     private void setupDb()
     {
-        User calle;
+        User calle = null;
 
         String email = "carl.christian.christensen@gmail.com";
+
+        try{
         calle = User.find("byEmail", email).first();
+        } catch (Exception e)
+        {
+            Logger.error("Feil ved henting av bruker under bootstrap",e);
+        }
 
         if(calle == null)
         {

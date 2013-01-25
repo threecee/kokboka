@@ -17,7 +17,7 @@ oppskrifter så langt</span></h3>
 
 #{list items:menus, as:'menu'}
     <p class="recipe ${recipe_parity}">
-        <a href="@{Admin.menuform(menu.id)}">${menu.title}</a>
+        <a href="@{Admin.menuform(menu.id)}">${menu.usedFromDate}</a>
     </p>
 #{/list}
 

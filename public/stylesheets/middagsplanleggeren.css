@@ -692,6 +692,11 @@ p {
 
 /* START #tags */
 
+
+#TagCloud li {
+   float:left
+}
+
 #tags {
 	overflow: hidden;
 	clear: both;

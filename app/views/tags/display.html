@@ -29,7 +29,7 @@
                 #{if _recipe.tags}
                     #{list items:_recipe.tags, as:'tag'}
                         <div class="tidsbruk">
-                            <span><a href="@{Application.listTagged(tag.name)}">${tag}</a></span>
+                            <span><a href="@{Application.listTagged(tag.nameHash)}">${tag.name}</a></span>
                         </div>
                     #{/list}
                 #{/if}

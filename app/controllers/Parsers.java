@@ -1,6 +1,7 @@
 package controllers;
 
 
+import models.Ingredient;
 import models.Recipe;
 import models.User;
 import org.htmlcleaner.CleanerProperties;
@@ -22,6 +23,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @With(Secure.class)
 public class Parsers extends Controller {
@@ -89,7 +92,7 @@ public class Parsers extends Controller {
             page++;
 
             for (final String url : recipeUrls) {
-                Recipe recipe = Recipe.find("bySource", url).first();
+                Recipe recipe = null;//Recipe.find("bySource", url).first();
                 if (recipe == null) {
                     String result = parseRema1000Recipe(url);
                     response.writeChunk(result + "<br/>");
@@ -183,7 +186,6 @@ public class Parsers extends Controller {
     }
 
     private static Recipe parseRema1000(String url, Document recipeDocument) {
-        //Document recipeDocument = cleanRema1000Html(content);
 
 
         String title = XPath.selectText("//div[@id='recipe']/div[@class='rightColumn']/h2", recipeDocument);
@@ -235,6 +237,10 @@ public class Parsers extends Controller {
                 String[] mengdeEnhetArray = mengdeEnhet.trim().split(" ");
                 amount = mengdeEnhetArray[0];
                 unit = mengdeEnhetArray[1];
+                if(amount!=null)
+                {
+                    amount = amount.replace(",",".");
+                }
             }
 
             String produktnavn = XPath.selectText("div[@class='produktnavn']", event);
@@ -243,17 +249,16 @@ public class Parsers extends Controller {
             }
 
             recipe.addIngredient(amount, unit, ingredientName);
-
+            convertPackageToWeight(recipe.ingredients.get(recipe.ingredients.size()-1));
         }
 
         String tidsbruk = XPath.selectText("//div[@class='tidsbruk']/strong", recipeDocument);
-        recipe.tagItWith(tidsbruk + "min");
-        recipe.tagItWith("rema1000");
+     //   recipe.tagItWith(tidsbruk + "min");
+     //   recipe.tagItWith("rema1000");
 
-        String photoUrl;// = XPath.selectText("//div[@id='recipe']/div[@class='leftColumn']/div[@class='recipeImage recipeImageDraggable ui-draggable']/img/@src", recipeDocument);
+        String photoUrl;
         photoUrl = XPath.selectText("//div[@id='recipe']/div[@class='leftColumn']/div[@class='recipeImage recipeImageDraggable']/img/@src", recipeDocument);
 
-        //       Node test = XPath.selectNode("//div[@id='recipe']/div[@class='leftColumn']", recipeDocument);
         Blob photo = new Blob();
 
         WS.HttpResponse response = WS.url(photoUrl).get();
@@ -262,13 +267,35 @@ public class Parsers extends Controller {
         recipe.addPhoto(photo);
 
         return recipe;
+    }
 
+    private static Pattern packagePattern =  Pattern.compile("c?a? ?([0-9]+,?[0-9]*) ?(k?g)");
 
+    private static void convertPackageToWeight(Ingredient originalIngredient)
+    {
+        if(originalIngredient.unit == "pk")
+        {
+             Matcher matcher = packagePattern.matcher(originalIngredient.description);
+            if(matcher.find())
+            {
+                String amount = matcher.group(1);
+                String newDesc = matcher.replaceFirst("");
+                String unit = matcher.group(2);
+                Double amountDouble = Double.parseDouble(amount);
+                Double totalAmount = amountDouble*Double.parseDouble(originalIngredient.amount);
+
+                Logger.info("Replacing" + originalIngredient.amount + " " + originalIngredient.unit + " " + originalIngredient.description + " with: " + totalAmount + " " + unit + " " + newDesc );
+            }
+        }
     }
 
     private static String cleanProductNames(String produktnavn) {
-        produktnavn = produktnavn.replaceAll(" *REMA 1000 *","");
-        produktnavn = produktnavn.replaceAll(" *Tine *","");
+        String[] kjenteProdukter = new String[]{"Godehav", "Solvinge", "REMA 1000", "Tine", "Bama", "Kikkoman", "Nordfjord", "Blue Dragon", "Taga", "Finsbråten", "Hatting", "Mesterbakeren", "Grilstad", "Ideal", "Staur", "MaxMat", "Viddas", "frossen", " - NB! Sesongvare"};
+
+        for(String kjentProdukt:kjenteProdukter)
+        {
+            produktnavn = produktnavn.replaceAll(" *" + kjentProdukt + " *", "");
+        }
         return produktnavn.trim();
     }
 

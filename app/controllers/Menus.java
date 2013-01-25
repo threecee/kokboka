@@ -62,8 +62,7 @@ public class Menus extends CRUD {
 
         initMenu(user, fromDate);
 
-        if(user != null && user.activeMenu != null)
-        {
+        if (user != null && user.activeMenu != null) {
             menu = Menu.findById(user.activeMenu.getId());
         }
 
@@ -79,9 +78,10 @@ public class Menus extends CRUD {
             menu = Menu.find("usedFromDate = ?", startingDay).first();
 
             if (menu == null) menu = new Menu(user, startingDay).save();
-        } else if (user.activeMenu != null) {
-            menu = Menu.findById(user.activeMenu.getId());
-
+        } else {
+            if (user.activeMenu != null) {
+                menu = Menu.findById(user.activeMenu.getId());
+            }
             if (menu == null || (DateUtil.distance(DateUtil.getStartingDay(), menu.usedFromDate) < 0)) {
                 menu = new Menu(user, DateUtil.getStartingDay()).save();
             }

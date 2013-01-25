@@ -86,13 +86,13 @@ public class Recipe extends Model {
 
     public static List<Recipe> findTaggedWith(String tag) {
         return Recipe.find(
-                "select distinct p from Recipe p join p.tags as t where t.name = '?'", tag
+                "select distinct p from Recipe p join p.tags as t where t.nameHash = '?'", tag
         ).fetch();
     }
 
     public static List<Recipe> findTaggedWith(String... tags) {
         return Recipe.find(
-                "select distinct p from Recipe p join p.tags as t where t.name in (:tags) group by p.id, p.author, p.title, p.description, p.steps, p.source, p.postedAt having count(t.id) = :size"
+                "select distinct p from Recipe p join p.tags as t where t.nameHash in (:tags) group by p.id, p.author, p.title, p.description, p.steps, p.source, p.postedAt having count(t.id) = :size"
         ).bind("tags", tags).bind("size", tags.length).fetch();
     }
 }

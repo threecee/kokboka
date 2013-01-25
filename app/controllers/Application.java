@@ -4,9 +4,12 @@ import models.Ingredient;
 import models.Recipe;
 import models.Tag;
 import play.mvc.Controller;
+import utils.TagUtil;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class Application extends Controller {
 
@@ -15,26 +18,41 @@ public class Application extends Controller {
         render(recipes);
     }
 
-    public static void index(List<Tag> selectedTags, Long id) {
+    public static void index(String[] tags) {
         List<Recipe> recipes;
-        if (selectedTags == null) {
-            selectedTags = new ArrayList<Tag>();
+        List<Tag> selectedTags = new ArrayList<Tag>();
+        Collection<Tag> availableTags = new ArrayList<Tag>();
 
-        }
-
-
-        if (id != null) {
-            Tag tag = Tag.findById(id);
-            selectedTags.add(tag);
+        if (tags != null) {
+            for (String tag : tags) {
+                Tag newTag = Tag.find("nameHash = ?", tag).first();
+                if (newTag != null) {
+                    selectedTags.add(newTag);
+                }
+            }
         }
 
         if (selectedTags != null && selectedTags.size() > 0) {
-            recipes = Recipe.findTaggedWith(selectedTags.toArray(new String[]{}));
+            recipes = Recipe.findTaggedWith(TagUtil.createArray(selectedTags));
         } else {
             recipes = Recipe.find("order by title desc").fetch();
 
         }
-        render(selectedTags, recipes);
+
+        Collection<Tag> availableTagsFromDb = Tag.findTagsFromRecipes(recipes);
+
+        for(Tag availableTagFromDb:availableTagsFromDb)
+        {
+            if(!selectedTags.contains(availableTagFromDb))
+            {
+                availableTags.add(availableTagFromDb);
+            }
+        }
+
+        List<Map> tagCloud = Tag.getCloud();
+
+
+        render(selectedTags, availableTags, tagCloud, recipes);
     }
 
     public static void show(Long id) {

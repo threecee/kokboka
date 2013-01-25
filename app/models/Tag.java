@@ -41,9 +41,24 @@ public class Tag extends Model implements Comparable<Tag> {
     return tag;
 }
 
+    public static Collection<Tag> findTagsFromRecipes(List<Recipe> recipes) {
+        HashMap<String, Tag> stringTagHashMap = new HashMap<String, Tag>();
+
+        for(Recipe recipe: recipes)
+        {
+            for(Tag tag:recipe.tags)
+            {
+                stringTagHashMap.put(tag.nameHash, tag);
+            }
+        }
+
+        return stringTagHashMap.values();
+    }
+
+
 public static List<Map> getCloud() {
     List<Map> result = Tag.find(
-        "select new map(t.name as tag, count(p.id) as pound) " +
+        "select new map(t.nameHash as tag, count(t.id) as pound) " +
         "from Recipe p join p.tags as t group by t.nameHash order by t.nameHash"
     ).fetch();
     return result;

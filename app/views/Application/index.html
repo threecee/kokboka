@@ -2,24 +2,44 @@
 #{set title:'Home' /}
 
 #{if recipes}
-<div id="tags">
+<h3>Fjern avgrensninger</h3>
+<div id="TagCloud">
 		<ul>
-            #{list items:models.Tag.findAll(), as:'tag'}
-                #{if !selectedTags.contains(tag) }
+            #{list items:selectedTags, as:'tag'}
 			    <li>
-					<a href="@{Application.index(selectedTags, tag)}">
+					<a href="@{Application.index(utils.TagUtil.mergeAndCreateArray(selectedTags, tag.nameHash))}">
 						<span>${tag.name}</span>
 					</a>
 				</li>
-                #{/if}
             #{/list}
+            <!--
 				<li>
 				<a href="/under100/?page=favoritter">
 				<span>
 					Favoritter
 				</span>
 				</a>
-			</li>
+			</li>  -->
+		</ul>
+</div>
+<br/>
+<h3>Avgrense:</h3>
+<div id="TagCloud">
+		<ul>
+            #{list items:availableTags, as:'tag'}
+			    <li>
+					<a href="@{Application.index(utils.TagUtil.mergeAndCreateArray(selectedTags, tag.nameHash))}">
+						<span>${tag.name}</span>
+					</a>
+				</li>
+            #{/list}
+			<!--	<li>
+				<a href="/under100/?page=favoritter">
+				<span>
+					Favoritter
+				</span>
+				</a>
+			</li> -->
 		</ul>
 </div>
 

@@ -23,11 +23,14 @@ public class Tag extends Model implements Comparable<Tag> {
     }
 
     public String toString() {
-        return name;
+        return nameHash;
     }
     
     public int compareTo(Tag otherTag) {
         return nameHash.compareTo(otherTag.nameHash);
+    }
+    public int compareTo(String otherTag) {
+        return nameHash.compareTo(otherTag);
     }
 
     public static Tag findOrCreateByName(String name) {

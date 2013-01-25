@@ -47,7 +47,7 @@ public class Recipe extends Model {
 
     public Recipe(User author, String title, String description, String steps, String source, double serves, String servesUnit) {
         this.ingredients = new ArrayList<Ingredient>();
-        this.tags = new TreeSet<Tag>();
+        this.tags = new HashSet<Tag>();
         this.author = author;
         this.title = title;
         this.description = description;
@@ -79,7 +79,7 @@ public class Recipe extends Model {
     }
 
     public Recipe tagItWith(String name) {
-        if(!tags.contains(name))
+        if(!tags.contains(Tag.hashName(name)))
         {tags.add(Tag.findOrCreateByName(name));}
         return this;
     }

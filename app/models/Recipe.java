@@ -39,10 +39,12 @@ public class Recipe extends Model {
     public Blob photoThumb;
 
 
-    @Lob
+    @Basic
+    @Column(name = "steps", columnDefinition = "text")
     public String steps;
 
-    @Lob
+    @Basic
+    @Column(name = "description", columnDefinition = "text")
     public String description;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -69,7 +71,7 @@ public class Recipe extends Model {
         return this;
     }
 
-    public void addPhoto(Blob photo){
+    public void addPhoto(Blob photo) {
         photoThumb = new Blob();
         File inputFile = new File("" + Calendar.getInstance().getTimeInMillis());
         Images.resize(photo.getFile(), inputFile, 140, 140);
@@ -83,8 +85,9 @@ public class Recipe extends Model {
     }
 
     public Recipe tagItWith(String name) {
-        if(!tags.contains(Tag.hashName(name)))
-        {tags.add(Tag.findOrCreateByName(name));}
+        if (!tags.contains(Tag.hashName(name))) {
+            tags.add(Tag.findOrCreateByName(name));
+        }
         return this;
     }
 

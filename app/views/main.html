@@ -74,7 +74,7 @@
     </div>
 
 </div>
-#{if request.controller == 'Recipes'}
+#{if request.action == 'Recipes.index' || request.action == 'Recipes.favorites'}
     #{planningFooter menu:menu /}
 #{/if}
 </body>

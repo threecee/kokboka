@@ -1,0 +1,4349 @@
+body.animate #lists li.animate {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important
+}
+
+body.animate #tasks .addtask .icon {
+    -webkit-transition: opacity 250ms linear;
+    -moz-transition: opacity 250ms linear;
+    -ms-transition: opacity 250ms linear;
+    -o-transition: opacity 250ms linear;
+    transition: opacity 250ms linear
+}
+
+body.animate #tasks li.task-item {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    .blur {
+        -webkit-filter: grayscale(10%) blur(5px) !important
+    }
+
+    &.extension #login .login-wrapper {
+        -webkit-animation-duration: .4s;
+        -moz-animation-duration: .4s;
+        -o-animation-duration: .4s;
+        animation-duration: .4s;
+        -webkit-animation-fill-mode: both;
+        -moz-animation-fill-mode: both;
+        -o-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+
+    &.extension #login .login-wrapper.bounceIn {
+        -webkit-animation-name: bounceIn;
+        -moz-animation-name: bounceIn;
+        -o-animation-name: bounceIn;
+        animation-name: bounceIn
+    }
+
+    &.extension #login .login-wrapper.bounceOut {
+        -webkit-animation-name: bounceOut;
+        -moz-animation-name: bounceOut;
+        -o-animation-name: bounceOut;
+        animation-name: bounceOut
+    }
+
+    &.extension #login .login-wrapper.delayedAnimation {
+        -webkit-animation-delay: .5s;
+        -moz-animation-delay: .5s;
+        -o-animation-delay: .5s;
+        animation-delay: .5s
+    }
+}
+
+@media all and (max-width:1024px) {
+    body.animate #tasks.animated,
+}
+
+@media all and (max-width:640px) {
+    body.animate #detail.animated {
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-transition: 250ms all !important;
+        -moz-transition: 250ms all !important;
+        -ms-transition: 250ms all !important
+    }
+}
+
+@-moz-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-webkit-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-o-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-ms-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-moz-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-webkit-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-o-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-ms-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-moz-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@-webkit-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@-o-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@-ms-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+.password-reset .icon, .unsupported-browser .icon, .confirm-account .icon {
+    cursor: default;
+    background: url("http://wunderlist2.s3.amazonaws.com/7846b0c3810f7f1fddb76b68a747c5f1400a78fa/images/wunderlist-login.png") -290px -155px;
+    width: 20px;
+    height: 16px;
+    margin-top: -2px;
+}
+
+.password-reset .footer a:hover, .unsupported-browser .footer a:hover, .confirm-account .footer a:hover {
+    text-decoration: underline
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    .minisite .ribbon {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/44632e0cebc9c29c8fbc835019c555d40949b0fd/images/wunderlist-login@2x.png");
+        background-size: 800px 480px
+    }
+}
+
+.unsupported-browser .content {
+    width: 500px;
+}
+
+.unsupported-browser .content .separator {
+    padding: 24px 120px;
+}
+
+body.extension:before {
+    background-color: rgba(51, 51, 51, 0.5) !important
+}
+
+body.extension #login #detail .note::before {
+    width: 224px !important
+}
+
+body.extension #login #detail a.logout:hover .icon {
+    background-position: -220px -120px;
+    opacity: 1
+}
+
+body.extension #login #detail a.logout:hover .logout-label {
+    opacity: 1
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    body.extension #login .icon.detail-star, body.extension #login #detail .inner, body.extension #login #detail .bottom, body.extension #login #detail .list-selector {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/6afb50b3f926383d8f8302ac02048e5f461392d1/images/textures/detail@2x.png") !important;
+        background-size: 144px 48px !important
+    }
+}
+
+.drag-clone {
+    list-style: none;
+}
+
+body.animate #lists li.animate {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important
+}
+
+body.animate #tasks .addtask .icon {
+    -webkit-transition: opacity 250ms linear;
+    -moz-transition: opacity 250ms linear;
+    -ms-transition: opacity 250ms linear;
+    -o-transition: opacity 250ms linear;
+    transition: opacity 250ms linear
+}
+
+body.animate #tasks li.task-item {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    .blur {
+        -webkit-filter: grayscale(10%) blur(5px) !important
+    }
+
+    &.extension #login .login-wrapper {
+        -webkit-animation-duration: .4s;
+        -moz-animation-duration: .4s;
+        -o-animation-duration: .4s;
+        animation-duration: .4s;
+        -webkit-animation-fill-mode: both;
+        -moz-animation-fill-mode: both;
+        -o-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+
+    &.extension #login .login-wrapper.bounceIn {
+        -webkit-animation-name: bounceIn;
+        -moz-animation-name: bounceIn;
+        -o-animation-name: bounceIn;
+        animation-name: bounceIn
+    }
+
+    &.extension #login .login-wrapper.bounceOut {
+        -webkit-animation-name: bounceOut;
+        -moz-animation-name: bounceOut;
+        -o-animation-name: bounceOut;
+        animation-name: bounceOut
+    }
+
+    &.extension #login .login-wrapper.delayedAnimation {
+        -webkit-animation-delay: .5s;
+        -moz-animation-delay: .5s;
+        -o-animation-delay: .5s;
+        animation-delay: .5s
+    }
+}
+
+@media all and (max-width:1024px) {
+    body.animate #tasks.animated,
+}
+
+@media all and (max-width:640px) {
+    body.animate #detail.animated {
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-transition: 250ms all !important;
+        -moz-transition: 250ms all !important;
+        -ms-transition: 250ms all !important
+    }
+}
+
+@-moz-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-webkit-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-o-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-ms-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-moz-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-webkit-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-o-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-ms-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-moz-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@-webkit-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@-o-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@-ms-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+/* Generated by CSS Usage.
+	   File: inline stylesheet.
+	   Look for the UNUSED items and see if you can remove them. */
+@media all and (max-width:1024px) and (-webkit-min-device-pixel-ratio: 2) {
+    .background-01 #tasks {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/f79974d07ebc76689f47697b2a7063fc5c3b48c7/images/backgrounds/01-2048.jpg") !important;
+    }
+
+    .background-01 #tasks .tasks-scroll {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch
+    }
+}
+
+@media all and (max-width:1024px) {
+
+{
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+}
+.background-01 #tasks {
+    background-image: url("http://wunderlist2.s3.amazonaws.com/9879a7e60fefdb068dae34906bca9090de27772f/images/backgrounds/01-1024.jpg");
+}
+
+.background-01 #tasks .tasks-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+.background-02 #tasks {
+    background-image: url("http://wunderlist2.s3.amazonaws.com/37273cde4630694437a52bc759fc8097893008fd/images/backgrounds/02-1024.jpg");
+}
+
+.background-02 #tasks .tasks-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+.background-04 #tasks {
+    background-image: url("http://wunderlist2.s3.amazonaws.com/ea0ce5a26a6b48118fcc70291cd50c4051cf3234/images/backgrounds/04-1024.jpg");
+}
+
+.background-04 #tasks .tasks-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+.background-05 #tasks {
+    background-image: url("http://wunderlist2.s3.amazonaws.com/e185a37e39421d820ce70fe91ccce4e8608bd8a4/images/backgrounds/05-1024.jpg");
+}
+
+.background-05 #tasks .tasks-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+.background-06 #tasks {
+    background-image: url("http://wunderlist2.s3.amazonaws.com/93f8f6446cbf6b2eb37e9be46319e7e8521a0dd7/images/backgrounds/06-1024.jpg");
+}
+
+.background-06 #tasks .tasks-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+.background-07 #tasks {
+    background-image: url("http://wunderlist2.s3.amazonaws.com/fe41fae4b091525b100877b14e0cb3fa50dffeac/images/backgrounds/07-1024.jpg");
+}
+
+.background-07 #tasks .tasks-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+.background-08 #tasks {
+    background-image: url("http://wunderlist2.s3.amazonaws.com/96e7cfb1e0cc127d5545dfc4080aa21df134d916/images/backgrounds/08-1024.jpg");
+}
+
+.background-08 #tasks .tasks-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+.background-09 #tasks {
+    background-image: url("http://wunderlist2.s3.amazonaws.com/7e7c2e3ab8b86281d6c0e0a688ed604fcc2032a9/images/backgrounds/09-1024.jpg");
+}
+
+.background-09 #tasks .tasks-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+.background-10 #tasks {
+    background-image: url("http://wunderlist2.s3.amazonaws.com/82589b547443e64dcb34396a0c4c216337b81e77/images/backgrounds/10-1024.jpg");
+}
+
+.background-10 #tasks .tasks-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+.background-11 #tasks {
+    background-image: url("http://wunderlist2.s3.amazonaws.com/34fba339c6366e963029babb0aab443fb95432c4/images/backgrounds/11-1024.jpg");
+}
+
+.background-11 #tasks .tasks-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+.background-12 #tasks {
+    background-image: url("http://wunderlist2.s3.amazonaws.com/c15b129b3299cb195ce74547d3ed77663dc9bdfc/images/backgrounds/12-1024.jpg");
+}
+
+.background-12 #tasks .tasks-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+.main-interface #tasks {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+    width: 100% !important;
+    z-index: 200;
+    -webkit-box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+    -ms-box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+    -o-box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.main-interface #tasks > div {
+    padding: 0 12px !important
+}
+
+.main-interface #tasks .tasks-scroll {
+    top: 0 !important;
+    padding-top: 52px !important;
+    padding-bottom: 12px !important;
+    z-index: -1;
+}
+
+.main-interface #tasks .tasks-scroll li {
+    -webkit-touch-callout: none
+}
+
+.main-interface #tasks #list-toolbar {
+    height: 48px;
+    display: block !important;
+    margin: 0 !important;
+    padding: 8px 14px !important
+}
+
+.main-interface #detail {
+    z-index: 300 !important;
+    padding: 0 !important;
+}
+
+    }
+
+@media all and (max-width:640px) {
+    body:after {
+        content: 'micro' !important
+    }
+
+    .main-interface #modals .dialog-wrapper {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 1000;
+    }
+
+    .main-interface #modals .dialog-wrapper.reminders {
+        height: auto !important;
+        width: 64% !important;
+        margin-left: -32% !important
+    }
+
+    .main-interface #modals .dialog-wrapper #settings a[rel=shortcuts] {
+        display: none
+    }
+
+    .main-interface #modals .dialog-wrapper.hidden {
+        z-index: 1
+    }
+
+    .main-interface #stacks > .stack {
+        -webkit-backface-visibility: hidden;
+        bottom: 0 !important;
+        left: 0 !important
+    }
+
+    .main-interface #tasks .tasks-404 {
+        margin: 0 10% !important;
+        margin-top: -60px !important
+    }
+
+    .main-interface #detail {
+        z-index: -999;
+        right: 0 !important;
+        width: 100% !important;
+        -webkit-transform: translateX(100%) !important;
+        -moz-transform: translateX(100%) !important;
+        -ms-transform: translateX(100%) !important;
+        -o-transform: translateX(100%) !important;
+        transform: translateX(100%) !important;
+    }
+
+    .main-interface #detail .note::before {
+        content: none !important
+    }
+
+    .main-interface #detail .inner {
+        margin-left: 56px
+    }
+}
+
+@media all and (max-width:320px) {
+    #detail .section.detail-date.editing {
+        height: 55px !important;
+    }
+}
+
+@media all and (min-width:641px) and (max-width:768px) {
+    body:after {
+        content: 'mini' !important
+    }
+
+    .main-interface #stacks #tasks {
+        right: 0 !important;
+        left: 0 !important;
+        width: auto !important;
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    .main-interface #stacks #detail {
+        width: 360px;
+        padding-right: 0 !important;
+    }
+}
+
+@media all and (min-width:769px) and (max-width:1024px) {
+    body:after {
+        content: 'medium' !important
+    }
+
+    .main-interface #stacks #lists {
+        width: 300px !important;
+        z-index: 1 !important
+    }
+
+    .main-interface #stacks #tasks {
+        right: 0 !important;
+        left: 0 !important;
+        width: auto !important;
+    }
+
+    .main-interface #stacks #tasks.slided {
+        left: 300px !important
+    }
+}
+
+@media all and (min-width:1025px) {
+    body::after {
+        content: 'large' !important
+    }
+}
+
+/* Generated by CSS Usage.
+	   File: inline stylesheet.
+	   Look for the UNUSED items and see if you can remove them. */
+.dialog-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.dialog-wrapper.reminders {
+    background: none;
+    width: 300px;
+    margin-left: -150px;
+    left: 50%;
+    height: auto
+}
+
+.dialog .tabs li a:hover {
+    background: rgba(0, 0, 0, 0);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.05)));
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05));
+    background: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.05))
+}
+
+.dialog .content .separator.about-page p {
+    font-size: 12px;
+    margin-top: 0;
+}
+
+.dialog .content .separator.about-page h3 {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 5px
+}
+
+.dialog .content .separator .social-links .button::after {
+    position: absolute;
+    border-width: 4px;
+    border-style: solid;
+    border-color: transparent #f6f6f6 transparent transparent;
+    left: -8px;
+    width: 0;
+    height: 0;
+    z-index: 100;
+    content: "";
+    top: 8px
+}
+
+.dialog .content .separator .social-links .button::before {
+    position: absolute;
+    border-width: 4px;
+    border-style: solid;
+    border-color: transparent #333 transparent transparent;
+    left: -8px;
+    width: 0;
+    height: 0;
+    z-index: 100;
+    content: "";
+    top: 8px
+}
+
+.dialog .content input.shortcut:focus {
+    background: #f9f9f9;
+    border-color: #2aadec
+}
+
+.dialog#settings {
+    width: 550px;
+}
+
+.dialog#settings .show-advanced-shortcuts {
+    width: 100%
+}
+
+.dialog#settings .time-format text {
+    margin: 0 8px
+}
+
+.dialog#confirmation {
+    width: 430px;
+    margin-left: -215px;
+}
+
+.dialog#confirmation .icon {
+    margin-top: -2px;
+    margin-left: -8px
+}
+
+.dialog#confirmation h3, .dialog#confirmation p {
+    text-shadow: 0 1px 0 white;
+    color: #423e3e
+}
+
+.dialog#confirmation h3 {
+    margin-top: -6px;
+    margin-bottom: 6px;
+    line-height: 22px;
+    font-size: 16px
+}
+
+.dialog#confirmation p {
+    line-height: 20px
+}
+
+.dialog#confirmation button {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 16px
+}
+
+.dialog#fullscreen-note {
+    background: #f7f5df;
+    width: 480px;
+    margin-left: -240px;
+    top: 30px;
+    bottom: 30px;
+}
+
+.dialog#fullscreen-note .head {
+    background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+    border: none;
+}
+
+.dialog#fullscreen-note .head h2 {
+    color: #b29559;
+    margin: 6px 40px;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 500;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65)
+}
+
+.dialog#fullscreen-note .head a.close {
+    padding: 6px 6px 14px 10px;
+}
+
+.dialog#fullscreen-note .head a.close span.close {
+    background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+    text-indent: -9999px;
+    border: none;
+    width: 20px;
+    height: 20px;
+    background-image: url("http://wunderlist2.s3.amazonaws.com/bcbfe600c9b7e6279f523d0ceee8cb09b485f7ed/images/wunderlist.png");
+    background-position: -40px -60px;
+    padding: 0;
+    margin: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+    opacity: .4;
+}
+
+.dialog#fullscreen-note .head a.close span.close:hover {
+    opacity: 1
+}
+
+.dialog#fullscreen-note .content-inner {
+    background: #f7f5df;
+    padding: 0;
+    position: absolute;
+    overflow-x: hidden;
+    overflow-y: auto;
+    top: 40px;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+}
+
+.dialog#fullscreen-note .content-inner a {
+    color: #2f7ec5
+}
+
+.dialog#fullscreen-note .note {
+    background: #f7f5df;
+    background-image: -webkit-linear-gradient(#dee2d0 1px, transparent 1px);
+    background-image: -moz-linear-gradient(top, #dee2d0 1px, transparent 1px);
+    background-image: -ms-linear-gradient(top, #dee2d0 1px, transparent 2px);
+    background-size: 100% 26px;
+    border: none;
+    font-size: 13px;
+    line-height: 26px;
+    padding: 8px 15px;
+    min-height: 94%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.dialog#fullscreen-note .note.selectable div, .dialog#fullscreen-note .note.selectable span {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    -o-user-select: text !important;
+    user-select: text !important
+}
+
+.dialog#fullscreen-note .note .note-body, .dialog#fullscreen-note .note .note-edit {
+    min-height: 218px;
+    word-wrap: break-word
+}
+
+.dialog#fullscreen-note .note textarea {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    .dialog#fullscreen-note .head .close {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/3139ac430370efaf6897492770de2742e2144875/images/wunderlist@2x.png");
+        background-size: 280px 760px
+    }
+}
+
+/* Generated by CSS Usage.
+	   File: inline stylesheet.
+	   Look for the UNUSED items and see if you can remove them. */
+.tag {
+    border-radius: 10px;
+    padding: 1px 7px;
+    font-size: 11px;
+    border: 1px solid transparent;
+    margin-left: 4px;
+}
+
+/* Generated by CSS Usage.
+	   File: inline stylesheet.
+	   Look for the UNUSED items and see if you can remove them. */
+textarea {
+    outline: none;
+    color: #423e3e;
+    font-weight: 500
+}
+
+input[type=text], input[type=password], input[type=text]:focus, input[type=password]:focus, .input-fake:focus, input[type=text].focus, input[type=password].focus, input[type=text].transparent, input[type=password].transparent, input[type=text].big, input[type=password].big, input[type=text].medium, input[type=password].medium, input[type=text].small, input[type=password].small, input[type=text].smaller, input[type=password].smaller, input[type=text][disabled], input[type=password][disabled], .input-fake[disabled] {
+    border-color: #ccc;
+    color: #bdbcbb
+}
+
+input[type=text]:-moz-placeholder, input[type=password]:-moz-placeholder, input[type=checkbox] {
+    margin-top: 4px
+}
+
+/* Generated by CSS Usage.
+	   File: inline stylesheet.
+	   Look for the UNUSED items and see if you can remove them. */
+body.animate #lists li.animate {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important
+}
+
+body.animate #tasks .addtask .icon {
+    -webkit-transition: opacity 250ms linear;
+    -moz-transition: opacity 250ms linear;
+    -ms-transition: opacity 250ms linear;
+    -o-transition: opacity 250ms linear;
+    transition: opacity 250ms linear
+}
+
+body.animate #tasks li.task-item {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    .blur {
+        -webkit-filter: grayscale(10%) blur(5px) !important
+    }
+
+    &.extension #login .login-wrapper {
+        -webkit-animation-duration: .4s;
+        -moz-animation-duration: .4s;
+        -o-animation-duration: .4s;
+        animation-duration: .4s;
+        -webkit-animation-fill-mode: both;
+        -moz-animation-fill-mode: both;
+        -o-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+
+    &.extension #login .login-wrapper.bounceIn {
+        -webkit-animation-name: bounceIn;
+        -moz-animation-name: bounceIn;
+        -o-animation-name: bounceIn;
+        animation-name: bounceIn
+    }
+
+    &.extension #login .login-wrapper.bounceOut {
+        -webkit-animation-name: bounceOut;
+        -moz-animation-name: bounceOut;
+        -o-animation-name: bounceOut;
+        animation-name: bounceOut
+    }
+
+    &.extension #login .login-wrapper.delayedAnimation {
+        -webkit-animation-delay: .5s;
+        -moz-animation-delay: .5s;
+        -o-animation-delay: .5s;
+        animation-delay: .5s
+    }
+}
+
+@media all and (max-width:1024px) {
+    body.animate #tasks.animated,
+}
+
+@media all and (max-width:640px) {
+    body.animate #detail.animated {
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-transition: 250ms all !important;
+        -moz-transition: 250ms all !important;
+        -ms-transition: 250ms all !important
+    }
+}
+
+@-moz-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-webkit-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-o-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-ms-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-moz-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-webkit-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-o-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-ms-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-moz-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@-webkit-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@-o-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@-ms-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+.password-reset .icon, .unsupported-browser .icon, .confirm-account .icon {
+    cursor: default;
+    background: url("http://wunderlist2.s3.amazonaws.com/7846b0c3810f7f1fddb76b68a747c5f1400a78fa/images/wunderlist-login.png") -290px -155px;
+    width: 20px;
+    height: 16px;
+    margin-top: -2px;
+}
+
+.password-reset .footer a:hover, .unsupported-browser .footer a:hover, .confirm-account .footer a:hover {
+    text-decoration: underline
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    .minisite .ribbon {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/44632e0cebc9c29c8fbc835019c555d40949b0fd/images/wunderlist-login@2x.png");
+        background-size: 800px 480px
+    }
+}
+
+.confirm-account p {
+    min-height: 100px !important
+}
+
+/* Generated by CSS Usage.
+	   File: inline stylesheet.
+	   Look for the UNUSED items and see if you can remove them. */
+body.animate #lists li.animate {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important
+}
+
+body.animate #tasks .addtask .icon {
+    -webkit-transition: opacity 250ms linear;
+    -moz-transition: opacity 250ms linear;
+    -ms-transition: opacity 250ms linear;
+    -o-transition: opacity 250ms linear;
+    transition: opacity 250ms linear
+}
+
+body.animate #tasks li.task-item {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    .blur {
+        -webkit-filter: grayscale(10%) blur(5px) !important
+    }
+
+    &.extension #login .login-wrapper {
+        -webkit-animation-duration: .4s;
+        -moz-animation-duration: .4s;
+        -o-animation-duration: .4s;
+        animation-duration: .4s;
+        -webkit-animation-fill-mode: both;
+        -moz-animation-fill-mode: both;
+        -o-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+
+    &.extension #login .login-wrapper.bounceIn {
+        -webkit-animation-name: bounceIn;
+        -moz-animation-name: bounceIn;
+        -o-animation-name: bounceIn;
+        animation-name: bounceIn
+    }
+
+    &.extension #login .login-wrapper.bounceOut {
+        -webkit-animation-name: bounceOut;
+        -moz-animation-name: bounceOut;
+        -o-animation-name: bounceOut;
+        animation-name: bounceOut
+    }
+
+    &.extension #login .login-wrapper.delayedAnimation {
+        -webkit-animation-delay: .5s;
+        -moz-animation-delay: .5s;
+        -o-animation-delay: .5s;
+        animation-delay: .5s
+    }
+}
+
+@media all and (max-width:1024px) {
+    body.animate #tasks.animated,
+}
+
+@media all and (max-width:640px) {
+    body.animate #detail.animated {
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-transition: 250ms all !important;
+        -moz-transition: 250ms all !important;
+        -ms-transition: 250ms all !important
+    }
+}
+
+@-moz-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-webkit-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-o-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-ms-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+    70% {
+        -webkit-transform: scale(.9);
+        -moz-transform: scale(.9);
+        -ms-transform: scale(.9);
+        -o-transform: scale(.9);
+        transform: scale(.9)
+    }
+    100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@-moz-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-webkit-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-o-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-ms-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(.95);
+        -moz-transform: scale(.95);
+        -ms-transform: scale(.95);
+        -o-transform: scale(.95);
+        transform: scale(.95)
+    }
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1)
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -moz-transform: scale(.3);
+        -ms-transform: scale(.3);
+        -o-transform: scale(.3);
+        transform: scale(.3)
+    }
+}
+
+@-moz-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@-webkit-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@-o-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@-ms-keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@keyframes wobble {
+    0% {
+        left: 0
+    }
+    10% {
+        left: -10px
+    }
+    20% {
+        left: 10px
+    }
+    30% {
+        left: -8px
+    }
+    40% {
+        left: 6px
+    }
+    50% {
+        left: -6px
+    }
+    60% {
+        left: -4px
+    }
+    60% {
+        left: 4px
+    }
+    60% {
+        left: -2px
+    }
+    60% {
+        left: 2px
+    }
+    100% {
+        left: 0
+    }
+}
+
+.password-reset .icon, .unsupported-browser .icon, .confirm-account .icon {
+    cursor: default;
+    background: url("http://wunderlist2.s3.amazonaws.com/7846b0c3810f7f1fddb76b68a747c5f1400a78fa/images/wunderlist-login.png") -290px -155px;
+    width: 20px;
+    height: 16px;
+    margin-top: -2px;
+}
+
+.password-reset .footer a:hover, .unsupported-browser .footer a:hover, .confirm-account .footer a:hover {
+    text-decoration: underline
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    .minisite .ribbon {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/44632e0cebc9c29c8fbc835019c555d40949b0fd/images/wunderlist-login@2x.png");
+        background-size: 800px 480px
+    }
+}
+
+/* Generated by CSS Usage.
+	   File: inline stylesheet.
+	   Look for the UNUSED items and see if you can remove them. */
+@media all and (min-width:1025px) {
+    body.minisite:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/f79974d07ebc76689f47697b2a7063fc5c3b48c7/images/backgrounds/01-2048.jpg")
+    }
+}
+
+@media all and (max-width:640px) {
+    body.minisite:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/0182b2282cfb9b736ef586fb142ece93ce217ba7/images/backgrounds/01-640.jpg")
+    }
+}
+
+@media all and (min-width:641px) and (min-width:768px) {
+    body.minisite:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/43b1568ee73367b33f270d3be1b5cba2c3c79f7e/images/backgrounds/01-768.jpg")
+    }
+}
+
+@media all and (min-width:769px) and (max-width:1024px) {
+    body.minisite:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/9879a7e60fefdb068dae34906bca9090de27772f/images/backgrounds/01-1024.jpg")
+    }
+}
+
+div.minisite-container h2 .shared-by .user, div.minisite-container .minisite-404 p, div.minisite-container .minisite-empty p, div.minisite-container .minisite-404 h2, div.minisite-container .minisite-empty h2 {
+    padding-left: 64px;
+    margin-top: 0 !important
+}
+
+div.minisite-container .footer a:hover {
+    text-decoration: underline
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    .minisite .ribbon {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/44632e0cebc9c29c8fbc835019c555d40949b0fd/images/wunderlist-login@2x.png");
+        background-size: 800px 480px
+    }
+}
+
+/* Generated by CSS Usage.
+	   File: inline stylesheet.
+	   Look for the UNUSED items and see if you can remove them. */
+@media print {
+    @page {
+        margin: 2.5cm
+    }
+
+{
+    margin: 0
+;
+    padding: 0
+;
+    background: none
+}
+body, .main-interface {
+    color: #1a1919;
+    overflow: visible !important;
+}
+
+#stacks, #modals {
+    display: none
+}
+
+    }
+
+/* Generated by CSS Usage.
+		   File: inline stylesheet.
+		   Look for the UNUSED items and see if you can remove them. */
+.qq-upload-spinner, /* Generated by CSS Usage.
+		   File: inline stylesheet.
+		   Look for the UNUSED items and see if you can remove them. */
+.content-fakable .display-view {
+    overflow: hidden;
+}
+
+/* Generated by CSS Usage.
+		   File: inline stylesheet.
+		   Look for the UNUSED items and see if you can remove them. */
+.expandingArea {
+    position: relative;
+}
+
+.expandingArea textarea, .expandingArea pre {
+    padding: 0;
+    background: transparent;
+    border: none;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 13px;
+    line-height: 26px
+}
+
+/* Generated by CSS Usage.
+		   File: inline stylesheet.
+		   Look for the UNUSED items and see if you can remove them. */
+.today-date {
+    width: 40px;
+    height: 25px;
+    display: inline-block;
+    background: url("http://wunderlist2.s3.amazonaws.com/0490a0178b484645cc998af6992d48f2c69131fb/images/numbers.png");
+    background-size: auto 25px;
+    margin: 37px 20px 0;
+    display: none;
+}
+
+/* Generated by CSS Usage.
+		   File: inline stylesheet.
+		   Look for the UNUSED items and see if you can remove them. */
+.datepicker {
+    width: 187px;
+    padding: 12px;
+}
+
+.datepicker ol.months a:hover {
+    background: #eaeaea
+}
+
+.datepicker .datepicker-actions a:hover {
+    text-decoration: underline
+}
+
+/* Generated by CSS Usage.
+		   File: inline stylesheet.
+		   Look for the UNUSED items and see if you can remove them. */
+#sidebar-actions {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 38px;
+    position: absolute;
+    z-index: 1000;
+}
+
+#sidebar-actions a:hover {
+    opacity: 1
+}
+
+/* Generated by CSS Usage.
+		   File: inline stylesheet.
+		   Look for the UNUSED items and see if you can remove them. */
+.flip {
+    position: relative;
+    z-index: 1000;
+    -webkit-perspective: 700;
+    -moz-perspective-origin: center center;
+    perspective: 700px;
+    -ms-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+.flip > .front {
+    z-index: 900;
+    -webkit-transform: rotateY(0);
+    -moz-transform: rotateY(0);
+    -ms-transform: rotateY(0);
+    transform: rotateY(0)
+}
+
+.flip > .back {
+    z-index: 800;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    transform: rotateY(180deg)
+}
+
+/* Generated by CSS Usage.
+		   File: inline stylesheet.
+		   Look for the UNUSED items and see if you can remove them. */
+body.login {
+    overflow-y: scroll !important
+}
+
+body.login::before {
+    background: #002d6b url("http://wunderlist2.s3.amazonaws.com/b2b1f2c358ac7bf1d7e10c628f1a7f70e2256d1b/images/backgrounds/bg.jpg") center top no-repeat !important;
+    background-size: auto !important;
+    position: absolute !important;
+    min-height: 1090px !important
+}
+
+#login .download-wrapper.activated:hover, #login .download-button:hover + .download-wrapper {
+    pointer-events: auto;
+    display: block;
+    z-index: 10000;
+    -webkit-transition: all .6s;
+    -moz-transition: all .6s;
+    -ms-transition: all .6s;
+    -o-transition: all .6s;
+    transition: all .6s;
+}
+
+#login .download-wrapper.activated:hover.fadeIn, #login .download-button:hover + .download-wrapper.fadeIn {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1
+}
+
+#login .download-container .devices .device:hover {
+    opacity: 1
+}
+
+#login .close-login:hover {
+    opacity: 1
+}
+
+#login .icon.login-questionmark {
+    background-position: -394px -110px
+}
+
+#login .content .separator.error.registration h2, #login .content .separator padding-bottom:
+
+0
+px.registration h2 {
+    margin-top: 33px
+}
+
+#login .content .separator.error h2, #login .content .separator padding-bottom:
+
+0
+px h2 {
+    margin-top: 2px
+}
+
+#login .content .separator.error .center, #login .content .separator padding-bottom:
+
+0
+px .center {
+    margin-top: 4px
+}
+
+#login .content .separator .hint a:hover {
+    text-decoration: underline
+}
+
+#login .content p a:hover {
+    text-decoration: underline
+}
+
+@media all and (max-width:768px) {
+    #login .header-title {
+        display: none !important
+    }
+
+    #login .pageflip {
+        margin-top: 50px !important
+    }
+
+    #login .call-to-actions {
+        width: 300px
+    }
+}
+
+@media all and (max-width:640px) {
+    #login .pageflip {
+        margin-top: 20px !important
+    }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    #login .mac,
+}
+
+/* Generated by CSS Usage.
+		   File: inline stylesheet.
+		   Look for the UNUSED items and see if you can remove them. */
+.button, .button.disabled:hover, button.disabled:hover {
+    cursor: default
+}
+
+.button:hover, button:hover {
+    text-decoration: none !important;
+    background: #f1f1f1;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#e6e6e6));
+    background: -moz-linear-gradient(top, #f1f1f1, #e6e6e6);
+    background: -ms-linear-gradient(top, #f1f1f1, #e6e6e6);
+    background: linear-gradient(top, #f1f1f1, #e6e6e6)
+}
+
+.button.clear:hover, button.clear:hover {
+    background: rgba(104, 56, 36, 0.7);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(104, 56, 36, 0.7)), to(rgba(141, 85, 62, 0.7)));
+    background: -moz-linear-gradient(top, rgba(104, 56, 36, 0.7), rgba(141, 85, 62, 0.7));
+    background: -ms-linear-gradient(top, rgba(104, 56, 36, 0.7), rgba(141, 85, 62, 0.7));
+    background: linear-gradient(top, rgba(104, 56, 36, 0.7), rgba(141, 85, 62, 0.7))
+}
+
+.button.blue:hover, button.blue:hover {
+    background: #2bb3ed;
+    background: -webkit-gradient(linear, left top, left bottom, from(#2bb3ed), to(#247cdf));
+    background: -moz-linear-gradient(top, #2bb3ed, #247cdf);
+    background: -ms-linear-gradient(top, #2bb3ed, #247cdf);
+    background: linear-gradient(top, #2bb3ed, #247cdf)
+}
+
+.button.red:hover, button.red:hover {
+    background: #e14731;
+    background: -webkit-gradient(linear, left top, left bottom, from(#e14731), to(#c4311f));
+    background: -moz-linear-gradient(top, #e14731, #c4311f);
+    background: -ms-linear-gradient(top, #e14731, #c4311f);
+    background: linear-gradient(top, #e14731, #c4311f)
+}
+
+.button.transparent:hover .icon, button.transparent:hover .icon {
+    opacity: 1
+}
+
+.button.toggle-lists, .button.toggle-lists::after, button.toggle-lists::after, .button.toggle-sharepopover::after, button.toggle-sharepopover::after {
+    content: '';
+    height: 2px;
+    position: absolute;
+    top: 29px;
+    left: 2px;
+    width: 35px;
+    display: block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05)
+}
+
+.button.toggle-lists:hover, button.toggle-lists:hover, .button.toggle-sharepopover:hover, button.toggle-sharepopover:hover {
+    background: rgba(30, 30, 30, 0.35);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(30, 30, 30, 0.35)), to(rgba(18, 18, 18, 0.5)));
+    background: -moz-linear-gradient(top, rgba(30, 30, 30, 0.35), rgba(18, 18, 18, 0.5));
+    background: -ms-linear-gradient(top, rgba(30, 30, 30, 0.35), rgba(18, 18, 18, 0.5));
+    background: linear-gradient(top, rgba(30, 30, 30, 0.35), rgba(18, 18, 18, 0.5))
+}
+
+.button.accepted, button.accepted {
+    height: 16px;
+    padding: 2px 0 !important;
+    font-weight: 500;
+    margin-left: -5px;
+    color: #0d7fe7;
+}
+
+.button span, .button span.icon, .buttonbar .button.selected + *, .buttonbar button.selected +    {
+    border-left: 1px solid #2f7ebc
+}
+
+.facebook-button:hover {
+    background-position: -290px -196px
+}
+
+.light-blu-buttons:hover {
+    background: #4e90ca;
+    background: -webkit-gradient(linear, left top, left bottom, from(#4e90ca), to(#2e66a6));
+    background: -moz-linear-gradient(top, #4e90ca, #2e66a6);
+    background: -ms-linear-gradient(top, #4e90ca, #2e66a6);
+    background: linear-gradient(top, #4e90ca, #2e66a6);
+    color: rgba(4, 24, 47, 0.7);
+    text-shadow: 0 1px 0 #5497d3;
+    -webkit-box-shadow: inset 0 1px 1px rgba(116, 172, 222, 0.41), inset 0 0 5px rgba(13, 46, 78, 0.08);
+    -moz-box-shadow: inset 0 1px 1px rgba(116, 172, 222, 0.41), inset 0 0 5px rgba(13, 46, 78, 0.08);
+    -ms-box-shadow: inset 0 1px 1px rgba(116, 172, 222, 0.41), inset 0 0 5px rgba(13, 46, 78, 0.08);
+    -o-box-shadow: inset 0 1px 1px rgba(116, 172, 222, 0.41), inset 0 0 5px rgba(13, 46, 78, 0.08);
+    box-shadow: inset 0 1px 1px rgba(116, 172, 222, 0.41), inset 0 0 5px rgba(13, 46, 78, 0.08);
+    border-color: #165486
+}
+
+.transparent-button:hover {
+    background: rgba(0, 0, 0, 0.05);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.05)), to(rgba(255, 255, 255, 0.02)));
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.02));
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.02));
+    background: linear-gradient(top, rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.02))
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    .facebook-button {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/44632e0cebc9c29c8fbc835019c555d40949b0fd/images/wunderlist-login@2x.png");
+        background-size: 936px 480px
+    }
+
+    button.loading span, .button.loading span {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/8f27e7c687d175b61f6bda902b0fc6e08fa1a0c4/images/loading@2x.png");
+        background-size: 19px
+    }
+}
+
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0)
+    }
+    100% {
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@-moz-keyframes rotate {
+    0% {
+        -moz-transform: rotate(0)
+    }
+    100% {
+        -moz-transform: rotate(360deg)
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0)
+    }
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+.popover {
+    display: none;
+    position: absolute;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    background: #f9f9f9;
+    min-height: 15px;
+    min-width: 150px;
+    max-width: 304px;
+    z-index: 1000;
+    color: #423e3e;
+    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+    -ms-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+    -o-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+    -webkit-filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.3));
+}
+
+.popover .due-date-picker input[type=text] {
+    width: 20px !important;
+    text-align: center
+}
+
+.popover .content p a:hover {
+    text-decoration: underline
+}
+
+.popover .list-menu li a:hover {
+    color: white;
+    background: #3595e1;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.popover .list-menu li a:hover .popover {
+    text-shadow: none;
+    display: block
+}
+
+.popover .list-people li[rel=owner] ~ li.not-shared {
+    display: none
+}
+
+.popover#user-popover .arrow {
+    display: none
+}
+
+.popover#user-popover > .inner {
+    width: 200px;
+    border: 1px solid #f9f9f9;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px
+}
+
+.popover .popover-notifications .list-people li .task-info font-size:
+
+12
+px img[src=""], .popover .popover-notifications .list-people li .share-info font-size:
+
+12
+px img[src=""] {
+    visibility: hidden
+}
+
+.popover .popover-notifications .list-people li .icon:hover {
+    opacity: 1
+}
+
+body.login .fauxUI {
+    position: absolute;
+    top: 250px;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    border-radius: 5px;
+}
+
+body.login .fauxUI #stacks::after {
+    background-position: 0 -108px;
+    background-image: url("http://wunderlist2.s3.amazonaws.com/f12d5cc006c24fd18b7ab332268eddee07821006/images/welcome-screen.png");
+    background-repeat: no-repeat;
+    width: 1018px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 9999;
+    position: absolute;
+    height: 235px;
+    content: ' '
+}
+
+body.login .fauxUI #tasks >    {
+    padding: 6px 12px 0 13px !important
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    body.login .fauxUI .browser-bar {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/2f702d3243fe575b4f3993b366729f6888f4f9ef/images/welcome-screen@2x.png") !important;
+        background-size: 1225px 811px !important
+    }
+}
+
+.icon {
+    background-image: url("http://wunderlist2.s3.amazonaws.com/bcbfe600c9b7e6279f523d0ceee8cb09b485f7ed/images/wunderlist.png");
+    cursor: pointer;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.icon.bell:hover {
+    background-position: -200px -40px;
+    width: 28px;
+    height: 20px
+}
+
+.icon.list-list, .icon.list-sharing, .icon.input-star {
+    background-position: -100px -180px;
+    width: 18px;
+    height: 20px;
+    opacity: .5;
+}
+
+.icon.input-star:hover {
+    opacity: 1
+}
+
+.icon.input-date {
+    background-position: -160px -100px;
+    width: 20px;
+    height: 20px;
+    opacity: .4;
+}
+
+.icon.input-date:hover {
+    opacity: .8
+}
+
+.icon.task-checkbox, .icon.task-checked, .icon.task-star:hover {
+    background-position: -100px 0;
+    width: 20px;
+    height: 34px
+}
+
+.icon.task-separator {
+    background-position: 0 0;
+    width: 2px;
+    height: 20px
+}
+
+.icon.task-attachment {
+    background-position: -20px -120px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.detail-delete:hover {
+    opacity: .8
+}
+
+.icon.note-fullscreen:hover {
+    opacity: 1
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    .icon {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/3139ac430370efaf6897492770de2742e2144875/images/wunderlist@2x.png");
+        background-size: 280px 760px
+    }
+}
+
+html, input, {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-touch-action: none
+}
+
+input, textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    -o-user-select: text;
+    user-select: text
+}
+
+body {
+    font-family: "Helvetica Neue", "Helvetica", "Arial", Sans-Serif;
+    color: #423e3e;
+    font-size: 13px;
+    font-weight: 500;
+    overflow: hidden;
+}
+
+ul {
+    list-style: none
+}
+
+a {
+    cursor: pointer
+}
+
+@media all and (min-width:1025px) {
+    .background-01:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/f79974d07ebc76689f47697b2a7063fc5c3b48c7/images/backgrounds/01-2048.jpg") !important
+    }
+}
+
+@media all and (max-width:640px) {
+    .background-01:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/0182b2282cfb9b736ef586fb142ece93ce217ba7/images/backgrounds/01-640.jpg") !important
+    }
+
+    .background-02:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/75055daea6272a888ee9d282ed21ca05b1632a67/images/backgrounds/02-640.jpg") !important
+    }
+
+    .background-04:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/c6f374cea2fa334514eaedb02f93c6c640ffe40b/images/backgrounds/04-640.jpg") !important
+    }
+
+    .background-05:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/4bf22675421936f844727f1145b8c0bbbcdbbfa8/images/backgrounds/05-640.jpg") !important
+    }
+
+    .background-06:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/a30778e335a056ff7f0fd1274c9c584164d13129/images/backgrounds/06-640.jpg") !important
+    }
+
+    .background-07:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/c7103f4932856d7cb92bf59508a0f5cf3e70b271/images/backgrounds/07-640.jpg") !important
+    }
+
+    .background-08:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/14d8fed225b55cee6c8956a99a19637cd6a8c654/images/backgrounds/08-640.jpg") !important
+    }
+
+    .background-09:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/e1e35e866cab3e33cb0c0f79a9e113eef723d5a6/images/backgrounds/09-640.jpg") !important
+    }
+
+    .background-10:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/5c47fe0d44685a8695eda8a247892325b3aa2ad6/images/backgrounds/10-640.jpg") !important
+    }
+
+    .background-11:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/664adad7cc61058baa1e7a6f3aa1465fce6d3ef1/images/backgrounds/11-640.jpg") !important
+    }
+
+    .background-12:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/8b8f4521b9226949565d72657e17129fef792d75/images/backgrounds/12-640.jpg") !important
+    }
+}
+
+@media all and (min-width:641px) and (max-width:768px) {
+    .background-01:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/43b1568ee73367b33f270d3be1b5cba2c3c79f7e/images/backgrounds/01-768.jpg") !important
+    }
+
+    .background-02:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/a5851749e12b577f16506afcc692fa0af18b56a7/images/backgrounds/02-768.jpg") !important
+    }
+
+    .background-04:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/6b1346189c0c9a6d59c36ef1016cc5cae51cacee/images/backgrounds/04-768.jpg") !important
+    }
+
+    .background-05:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/2fcbaea66cbfd52d8c96bce1f8a3edf32580445b/images/backgrounds/05-768.jpg") !important
+    }
+
+    .background-06:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/989506b412ca96ba4f257124f70edbae8be81ae9/images/backgrounds/06-768.jpg") !important
+    }
+
+    .background-07:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/a6563437b0b969985559358e2b727e144bc9c7b1/images/backgrounds/07-768.jpg") !important
+    }
+
+    .background-08:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/dcafe363b2178caf392b194a683c95805f4b1b57/images/backgrounds/08-768.jpg") !important
+    }
+
+    .background-09:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/5a484bc6e89efbb4376e92270a92cadef7be995b/images/backgrounds/09-768.jpg") !important
+    }
+
+    .background-10:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/eec9192e602e320ccf868c7f65f33bf3eb28f985/images/backgrounds/10-768.jpg") !important
+    }
+
+    .background-11:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/549e4be00ce2ea5f5615c9e58a938931d8e2eb9c/images/backgrounds/11-768.jpg") !important
+    }
+
+    .background-12:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/3e6e8c2f11503aa4f968f224a0b33213405d3e67/images/backgrounds/12-768.jpg") !important
+    }
+}
+
+@media all and (min-width:769px) and (max-width:1024px) {
+    .background-01:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/9879a7e60fefdb068dae34906bca9090de27772f/images/backgrounds/01-1024.jpg") !important
+    }
+
+    .background-02:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/37273cde4630694437a52bc759fc8097893008fd/images/backgrounds/02-1024.jpg") !important
+    }
+
+    .background-04:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/ea0ce5a26a6b48118fcc70291cd50c4051cf3234/images/backgrounds/04-1024.jpg") !important
+    }
+
+    .background-05:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/e185a37e39421d820ce70fe91ccce4e8608bd8a4/images/backgrounds/05-1024.jpg") !important
+    }
+
+    .background-06:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/93f8f6446cbf6b2eb37e9be46319e7e8521a0dd7/images/backgrounds/06-1024.jpg") !important
+    }
+
+    .background-07:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/fe41fae4b091525b100877b14e0cb3fa50dffeac/images/backgrounds/07-1024.jpg") !important
+    }
+
+    .background-08:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/96e7cfb1e0cc127d5545dfc4080aa21df134d916/images/backgrounds/08-1024.jpg") !important
+    }
+
+    .background-09:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/7e7c2e3ab8b86281d6c0e0a688ed604fcc2032a9/images/backgrounds/09-1024.jpg") !important
+    }
+
+    .background-10:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/82589b547443e64dcb34396a0c4c216337b81e77/images/backgrounds/10-1024.jpg") !important
+    }
+
+    .background-11:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/34fba339c6366e963029babb0aab443fb95432c4/images/backgrounds/11-1024.jpg") !important
+    }
+
+    .background-12:before {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/c15b129b3299cb195ce74547d3ed77663dc9bdfc/images/backgrounds/12-1024.jpg") !important
+    }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    .background-03:before, li.background-03 {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/13c16f5e0c4cfb28371176855caa972df94919e5/images/backgrounds/03@2x.jpg")
+    }
+}
+
+.hidden {
+    display: none !important
+}
+
+#stacks {
+    -webkit-backface-visibility: hidden;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+#stacks > div {
+    -webkit-overflow-scrolling: touch;
+    position: absolute
+}
+
+.main-interface {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    overflow: hidden;
+}
+
+body *::-webkit-scrollbar {
+    width: 8px !important
+}
+
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {
+    height: 10px;
+    display: block;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.2)
+}
+
+li.task-item {
+    height: 37px;
+    z-index: 100 !important;
+    list-style: none;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+li.task-item.done {
+    opacity: .6;
+    list-style: none;
+}
+
+li.task-item.done .title {
+    text-decoration: line-through;
+    text-shadow: none
+}
+
+li.task-item .task-body {
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    background: #eaeaea url("http://wunderlist2.s3.amazonaws.com/2b2576e3d0a5b892d1e5673e79caa7919a70eb94/images/textures/task.png") repeat-x;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    list-style: none;
+    position: relative;
+    height: 34px;
+    margin: 1px 1px 0 1px;
+}
+
+li.task-item .task-body .icon.task-separator {
+    position: absolute;
+    left: 34px;
+    top: 1px;
+    height: 100%;
+    cursor: default
+}
+
+li.task-item .task-body .icon.task-checkbox {
+    position: absolute;
+    left: 9px;
+    top: 8px
+}
+
+li.task-item .task-body .title-wrapper {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    margin: 0 0 0 44px;
+    padding: 9px 0;
+    line-height: 16px;
+    color: #423e3e;
+    position: relative;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+li.task-item .task-body .title-wrapper .task-attachment {
+    height: 18px;
+    margin-top: -3px;
+    display: none
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    li.task-item .task-body {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/dc1244341aca258d0ec806191b083a2f6b576ccf/images/textures/task@2x.png");
+        background-size: 96px 68px
+    }
+}
+
+.background-05 #tasks .tasks-404, #tasks {
+    top: 0;
+    bottom: 0;
+    padding-bottom: 15px;
+    left: 10px;
+    right: 10px;
+}
+
+#tasks #list-toolbar {
+    display: none
+}
+
+#tasks .tasks-scroll {
+    overflow: auto;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 9px
+}
+
+#tasks .tasks-404 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: 50%;
+    margin-top: -110px !important;
+}
+
+#tasks >    {
+    padding: 6px 7px 0 17px
+}
+
+#tasks .addtask {
+    -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4);
+    -moz-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4);
+    -ms-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4);
+    -o-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4);
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.3);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.1)));
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+    background: linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    position: relative;
+    margin: 12px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.4);
+    padding: 8px 12px;
+}
+
+#tasks .addtask input {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    padding-right: 60px;
+}
+
+#tasks .addtask input::-webkit-input-placeholder {
+    color: #dbdbdb;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45)
+}
+
+#tasks .addtask input:-moz-placeholder {
+    color: #dbdbdb;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45)
+}
+
+#tasks .addtask input:-ms-input-placeholder {
+    color: #dbdbdb;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.45)
+}
+
+#tasks .addtask .icon {
+    position: absolute;
+    top: 6px;
+}
+
+#tasks .addtask .icon.transparent {
+    opacity: 0
+}
+
+#tasks .addtask .icon.input-star {
+    right: 12px
+}
+
+#tasks .addtask .icon.input-date {
+    right: 38px;
+    top: 7px;
+}
+
+#tasks .grouped-tasks {
+    position: relative;
+}
+
+#tasks h2 {
+    color: white;
+    font-size: 12px;
+    margin-top: 20px !important;
+    margin-bottom: 10px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+    word-wrap: break-word;
+}
+
+.drag-clone {
+    list-style: none;
+}
+
+#lists li.active.list .list-sharing:hover {
+    opacity: 1
+}
+
+#lists a.addlist:hover .title {
+    color: #625f5f
+}
+
+#lists a.addlist:hover .icon {
+    opacity: 1
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    #lists {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/d5a4d1ff716249d59b34369b70e777163d50a595/images/textures/sidebar@2x.png");
+        background-size: 128px 36px;
+    }
+
+    #lists li.active a {
+        background-size: 128px 72px;
+        background-image: url("http://wunderlist2.s3.amazonaws.com/6e5c49ba97868880c4f1f99f5231d0590b9acc6a/images/textures/list-active@2x.jpg")
+    }
+}
+
+#detail {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    padding: 18px 18px 18px 0;
+    right: -360px;
+    top: 0;
+    bottom: 0;
+    width: 360px;
+    z-index: 1;
+}
+
+#detail.complete .body .subtasks li.addtask:hover {
+    color: #aaa;
+}
+
+#detail.complete .body .subtasks li.addtask:hover .icon {
+    opacity: .5
+}
+
+#detail.complete .body .section.detail-date.date:hover a.detail-delete, #detail.complete .body .section.detail-reminder.date:hover a.detail-delete {
+    display: none
+}
+
+#detail .body .section.detail-date.date:hover .icon.detail-delete, #detail .body .section.detail-reminder.date:hover .icon.detail-delete {
+    display: inline-block
+}
+
+#detail .body .subtasks li:after {
+    left: 36px
+}
+
+#detail .body .subtasks li.addtask:hover {
+    color: #737272;
+}
+
+#detail .body .subtasks li.addtask:hover .icon {
+    opacity: .8
+}
+
+#detail .body .subtasks li:hover .icon.detail-delete {
+    display: block
+}
+
+#detail .bottom .icon:hover {
+    opacity: 1
+}
+
+#toolbar {
+    -webkit-backface-visibility: hidden;
+    background: #f0f0f0;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#dfdfdf));
+    background: -moz-linear-gradient(top, #f0f0f0, #dfdfdf);
+    background: -ms-linear-gradient(top, #f0f0f0, #dfdfdf);
+    background: linear-gradient(top, #f0f0f0, #dfdfdf);
+    height: 37px;
+    border-bottom: 1px solid #afafaf;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    z-index: 100;
+    background: url("http://wunderlist2.s3.amazonaws.com/bcbfe600c9b7e6279f523d0ceee8cb09b485f7ed/images/wunderlist.png");
+    background-position: 0 -340px;
+}
+
+#toolbar #user:hover {
+    cursor: pointer
+}
+
+#toolbar #search-toolbar #reset-search:hover .icon {
+    opacity: 1
+}
+
+#toolbar #search:hover {
+    opacity: 1
+}
+
+#toolbar #notifications-count .icon.bell {
+    display: block
+}
+
+#list-toolbar {
+    -webkit-backface-visibility: hidden;
+    background: rgba(41, 41, 41, 0.75);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(41, 41, 41, 0.75)), to(rgba(21, 21, 21, 0.8)));
+    background: -moz-linear-gradient(top, rgba(41, 41, 41, 0.75), rgba(21, 21, 21, 0.8));
+    background: -ms-linear-gradient(top, rgba(41, 41, 41, 0.75), rgba(21, 21, 21, 0.8));
+    background: linear-gradient(top, rgba(41, 41, 41, 0.75), rgba(21, 21, 21, 0.8));
+    height: 37px;
+    border-bottom: 1px solid black;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    z-index: 100;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 2000;
+}
+
+#list-toolbar .list-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #f7f6f6;
+    text-align: center;
+    position: absolute;
+    left: 60px;
+    right: 60px;
+    font-size: 23px;
+    text-shadow: 0 1px 0 black;
+    margin-top: 2px
+}
+
+#list-toolbar .toggle-sharepopover {
+    float: right;
+    margin-right: 0
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    #toolbar {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/3139ac430370efaf6897492770de2742e2144875/images/wunderlist@2x.png");
+        background-size: 280px 760px
+    }
+}
+
+body.login .welcome-screen {
+    width: 1018px;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 0 auto;
+    margin-top: 180px;
+    height: 513px
+}
+
+body.login .feature:hover {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+}
+
+body.login .feature:hover .popover {
+    opacity: 1
+}
+
+body.login .feature:hover + div.circle {
+    opacity: 0;
+    -webkit-transition: ease-in-out 100ms linear;
+    -moz-transition: ease-in-out 100ms linear;
+    -ms-transition: ease-in-out 100ms linear;
+    -o-transition: ease-in-out 100ms linear;
+    transition: ease-in-out 100ms linear
+}
+
+body.login .feature:hover.notes {
+    -webkit-transform: translateX(-30px) translateY(-40px);
+    -moz-transform: translateX(-30px) translateY(-40px);
+    -ms-transform: translateX(-30px) translateY(-40px);
+    -o-transform: translateX(-30px) translateY(-40px);
+    transform: translateX(-30px) translateY(-40px)
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    body.login #main, body.login .popover-welcome {
+        background-size: 80px 32px
+    }
+
+    body.login .circle {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/2f702d3243fe575b4f3993b366729f6888f4f9ef/images/welcome-screen@2x.png");
+        background-size: 1225px 811px !important
+    }
+
+    body.login .feature.user, body.login .feature.notifications, body.login .feature.sharing, body.login .feature.subtasks, body.login .feature.notes {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/2f702d3243fe575b4f3993b366729f6888f4f9ef/images/welcome-screen@2x.png")
+    }
+}
+
+@-moz-keyframes pulse {
+    0% {
+        -webkit-transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(1.1)
+    }
+    50% {
+        -webkit-transform: scale(1)
+    }
+    75% {
+        -webkit-transform: scale(1.1)
+    }
+    100% {
+        -webkit-transform: scale(1)
+    }
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(1.1)
+    }
+    50% {
+        -webkit-transform: scale(1)
+    }
+    75% {
+        -webkit-transform: scale(1.1)
+    }
+    100% {
+        -webkit-transform: scale(1)
+    }
+}
+
+@-o-keyframes pulse {
+    0% {
+        -webkit-transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(1.1)
+    }
+    50% {
+        -webkit-transform: scale(1)
+    }
+    75% {
+        -webkit-transform: scale(1.1)
+    }
+    100% {
+        -webkit-transform: scale(1)
+    }
+}
+
+@-ms-keyframes pulse {
+    0% {
+        -webkit-transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(1.1)
+    }
+    50% {
+        -webkit-transform: scale(1)
+    }
+    75% {
+        -webkit-transform: scale(1.1)
+    }
+    100% {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes pulse {
+    0% {
+        -webkit-transform: scale(1)
+    }
+    25% {
+        -webkit-transform: scale(1.1)
+    }
+    50% {
+        -webkit-transform: scale(1)
+    }
+    75% {
+        -webkit-transform: scale(1.1)
+    }
+    100% {
+        -webkit-transform: scale(1)
+    }
+}
+
+/* Generated by CSS Usage.
+				   File: inline stylesheet.
+				   Look for the UNUSED items and see if you can remove them. */
+#error-handle {
+    -webkit-transition: top 150ms ease-out;
+    -moz-transition: top 150ms ease-out;
+    -ms-transition: top 150ms ease-out;
+    -o-transition: top 150ms ease-out;
+    transition: top 150ms ease-out;
+    background: none;
+    border: 1px solid #8b2322;
+    min-height: 38px;
+    position: relative !important;
+    margin: 0 auto;
+    width: 220px;
+    left: 0 !important;
+}
+
+/* Generated by CSS Usage.
+				   File: inline stylesheet.
+				   Look for the UNUSED items and see if you can remove them. */
+@font-face {
+    font-family: 'Wundercon';
+    src: url(http://wunderlist2.s3.amazonaws.com/4d506e241fe4b51caea6c123548e19f66af2bb62/fonts/wundercon.otf), url(http://wunderlist2.s3.amazonaws.com/e41b09afcd5a2dc50af389b8965b51d3fd9c8c5f/fonts/wundercon.eot), url('http://wunderlist2.s3.amazonaws.com/e41b09afcd5a2dc50af389b8965b51d3fd9c8c5f/fonts/wundercon.eot?#iefix') format('embedded-opentype');
+}
+					

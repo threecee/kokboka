@@ -49,7 +49,7 @@ $(document).ready(function() {
    		     Gjøres et ajax-call til '/under100/setFavorite' som lagrer oppskriften som favoritt på server. 
    		
    		*/
-   		
+
 		$("#recipeToolbar a.favBtn").click(function(){
 			
 			var favoriserButton = $(this);
@@ -58,19 +58,12 @@ $(document).ready(function() {
 				  {
 				      $.ajax({
 			              type: "GET",
-			              url: "/recipes/setFavorite",
-			              data: "recipeId=" + $(favoriserButton).attr('id'),
+			              url: "/recipes/addFavorite",
+			              data: "id=" + $(favoriserButton).attr('id'),
 			              dataType: 'xml',
 			              success: function(xml) {      				
-			                 if($(xml).find("status").text() == 'ok')
-			                 {
 			              		$(favoriserButton).removeClass('favBtn favoriserBtn').addClass('favBtn favoriserBtn_favorisert');
 			                 	changeHoverText(favoriserButton, 'added')
-			                 }	 
-			                
-			                 else if($(xml).find("status").text() == 'ikke pålogget')
-			                 	alert("Du må logge inn for å legge en oppskrift i favoritter");
-	
 			              }
 			            });
 				  }
@@ -78,24 +71,19 @@ $(document).ready(function() {
 				  {
 				  	$.ajax({
 			              type: "GET",
-			              url: "/recipes/unFavorite",
-			               data: "recipeId=" + $(favoriserButton).attr('id'),
+			              url: "/recipes/removeFavorite",
+			               data: "id=" + $(favoriserButton).attr('id'),
 			              dataType: 'xml',
 			              success: function(xml) {      				
-			                 if($(xml).find("status").text() == 'ok')
-			                 {
-			                	$(favoriserButton).removeClass('favBtn favoriserBtn_favorisert').addClass('favBtn favoriserBtn'); 
+			                	$(favoriserButton).removeClass('favBtn favoriserBtn_favorisert').addClass('favBtn favoriserBtn');
 			                 	changeHoverText(favoriserButton, 'removed');
-			                 }
-			                 else if($(xml).find("status").text() == 'ikke pålogget')
-			                 	alert("Du må logge inn for å fjerne en oppskrift fra favoritter");
 			              }
 			            });	
 	
 				  }
 			  
 		});
-		
+
 		/*
 		* Hover på favoriserknapper
 		*

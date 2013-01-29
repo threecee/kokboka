@@ -2,17 +2,18 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /oppskrifter/{<[0-9]+>id}             Application.show
-GET     /oppskrifter/{tag}                    Application.listTagged
+GET     /oppskrifter/{<[0-9]+>id}             Recipes.show
+GET     /oppskrifter/{tag}                    Recipes.listTagged
+GET     /oppskrifter                            Recipes.index
 
 # Home page
 GET     /                                       Application.index
 
 # New route to ingredients method
-GET     /ingredients                                  Application.ingredients
+GET     /ingredients                                  Recipes.ingredients
 
 # New route to recipes method
-GET     /recipes.json                                  Application.recipes_json
+GET     /recipes.json                                  Recipes.recipes_json
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

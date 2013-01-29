@@ -1,36 +1,1905 @@
-#{extends 'main.html' /}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Handlelappen</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="google" value="notranslate">
+    <!-- Pinned Site -->
+    <!-- Main Data -->
+    <meta name="application-name" content="Handlelappen">
+    <meta name="msapplication-tooltip" content="Handlelappen">
+    <meta name="msapplication-TileColor" content="#6176ff">
+    <meta name="msapplication-TileImage" content="f417268b-81a2-43e0-a800-60bf210ad5a1.png">
+    <meta name="msapplication-starturl" content="./">
+    <!-- Pinned Site Tasks -->
+    <link rel="apple-touch-icon-precomposed"
+          href="http://wunderlist2.s3.amazonaws.com/7ab04e5a1a69c2f258e3fffeebfd806baf4dca1e/images/icon.png">
 
-	<div id="handlelapp">
-		<h2>Handlelapp for uke ${utils.DateUtil.weekOfYear(menu.usedFromDate)}</h2>
-		<br class="clear">
-		<!-- START leftColumnSmall -->
-		<div class="leftColumnSmall">
-			<h3>Ingredienser</h3>
-			<div id="ingrediens">
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-1.7.min.js'}"></script>
+</head>
+<style type="text/css" media="all">
 
-            #{list items:shoppingList, as:'ingredient'}
-				<div class="product_item" id="1">
-                    <input type="checkbox" ${ingredient.checked?'checked':''} value="${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit} ${ingredient.description}" name="produkt" autocomplete="off"/>
-                        <div class="info">
-                            <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span> ${ingredient.description}<br/>
-                        </div>
-				</div>
-            #{/list}
-			</div>
+    @font-face {
 
-		<h3>Notater</h3> 
-		<div id="rememberThis">
-			<textarea id="husk" placeholder="Skriv her.." onkeyup="javascript:$(this).addClass('modified');"></textarea>
-		  	<div id="remeberThisContainer">
-				<div id="saveMsg" class="smallBtn smallBtnInaktiv">Lagre</div>
-				<div id="clearMsg" class="smallBtn">Tøm</div>
-			</div>
-		</div>
+        font-family: 'Wundercon';
+        src: url(http://wunderlist2.s3.amazonaws.com/4d506e241fe4b51caea6c123548e19f66af2bb62/fonts/wundercon.otf), url(http://wunderlist2.s3.amazonaws.com/e41b09afcd5a2dc50af389b8965b51d3fd9c8c5f/fonts/wundercon.eot), url('http://wunderlist2.s3.amazonaws.com/e41b09afcd5a2dc50af389b8965b51d3fd9c8c5f/fonts/wundercon.eot?#iefix') format('embedded-opentype');
+    }
+</style>
+<!--[if lt IE 9]>
+<script type="text/javascript">this.kaputBrowser = true;</script>
+<![endif]-->
 
-            <a href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
-                <div  class="customButton">Velg oppskrifter på nytt</div>
-            </a>
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/tasks.css'}" data-requiremodule="tasks" data-requirecontext="styles" />
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/taskitem.css'}" data-requiremodule="taskitem" data-requirecontext="styles" />
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/applicationLayout.css'}" data-requiremodule="application/layout" data-requirecontext="styles" />
 
-	</div>
+<style type="text/css" data-requiremodule="sprite" data-requirecontext="styles">.icon {
+    background-image: url("http://wunderlist2.s3.amazonaws.com/bcbfe600c9b7e6279f523d0ceee8cb09b485f7ed/images/wunderlist.png");
+    cursor: pointer;
+    vertical-align: middle;
+    display: inline-block;
+}
 
+.icon.logo {
+    background-position: -80px -120px;
+    width: 100px;
+    height: 20px
+}
+
+.icon.bell {
+    background-position: -200px -20px;
+    width: 28px;
+    height: 20px;
+}
+
+.icon.bell:hover {
+    background-position: -200px -40px;
+    width: 28px;
+    height: 20px
+}
+
+.icon.bell-left {
+    background-position: -240px -20px;
+    width: 7px;
+    height: 20px
+}
+
+.icon.bell-right {
+    background-position: -260px -20px;
+    width: 7px;
+    height: 20px
+}
+
+.icon.menu-down {
+    background-position: -20px -40px;
+    width: 10px;
+    height: 10px
+}
+
+.icon.menu-up {
+    background-position: -20px -60px;
+    width: 10px;
+    height: 10px
+}
+
+.icon.menu-settings {
+    background-position: 0 -40px;
+    width: 16px;
+    height: 16px
+}
+
+.icon.menu-notifications {
+    background-position: -60px -40px;
+    width: 16px;
+    height: 20px
+}
+
+.icon.menu-search {
+    background-position: -40px -40px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.list-inbox, .filter-setting .icon.list-inbox {
+    background-position: -80px -80px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.list-all, .filter-setting .icon.list-all {
+    background-position: 0 -100px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.list-today, .filter-setting .icon.list-today {
+    background-position: -80px -100px;
+    width: 20px;
+    height: 20px;
+    font-size: 7px;
+    padding-top: 7px;
+    font-weight: bold;
+    color: #aaa;
+    text-shadow: 0 1px 0 white;
+    text-align: center;
+    line-height: 9px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.icon.list-week, .filter-setting .icon.list-week {
+    background-position: -20px 0;
+    width: 20px;
+    height: 20px
+}
+
+.icon.list-completed, .filter-setting .icon.list-completed {
+    background-position: -120px -100px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.list-starred, .filter-setting .icon.list-starred {
+    background-position: -40px -100px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.list-list, .filter-setting .icon.list-list {
+    background-position: 0 -80px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.list-sharing, .filter-setting .icon.list-sharing {
+    background-position: 0 -60px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.list-share-menu, .filter-setting .icon.list-share-menu {
+    background-position: -80px -200px;
+    width: 20px;
+    height: 20px
+}
+
+.popover-sharing .icon.list-completed {
+    background-position: -140px -100px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.input-star {
+    background-position: -100px -180px;
+    width: 18px;
+    height: 20px;
+    opacity: .5;
+}
+
+.icon.input-star:hover {
+    opacity: 1
+}
+
+.icon.input-star.starred {
+    background-position: -120px -180px;
+    width: 18px;
+    height: 18px;
+    opacity: 1
+}
+
+.icon.input-date {
+    background-position: -160px -100px;
+    width: 20px;
+    height: 20px;
+    opacity: .4;
+}
+
+.icon.input-date:hover {
+    opacity: .8
+}
+
+.icon.input-date.dated {
+    background-position: -100px -100px;
+    width: 20px;
+    height: 12px;
+    font-size: 7px;
+    padding-top: 7px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 1px 0 black;
+    text-align: center;
+    opacity: 1
+}
+
+.icon.task-checkbox, .icon.detail-checkbox {
+    background-position: -40px -20px;
+    width: 18px;
+    height: 18px;
+}
+
+.icon.task-checkbox:active, .icon.detail-checkbox:active {
+    background-position: -60px -20px;
+    width: 18px;
+    height: 18px
+}
+
+.icon.task-checked, .icon.detail-checked {
+    background-position: -80px -20px;
+    width: 18px;
+    height: 18px
+}
+
+.icon.task-star {
+    background-position: -140px -180px;
+    width: 20px;
+    height: 34px;
+}
+
+.icon.task-star:hover {
+    background-position: -100px 0;
+    width: 20px;
+    height: 34px
+}
+
+.icon.task-starred, .icon.task-starred:hover {
+    background-position: -120px 0;
+    width: 24px;
+    height: 34px
+}
+
+.icon.task-separator {
+    background-position: 0 0;
+    width: 2px;
+    height: 20px
+}
+
+.icon.task-recurring {
+    background-position: -20px -20px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.task-attachment {
+    background-position: -20px -120px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.detail-star {
+    background-position: -160px -60px;
+    width: 30px;
+    height: 40px
+}
+
+.icon.detail-starred {
+    background-position: -160px 0;
+    width: 30px;
+    height: 54px
+}
+
+.icon.subtask-checkbox {
+    background-position: -40px 0;
+    width: 20px;
+    height: 20px;
+}
+
+.icon.subtask-checkbox:active {
+    background-position: -60px 0;
+    width: 20px;
+    height: 20px
+}
+
+.icon.subtask-checked {
+    background-position: -80px 0;
+    width: 20px;
+    height: 20px
+}
+
+.icon.detail-add {
+    background-position: -100px -60px;
+    width: 16px;
+    height: 16px;
+    opacity: .5;
+    cursor: default
+}
+
+.icon.detail-delete {
+    background-position: -40px -60px;
+    width: 20px;
+    height: 20px;
+    opacity: .4;
+}
+
+.icon.detail-delete:hover {
+    opacity: .8
+}
+
+.icon.detail-save {
+    background-position: -180px -120px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.detail-date {
+    background-position: -100px -40px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.detail-reminder {
+    background-position: -120px -40px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.detail-trash {
+    background-position: -80px -60px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.detail-close {
+    background-position: -60px -60px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.logout {
+    background-position: -180px -120px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.delete-list {
+    background-position: -200px -100px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.settings {
+    background-position: -60px -120px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.note-fullscreen {
+    background-position: -140px -60px;
+    width: 20px;
+    height: 20px;
+    opacity: .6;
+}
+
+.icon.note-fullscreen:hover {
+    opacity: 1
+}
+
+.icon.attention {
+    background-position: 0 -180px;
+    width: 80px;
+    height: 60px
+}
+
+.icon.reminder {
+    background-position: -200px -140px;
+    width: 40px;
+    height: 40px
+}
+
+.icon.popover-share {
+    background-position: -80px -200px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.popover-accepted {
+    background-position: 0 -120px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.popover-notshared {
+    background-position: 0 -240px;
+    width: 120px;
+    height: 100px
+}
+
+.icon.no-share-empty-coach {
+    background-position: -120px -240px;
+    width: 120px;
+    height: 100px
+}
+
+.icon.settings-general {
+    background-position: 0 -140px;
+    width: 40px;
+    height: 40px
+}
+
+.icon.settings-account {
+    background-position: -40px -140px;
+    width: 40px;
+    height: 40px
+}
+
+.icon.settings-shortcuts {
+    background-position: -80px -140px;
+    width: 40px;
+    height: 40px
+}
+
+.icon.settings-sidebar {
+    background-position: -120px -140px;
+    width: 40px;
+    height: 40px
+}
+
+.icon.settings-notifications {
+    background-position: -160px -140px;
+    width: 40px;
+    height: 40px
+}
+
+.icon.settings-facebook {
+    background-position: -200px 0;
+    width: 80px;
+    height: 20px
+}
+
+.icon.settings-about {
+    background-position: -240px -140px;
+    width: 40px;
+    height: 40px
+}
+
+.icon.wunderlist-icon {
+    background-position: -460px -664px;
+    width: 190px;
+    height: 170px
+}
+
+.icon.facebook-btn {
+    background-position: -160px -200px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.twitter-btn {
+    background-position: -180px -200px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.sixw-btn {
+    background-position: -160px -180px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.support-btn {
+    background-position: -180px -180px;
+    width: 20px;
+    height: 20px
+}
+
+.icon.fourohfour {
+    background-position: -80px -520px;
+    width: 80px;
+    height: 80px
+}
+
+.icon.fourohfour-search {
+    background-position: 0 -520px;
+    width: 80px;
+    height: 80px
+}
+
+.icon.fourohfour-today {
+    background-position: -80px -600px;
+    width: 80px;
+    height: 80px
+}
+
+.icon.fourohfour-starred {
+    background-position: 0 -600px;
+    width: 80px;
+    height: 80px
+}
+
+.icon.fourohfour-week {
+    background-position: -160px -520px;
+    width: 80px;
+    height: 80px
+}
+
+.icon.fourohfour-all {
+    background-position: -160px -600px;
+    width: 80px;
+    height: 80px
+}
+
+.icon.fourohfour-completed {
+    background-position: 0 -678px;
+    width: 80px;
+    height: 80px
+}
+
+.icon.large {
+    background-position: -5px -381px;
+    width: 135.2px;
+    height: 135.2px
+}
+
+.icon.thumb {
+    background-position: -424px -384px;
+    width: 25px;
+    height: 25px
+}
+
+.icon.blank {
+    background-position: -455px -382px;
+    width: 26px;
+    height: 26px
+}
+
+.icon.share-thumb {
+    background-position: -424px -417px;
+    width: 27px;
+    height: 27px
+}
+
+.icon.share-blank {
+    background-position: -464px -416px;
+    width: 27px;
+    height: 27px
+}
+
+.task-item.selected .task-attachment {
+    background-position: -40px -120px;
+    width: 20px;
+    height: 20px
+}
+
+li.active .icon.list-inbox {
+    background-position: -100px -80px;
+    width: 20px;
+    height: 20px
+}
+
+li.active .icon.list-all {
+    background-position: -20px -100px;
+    width: 22px;
+    height: 20px
+}
+
+li.active .icon.list-today {
+    background-position: -100px -100px;
+    width: 20px;
+    height: 20px;
+    color: white;
+    text-shadow: 0 1px 0 #336692
+}
+
+li.active .icon.list-week {
+    background-position: 0 -40px;
+    width: 20px;
+    height: 20px
+}
+
+li.active .icon.list-completed {
+    background-position: -140px -100px;
+    width: 20px;
+    height: 20px
+}
+
+li.active .icon.list-starred {
+    background-position: -60px -100px;
+    width: 20px;
+    height: 20px
+}
+
+li.active .icon.delete-list {
+    background-position: -220px -100px;
+    width: 20px;
+    height: 20px
+}
+
+li.active .icon.list-list, .addlist.active .icon.list-list {
+    background-position: -20px -80px;
+    width: 20px;
+    height: 20px
+}
+
+.shared .icon.list-list {
+    background-position: -40px -80px;
+    width: 20px;
+    height: 20px
+}
+
+.active.shared .icon.list-list {
+    background-position: -60px -80px;
+    width: 20px;
+    height: 20px
+}
+
+.section.date .icon.detail-date {
+    background-position: -120px -60px;
+    width: 20px;
+    height: 20px;
+}
+
+.section.date .icon.detail-date.overdue {
+    background-position: -180px -100px;
+    width: 20px;
+    height: 20px
+}
+
+.section.date .icon.detail-reminder {
+    background-position: -120px -80px;
+    width: 20px;
+    height: 20px;
+}
+
+.section.date .icon.detail-reminder.overdue {
+    background-position: -140px -80px;
+    width: 20px;
+    height: 20px
+}
+
+.focus-notifications .icon.bell, .focus-notifications .icon.bell:hover {
+    background-position: -200px -60px;
+    width: 28px;
+    height: 20px
+}
+
+#notifications-count:active .icon.bell-left {
+    background-position: -240px -40px;
+    width: 7px;
+    height: 20px
+}
+
+#notifications-count:active .icon.bell-right {
+    background-position: -260px -40px;
+    width: 7px;
+    height: 20px
+}
+
+#notifications-count:active .bell-mid {
+    background-position: 0 -19px !important
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5) {
+    .icon {
+        background-image: url("http://wunderlist2.s3.amazonaws.com/3139ac430370efaf6897492770de2742e2144875/images/wunderlist@2x.png");
+        background-size: 280px 760px
+    }
+}</style>
+<style type="text/css" data-requiremodule="forms" data-requirecontext="styles">textarea {
+    outline: none;
+    color: #423e3e;
+    font-weight: 500
+}
+
+input[type=text], input[type=password], .input-fake {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 4px;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", Sans-Serif;
+    font-weight: 500;
+    font-size: 13px;
+    color: #423e3e;
+    outline: none;
+    border: 1px solid #bdbcbb;
+    background: white;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+input[type=text]:focus, input[type=password]:focus, .input-fake:focus, input[type=text].focus, input[type=password].focus, .input-fake.focus {
+    background-color: #f8f8f8;
+    -webkit-box-shadow: 0 0 4px rgba(43, 136, 217, 0.32), 0 1px 1px rgba(255, 255, 255, 0.43), inset 0 2px 4px rgba(43, 136, 217, 0.12), inset 0 0 4px rgba(43, 136, 217, 0.2);
+    -moz-box-shadow: 0 0 4px rgba(43, 136, 217, 0.32), 0 1px 1px rgba(255, 255, 255, 0.43), inset 0 2px 4px rgba(43, 136, 217, 0.12), inset 0 0 4px rgba(43, 136, 217, 0.2);
+    -ms-box-shadow: 0 0 4px rgba(43, 136, 217, 0.32), 0 1px 1px rgba(255, 255, 255, 0.43), inset 0 2px 4px rgba(43, 136, 217, 0.12), inset 0 0 4px rgba(43, 136, 217, 0.2);
+    -o-box-shadow: 0 0 4px rgba(43, 136, 217, 0.32), 0 1px 1px rgba(255, 255, 255, 0.43), inset 0 2px 4px rgba(43, 136, 217, 0.12), inset 0 0 4px rgba(43, 136, 217, 0.2);
+    box-shadow: 0 0 4px rgba(43, 136, 217, 0.32), 0 1px 1px rgba(255, 255, 255, 0.43), inset 0 2px 4px rgba(43, 136, 217, 0.12), inset 0 0 4px rgba(43, 136, 217, 0.2);
+    border: solid 1px rgba(43, 136, 217, 0.65)
+}
+
+input[type=text].transparent, input[type=password].transparent, .input-fake.transparent {
+    border: none !important;
+    background: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -ms-box-shadow: none !important;
+    -o-box-shadow: none !important;
+    box-shadow: none !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    -ms-border-radius: 0 !important;
+    -o-border-radius: 0 !important;
+    border-radius: 0 !important;
+    padding: 0
+}
+
+input[type=text].big, input[type=password].big, .input-fake.big {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+input[type=text].medium, input[type=password].medium, .input-fake.medium {
+    width: 76px
+}
+
+input[type=text].small, input[type=password].small, .input-fake.small {
+    width: 30px
+}
+
+input[type=text].smaller, input[type=password].smaller, .input-fake.smaller {
+    width: 20px
+}
+
+input[type=text][disabled], input[type=password][disabled], .input-fake[disabled] {
+    border-color: #ccc;
+    color: #bdbcbb
+}
+
+input[type=text]:-moz-placeholder, input[type=password]:-moz-placeholder, .input-fake:-moz-placeholder {
+    color: #bdbcbb
+}
+
+input[type=checkbox] {
+    margin-top: 4px
+}
+
+textarea {
+    resize: none
+}
+
+select {
+    width: 100%;
+}
+
+select.small {
+    width: 100px
+}
+
+select.smaller {
+    width: 70px
+}
+
+select.tiny {
+    width: 50px
+}
+
+#edit-reminder-time-container {
+    padding: 4px 2px 4px 8px
+} </style>
+<style type="text/css" data-requiremodule="responsive"
+       data-requirecontext="styles">
+
+@media all and (max-width:1024px) {
+
+{
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+}
+
+#tasks .tasks-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+
+.popover-notifications .list-people {
+    -webkit-overflow-scrolling: touch
+}
+
+body.focus-browser #lists li.active a {
+    background: rgba(41, 111, 176, 0.7);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(41, 111, 176, 0.7)), to(rgba(72, 139, 192, 0.7)));
+    background: -moz-linear-gradient(top, rgba(41, 111, 176, 0.7), rgba(72, 139, 192, 0.7));
+    background: -ms-linear-gradient(top, rgba(41, 111, 176, 0.7), rgba(72, 139, 192, 0.7));
+    background: linear-gradient(top, rgba(41, 111, 176, 0.7), rgba(72, 139, 192, 0.7))
+}
+
+.main-interface #toolbar {
+    height: 48px !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100% !important;
+    background-image: none !important;
+    background-position: none !important;
+}
+
+.main-interface #toolbar .thumb {
+    background-position: -424px -417px
+}
+
+.main-interface #toolbar #search {
+    right: 11px !important;
+    top: 4px !important
+}
+
+.main-interface #toolbar #search-toolbar .menu-search {
+    top: 16px !important;
+    left: 52px !important
+}
+
+.main-interface #toolbar #search-toolbar input {
+    padding-left: 28px !important;
+    left: 48px !important;
+    right: 36px !important;
+    top: 13px !important
+}
+
+.main-interface #toolbar #search-toolbar #reset-search {
+    right: 3px !important;
+    top: 6px !important;
+    padding: 9px !important
+}
+
+.main-interface #toolbar .logo-wrapper {
+    width: 130px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.main-interface #toolbar .logo-wrapper #logo {
+    left: 0 !important;
+    top: 5px !important
+}
+
+.main-interface #toolbar .logo-wrapper #notifications-count {
+    top: 15px !important;
+    left: 100px
+}
+
+.main-interface #toolbar #user {
+    margin: 9px !important;
+}
+
+.main-interface #toolbar #user .default-avatar {
+    width: 32px !important;
+    height: 32px !important
+}
+
+.main-interface #toolbar #user img, .main-interface #toolbar #user span {
+    height: 32px !important;
+    width: 32px !important
+}
+
+.main-interface #tasks {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+    width: 100% !important;
+    z-index: 200;
+    -webkit-box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+    -ms-box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+    -o-box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.main-interface #tasks > div {
+    padding: 0 12px !important
+}
+
+.main-interface #tasks .tasks-scroll {
+    top: 0 !important;
+    padding-top: 52px !important;
+    padding-bottom: 12px !important;
+    z-index: -1;
+}
+
+.main-interface #tasks .tasks-scroll li {
+    -webkit-touch-callout: none
+}
+
+.main-interface #tasks #list-toolbar {
+    height: 48px;
+    display: block !important;
+    margin: 0 !important;
+    padding: 8px 14px !important
+}
+
+.main-interface #tasks ul li {
+    padding: 14px
+}
+
+.main-interface #lists .lists-scroll {
+    top: 49px !important;
+    bottom: 44px !important;
+}
+
+.main-interface #lists .lists-scroll li.animate-up {
+    overflow: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important
+}
+
+.main-interface #lists .lists-scroll .active .list-sharing {
+    display: none !important
+}
+
+.main-interface #lists .lists-scroll .active .count {
+    display: block !important
+}
+
+.main-interface #lists .settings {
+    display: block !important
+}
+
+.main-interface #detail {
+    z-index: 300 !important;
+    padding: 0 !important;
+}
+
+.main-interface #detail .inner {
+    background-image: none !important;
+}
+
+.main-interface #detail .inner .title {
+    background-image: none !important
+}
+
+    }
+
+@media all and (max-width:640px) {
+    body:after {
+        content: 'micro' !important
+    }
+
+    #user-popover .popover.backgrounds {
+        right: -70px;
+        top: 70px
+    }
+
+    .popover .popover-sharing {
+        width: 254px !important;
+        height: 345px !important;
+    }
+
+    .popover .popover-sharing .facebook-button {
+        -webkit-border-radius: 0 5px 6px 0;
+        -moz-border-radius: 0 5px 6px 0;
+        -ms-border-radius: 0 5px 6px 0;
+        -o-border-radius: 0 5px 6px 0;
+        border-radius: 0 5px 6px 0;
+        width: 226px !important
+    }
+
+    .popover .popover-notifications {
+        width: 250px;
+    }
+
+    .popover .popover-notifications .list-people {
+        max-height: 200px !important
+    }
+
+    #login {
+        position: fixed;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #login .pageflip {
+        margin: 20px auto !important
+    }
+
+    #login .support-center {
+        display: none !important
+    }
+
+    #login .divider {
+        display: none !important
+    }
+
+    #login .download-wrapper {
+        display: none !important
+    }
+
+    .main-interface #modals .dialog-wrapper {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 1000;
+    }
+
+    .main-interface #modals .dialog-wrapper.reminders {
+        height: auto !important;
+        width: 64% !important;
+        margin-left: -32% !important
+    }
+
+    .main-interface #modals .dialog-wrapper .dialog {
+        width: 90%;
+        left: 0;
+        margin-left: 5%}
+
+    .main-interface #modals .dialog-wrapper #confirmation .col-20 {
+        width: 25%}
+
+    .main-interface #modals .dialog-wrapper #confirmation .col-80 {
+        width: 75%}
+
+    .main-interface #modals .dialog-wrapper #confirmation .icon {
+        margin-left: -16px
+    }
+
+    .main-interface #modals .dialog-wrapper #fullscreen-note {
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin-left: 0 !important;
+        width: auto;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        -ms-border-radius: 0;
+        -o-border-radius: 0;
+        border-radius: 0
+    }
+
+    .main-interface #modals .dialog-wrapper #settings {
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin-left: 0 !important;
+        width: auto;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        -ms-border-radius: 0;
+        -o-border-radius: 0;
+        border-radius: 0;
+    }
+
+    .main-interface #modals .dialog-wrapper #settings a[rel=shortcuts] {
+        display: none
+    }
+
+    .main-interface #modals .dialog-wrapper #settings .content-inner {
+        padding: 10px !important
+    }
+
+    .main-interface #modals .dialog-wrapper #settings ul.social-links {
+        text-align: center;
+        width: 320px;
+        margin: 16px auto 16px auto;
+        height: 40px;
+    }
+
+    .main-interface #modals .dialog-wrapper #settings ul.social-links li {
+        margin: 0 3px 6px 3px
+    }
+
+    .main-interface #modals .dialog-wrapper #settings .tabs li text {
+        display: none
+    }
+
+    .main-interface #modals .dialog-wrapper #settings .tabs li span {
+        display: inline-block
+    }
+
+    .main-interface #modals .dialog-wrapper #settings .tabs ~ .content-inner {
+        top: 94px
+    }
+
+    .main-interface #modals .dialog-wrapper #settings .col-35 {
+        display: block;
+        width: 128px;
+        margin: 0 auto;
+        margin-bottom: 20px
+    }
+
+    .main-interface #modals .dialog-wrapper #settings .col-65 {
+        display: block;
+        width: 100%}
+
+    .main-interface #modals .dialog-wrapper.hidden {
+        z-index: 1
+    }
+
+    .main-interface #stacks > .stack {
+        -webkit-backface-visibility: hidden;
+        bottom: 0 !important;
+        left: 0 !important
+    }
+
+    .main-interface #lists {
+        right: 68px !important;
+        width: auto !important;
+        z-index: 100;
+        -webkit-transform: translateX(-30%) !important;
+        -moz-transform: translateX(-30%) !important;
+        -ms-transform: translateX(-30%) !important;
+        -o-transform: translateX(-30%) !important;
+        transform: translateX(-30%) !important;
+    }
+
+    .main-interface #lists.slided {
+        -webkit-transform: translateX(0) !important;
+        -moz-transform: translateX(0) !important;
+        -ms-transform: translateX(0) !important;
+        -o-transform: translateX(0) !important;
+        transform: translateX(0) !important
+    }
+
+    .main-interface #tasks.slided {
+        margin-left: -68px !important;
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        -o-transform: translateX(100%);
+        transform: translateX(100%)
+    }
+
+    .main-interface #tasks .tasks-404 {
+        margin: 0 10% !important;
+        margin-top: -60px !important
+    }
+
+    .main-interface.detail-visible #detail {
+        z-index: 300;
+        -webkit-transform: translateX(0%) !important;
+        -moz-transform: translateX(0%) !important;
+        -ms-transform: translateX(0%) !important;
+        -o-transform: translateX(0%) !important;
+        transform: translateX(0%) !important
+    }
+
+    .main-interface #detail {
+        z-index: -999;
+        right: 0 !important;
+        width: 100% !important;
+        -webkit-transform: translateX(100%) !important;
+        -moz-transform: translateX(100%) !important;
+        -ms-transform: translateX(100%) !important;
+        -o-transform: translateX(100%) !important;
+        transform: translateX(100%) !important;
+    }
+
+    .main-interface #detail .note {
+        border-top: 1px solid #cfcfcf !important;
+        margin-top: 20px !important;
+    }
+
+    .main-interface #detail .note::before {
+        content: none !important
+    }
+
+    .main-interface #detail .note .open-fullscreen-note {
+        margin-top: -6px !important
+    }
+
+    .main-interface #detail .inner {
+        margin-left: 56px
+    }
+}
+
+@media all and (max-width:320px) {
+    #detail .section.detail-date.editing {
+        height: 55px !important;
+    }
+
+    #detail .section.detail-date.editing #edit-repeat {
+        width: 77px
+    }
+
+    #detail .section.detail-date.editing #edit-repeat-interval {
+        position: absolute;
+        left: 132px;
+        top: 42px
+    }
+
+    #detail .section.detail-reminder.editing {
+        height: 55px !important;
+    }
+
+    #detail .section.detail-reminder.editing #edit-reminder-time-ampm {
+        position: absolute;
+        top: 45px;
+        left: 148px
+    }
+}
+
+@media all and (min-width:641px) and (max-width:768px) {
+    body:after {
+        content: 'mini' !important
+    }
+
+    .main-interface #stacks #lists {
+        -webkit-transform: translateX(-30%);
+        -moz-transform: translateX(-30%);
+        -ms-transform: translateX(-30%);
+        -o-transform: translateX(-30%);
+        transform: translateX(-30%);
+        width: 300px !important;
+    }
+
+    .main-interface #stacks #lists.slided {
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0)
+    }
+
+    .main-interface #stacks #tasks {
+        right: 0 !important;
+        left: 0 !important;
+        width: auto !important;
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    .main-interface #stacks #tasks.slided {
+        -webkit-transform: translateX(300px);
+        -moz-transform: translateX(300px);
+        -ms-transform: translateX(300px);
+        -o-transform: translateX(300px);
+        transform: translateX(300px)
+    }
+
+    .main-interface #stacks #detail {
+        width: 360px;
+        padding-right: 0 !important;
+    }
+
+    .main-interface #stacks #detail .inner {
+        -webkit-border-radius: 5px 0 0 5px !important;
+        -moz-border-radius: 5px 0 0 5px !important;
+        -ms-border-radius: 5px 0 0 5px !important;
+        -o-border-radius: 5px 0 0 5px !important;
+        border-radius: 5px 0 0 5px !important
+    }
+}
+
+@media all and (min-width:769px) and (max-width:1024px) {
+    body:after {
+        content: 'medium' !important
+    }
+
+    .main-interface #stacks #lists {
+        width: 300px !important;
+        z-index: 1 !important
+    }
+
+    .main-interface #stacks #tasks {
+        right: 0 !important;
+        left: 0 !important;
+        width: auto !important;
+    }
+
+    .main-interface #stacks #tasks.slided {
+        left: 300px !important
+    }
+}
+
+@media all and (min-width:1025px) {
+    body::after {
+        content: 'large' !important
+    }
+}</style>
+<style type="text/css" data-requiremodule="touch" data-requirecontext="styles">.drag-clone {
+    list-style: none;
+}
+
+.drag-clone .badge {
+    background: #e74545;
+    background: -webkit-gradient(linear, left top, left bottom, from(#e74545), to(#c12020));
+    background: -moz-linear-gradient(top, #e74545, #c12020);
+    background: -ms-linear-gradient(top, #e74545, #c12020);
+    background: linear-gradient(top, #e74545, #c12020);
+    -webkit-box-shadow: inset 1px 0 3px rgba(255, 255, 255, 0.2);
+    -moz-box-shadow: inset 1px 0 3px rgba(255, 255, 255, 0.2);
+    -ms-box-shadow: inset 1px 0 3px rgba(255, 255, 255, 0.2);
+    -o-box-shadow: inset 1px 0 3px rgba(255, 255, 255, 0.2);
+    box-shadow: inset 1px 0 3px rgba(255, 255, 255, 0.2);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7);
+    min-width: 16px;
+    min-height: 17px;
+    padding: 1px 1px 0 1px;
+    display: block;
+    margin-left: 290px;
+    margin-bottom: -11px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-radius: 15px;
+    position: relative;
+    z-index: 9999;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #8c0404
+}
+
+.drag-clone-reset {
+    width: 243px !important;
+    left: 0 !important;
+    height: 16px !important;
+    padding: 10px 14px 11px 14px;
+    display: block;
+    font-weight: bold;
+    background: url("http://wunderlist2.s3.amazonaws.com/8a0076673b54f3a3c0be278aeee7b63812a75dd8/images/textures/list-active.jpg");
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.3);
+    -ms-box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.3);
+    -o-box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.drag-clone-reset .icon.list-list {
+    background-position: -20px -82px;
+    width: 18px;
+    height: 14px
+}
+
+.drag-clone-reset .fake-title {
+    position: absolute;
+    top: 11px;
+    left: 40px;
+    right: 40px;
+}
+
+.drag-clone-reset .fake-title .fake-new-list {
+    width: 250px;
+}
+
+.drag-clone-reset .fake-title .fake-new-list div {
+    position: absolute !important
+}
+
+.no-animate {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important
+}
+
+.new-list-dropzone {
+    position: absolute;
+    height: auto;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-top: 50em;
+    z-index: 200 !important
+}
+
+.list-hover {
+    -webkit-box-shadow: inset 0 0 0 3px #3d86b8;
+    -moz-box-shadow: inset 0 0 0 3px #3d86b8;
+    -ms-box-shadow: inset 0 0 0 3px #3d86b8;
+    -o-box-shadow: inset 0 0 0 3px #3d86b8;
+    box-shadow: inset 0 0 0 3px #3d86b8
+}
+
+.not-allowed {
+    cursor: not-allowed
+}
+
+body.touch .main-interface .new-list-dropzone {
+    display: none
+}
+
+body.touch .main-interface .delete {
+    display: none
+}
+
+body.touch .main-interface .edit-lists {
+    display: block !important
+}
+
+body.touch .main-interface #tasks .addtask {
+    margin: 12px 0;
+    padding: 12px 12px;
+}
+
+body.touch .main-interface #tasks .addtask input {
+    font-size: 15px;
+    font-weight: bold;
+    padding-right: 80px
+}
+
+body.touch .main-interface #tasks .addtask a.input-star {
+    padding: 10px 12px;
+    position: absolute;
+    right: 2px;
+    top: 0;
+    z-index: 9999
+}
+
+body.touch .main-interface #tasks .addtask a.input-date {
+    padding: 10px 12px;
+    position: absolute;
+    right: 46px;
+    top: 0;
+    z-index: 9999;
+}
+
+body.touch .main-interface #tasks .addtask a.input-date.in-starred {
+    right: 0 !important
+}
+
+body.touch .main-interface #tasks .addtask .icon.input-star {
+    position: relative;
+    right: 0;
+    top: 0;
+}
+
+body.touch .main-interface #tasks .addtask .icon.input-star.starred {
+    top: -1px
+}
+
+body.touch .main-interface #tasks .addtask .icon.input-date {
+    position: relative;
+    right: 0;
+    top: 0;
+}
+
+body.touch .main-interface #tasks .addtask .icon.input-date.in-starred {
+    right: 0
+}
+
+body.touch .main-interface #tasks h2 {
+    font-size: 15px;
+    margin-top: 22px !important;
+    margin-bottom: 12px;
+}
+
+body.touch .main-interface #tasks h2.no-results {
+    font-size: 22px
+}
+
+body.touch .main-interface #tasks li.task-item {
+    height: 48px;
+}
+
+body.touch .main-interface #tasks li.task-item.dragging {
+    z-index: 9999 !important;
+    width: 300px;
+    overflow: visible
+}
+
+body.touch .main-interface #tasks li.task-item.first-task-position {
+    padding-top: 48px !important
+}
+
+body.touch .main-interface #tasks li.task-item.first-task-position-next {
+    padding-bottom: 48px !important
+}
+
+body.touch .main-interface #tasks li.task-item.animate-up {
+    height: 0;
+    opacity: .6;
+    overflow: hidden !important
+}
+
+body.touch .main-interface #tasks li.task-item.animate-down {
+    height: 48px !important;
+    opacity: 1 !important
+}
+
+body.touch .main-interface #tasks li.task-item.lists-in-filter-hover {
+    opacity: .6
+}
+
+body.touch .main-interface #tasks li.task-item.animate-empty-task {
+    margin-top: 40px
+}
+
+body.touch .main-interface #tasks li.task-item.animate-empty-task-close {
+    margin-top: 0
+}
+
+body.touch .main-interface #tasks li.task-item.fall-out {
+    z-index: 5 !important;
+    margin-top: 55px;
+    opacity: 0 !important
+}
+
+body.touch .main-interface #tasks li.task-item.return-up {
+    margin-top: -55px;
+    opacity: 0 !important
+}
+
+body.touch .main-interface #tasks li.task-item .task-body {
+    background: #eaeaea;
+    height: 44px;
+}
+
+body.touch .main-interface #tasks li.task-item .task-body .icon.task-separator {
+    position: absolute;
+    left: 44px;
+    top: 7px;
+    height: 100%;
+    cursor: default
+}
+
+body.touch .main-interface #tasks li.task-item .task-body .icon.task-checkbox {
+    position: relative;
+    left: 0;
+    top: 0
+}
+
+body.touch .main-interface #tasks li.task-item .task-body a.task-checkbox {
+    margin: 0;
+    position: absolute;
+    padding: 12px 12px 12px 14px
+}
+
+body.touch .main-interface #tasks li.task-item .task-body .icon.task-star {
+    float: none;
+    margin: 0;
+}
+
+body.touch .main-interface #tasks li.task-item .task-body .icon.task-star.task-starred {
+    margin: -5px -3px 0 0
+}
+
+body.touch .main-interface #tasks li.task-item .task-body a.task-star {
+    padding: 4px 13px 3px 12px;
+    float: right
+}
+
+body.touch .main-interface #tasks li.task-item .task-body .title-wrapper {
+    font-size: 15px;
+    margin: 0 0 0 58px;
+    padding: 13px 0 0 0;
+    line-height: 18px;
+}
+
+body.touch .main-interface #tasks li.task-item .task-body .title-wrapper .task-attachment {
+    height: 18px;
+    margin-top: -3px
+}
+
+body.touch .main-interface #tasks li.task-item .task-body .title-wrapper.attachment {
+    padding-right: 20px;
+}
+
+body.touch .main-interface #tasks li.task-item .task-body .title-wrapper.attachment .task-attachment.overflow {
+    margin-top: -2px;
+    right: 0
+}
+
+body.touch .main-interface #tasks li.task-item .task-body .duedate {
+    float: right;
+    font-size: 13px;
+    line-height: 16px;
+    margin: 13px 3px 0 7px
+}
+
+body.touch .main-interface #tasks li.task-item .task-body .task-recurrence.task-recurring {
+    margin-top: 13px
+}
+
+body.touch .main-interface #tasks li.task-item.active .task-body, body.touch .main-interface #tasks li.task-item.selected .task-body {
+    background: #c0d6e7;
+    background-position: 0 -34px
+}
+
+body.touch .main-interface #lists {
+    background-image: none !important;
+}
+
+body.touch .main-interface #lists .lists-scroll {
+    bottom: 44px !important;
+}
+
+body.touch .main-interface #lists .lists-scroll li {
+    height: 44px;
+}
+
+body.touch .main-interface #lists .lists-scroll li.active a {
+    background-image: none;
+    background: rgba(41, 111, 176, 0.9);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(41, 111, 176, 0.9)), to(rgba(72, 139, 192, 0.9)));
+    background: -moz-linear-gradient(top, rgba(41, 111, 176, 0.9), rgba(72, 139, 192, 0.9));
+    background: -ms-linear-gradient(top, rgba(41, 111, 176, 0.9), rgba(72, 139, 192, 0.9));
+    background: linear-gradient(top, rgba(41, 111, 176, 0.9), rgba(72, 139, 192, 0.9))
+}
+
+body.touch .main-interface #lists .lists-scroll li .icon {
+    margin-top: 4px !important
+}
+
+body.touch .main-interface #lists .lists-scroll li a {
+    height: 44px !important
+}
+
+body.touch .main-interface #lists .lists-scroll li .title {
+    font-size: 18px !important;
+    font-weight: 500 !important
+}
+
+body.touch .main-interface #lists .lists-scroll li .count {
+    font-size: 14px !important;
+    margin-top: 4px
+}
+
+body.touch .main-interface #lists .lists-scroll .addlist .title, body.touch .main-interface #lists .lists-scroll input.edit {
+    font-size: 18px !important
+}
+
+body.touch .main-interface #lists .lists-scroll li a .title.touch-edit-mode, body.touch .main-interface #lists .lists-scroll .addlist .title.touch-edit-mode {
+    border-bottom: 1px solid #b0b0b0;
+    right: auto;
+    padding: 0 5px 0 5px;
+}
+
+body.touch .main-interface #lists .lists-scroll li a .title.touch-edit-mode:before, body.touch .main-interface #lists .lists-scroll .addlist .title.touch-edit-mode:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border: 1px solid #b0b0b0
+}
+
+body.touch .main-interface #lists .lists-scroll li a .title.touch-edit-mode:after, body.touch .main-interface #lists .lists-scroll .addlist .title.touch-edit-mode:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: 1px solid #b0b0b0
+}
+
+body.touch .main-interface #lists #sidebar-actions {
+    height: 44px;
+}
+
+body.touch .main-interface #lists #sidebar-actions .information {
+    margin-top: 14px
+}
+
+body.touch .main-interface #lists #sidebar-actions a.settings {
+    padding: 12px;
+    right: 0;
+    top: 1px
+}
+
+body.touch .main-interface #lists #sidebar-actions a.edit-lists {
+    margin-top: 9px
+}
+
+body.touch .main-interface #lists #sidebar-actions a.delete {
+    padding: 12px;
+    top: 1px
+}
+
+body.touch #detail a.detail-checkbox {
+    padding: 12px;
+    position: absolute;
+    left: 5px;
+    top: 5px
+}
+
+body.touch #detail a.detail-star {
+    padding: 0 7px;
+    position: absolute;
+    right: 8px;
+    top: -1px
+}
+
+body.touch #detail a.detail-delete {
+    position: absolute;
+    padding: 10px;
+    right: 12px;
+    top: 3px
+}
+
+body.touch #detail .icon.detail-delete {
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important
+}
+
+body.touch #detail .icon.detail-checkbox, body.touch #detail .icon.detail-checked {
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important
+}
+
+body.touch #detail .icon.detail-star, body.touch #detail .icon.detail-starred {
+    position: relative !important;
+    right: 0 !important;
+    top: 0 !important
+}
+
+body.touch #detail .icon.detail-save {
+    display: none !important
+}
+
+body.touch #detail .subtasks a.detail-delete {
+    position: absolute;
+    padding: 6px 5px;
+    right: 0;
+    top: 0
+}
+
+body.touch #detail .subtasks .icon.detail-delete {
+    display: block !important
+}
+
+body.touch #detail .bottom a.detail-trash {
+    padding: 10px;
+    position: absolute;
+    left: 0;
+    top: 0
+}
+
+body.touch #detail .bottom a.detail-close {
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    top: 0
+}
+
+body.touch #detail .bottom .icon.detail-trash {
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important
+}
+
+body.touch #detail .bottom .icon.detail-close {
+    position: relative !important;
+    right: 0 !important;
+    top: 0 !important
+} </style>
+<style type="text/css" media="screen"></style>
+
+<link rel="stylesheet" type="text/css" media="screen, handheld"
+      href="@{'/public/stylesheets/middagsplanleggeren.css'}">
+
+<script type="text/javascript">
+    $(document).ready( function() {
+        $("a.task-checkbox").click(function()
+        {
+            if(!$(this).hasClass("task-checked"))
+            {
+            checkIngredient($(this).parent().parent().attr("id"));
+            $(this).addClass("task-checked");
+            $(this).find("span.task-checkbox").addClass("task-checked");
+            $(this).parent().parent().addClass("done");
+            var taskItem = $(this).parent().parent().detach();
+            taskItem.prependTo(".completed-tasks");
+            }
+            else{
+            unCheckIngredient($(this).parent().parent().attr("id"));
+            $(this).removeClass("task-checked");
+            $(this).find("span.task-checkbox").removeClass("task-checked");
+            $(this).parent().parent().removeClass("done");
+            var taskItem = $(this).parent().parent().detach();
+            taskItem.prependTo(".tasks");
+
+            }
+        });
+
+
+
+
+
+    });
+
+
+    function checkIngredient(id){
+        $.ajax({
+      				   type: "POST",
+      				   url: "/shoppinglists/check",
+      				   data: "id=" + id ,
+      				   dataType: "xml"
+      			    });
+            }
+    function unCheckIngredient(id){
+         $.ajax({
+       				   type: "POST",
+       				   url: "/shoppinglists/uncheck",
+       				   data: "id=" + id ,
+       				   dataType: "xml"
+       			    });
+             }
+
+</script>
+
+</head>
+
+
+<body style="zoom: 1;background-color: rgba(120, 153, 78, 0.64)" class="animate">
+<div class="container">
+    #{topmenu /}
 </div>
+<div class="main-interface">
+    <div id="modals">
+        <div class="dialog-wrapper hidden" style=""></div>
+        <div class="dialog-wrapper hidden" style=""></div>
+        <ul class="reminders dialog-wrapper"></ul>
+    </div>
+    <div id="stacks">
+        <div id="tasks" class="stack" style="padding-left: 0px;">
+            <div class="tasks-scroll">
+                <h2 style="display: block">Handlelapp for uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}</h2>
+                <!--
+                <div class="addtask" style=""><a class="input-star"><span
+                        class="icon input-star transparent"></span></a> <a class="input-date"><span
+                        class="icon input-date transparent"></span></a> <input type="text" class="transparent mousetrap"
+                                                                               maxlength="255"
+                                                                               key-placeholder="placeholder_add_task_to_$"
+                                                                               data-placeholder="Inbox"
+                                                                               placeholder="Legg til vare i handlelisten...">
+                </div>
+                -->
+                <div class="task-list">
+                    <div class="grouped-tasks" rel="inbox">
+                        <ol class="tasks"  style="padding-left:0px;">
+                        #{list items:shoppingListUnchecked, as:'ingredient'}
+                            <li class="task-item" id="${ingredient.id}" >
+                                <div class="task-body"><a class="task-checkbox"><span
+                                        class="icon task-checkbox "></span></a> <a class="icon task-separator"></a>
+
+                                    <div class="title-wrapper"><span class="title"><span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span> ${ingredient.description}</span></div>
+                                </div>
+                            </li>
+                        #{/list}
+                        </ol>
+                        <h2 class="heading completed">
+                            <text rel="label_completed_tasks_heading">Ferdigstilte</text>
+                        </h2>
+                        <ol class="completed-tasks"  style="padding-left:0px;">
+                        #{list items:shoppingListChecked, as:'ingredient'}
+                            <li class="task-item done" id="${ingredient.id}" >
+                                <div class="task-body"><a class="task-checkbox task-checked"><span
+                                        class="icon task-checkbox  task-checked"></span></a> <a class="icon task-separator"></a>
+
+                                    <div class="title-wrapper"><span class="title"><span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span> ${ingredient.description}</span></div>
+                                </div>
+                            </li>
+                        #{/list}
+                        </ol>
+                    </div>
+                </div>
+                <div class="tasks-404 hidden"></div>
+            </div>
+        </div>
+        <div id="detail" class="stack"></div>
+    </div>
+</div>
+#{if menu!=null}
+<!--
+<a href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
+    <div  class="customButton">Velg oppskrifter på nytt</div>
+</a>-->
+#{/if}
+
+</body>
+</html>

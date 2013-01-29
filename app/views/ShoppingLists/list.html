@@ -56,7 +56,7 @@
                         <strong>${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}</strong>
                         <span>${utils.DateUtil.dayOfMonth(utils.DateUtil.addDays(menu.usedFromDate, i))} ${utils.DateUtil.monthOfYearShort(utils.DateUtil.addDays(menu.usedFromDate, i))}</span>
                     </div>
-                    <a href="@{Application.show(menu.getRecipeForDay(i).id)}">
+                    <a href="@{Recipes.show(menu.getRecipeForDay(i).id)}">
                         <img class="oppskriftsBilde" src="@{Recipes.recipePhotoThumb(menu.getRecipeForDay(i).id)}" />
                     </a>
                     <div class="recipe_content">
@@ -68,7 +68,7 @@
                         </div>
 
                         <h5></h5>
-                        <h4><a href="@{Application.show(menu.getRecipeForDay(i).id)}">${menu.getRecipeForDay(i).title}</a></h4>
+                        <h4><a href="@{Recipes.show(menu.getRecipeForDay(i).id)}">${menu.getRecipeForDay(i).title}</a></h4>
 
                         <p>
                         <div id="slider">
@@ -115,9 +115,7 @@
 					<!-- END Recipe item -->
 		<input type="submit" value="Lag handlelapp" class="submit_button blue_button" />
     #{/form}
-     <div id="deling">
-    	<a href="#" class="submit_button grey_button" onclick="window.print(); return false;" id="middagsplanleggeren_print_recipes">Skriv ut</a>
-    </div>
+
 
 </div>
 <!-- END velgDager -->

@@ -1,0 +1,38 @@
+#{extends 'main.html' /}
+
+	<div id="handlelapp">
+		<h2>Handlelapp for uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}</h2>
+		<br class="clear">
+		<!-- START leftColumnSmall -->
+		<div class="leftColumnSmall">
+			<h3>Ingredienser</h3>
+			<div id="ingrediens">
+
+            #{list items:shoppingList, as:'ingredient'}
+				<div class="product_item" id="1">
+                    <input type="checkbox" ${ingredient.checked?'checked':''} value="${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit} ${ingredient.description}" name="produkt" autocomplete="off"/>
+                        <div class="info">
+                            <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span> ${ingredient.description}<br/>
+                        </div>
+				</div>
+            #{/list}
+			</div>
+
+		<h3>Notater</h3> 
+		<div id="rememberThis">
+			<textarea id="husk" placeholder="Skriv her.." onkeyup="javascript:$(this).addClass('modified');"></textarea>
+		  	<div id="remeberThisContainer">
+				<div id="saveMsg" class="smallBtn smallBtnInaktiv">Lagre</div>
+				<div id="clearMsg" class="smallBtn">Tøm</div>
+			</div>
+		</div>
+
+            #{if menu!=null}
+            <a href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
+                <div  class="customButton">Velg oppskrifter på nytt</div>
+            </a>
+            #{/if}
+
+	</div>
+
+</div>

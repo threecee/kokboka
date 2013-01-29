@@ -1,0 +1,255 @@
+html, input, textarea {
+    -webkit-font-smoothing: antialiased
+}
+
+{
+    padding: 0
+;
+    margin: 0
+;
+    text-decoration: none
+;
+    -webkit-user-select: none
+;
+    -moz-user-select: none
+;
+    -ms-user-select: none
+;
+    -o-user-select: none
+;
+    user-select: none
+;
+    -moz-user-select: -moz-none
+;
+    -ms-touch-action: none
+}
+input, textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    -o-user-select: text;
+    user-select: text
+}
+
+body {
+    font-family: "Helvetica Neue", "Helvetica", "Arial", Sans-Serif;
+    color: #423e3e;
+    font-size: 13px;
+    font-weight: 500;
+    overflow: hidden;
+}
+
+body.scroll {
+    overflow: auto
+}
+
+body:before {
+    content: '';
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+    position: fixed;
+    z-index: -100;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -100;
+    font-family: "Wundercon"
+}
+
+body:after {
+    opacity: 0
+}
+
+ul {
+    list-style: none
+}
+
+a {
+    cursor: pointer
+}
+
+
+.right {
+    float: right !important
+}
+
+.left {
+    float: left
+}
+
+.text-right {
+    text-align: right
+}
+
+.text-left {
+    text-align: left
+}
+
+.center {
+    text-align: center
+}
+
+.hidden {
+    display: none !important
+}
+
+.invisible {
+    visibility: hidden
+}
+
+.mtop {
+    margin-top: 5px
+}
+
+#stacks {
+    -webkit-backface-visibility: hidden;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+#stacks > div {
+    -webkit-overflow-scrolling: touch;
+    position: absolute
+}
+
+.cols {
+    font-size: 0;
+}
+
+.cols > div {
+    vertical-align: middle;
+    font-size: 13px;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-right: 5px;
+}
+
+.cols > div:last-child {
+    padding-right: 0;
+    padding-left: 5px
+}
+
+.cols.top > div {
+    vertical-align: top
+}
+
+.cols-center > div {
+    margin: 0 auto 10px auto;
+}
+
+.cols-center > div:last-child {
+    margin-bottom: 0
+}
+
+.cols-center > div > .col-50:first-child {
+    padding-right: 5px
+}
+
+.cols-center > div > .col-50:last-child {
+    padding-left: 5px;
+    padding-right: 0
+}
+
+.col-10 {
+    width: 10%}
+
+.col-20 {
+    width: 20%}
+
+.col-30 {
+    width: 30%}
+
+.col-35 {
+    width: 35%}
+
+.col-40 {
+    width: 40%}
+
+.col-50 {
+    width: 50%}
+
+.col-60 {
+    width: 60%}
+
+.col-65 {
+    width: 65%}
+
+.col-70 {
+    width: 70%}
+
+.col-80 {
+    width: 80%}
+
+.col-90 {
+    width: 90%}
+
+.col-100 {
+    width: 100%;
+    padding-left: 0 !important
+}
+
+.col-160 {
+    width: 160px
+}
+
+.main-interface {
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    overflow: hidden;
+}
+
+.main-interface #print {
+    display: none
+}
+
+.main-interface.detail-visible #detail {
+    right: 0
+}
+
+.main-interface.detail-visible #tasks {
+    right: 30px
+}
+
+#desktop-notifications {
+    color: #423e3e;
+}
+
+#desktop-notifications div.desktop-notification-text {
+    background: white;
+    margin: 10px;
+    padding: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-radius: 10px
+}
+
+body *::-webkit-scrollbar {
+    width: 8px !important
+}
+
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {
+    height: 10px;
+    display: block;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.2)

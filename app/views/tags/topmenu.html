@@ -1,0 +1,12 @@
+<div id="menu">
+
+		<div class="width">
+			<ul>
+                <li class="first ${request.action == 'Recipes.favorites' ? 'active' : ''}"><a href="@{Recipes.favorites()}">Mine oppskrifter</a></li>
+				<li class="${request.action == 'Recipes.index' ? 'active' : ''}"><a href="@{Recipes.index()}">Alle oppskrifter</a></li>
+				<li class="${request.controller == "ShoppingLists" ? 'active' : ''}"><a href="@{ShoppingLists.showCurrent()}">Handlelappen</a></li>
+				<li class="${request.action == "Recipes.showCurrent" ? 'active' : ''}"><a href="@{Recipes.showCurrent()}">Dagens oppskrift</a></li>
+			</ul>
+		</div>
+
+	</div>

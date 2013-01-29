@@ -1,0 +1,53 @@
+#{extends 'main.html' /}
+#{set title:'Oppskrifter' /}
+
+#{if recipes}
+
+#{if selectedTags }
+    <div id="venstremeny">
+<h3>Fjern avgrensninger</h3>
+<div>
+		<ul>
+            #{list items:selectedTags, as:'tag'}
+			    <li >
+					<a href="@{Recipes.index(utils.TagUtil.removeTagAndCreateArray(selectedTags, tag.nameHash))}">
+						<div class="recipeTagButton">${tag.name}</div>
+					</a>
+				</li>
+            #{/list}
+		</ul>
+</div>
+<br/>
+<h3>Avgrense:</h3>
+<div>
+		<ul>
+            #{list items:availableTags, as:'tag'}
+			    <li >
+					<a href="@{Recipes.index(utils.TagUtil.mergeAndCreateArray(selectedTags, tag.nameHash))}">
+                        <div class="recipeTagButton">${tag.name}</div>
+					</a>
+				</li>
+            #{/list}
+		</ul>
+</div>
+</div>
+#{/if}
+#{else }
+<div id="newrecipe">
+    <a href="/admin/new"><span>+</span> legg inn en ny oppskrift</a>
+</div>#{/else}
+<div id="recipe_container">
+		<div id="recipeList">
+            #{list items:recipes, as:'recipe'}
+                #{display recipe:recipe, as:'teaser' /}
+            #{/list}
+		</div>
+</div>
+
+#{/if}
+
+#{else}
+    <div class="empty">
+        Finner ingen oppskrifter!
+    </div>
+#{/else}

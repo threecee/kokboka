@@ -1,0 +1,157 @@
+#{extends 'main.html' /}
+
+#{ifnot recipe?.id}
+<h3>Legg inn <span>en ny oppskrift</span></h3>
+#{/ifnot}
+#{else}
+<h3>Rediger <span>oppskrift</span></h3>
+#{/else}
+
+
+#{form @save(recipe?.id), enctype:'multipart/form-data'}
+
+    #{ifErrors}
+    <p class="error">
+        Vennligst rett opp disse feilene.
+    </p>
+    #{/ifErrors}
+
+
+<div id="recipe">
+    <div class="">
+        #{field 'title'}
+        <h2>
+            <label>Oppskriftens tittel:</label>
+            <input type="text" name="${field.name}"
+                   value="${recipe?.title}" class="${field.errorClass}" size="100"/>
+        #{/field}
+    </h2>
+
+        <div id="ingress">
+            <h3>Ingress</h3>
+
+            <p>#{field 'description'}
+                <textarea name="${field.name}"
+                          class="${field.errorClass}">${recipe?.description}</textarea>
+            #{/field}
+            </p>
+        </div>
+
+
+        <br class="clear">
+
+        <div id="fremgangsmote">
+            <div class="stepByStepItem_noImage">
+                #{field 'steps'}
+                    <label>Beskriv tilbereding av oppskriften her:</label>
+                    <textarea name="${field.name}"
+                              class="${field.errorClass}">${recipe?.steps}</textarea>
+                #{/field}
+            </div>
+        </div>
+
+
+        <h3>Ingredienser</h3>
+
+        <div id="ingredient">
+            <div class="ingredient_parent">
+                <div class="mengdeEnhet">(antall) (enhet)}</div>
+                <div class="produktnavn">(navn)</div>
+            </div>
+            #{list items:_recipe?.ingredients, as:'ingredient'}
+                <div class="ingredient_parent">
+                    <div class="mengdeEnhet">                         #{field 'amounts'}
+                        <input type="text" name="${field.name}" value="${ingredient.amount}" size="1"
+                               class="${field.errorClass}"/>
+                    #{/field} #{field 'units'}
+                        <input type="text" name="${field.name}" value="${ingredient.unit}" size="1"
+                               class="${field.errorClass}"/>
+                    #{/field}
+                    </div>
+                    <div class="produktnavn">#{field 'ingredients'}
+                        <input type="text" name="${field.name}" value="${ingredient.description}"
+                               class="${field.errorClass}" size="100"/>
+                    #{/field}
+                    </div>
+                </div>
+            #{/list}
+            #{list items:0..7, as:'i'}
+                <div class="ingredient_parent">
+                    <div class="mengdeEnhet">
+                        #{field 'amounts'}
+                        <input type="text" name="${field.name}" value="${field.value}" size="1"
+                               class="${field.errorClass}"/>
+                    #{/field} #{field 'units'}
+                        <input type="text" name="${field.name}" value="${field.value}" size="1"
+                               class="${field.errorClass}"/>
+                    #{/field}
+                    </div>
+                    <div class="produktnavn">#{field 'ingredients'}
+                        <input type="text" name="${field.name}" value="${field.value}"
+                               class="${field.errorClass}" size="100"/>
+                    #{/field}
+                    </div>
+                </div>
+            #{/list}
+        </div>
+
+
+        <div class="recipeImage">
+
+            #{if recipe?.photo }
+                <img src="@{Recipes.recipePhoto(recipe?.id)}">
+            #{/if}
+
+            #{field 'photo'}
+                <label>Last opp bilde:</label>
+                <input type="file" name="${field.name}">
+            #{/field}
+
+
+
+            <div id="recipeToolbar">
+                #{field 'tags'}
+                    <label>Legg inn noen merkelapper:</label>
+                    <input type="text" size="50"
+                           name="${field.name}" value="${recipe?.tags?.join(' ')}"/>
+                #{/field}
+            </div>
+
+        </div>
+
+        <div id="slider">
+
+            <label><strong>Oppskriften gir (antall og enhet):</strong></label>
+            <span id="adultRange">
+            #{field 'serves'}
+                <input type="text" name="${field.name}" class="${field.errorClass}" value="${recipe?.serves}"/>
+            #{/field}
+                #{field 'servesUnit'}
+                    <input type="text" name="${field.name}" class="${field.errorClass}" value="${recipe?.servesUnit}"/>
+                #{/field}
+            </span>
+
+
+        </div>
+
+
+        <p>
+            #{field 'source'}
+                <label>Oppskriftens kilde, navn eller url:</label>
+                <input type="text" name="${field.name}"
+                       value="${recipe?.source}" class="${field.errorClass}"/>
+            #{/field}
+
+        </p>
+
+    </div>
+
+
+</div>
+
+
+<p>
+    <input type="submit" value="Lagre"/>
+</p>
+
+#{/form}

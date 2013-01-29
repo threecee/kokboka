@@ -61,37 +61,20 @@
 </head>
 <body>
 
+
+
 <div id="container">
 
-    <div id="settingsSection">
-        <ul>
-            <a href="@{Application.index()}">
-                <li class="${request.action == 'Application.index' ? 'active' : ''}"><span
-                        id="Oppskrifter"><strong></strong>Oppskrifter</span></li>
-            </a>
-            <a href="@{ShoppingLists.showCurrent()}">
-                <li class="${request.controller == "ShoppingLists" ? 'active' : ''}"><span
-                        id="vishandlelapp"><strong></strong>Handlelappen</span></li>
-            </a>
-            <a href="@{Recipes.showCurrent()}">
-                <li class="${request.action == "Recipes.showCurrent" ? 'active' : ''}"><span
-                        id="visoppskrift"><strong></strong>Dagens oppskrift</span></li>
-            </a>
-        #{secure.check 'admin'}
-            <a href="@{Users.list()}">
-                <li class="${request.controller == 'Users' ? 'active' : ''}"><span id="visbrukere"><strong></strong>Brukere</span>
-                </li>
-            </a>
-        #{/secure.check}
-        </ul>
-    </div>
+#{topmenu /}
+
+
 
     <div class="width">
     #{doLayout /}
     </div>
 
 </div>
-#{if request.controller == 'Application'}
+#{if request.controller == 'Recipes'}
     #{planningFooter menu:menu /}
 #{/if}
 </body>

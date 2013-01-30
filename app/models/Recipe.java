@@ -35,8 +35,8 @@ public class Recipe extends Model {
     public double serves;
     public String servesUnit;
 
-    public Blob photo;
-    public Blob photoThumb;
+   // public Blob photo;
+   // public Blob photoThumb;
 
 
     @Basic
@@ -49,6 +49,10 @@ public class Recipe extends Model {
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     public Set<Tag> tags;
+
+
+    public String photoName;
+    public String photoThumbName;
 
 
     public Recipe(User author, String title, String description, String steps, String source, double serves, String servesUnit) {
@@ -70,7 +74,7 @@ public class Recipe extends Model {
         this.save();
         return this;
     }
-
+/*
     public void addPhoto(Blob photo) {
         photoThumb = new Blob();
         File inputFile = new File("" + Calendar.getInstance().getTimeInMillis());
@@ -83,7 +87,7 @@ public class Recipe extends Model {
         }
         this.photo = photo;
     }
-
+  */
     public Recipe tagItWith(String name) {
         if (!tags.contains(Tag.hashName(name))) {
             tags.add(Tag.findOrCreateByName(name));

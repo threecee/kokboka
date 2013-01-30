@@ -40,37 +40,6 @@ public class Recipes extends CRUD {
         render("Recipes/show.html");
     }
 
-
-    public static void recipePhoto(long id) {
-        final Recipe recipe = Recipe.findById(id);
-        try {
-            response.setContentTypeIfNotSet(recipe.photo.type());
-            renderBinary(recipe.photo.getFile());
-        } catch (NullPointerException e) {
-            renderBinary(new File("public/images/transparent.gif"));
-        }
-
-    }
-
-    public static void recipePhotoThumb(long id) {
-        final Recipe recipe = Recipe.findById(id);
-        try {
-            response.setContentTypeIfNotSet(recipe.photoThumb.type());
-            renderBinary(recipe.photoThumb.getFile());
-        } catch (NullPointerException e) {
-            renderBinary(new File("public/images/food-plate-icons.jpg"));
-        }
-    }
-
-    public static boolean recipeHasPhoto(long id) {
-        final Recipe recipe = Recipe.findById(id);
-        return (recipe != null && recipe.photo != null);
-
-    }
-
-
-
-
     public static void index(String[] tags) {
         List<Recipe> recipes;
         List<Tag> selectedTags = new ArrayList<Tag>();

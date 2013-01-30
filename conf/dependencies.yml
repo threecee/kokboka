@@ -5,3 +5,4 @@ require:
     - play -> crud
     - play -> secure
     - net.sourceforge.htmlcleaner -> htmlcleaner 2.2
+    - commons-net -> commons-net 3.1

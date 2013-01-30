@@ -7,7 +7,7 @@ oppskrifter så langt</span></h3>
 
 #{list items:menus, as:'menu'}
     <p class="recipe ${recipe_parity}">
-        <a href="@{Admin.menuform(menu.id)}">${menu.usedFromDate}</a>
+        <a href="@{Admin.menuform(menu.id)}">${menu.id}-${menu.author.email}-${menu.usedFromDate}</a>
     </p>
 #{/list}
 

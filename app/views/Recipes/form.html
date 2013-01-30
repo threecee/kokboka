@@ -99,7 +99,7 @@
         <div class="recipeImage">
 
             #{if recipe?.photo }
-                <img src="@{Recipes.recipePhoto(recipe?.id)}">
+                <img src="${Images.get(recipe?)}">
             #{/if}
 
             #{field 'photo'}

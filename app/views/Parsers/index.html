@@ -1,7 +1,9 @@
 #{extends 'admin.html' /}
 
+
     <p class="recipe">
-        <a href="@{Parsers.importRema1000()}">Kjør rema1000-import</a>
+        <a href="@{Parsers.importRema1000(false)}">Kjør rema1000-import</a>
+        <a href="@{Parsers.importRema1000(true)}">Kjør rema1000-import med overskriving</a>
     </p>
 
 

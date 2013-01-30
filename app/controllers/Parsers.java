@@ -1,9 +1,7 @@
 package controllers;
 
 
-import models.Ingredient;
-import models.Recipe;
-import models.User;
+import models.*;
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.PrettyXmlSerializer;
@@ -11,7 +9,6 @@ import org.htmlcleaner.TagNode;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import play.Logger;
-import play.db.jpa.Blob;
 import play.libs.WS;
 import play.libs.XML;
 import play.libs.XPath;
@@ -22,6 +19,8 @@ import play.mvc.With;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -68,13 +67,13 @@ public class Parsers extends Controller {
             new PrettyXmlSerializer(props);
 
 
-    private static void reporter(String report){
+    private static void reporter(String report) {
 
         response.writeChunk(report + "<br/>");
         Logger.info(report);
     }
 
-    public static void importRema1000() {
+    public static void importRema1000(boolean overskriving) {
         String urlTemplate = "http://www.rema.no/under100/?service=oppskrifter&allRecipes=true&page=";
 
         response.setContentTypeIfNotSet("text/html");
@@ -86,7 +85,6 @@ public class Parsers extends Controller {
 
             Document recipeDocument = getDocument(urlTemplate + page);
 
-            //int oldSize = recipeUrls.size();
             ArrayList<String> recipeUrls = (findRecipeUrls(recipeDocument));
             morePages = recipeUrls.size() > 0;
             page++;
@@ -96,8 +94,12 @@ public class Parsers extends Controller {
 
                 if (recipe == null) {
                     String result = parseRema1000Recipe(url);
-                    response.writeChunk(result + "<br/>");
+                    reporter(result);
+                } else if (overskriving) {
+                    String result = parseRema1000Recipe(url, recipe);
+                    reporter(result);
                 }
+
             }
 
 
@@ -105,7 +107,7 @@ public class Parsers extends Controller {
 
 
         importRema1000Tags();
-        Application.index();
+        index();
     }
 
     private static ArrayList<String> findRecipeUrls(Document recipeDocument) {
@@ -122,28 +124,24 @@ public class Parsers extends Controller {
 
     private static void importRema1000Tags() {
         String urlTemplate = "http://www.rema.no/under100/?service=oppskrifter&allRecipes=true&page=1";
-        ArrayList<String> tagUrls = new ArrayList<String>();
 
-        Document recipeDocument = getDocument(urlTemplate);
+            Document recipeDocument = getDocument(urlTemplate);
 
+            for (Node event : XPath.selectNodes("//div[@id='tags']/div/ul/li", recipeDocument)) {
+                tagRecipes(event);
+            }
 
-        for (Node event : XPath.selectNodes("//div[@id='tags']/div/ul/li", recipeDocument)) {
-            tagRecipes(event);
-        }
-
-        for (Node event : XPath.selectNodes("//div[@id='campaign_archive_container']/ul/li", recipeDocument)) {
-            tagRecipes(event);
-        }
-
-
+            for (Node event : XPath.selectNodes("//div[@id='campaign_archive_container']/ul/li", recipeDocument)) {
+                tagRecipes(event);
+            }
     }
 
     private static void tagRecipes(Node event) {
+        String urlTemplate = "&page=";
         String url = XPath.selectText("a/@href", event);
         String name = XPath.selectText("a/span", event);
         List<Node> nameNodes = XPath.selectNodes("a/span", event);
-        if(name != null && name.trim().isEmpty())
-        {
+        if (name != null && name.trim().isEmpty()) {
             name = nameNodes.get(0).getChildNodes().item(2).getTextContent();
         }
         ArrayList<String> tagUrls;
@@ -151,24 +149,48 @@ public class Parsers extends Controller {
             url = url.replaceAll(" ", "%20");
             name = name.trim();
 
-            Document tagDocument = getDocument(url);
+            if (isApproved(name)) {
 
-            tagUrls = findRecipeUrls(tagDocument);
+                int page = 1;
+                  boolean morePages = true;
+                  while (morePages) {
 
-            for (String tagUrl : tagUrls) {
-                Recipe recipe = Recipe.find("bySource", tagUrl).first();
-                if (recipe != null) {
-                    recipe.tagItWith(name);
-                    recipe.save();
-                    reporter("Tagget '" + recipe.title + "' med '" + name + "'");
-                }
+                      Document tagDocument = getDocument(url + urlTemplate + page);
 
+                      tagUrls = findRecipeUrls(tagDocument);
+                      morePages = tagUrls.size() > 0;
+                      page++;
+
+                        for (String tagUrl : tagUrls) {
+                            Recipe recipe = Recipe.find("bySource", tagUrl).first();
+                            if (recipe != null) {
+                                recipe.tagItWith(name);
+                                recipe.save();
+                                reporter("Tagget '" + recipe.title + "' med '" + name + "'");
+                            }
+                        }
+                  }
             }
 
         }
     }
 
+    private static String[] noGoNames = new String[]{"5 på topp", "Fri for gluten og melk", "Litt over hundrelappen", "Fri for melk", "10 på topp", "Raske middager i julestria", "Fri for gluten"};
+
+    private static boolean isApproved(String name) {
+        for (String noGoName : noGoNames) {
+            if (name.compareToIgnoreCase(noGoName) == 0) return false;
+        }
+        return true;
+
+    }
+
     private static String parseRema1000Recipe(String url) {
+        return parseRema1000Recipe(url, null);
+
+    }
+
+    private static String parseRema1000Recipe(String url, Recipe recipe) {
 
         //determine support
 
@@ -176,7 +198,11 @@ public class Parsers extends Controller {
         reporter("Retrieveing url: " + url);
         Document recipeDocument = getDocument(url);  //WS.url(url).get().getString();
 
-        Recipe recipe = parseRema1000(url, recipeDocument);
+        if (recipe == null) {
+            recipe = parseRema1000(url, recipeDocument);
+        } else {
+            parseRema1000(url, recipeDocument, recipe);
+        }
 
         if (recipe != null) {
             recipe.save();
@@ -187,6 +213,10 @@ public class Parsers extends Controller {
     }
 
     private static Recipe parseRema1000(String url, Document recipeDocument) {
+        return parseRema1000(url, recipeDocument, null);
+    }
+
+    private static Recipe parseRema1000(String url, Document recipeDocument, Recipe recipe) {
 
 
         String title = XPath.selectText("//div[@id='recipe']/div[@class='rightColumn']/h2", recipeDocument);
@@ -225,7 +255,24 @@ public class Parsers extends Controller {
 
 
         User user = User.find("byEmail", Security.connected()).first();
-        Recipe recipe = new Recipe(user, title, description, steps, source, serves, servesUnit).save();
+        if (recipe == null) {
+            recipe = new Recipe(user, title, description, steps, source, serves, servesUnit).save();
+        } else {
+            recipe.author = user;
+            recipe.title = title;
+            recipe.description = description;
+            recipe.steps = steps;
+            recipe.source = source;
+            recipe.serves = serves;
+            recipe.servesUnit = servesUnit;
+
+            recipe.photoName = null;
+            recipe.tags = new HashSet<Tag>();
+            recipe.ingredients = new ArrayList<Ingredient>();
+            recipe.save();
+
+        }
+
 
         for (Node event : XPath.selectNodes("//div[@id='recipe']/div[@class='rightColumn']/div/div[@class='ingredient_parent']", recipeDocument)) {
 
@@ -238,9 +285,8 @@ public class Parsers extends Controller {
                 String[] mengdeEnhetArray = mengdeEnhet.trim().split(" ");
                 amount = mengdeEnhetArray[0];
                 unit = mengdeEnhetArray[1];
-                if(amount!=null)
-                {
-                    amount = amount.replace(",",".");
+                if (amount != null) {
+                    amount = amount.replace(",", ".");
                 }
             }
 
@@ -250,42 +296,38 @@ public class Parsers extends Controller {
             }
 
             recipe.addIngredient(amount, unit, ingredientName);
-            convertPackageToWeight(recipe.ingredients.get(recipe.ingredients.size()-1));
+            convertPackageToWeight(recipe.ingredients.get(recipe.ingredients.size() - 1));
         }
 
         String tidsbruk = XPath.selectText("//div[@class='tidsbruk']/strong", recipeDocument);
-     //   recipe.tagItWith(tidsbruk + "min");
-     //   recipe.tagItWith("rema1000");
+        //   recipe.tagItWith(tidsbruk + "min");
+        //   recipe.tagItWith("rema1000");
 
         String photoUrl;
         photoUrl = XPath.selectText("//div[@id='recipe']/div[@class='leftColumn']/div[@class='recipeImage recipeImageDraggable']/img/@src", recipeDocument);
 
-        Blob photo = new Blob();
-
         WS.HttpResponse response = WS.url(photoUrl).get();
         InputStream fileStream = response.getStream();
-        photo.set(fileStream, response.getContentType());
-        recipe.addPhoto(photo);
+        String name = Calendar.getInstance().getTimeInMillis() + "" + ((int) (Math.random() * 100000)) + photoUrl.substring(photoUrl.length() - 4);
+        Image.save(name, fileStream);
+        recipe.photoName = name;
 
         return recipe;
     }
 
-    private static Pattern packagePattern =  Pattern.compile("c?a? ?([0-9]+,?[0-9]*) ?(k?g)");
+    private static Pattern packagePattern = Pattern.compile("c?a? ?([0-9]+,?[0-9]*) ?(k?g)");
 
-    private static void convertPackageToWeight(Ingredient originalIngredient)
-    {
-        if(originalIngredient.unit == "pk")
-        {
-             Matcher matcher = packagePattern.matcher(originalIngredient.description);
-            if(matcher.find())
-            {
+    private static void convertPackageToWeight(Ingredient originalIngredient) {
+        if (originalIngredient.unit == "pk") {
+            Matcher matcher = packagePattern.matcher(originalIngredient.description);
+            if (matcher.find()) {
                 String amount = matcher.group(1);
                 String newDesc = matcher.replaceFirst("");
                 String unit = matcher.group(2);
                 Double amountDouble = Double.parseDouble(amount);
-                Double totalAmount = amountDouble*Double.parseDouble(originalIngredient.amount);
+                Double totalAmount = amountDouble * Double.parseDouble(originalIngredient.amount);
 
-                Logger.info("Replacing" + originalIngredient.amount + " " + originalIngredient.unit + " " + originalIngredient.description + " with: " + totalAmount + " " + unit + " " + newDesc );
+                Logger.info("Replacing" + originalIngredient.amount + " " + originalIngredient.unit + " " + originalIngredient.description + " with: " + totalAmount + " " + unit + " " + newDesc);
             }
         }
     }
@@ -293,8 +335,7 @@ public class Parsers extends Controller {
     private static String cleanProductNames(String produktnavn) {
         String[] kjenteProdukter = new String[]{"Godehav", "Solvinge", "REMA 1000", "Tine", "Bama", "Kikkoman", "Nordfjord", "Blue Dragon", "Taga", "Finsbråten", "Hatting", "Mesterbakeren", "Grilstad", "Ideal", "Staur", "MaxMat", "Viddas", "frossen", " - NB! Sesongvare"};
 
-        for(String kjentProdukt:kjenteProdukter)
-        {
+        for (String kjentProdukt : kjenteProdukter) {
             produktnavn = produktnavn.replaceAll(" *" + kjentProdukt + " *", "");
         }
         return produktnavn.trim();

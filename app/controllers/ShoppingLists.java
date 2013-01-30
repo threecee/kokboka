@@ -24,6 +24,8 @@ public class ShoppingLists extends CRUD {
     }
 
     public static void show(Long listId) {
+        if(listId != null)
+        {
         Menu menu = Menu.find("shoppingList is ?", ShoppingList.findById(listId)).first();
 
         User user = User.find("byEmail", Security.connected()).first();
@@ -46,7 +48,9 @@ public class ShoppingLists extends CRUD {
             }
         }
         render("ShoppingLists/show.html", shoppingListChecked, shoppingListUnchecked, menu);
+        }
 
+        render("ShoppingLists/show.html");
 
     }
 
@@ -58,8 +62,12 @@ public class ShoppingLists extends CRUD {
         List<ShoppingListIngredient> shoppingListUnchecked = null;
         if (menu != null) {
             ShoppingList shoppingListItem = ShoppingList.find("menu = ?", menu).first();
-            show(shoppingListItem.id);
+            if (shoppingListItem != null) {
+                show(shoppingListItem.id);
+            }
+
         }
+        show(null);
     }
 
     public static void list(Long menuId) {

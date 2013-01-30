@@ -67,7 +67,9 @@ public class ShoppingLists extends CRUD {
             }
 
         }
-        show(null);
+
+        Long dummy = null;
+        show(dummy);
     }
 
     public static void list(Long menuId) {

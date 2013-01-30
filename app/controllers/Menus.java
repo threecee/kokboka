@@ -90,5 +90,10 @@ public class Menus extends CRUD {
         user.save();
     }
 
+    public static void delete(Long id)
+    {
+        Menu.findById(id)._delete();
+    }
+
 
 }

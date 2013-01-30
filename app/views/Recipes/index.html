@@ -5,7 +5,10 @@
 
 #{if selectedTags != null }
     <div id="venstremeny">
-<h3>Fjern avgrensninger</h3>
+
+    #{if selectedTags.size() > 0 }
+        <h3>Fjern avgrensninger</h3>
+        #{/if }
 <div>
 		<ul>
             #{list items:selectedTags, as:'tag'}

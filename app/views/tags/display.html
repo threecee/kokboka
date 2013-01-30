@@ -5,7 +5,7 @@
         <div class="recipeImage">
             <div class="cimg">
                 <a href="@{Recipes.show(_recipe.id)}">
-                    <img src="${Images.getThumb(_recipe)}" alt="oppskrift bilde" width="100" height="100"/>
+                    <img src="${models.Image.getThumb(_recipe)}" alt="oppskrift bilde" width="100" height="100"/>
 
                     <div class="recipeTitleBox"><p class="recipeTitle">${_recipe.title}</p></div>
                     <!--span class="recipeTime">${_recipe.title}</span-->

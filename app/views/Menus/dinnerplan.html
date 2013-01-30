@@ -83,7 +83,7 @@
                     
                     <div class="cimg" id="${i}">
                         #{if menu.getRecipeForDay(i) != null}
-                            <img src="@{Recipes.recipePhotoThumb(menu.getRecipeForDay(i).id)}" alt="oppskrift bilde" width="100" height="100">
+                            <img src="${models.Image.getThumb(menu.getRecipeForDay(i))}" alt="oppskrift bilde" width="100" height="100">
                         #{/if}
                         #{else}
                             <img src="@{'/public/images/drophere.png'}" class="dropBilde">

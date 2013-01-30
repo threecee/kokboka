@@ -75,14 +75,14 @@ public class Menus extends CRUD {
 
         if (startingDayString != null) {
             Date startingDay = dateFormat.parse(startingDayString);
-            menu = Menu.find("usedFromDate = ?", startingDay).first();
+            menu = Menu.find("author = ? and usedFromDate = ?", user,  startingDay).first();
 
             if (menu == null) menu = new Menu(user, startingDay).save();
         } else {
             if (user.activeMenu != null) {
                 menu = Menu.findById(user.activeMenu.getId());
             }
-            if (menu == null || (DateUtil.distance(DateUtil.getStartingDay(), menu.usedFromDate) < 0)) {
+            else if (menu == null || (DateUtil.distance(DateUtil.getStartingDay(), menu.usedFromDate) < 0)) {
                 menu = new Menu(user, DateUtil.getStartingDay()).save();
             }
         }

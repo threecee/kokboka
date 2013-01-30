@@ -93,6 +93,7 @@ public class Parsers extends Controller {
 
             for (final String url : recipeUrls) {
                 Recipe recipe = Recipe.find("bySource", url).first();
+
                 if (recipe == null) {
                     String result = parseRema1000Recipe(url);
                     response.writeChunk(result + "<br/>");

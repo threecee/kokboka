@@ -1890,7 +1890,7 @@ p.recipeTitle{
 	background:url(default_fav_.png) no-repeat;
 }
 
-#recipe .favoriserBtn:hover,
+/*#recipe .favoriserBtn:hover,     */
 #recipe .favoriserBtn_favorisert{
 	background:url(onclick_fav_.png) no-repeat;
 }

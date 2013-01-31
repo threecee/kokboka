@@ -16,14 +16,14 @@
 </div>
 
 #{/if}
-#{if _as == 'full' && recipe != null}
+#{if _as == 'full' && _recipe != null}
 
 
 <div id="recipe">
     <div class="leftColumn">
         <div class="recipeImage recipeImageDraggable ui-draggable">
 
-            <img src="${Images.get(_recipe)}"/>
+            <img src="${models.Image.get(_recipe)}"/>
 
             <div id="recipeTags">
                 #{if _recipe.tags}
@@ -91,7 +91,7 @@
             <div class="recipeItem ">
                 <div id="${_recipe.id}" class="recipeImage cimg dtp_bilde">
                     <a href="@{Recipes.show(_recipe.id)}">
-                        <img src="${Images.getThumb(_recipe)}" alt="oppskrift bilde" width="100"
+                        <img src="${models.Image.getThumb(_recipe)}" alt="oppskrift bilde" width="100"
                              height="100">
                     </a>
                 </div>

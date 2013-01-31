@@ -57,7 +57,7 @@
                         <span>${utils.DateUtil.dayOfMonth(utils.DateUtil.addDays(menu.usedFromDate, i))} ${utils.DateUtil.monthOfYearShort(utils.DateUtil.addDays(menu.usedFromDate, i))}</span>
                     </div>
                     <a href="@{Recipes.show(menu.getRecipeForDay(i).id)}">
-                        <img class="oppskriftsBilde" src="@{Recipes.recipePhotoThumb(menu.getRecipeForDay(i).id)}" />
+                        <img class="oppskriftsBilde" src="${models.Image.getThumb(menu.getRecipeForDay(i))}" />
                     </a>
                     <div class="recipe_content">
                         <div class="checkBox_container">

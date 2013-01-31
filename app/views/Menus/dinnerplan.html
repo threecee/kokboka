@@ -37,18 +37,18 @@
 <div class="weekplanner_buttons">
     #{if menu.shoppingList != null }
     <a href="@{ShoppingLists.show(menu.shoppingList.id)}" id="tilHandlelappen">
-        Handlelapp
+        Til handlelapp
     </a>
     #{/if}
     #{else}
         <a href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
-            Handlelapp
+            Lag handlelapp
         </a>
     #{/else}
     
-    <a href="http://www.rema.no/under100/?service=showProfile" id="tilInstillinger">
+   <!-- <a href="http://www.rema.no/under100/?service=showProfile" id="tilInstillinger">
         Innstillinger
-    </a>
+    </a> -->
 </div>
 
 <div class="weekplanner_days">

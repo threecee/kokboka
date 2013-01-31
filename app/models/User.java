@@ -16,7 +16,7 @@ public class User extends Model {
     public String fullname;
     public boolean isAdmin;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     public Menu activeMenu;
 
 

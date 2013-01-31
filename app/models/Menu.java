@@ -22,7 +22,7 @@ public class Menu extends Model {
 
     public Date usedFromDate;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     public ShoppingList shoppingList;
 
 

@@ -1888,20 +1888,23 @@ body.touch #detail .bottom .icon.detail-close {
                             </li>
                         #{/list}
                         </ol>
+                        <h2 class="heading">Handlinger</h2>
+                    #{if menu!=null}
+                     <a href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
+                         <div  class="customButton">Velg oppskrifter på nytt</div>
+                     </a>
+                     #{/if}
+
                     </div>
                 </div>
                 <div class="tasks-404 hidden"></div>
             </div>
         </div>
-        <div id="detail" class="stack"></div>
+        <div id="detail" class="stack">
+
+        </div>
     </div>
 </div>
-#{if menu!=null}
-<!--
-<a href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
-    <div  class="customButton">Velg oppskrifter på nytt</div>
-</a>-->
-#{/if}
 
 </body>
 </html>

@@ -10,10 +10,23 @@ public class Security extends Secure.Security {
     }
 
     static void onDisconnected() {
-        Application.index();
+        sendTo();
     }
 
     static void onAuthenticated() {
-        Application.index();
+       sendTo();
+    }
+
+    static void sendTo()
+    {
+        String url = flash.get("url");
+        if(url == null) {
+            Application.index();
+        }
+        else
+        {
+            redirect(url);
+        }
+
     }
 }

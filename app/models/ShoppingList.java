@@ -24,10 +24,17 @@ public class ShoppingList extends Model {
     }
 
     public ShoppingList addIngredient(double amount, String unit, String description) {
-        ShoppingListIngredient newIngredient = new ShoppingListIngredient(this, amount, unit, description, false).save();
+        ShoppingListIngredient newIngredient = new ShoppingListIngredient(this, amount, unit, description, ShoppingListItemType.ingredient, false).save();
         this.shoppingListIngredients.add(newIngredient);
         this.save();
         return this;
     }
+    public ShoppingListIngredient addOnTheFly(String description) {
+        ShoppingListIngredient newIngredient = new ShoppingListIngredient(this, 0, null, description, ShoppingListItemType.onthefly, false).save();
+        this.shoppingListIngredients.add(newIngredient);
+        this.save();
+        return newIngredient;
+    }
+
 
 }

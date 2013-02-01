@@ -5,6 +5,7 @@
 				<li class="${request.action == 'Recipes.index' ? 'active' : ''}"><a href="@{Recipes.index()}">Alle oppskrifter</a></li>
 				<li class="${request.controller == "ShoppingLists" ? 'active' : ''}"><a href="@{ShoppingLists.showCurrent()}">Ukens handlelapp</a></li>
 				<li class="${request.action == "Recipes.showCurrent" ? 'active' : ''}"><a href="@{Recipes.showCurrent()}">Dagens oppskrift</a></li>
+                <li class="${request.action == "Users.preferences" ? 'active' : ''}"><a href="@{Users.preferences()}">Innstillinger</a></li>
 			</ul>
 		</div>
 

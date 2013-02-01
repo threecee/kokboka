@@ -1,0 +1,507 @@
+@media all and (max-width:1024px) {
+
+{
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+}
+
+#tasks .tasks-scroll {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+.popover-notifications .list-people {
+    -webkit-overflow-scrolling: touch
+}
+
+body.focus-browser #lists li.active a {
+    background: rgba(41, 111, 176, 0.7);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(41, 111, 176, 0.7)), to(rgba(72, 139, 192, 0.7)));
+    background: -moz-linear-gradient(top, rgba(41, 111, 176, 0.7), rgba(72, 139, 192, 0.7));
+    background: -ms-linear-gradient(top, rgba(41, 111, 176, 0.7), rgba(72, 139, 192, 0.7));
+    background: linear-gradient(top, rgba(41, 111, 176, 0.7), rgba(72, 139, 192, 0.7))
+}
+
+.main-interface #toolbar {
+    height: 48px !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100% !important;
+    background-image: none !important;
+    background-position: none !important;
+}
+
+.main-interface #toolbar .thumb {
+    background-position: -424px -417px
+}
+
+.main-interface #toolbar #search {
+    right: 11px !important;
+    top: 4px !important
+}
+
+.main-interface #toolbar #search-toolbar .menu-search {
+    top: 16px !important;
+    left: 52px !important
+}
+
+.main-interface #toolbar #search-toolbar input {
+    padding-left: 28px !important;
+    left: 48px !important;
+    right: 36px !important;
+    top: 13px !important
+}
+
+.main-interface #toolbar #search-toolbar #reset-search {
+    right: 3px !important;
+    top: 6px !important;
+    padding: 9px !important
+}
+
+.main-interface #toolbar .logo-wrapper {
+    width: 130px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.main-interface #toolbar .logo-wrapper #logo {
+    left: 0 !important;
+    top: 5px !important
+}
+
+.main-interface #toolbar .logo-wrapper #notifications-count {
+    top: 15px !important;
+    left: 100px
+}
+
+.main-interface #toolbar #user {
+    margin: 9px !important;
+}
+
+.main-interface #toolbar #user .default-avatar {
+    width: 32px !important;
+    height: 32px !important
+}
+
+.main-interface #toolbar #user img, .main-interface #toolbar #user span {
+    height: 32px !important;
+    width: 32px !important
+}
+
+.main-interface #tasks {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+    width: 100% !important;
+    z-index: 200;
+    -webkit-box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+    -ms-box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+    -o-box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.main-interface #tasks > div {
+    padding: 0 12px !important
+}
+
+.main-interface #tasks .tasks-scroll {
+    top: 0 !important;
+    padding-top: 52px !important;
+    padding-bottom: 12px !important;
+    z-index: -1;
+}
+
+.main-interface #tasks .tasks-scroll li {
+    -webkit-touch-callout: none
+}
+
+.main-interface #tasks #list-toolbar {
+    height: 48px;
+    display: block !important;
+    margin: 0 !important;
+    padding: 8px 14px !important
+}
+
+.main-interface #tasks ul li {
+    padding: 14px
+}
+
+.main-interface #lists .lists-scroll {
+    top: 49px !important;
+    bottom: 44px !important;
+}
+
+.main-interface #lists .lists-scroll li.animate-up {
+    overflow: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important
+}
+
+.main-interface #lists .lists-scroll .active .list-sharing {
+    display: none !important
+}
+
+.main-interface #lists .lists-scroll .active .count {
+    display: block !important
+}
+
+.main-interface #lists .settings {
+    display: block !important
+}
+
+.main-interface #detail {
+    z-index: 300 !important;
+    padding: 0 !important;
+}
+
+.main-interface #detail .inner {
+    background-image: none !important;
+}
+
+.main-interface #detail .inner .title {
+    background-image: none !important
+}
+
+    }
+
+@media all and (max-width:640px) {
+    body:after {
+        content: 'micro' !important
+    }
+
+    #user-popover .popover.backgrounds {
+        right: -70px;
+        top: 70px
+    }
+
+    .popover .popover-sharing {
+        width: 254px !important;
+        height: 345px !important;
+    }
+
+    .popover .popover-sharing .facebook-button {
+        -webkit-border-radius: 0 5px 6px 0;
+        -moz-border-radius: 0 5px 6px 0;
+        -ms-border-radius: 0 5px 6px 0;
+        -o-border-radius: 0 5px 6px 0;
+        border-radius: 0 5px 6px 0;
+        width: 226px !important
+    }
+
+    .popover .popover-notifications {
+        width: 250px;
+    }
+
+    .popover .popover-notifications .list-people {
+        max-height: 200px !important
+    }
+
+    #login {
+        position: fixed;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #login .pageflip {
+        margin: 20px auto !important
+    }
+
+    #login .support-center {
+        display: none !important
+    }
+
+    #login .divider {
+        display: none !important
+    }
+
+    #login .download-wrapper {
+        display: none !important
+    }
+
+    .main-interface #modals .dialog-wrapper {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 1000;
+    }
+
+    .main-interface #modals .dialog-wrapper.reminders {
+        height: auto !important;
+        width: 64% !important;
+        margin-left: -32% !important
+    }
+
+    .main-interface #modals .dialog-wrapper .dialog {
+        width: 90%;
+        left: 0;
+        margin-left: 5%}
+
+    .main-interface #modals .dialog-wrapper #confirmation .col-20 {
+        width: 25%}
+
+    .main-interface #modals .dialog-wrapper #confirmation .col-80 {
+        width: 75%}
+
+    .main-interface #modals .dialog-wrapper #confirmation .icon {
+        margin-left: -16px
+    }
+
+    .main-interface #modals .dialog-wrapper #fullscreen-note {
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin-left: 0 !important;
+        width: auto;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        -ms-border-radius: 0;
+        -o-border-radius: 0;
+        border-radius: 0
+    }
+
+    .main-interface #modals .dialog-wrapper #settings {
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin-left: 0 !important;
+        width: auto;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        -ms-border-radius: 0;
+        -o-border-radius: 0;
+        border-radius: 0;
+    }
+
+    .main-interface #modals .dialog-wrapper #settings a[rel=shortcuts] {
+        display: none
+    }
+
+    .main-interface #modals .dialog-wrapper #settings .content-inner {
+        padding: 10px !important
+    }
+
+    .main-interface #modals .dialog-wrapper #settings ul.social-links {
+        text-align: center;
+        width: 320px;
+        margin: 16px auto 16px auto;
+        height: 40px;
+    }
+
+    .main-interface #modals .dialog-wrapper #settings ul.social-links li {
+        margin: 0 3px 6px 3px
+    }
+
+    .main-interface #modals .dialog-wrapper #settings .tabs li text {
+        display: none
+    }
+
+    .main-interface #modals .dialog-wrapper #settings .tabs li span {
+        display: inline-block
+    }
+
+    .main-interface #modals .dialog-wrapper #settings .tabs ~ .content-inner {
+        top: 94px
+    }
+
+    .main-interface #modals .dialog-wrapper #settings .col-35 {
+        display: block;
+        width: 128px;
+        margin: 0 auto;
+        margin-bottom: 20px
+    }
+
+    .main-interface #modals .dialog-wrapper #settings .col-65 {
+        display: block;
+        width: 100%}
+
+    .main-interface #modals .dialog-wrapper.hidden {
+        z-index: 1
+    }
+
+    .main-interface #stacks > .stack {
+        -webkit-backface-visibility: hidden;
+        bottom: 0 !important;
+        left: 0 !important
+    }
+
+    .main-interface #lists {
+        right: 68px !important;
+        width: auto !important;
+        z-index: 100;
+        -webkit-transform: translateX(-30%) !important;
+        -moz-transform: translateX(-30%) !important;
+        -ms-transform: translateX(-30%) !important;
+        -o-transform: translateX(-30%) !important;
+        transform: translateX(-30%) !important;
+    }
+
+    .main-interface #lists.slided {
+        -webkit-transform: translateX(0) !important;
+        -moz-transform: translateX(0) !important;
+        -ms-transform: translateX(0) !important;
+        -o-transform: translateX(0) !important;
+        transform: translateX(0) !important
+    }
+
+    .main-interface #tasks.slided {
+        margin-left: -68px !important;
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        -o-transform: translateX(100%);
+        transform: translateX(100%)
+    }
+
+    .main-interface #tasks .tasks-404 {
+        margin: 0 10% !important;
+        margin-top: -60px !important
+    }
+
+    .main-interface.detail-visible #detail {
+        z-index: 300;
+        -webkit-transform: translateX(0%) !important;
+        -moz-transform: translateX(0%) !important;
+        -ms-transform: translateX(0%) !important;
+        -o-transform: translateX(0%) !important;
+        transform: translateX(0%) !important
+    }
+
+    .main-interface #detail {
+        z-index: -999;
+        right: 0 !important;
+        width: 100% !important;
+        -webkit-transform: translateX(100%) !important;
+        -moz-transform: translateX(100%) !important;
+        -ms-transform: translateX(100%) !important;
+        -o-transform: translateX(100%) !important;
+        transform: translateX(100%) !important;
+    }
+
+    .main-interface #detail .note {
+        border-top: 1px solid #cfcfcf !important;
+        margin-top: 20px !important;
+    }
+
+    .main-interface #detail .note::before {
+        content: none !important
+    }
+
+    .main-interface #detail .note .open-fullscreen-note {
+        margin-top: -6px !important
+    }
+
+    .main-interface #detail .inner {
+        margin-left: 56px
+    }
+}
+
+@media all and (max-width:320px) {
+    #detail .section.detail-date.editing {
+        height: 55px !important;
+    }
+
+    #detail .section.detail-date.editing #edit-repeat {
+        width: 77px
+    }
+
+    #detail .section.detail-date.editing #edit-repeat-interval {
+        position: absolute;
+        left: 132px;
+        top: 42px
+    }
+
+    #detail .section.detail-reminder.editing {
+        height: 55px !important;
+    }
+
+    #detail .section.detail-reminder.editing #edit-reminder-time-ampm {
+        position: absolute;
+        top: 45px;
+        left: 148px
+    }
+}
+
+@media all and (min-width:641px) and (max-width:768px) {
+    body:after {
+        content: 'mini' !important
+    }
+
+    .main-interface #stacks #lists {
+        -webkit-transform: translateX(-30%);
+        -moz-transform: translateX(-30%);
+        -ms-transform: translateX(-30%);
+        -o-transform: translateX(-30%);
+        transform: translateX(-30%);
+        width: 300px !important;
+    }
+
+    .main-interface #stacks #lists.slided {
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0)
+    }
+
+    .main-interface #stacks #tasks {
+        right: 0 !important;
+        left: 0 !important;
+        width: auto !important;
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    .main-interface #stacks #tasks.slided {
+        -webkit-transform: translateX(300px);
+        -moz-transform: translateX(300px);
+        -ms-transform: translateX(300px);
+        -o-transform: translateX(300px);
+        transform: translateX(300px)
+    }
+
+    .main-interface #stacks #detail {
+        width: 360px;
+        padding-right: 0 !important;
+    }
+
+    .main-interface #stacks #detail .inner {
+        -webkit-border-radius: 5px 0 0 5px !important;
+        -moz-border-radius: 5px 0 0 5px !important;
+        -ms-border-radius: 5px 0 0 5px !important;
+        -o-border-radius: 5px 0 0 5px !important;
+        border-radius: 5px 0 0 5px !important
+    }
+}
+
+@media all and (min-width:769px) and (max-width:1024px) {
+    body:after {
+        content: 'medium' !important
+    }
+
+    .main-interface #stacks #lists {
+        width: 300px !important;
+        z-index: 1 !important
+    }
+
+    .main-interface #stacks #tasks {
+        right: 0 !important;
+        left: 0 !important;
+        width: auto !important;
+    }
+
+    .main-interface #stacks #tasks.slided {
+        left: 300px !important
+    }
+}
+
+@media all and (min-width:1025px) {
+    body::after {
+        content: 'large' !important
+    }
+}

@@ -131,7 +131,7 @@ li.task-item .task-body .icon.task-separator {
     cursor: default
 }
 
-li.task-item .task-body .icon.task-checkbox {
+li.task-item .task-body .icon.task-checkbox, li.task-item .task-body .icon.check-trash {
     position: absolute;
     left: 9px;
     top: 8px

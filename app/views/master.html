@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>Handlelappen</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="google" value="notranslate"/>
+    <!-- Pinned Site -->
+    <!-- Main Data -->
+    <meta name="application-name" content="Handlelappen"/>
+    <meta name="msapplication-tooltip" content="Handlelappen"/>
+    <meta name="msapplication-TileColor" content="#6176ff"/>
+    <meta name="msapplication-TileImage" content="f417268b-81a2-43e0-a800-60bf210ad5a1.png"/>
+    <meta name="msapplication-starturl" content="./"/>
+    <!-- Pinned Site Tasks -->
+    <link rel="apple-touch-icon-precomposed"
+          href="http://wunderlist2.s3.amazonaws.com/7ab04e5a1a69c2f258e3fffeebfd806baf4dca1e/images/icon.png"/>
+
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-1.7.min.js'}"></script>
+    <!--[if lt IE 9]>
+    <script type="text/javascript">this.kaputBrowser = true;</script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/font.css'}"/>
+    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/tasks.css'}" data-requiremodule="tasks"
+          data-requirecontext="styles"/>
+    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/taskitem.css'}"
+          data-requiremodule="taskitem"
+          data-requirecontext="styles"/>
+    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/applicationLayout.css'}"
+          data-requiremodule="application/layout" data-requirecontext="styles"/>
+
+    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/sprite.css'}"
+          data-requiremodule="sprite" data-requirecontext="styles"/>
+    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/forms.css'}"
+          data-requiremodule="forms" data-requirecontext="styles"/>
+    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/responsive.css'}"
+          data-requiremodule="responsive" data-requirecontext="styles"/>
+    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/touch.css'}"
+          data-requiremodule="touch" data-requirecontext="styles"/>
+
+    <link rel="stylesheet" type="text/css" media="screen, handheld"
+          href="@{'/public/stylesheets/jquery/jquery-ui-1.8.16.custom.css'}"/>
+    <link rel="stylesheet" type="text/css" media="screen, handheld"
+          href="@{'/public/stylesheets/middagsplanleggeren.css'}"/>
+
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-ui.min.js'}"/>
+    <script type="text/javascript" language="javascript"
+            src="@{'/public/javascripts/jquery.ui.touch-punch.min.js'}"></script>
+</head>
+<body style="zoom: 1;background-color: rgba(120, 153, 78, 0.64)" class="animate">
+<div class="container">
+#{topmenu /}
+</div>
+
+
+<div class="main-interface">
+#{doLayout /}
+
+</div>
+
+</body>
+</html>

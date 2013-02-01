@@ -1954,10 +1954,11 @@ p.recipeTitle{
 
 
 #slider > div {
-	width: 190px;
+	width: 80%;
 	float: left;
 	height: 8px;
 	margin-top: 12px;
+    margin-left:5px;
 }
 
 #slider span {

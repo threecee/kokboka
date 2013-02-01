@@ -2,9 +2,7 @@ package models;
 
 import play.db.jpa.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "my_shopping_list_ingredient")
@@ -15,16 +13,22 @@ public class ShoppingListIngredient extends Model {
     public String unit;
     public boolean checked;
 
+
+    @Enumerated(EnumType.STRING)
+    public ShoppingListItemType type;
+
+
     @ManyToOne
     public ShoppingList shoppingList;
 
 
-    public ShoppingListIngredient(ShoppingList shoppingList, double amount, String unit, String description, boolean checked) {
+    public ShoppingListIngredient(ShoppingList shoppingList, double amount, String unit, String description, ShoppingListItemType type, boolean checked) {
         this.amount = amount;
         this.unit = unit;
         this.description = description;
         this.shoppingList = shoppingList;
         this.checked = checked;
+        this.type = type;
     }
 
 }

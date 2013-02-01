@@ -20,6 +20,7 @@ public class Bootstrap extends Job {
 
     private void setupDb()
     {
+
         User calle = null;
 
         String email = "carl.christian.christensen@gmail.com";

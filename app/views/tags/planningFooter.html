@@ -37,3 +37,9 @@
 
     </div>
 </div>
+<script type="text/javascript">
+	//stick the footer at the bottom of the page if we're on an iPad/iPhone due to viewport/page bugs in mobile webkit
+	if(navigator.platform == 'iPad' || navigator.platform == 'iPhone') {
+	     $("#footer").css("position", "static");
+	};
+</script>

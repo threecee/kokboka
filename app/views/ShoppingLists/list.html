@@ -1,143 +1,152 @@
 #{extends 'main.html' /}
 
-    <script type="text/javascript">
-	$(document).ready(function() {
+<script type="text/javascript">
+    $(document).ready(function () {
 
 
-		if ($(".handlelapp_recipe_container").length == 0)
-		{
-             $("p.disclaimer").text("Du har ikke valgt noen middager i middagsplanleggeren.");
-             $("div#velgDager form").remove();
-             $("div#deling").remove();
-		}
+        if ($(".handlelapp_recipe_container").length == 0) {
+            $("p.disclaimer").text("Du har ikke valgt noen middager i middagsplanleggeren.");
+            $("div#velgDager form").remove();
+            $("div#deling").remove();
+        }
 
 
-		$("input[type=checkbox]").click(function() {
-		    if (this.checked){
+        $("input[type=checkbox]").click(function () {
+            if (this.checked) {
 
-		      $(this).closest('.handlelapp_recipe_container').find(".oppskriftsdata-print").addClass('selected');
-		      $(this).closest('.handlelapp_recipe_container').find(".oppskriftsdata-print").find("input[type=checkbox]").attr('checked', true);
+                $(this).closest('.handlelapp_recipe_container').find(".oppskriftsdata-print").addClass('selected');
+                $(this).closest('.handlelapp_recipe_container').find(".oppskriftsdata-print").find("input[type=checkbox]").attr('checked', true);
 
-		    } else {
-		    	$(this).closest('.handlelapp_recipe_container').find(".oppskriftsdata-print").removeClass('selected');
-		    	$(this).closest('.handlelapp_recipe_container').find(".oppskriftsdata-print").find("input[type=checkbox]").attr('checked', false)
-		    }
-		});
-
-
-	$('#deling').styleSwitcher();
-
-	});
+            } else {
+                $(this).closest('.handlelapp_recipe_container').find(".oppskriftsdata-print").removeClass('selected');
+                $(this).closest('.handlelapp_recipe_container').find(".oppskriftsdata-print").find("input[type=checkbox]").attr('checked', false)
+            }
+        });
 
 
- </script>
+        $('#deling').styleSwitcher();
+
+    });
+
+
+</script>
 
 
 <!-- START velgDager -->
-    <div id="velgDager">
+<div id="velgDager">
 
-<h2>Lag handlelapp</h2>
-<p class="disclaimer">
-	Her kan du velge oppskriftene du vil ha med på handlelappen.
-</p>
-<br />
+    <h2>Lag handlelapp</h2>
 
-    #{form @save(shoppingList?.id)}
-		<h3>Dine valgte middager:</h3>
-		<input type="hidden" name="service" value="handleliste" />
-					<!-- START Recipe item -->
-                #{list items:0..6, as:'i'}
+    <p class="disclaimer">
+        Her kan du velge oppskriftene du vil ha med på handlelappen.
+    </p>
+    <br/>
+
+#{form @save(shoppingList?.id)}
+    <h3>Dine valgte middager:</h3>
+    <input type="hidden" name="service" value="handleliste"/>
+    <!-- START Recipe item -->
+    #{list items:0..6, as:'i'}
 
 
-                    #{if menu.getRecipeForDay(i) != null}
+        #{if menu.getRecipeForDay(i) != null}
 
-                <div class="handlelapp_recipe_container">
-                    <div class="date">
-                        <strong>${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}</strong>
-                        <span>${utils.DateUtil.dayOfMonth(utils.DateUtil.addDays(menu.usedFromDate, i))} ${utils.DateUtil.monthOfYearShort(utils.DateUtil.addDays(menu.usedFromDate, i))}</span>
-                    </div>
-                    <a href="@{Recipes.show(menu.getRecipeForDay(i).id)}">
-                        <img class="oppskriftsBilde" src="${models.Image.getThumb(menu.getRecipeForDay(i))}" />
-                    </a>
-                    <div class="recipe_content">
-                        <div class="checkBox_container">
+            <div class="handlelapp_recipe_container">
+                <div class="date">
+                    <strong>${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}</strong>
+                    <span>${utils.DateUtil.dayOfMonth(utils.DateUtil.addDays(menu.usedFromDate, i))} ${utils.DateUtil.monthOfYearShort(utils.DateUtil.addDays(menu.usedFromDate, i))}</span>
+                </div>
+                <a href="@{Recipes.show(menu.getRecipeForDay(i).id)}">
+                    <img class="oppskriftsBilde" src="${models.Image.getThumb(menu.getRecipeForDay(i))}"/>
+                </a>
+
+                <div class="recipe_content">
+                    <div class="checkBox_container">
                         #{field 'includeRecipes'}
                             <label for="${field.name}">Ta med</label>
-                            <input type="checkbox" name="${field.name}" id="${field.name}" value="${menu.getRecipeForDay(i).id}" checked />
+                            <input type="checkbox" name="${field.name}" id="${field.name}"
+                                   value="${menu.getRecipeForDay(i).id}" checked/>
                         #{/field}
-                        </div>
-
-                        <h5></h5>
-                        <h4><a href="@{Recipes.show(menu.getRecipeForDay(i).id)}">${menu.getRecipeForDay(i).title}</a></h4>
-
-                        <p>
-                        <div id="slider">
-
-                            <!-- adult - slider -->
-                            <strong>Mengde:</strong>
-                            <div id="slider_${i}"></div>
-                            <span id="slider_${i}_Range">${utils.Currency.prettyDouble(menu.getRecipeForDay(i).serves)}</span>
-                            <span>${menu.getRecipeForDay(i).servesUnit}</span>
-
-                        </div>
-                        </p>
-                       <input type="hidden" name="recipeAmounts-${menu.getRecipeForDay(i).id}" id="day-${i}" value="${utils.Currency.prettyDouble(menu.getRecipeForDay(i).serves)}"/>
-
                     </div>
 
+                    <h5></h5>
+                    <h4><a href="@{Recipes.show(menu.getRecipeForDay(i).id)}">${menu.getRecipeForDay(i).title}</a></h4>
+
+                    <p>
+
+                    <div id="slider">
+
+                        <!-- adult - slider -->
+                        <strong>Mengde:</strong>
+
+                        <div id="slider_${i}"></div>
+                    <span>${menu.getRecipeForDay(i).servesUnit}</span>
+                        <span id="slider_${i}_Range">${utils.Servings.getPreferredServings(user, menu.getRecipeForDay(i))}</span>
+
+                    </div>
+                    </p>
+                    <input type="hidden" name="recipeAmounts-${menu.getRecipeForDay(i).id}" id="day-${i}"
+                           value="${utils.Servings.getPreferredServings(user, menu.getRecipeForDay(i))}"/>
 
                 </div>
-                        <script type="text/javascript">
-                        	$(document).ready(function() {
-                        		$("#slider_${i}").slider({
-                        		   	value:${menu.getRecipeForDay(i).serves},
-                        			min:0,
-                        			max:8,
-                        			range: 'min',
-                        			step:1,
-                        			slide: function(event,ui){
-                        				if(ui.value==0)
-                        				return false;
-                        				 $("#slider_${i}_Range").text(ui.value);
-                                         $("#day_${i}").value(ui.value);
-                        			},
-                        			stop: function(event, ui) {
-                        				//saveRecipeAndUpdateRecipedata(ui.value, $('#slider_child').slider('value'));
-                        			}
-                        		});
-                            });
-                        </script>
-
-                    #{/if}
 
 
-                #{/list}
-					<!-- END Recipe item -->
-		<input type="submit" value="Lag handlelapp" class="submit_button blue_button" />
-    #{/form}
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $("#slider_${i}").slider({
+                        value:${utils.Servings.getPreferredServings(user, menu.getRecipeForDay(i))},
+                        min: 0,
+                        max: 8,
+                        range: 'min',
+                        step: 1,
+                        slide: function (event, ui) {
+                            if (ui.value == 0)
+                                return false;
+                            $("#slider_${i}_Range").text(ui.value);
+                            $("#day_${i}").attr("value",ui.value);
+                        },
+                        stop: function (event, ui) {
+                            //saveRecipeAndUpdateRecipedata(ui.value, $('#slider_child').slider('value'));
+                        }
+                    });
+                });
+            </script>
+
+        #{/if}
+
+
+    #{/list}
+    <div class="handlelapp_recipe_container">
+        <div class="recipe_content">
+            <div class="checkBox_container">
+                #{field 'includePreferredRecipes'}
+                    <label for="${field.name}">Ta med</label>
+                    <input type="checkbox" name="${field.name}" value="preferred" id="${field.name}" checked/>
+                #{/field}
+            </div>
+
+            <h4 style="margin:8px;">Matvarer du har lagt inn som faste varer hver uke</h4>
+
+        </div>
+    </div>
+    <!-- END Recipe item -->
+    <input type="submit" value="Lag handlelapp" class="submit_button blue_button"/>
+#{/form}
 
 
 </div>
 <!-- END velgDager -->
 
 
-
-
-
 <script type="text/javascript">
-	$(document).ready(function(){
-		$('div#menu').find('li').removeClass('active');
+    $(document).ready(function () {
+        $('div#menu').find('li').removeClass('active');
 
-	     	$('div#menu').find('li:eq(5)').addClass('active');
+        $('div#menu').find('li:eq(5)').addClass('active');
 
 
-	});
+    });
 
-</script>
-<script type="text/javascript">
-	//stick the footer at the bottom of the page if we're on an iPad/iPhone due to viewport/page bugs in mobile webkit
-	if(navigator.platform == 'iPad' || navigator.platform == 'iPhone') {
-	     $("#footer").css("position", "static");
-	};
 </script>
 

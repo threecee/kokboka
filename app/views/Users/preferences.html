@@ -1,0 +1,154 @@
+#{extends 'master.html' /}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#slider_adult").slider({
+            value:${user.preferredServings != null?user.preferredServings:2},
+            min: 0,
+            max: 8,
+            range: 'min',
+            step: 1,
+            slide: function (event, ui) {
+                if (ui.value == 0)
+                    return false;
+                $("#slider_Range").text(ui.value);
+
+            },
+            stop: function (event, ui) {
+                      savePreferredServings(ui.value);
+            }
+        });
+
+        $("input#add-description").keypress(function (e) {
+            if (e.which == 13) {
+                var amountInput = $(this).parent().find("input#add-amount");
+                var unitInput = $(this).parent().find("input#add-unit");
+                var descriptionInput = $(this);
+
+                addIngredient(amountInput.attr("value"), unitInput.attr("value"), $(this).attr("value"));
+                amountInput.attr("value", "");
+                unitInput.attr("value", "");
+                descriptionInput.attr("value", "");
+
+
+            }
+        });
+
+        $("a.task-checkbox").click(function () {
+            removeIngredient($(this).parent().parent().attr("id"));
+            $(this).parent().parent().detach();
+        });
+
+
+    });
+
+
+    function addIngredient(amount, unit, description) {
+        $.ajax({
+            type: "POST",
+            url: "/users/addIngredient",
+            data: "amount=" + amount + "&unit=" + unit + "&description=" + description,
+            dataType: "xml"
+
+        }).always(function (data) {
+                    injectTask(data.responseText, amount, unit, description);
+
+                });
+    }
+    function removeIngredient(id) {
+        $.ajax({
+            type: "POST",
+            url: "/users/removeIngredient",
+            data: "id=" + id,
+            dataType: "xml"
+
+        });
+    }
+    function savePreferredServings(amount) {
+        $.ajax({
+            type: "POST",
+            url: "/users/preferredServings",
+            data: "amount=" + amount,
+            dataType: "xml"
+
+        });
+    }
+
+        var taskTemplate = "<li class=\"task-item\" id=\"$ID$\">" +
+                "<div class=\"task-body\"><a class=\"task-checkbox\"><span class=\"icon check-trash \"></span></a> " +
+                "<a class=\"icon task-separator\"></a>" +
+                "<div class=\"title-wrapper\"><span" +
+                "  class=\"title\"><span>$AMOUNT$ $UNIT$</span> $DESCRIPTION$</span>" +
+                "</div>" +
+                "</div>" +
+                "</li>";
+
+        function injectTask(id, amount, unit, description) {
+            var injectString = taskTemplate.replace("$ID$", id).replace("$AMOUNT$", amount).replace("$UNIT$", unit).replace("$DESCRIPTION$", description);
+
+            $('<div/>').html(injectString).prependTo("ol#ingredient-tasks");
+
+        }
+
+
+</script>
+
+
+<div id="stacks">
+    <div id="tasks" class="stack" style="padding-left: 0px;">
+        <div class="tasks-scroll">
+            <h2 style="display: block; font-size: 20px">Matvarer som legges til handlelappen hver uke</h2>
+
+            <div class="addtask" style="">
+
+                <a class="input-date"><span class="icon input-date transparent"></span></a>
+                <input style="width:15%" id="add-amount" type="text" class="transparent mousetrap" maxlength="255"
+                       key-placeholder="placeholder_add_task_to_$" data-placeholder="amount" placeholder="Mengde">
+                <input id="add-unit" style="width:15%" type="text" class="transparent mousetrap" maxlength="255"
+                       key-placeholder="placeholder_add_task_to_$" data-placeholder="unit" placeholder="enhet">
+                <input id="add-description" style="width:60%" type="text" class="transparent mousetrap" maxlength="255"
+                       key-placeholder="placeholder_add_task_to_$" data-placeholder="Inbox"
+                       placeholder="beskrivelse (trykk enter her for å legge til)">
+            </div>
+            <div class="task-list">
+                <div class="grouped-tasks" rel="inbox">
+                    <ol class="tasks" id="ingredient-tasks" style="padding-left:0px;">
+                    #{list items:shoppingList, as:'ingredient'}
+                        <li class="task-item" id="${ingredient.id}">
+                            <div class="task-body"><a class="task-checkbox"><span
+                                    class="icon check-trash "></span></a> <a class="icon task-separator"></a>
+
+                                <div class="title-wrapper"><span
+                                        class="title">
+                                    #{if !ingredient.type.equals(models.ShoppingListItemType.onthefly) }
+                                        <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
+                                    #{/if}
+                                ${ingredient.description}</span>
+                                </div>
+                            </div>
+                        </li>
+                    #{/list}
+                    </ol>
+
+                </div>
+            </div>
+            <h2 style="display: block; font-size: 20px">Antall personer oppskriftene skal ta utganspunkt i</h2>
+
+            <p>
+
+            <div id="slider">
+
+                <!-- adult - slider -->
+                <strong>Mengde:</strong>
+
+                <div id="slider_adult"></div>
+                <span>personer</span>
+                <span id="slider_Range">${user.preferredServings != null?utils.Currency.prettyDouble(user.preferredServings):2}</span>
+
+            </div>
+            </p>
+        </div>
+    </div>
+</div>

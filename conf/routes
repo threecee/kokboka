@@ -28,8 +28,8 @@ GET     /admin/?                                Admin.index
 
 GET     /admin/mineoppskrifter/{id}                 Admin.form
 POST    /admin/mineoppskrifter/{id}                 Admin.save
-GET     /admin/new                          Admin.form
-POST    /admin/new                          Admin.save
+GET     /recipes/new                          Recipes.form
+POST    /recipes/new                          Recipes.save
 GET     /admin/menus/delete/{id}            Menus.delete
 
 

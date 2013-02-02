@@ -1,12 +1,74 @@
-#{extends 'main.html' /}
+#{extends 'master.html' /}
 
-#{ifnot recipe?.id}
-<h3>Legg inn <span>en ny oppskrift</span></h3>
-#{/ifnot}
-#{else}
-<h3>Rediger <span>oppskrift</span></h3>
-#{/else}
 
+
+<div id="stacks">
+    <div id="tasks" class="stack" style="padding-left: 0px;">
+        <div class="tasks-scroll">
+            <div class="addtask" style="">
+                 <input type="text" name="title"
+                        value="${recipe?.title}" id="title" class="transparent mousetrap" key-placeholder="placeholder_title_$" data-placeholder="title" placeholder="Tittel" style="font-size: 20px;" />
+         </div>
+
+
+
+
+
+        <h2 style="display: block; font-size: 20px">
+        Ingredienser
+        </h2>
+            <div class="addtask" style="">
+
+                <a class="input-date"><span class="icon input-date transparent"></span></a>
+                <input style="width:15%" id="add-amount" type="text" class="transparent mousetrap" maxlength="255"
+                       key-placeholder="placeholder_add_task_to_$" data-placeholder="amount" placeholder="Mengde">
+                <input id="add-unit" style="width:15%" type="text" class="transparent mousetrap" maxlength="255"
+                       key-placeholder="placeholder_add_task_to_$" data-placeholder="unit" placeholder="enhet">
+                <input id="add-description" style="width:60%" type="text" class="transparent mousetrap" maxlength="255"
+                       key-placeholder="placeholder_add_task_to_$" data-placeholder="Inbox"
+                       placeholder="beskrivelse (trykk enter her for å legge til)">
+            </div>
+            <div class="task-list">
+                <div class="grouped-tasks" rel="inbox">
+                    <ol class="tasks" id="ingredient-tasks" style="padding-left:0px;">
+                    #{list items:recipe.ingredients, as:'ingredient'}
+                        <li class="task-item" id="${ingredient.id}">
+                            <div class="task-body"><a class="task-checkbox"><span
+                                    class="icon check-trash "></span></a> <a class="icon task-separator"></a>
+
+                                <div class="title-wrapper"><span
+                                        class="title">
+                                    #{if !ingredient.type.equals(models.ShoppingListItemType.onthefly) }
+                                        <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
+                                    #{/if}
+                                ${ingredient.description}</span>
+                                </div>
+                            </div>
+                        </li>
+                    #{/list}
+                    </ol>
+
+                </div>
+            </div>
+            <h2 style="display: block; font-size: 20px">Oppskriften holder til</h2>
+            <div class="addtask" style="">
+
+                <a class="input-date"><span class="icon input-date transparent"></span></a>
+                <input style="width:15%" id="serves" type="text" class="transparent mousetrap" maxlength="255"
+                       key-placeholder="placeholder_add_task_to_$" data-placeholder="amount" placeholder="antall">
+                <input id="servesUnit" style="width:60%" type="text" class="transparent mousetrap" maxlength="255"
+                       key-placeholder="placeholder_add_task_to_$" data-placeholder="Inbox"
+                       placeholder="enhet, for eksempel stk eller personer (trykk enter her for å legge til)">
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<!--
 
 #{form @save(recipe?.id), enctype:'multipart/form-data'}
 
@@ -19,13 +81,6 @@
 
 <div id="recipe">
     <div class="">
-        #{field 'title'}
-        <h2>
-            <label>Oppskriftens tittel:</label>
-            <input type="text" name="${field.name}"
-                   value="${recipe?.title}" class="${field.errorClass}" size="100"/>
-        #{/field}
-    </h2>
 
         <div id="ingress">
             <h3>Ingress</h3>
@@ -155,3 +210,5 @@
 </p>
 
 #{/form}
+
+-->

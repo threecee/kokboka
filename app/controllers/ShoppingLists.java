@@ -76,8 +76,6 @@ public class ShoppingLists extends CRUD {
         Menu menu = Menu.findById(menuId);
         User user = User.find("byEmail", Security.connected()).first();
 
-
-
         ShoppingList shoppingList;
 
         if (menu.shoppingList == null) {

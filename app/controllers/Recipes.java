@@ -8,7 +8,6 @@ import play.mvc.With;
 import utils.DateUtil;
 import utils.TagUtil;
 
-import java.io.File;
 import java.util.*;
 
 
@@ -115,11 +114,106 @@ public class Recipes extends CRUD {
         user.removeFavorite(recipe).save();
         response.print("<xml/>");
     }
+
+
+    public static void addIngredient(Long id, String amount, String unit, String description) {
+        Recipe recipe = Recipe.findById(id);
+        Ingredient ingredient = recipe.addIngredient(amount, unit, description);
+        recipe.save();
+        response.print(ingredient.id);
+    }
+
+    public static void updateIngredient(Long id, String amount, String unit, String description) {
+        Ingredient ingredient = Ingredient.findById(id);
+        ingredient.amount = amount;
+        ingredient.unit = unit;
+        ingredient.description = description;
+        response.print("<xml/>");
+    }
+
+    public static void removeIngredient(Long recipeId, Long ingredientId) {
+        Recipe recipe = Recipe.findById(recipeId);
+        Ingredient ingredient = Ingredient.findById(ingredientId);
+        recipe.ingredients.remove(ingredient);
+        recipe.save();
+        ingredient.delete();
+        response.print("<xml/>");
+    }
+
+    public static void updateTitle(Long id, String title) {
+        Recipe recipe = Recipe.findById(id);
+        recipe.title = title;
+        recipe.save();
+        response.print("<xml/>");
+
+    }
+
+    public static void updateDescription(Long id, String description) {
+        Recipe recipe = Recipe.findById(id);
+        recipe.description = description;
+        recipe.save();
+        response.print("<xml/>");
+
+    }
+
+    public static void updateServes(Long id, double serves) {
+        Recipe recipe = Recipe.findById(id);
+        recipe.serves = serves;
+        recipe.save();
+        response.print("<xml/>");
+
+    }
+
+    public static void updateServesUnit(Long id, String servesUnit) {
+        Recipe recipe = Recipe.findById(id);
+        recipe.servesUnit = servesUnit;
+        recipe.save();
+        response.print("<xml/>");
+
+    }
+
+    public static void updateSteps(Long id, String steps) {
+        Recipe recipe = Recipe.findById(id);
+        recipe.steps = steps;
+        recipe.save();
+        response.print("<xml/>");
+
+    }
+
+    public static void updateSource(Long id, String source) {
+        Recipe recipe = Recipe.findById(id);
+        recipe.steps = source;
+        recipe.save();
+        response.print("<xml/>");
+    }
+
+    public static void addTag(Long id, String tag) {
+        Recipe recipe = Recipe.findById(id);
+        recipe.tagItWith(tag);
+        recipe.save();
+        response.print("<xml/>");
+
+    }
+
+    public static void removeTag(Long id, String tag) {
+        Recipe recipe = Recipe.findById(id);
+        recipe.tags.remove(Tag.hashName(tag));
+        recipe.save();
+        response.print("<xml/>");
+
+    }
+
+    public static void updatePhoto(Long id, Blob photo) {
+        Recipe recipe = Recipe.findById(id);
+
+    }
+
+
     public static void favorites() {
         User user = User.find("byEmail", Security.connected()).first();
-         List<Recipe> recipes = user.favorites;
+        List<Recipe> recipes = user.favorites;
         render("Recipes/index.html", recipes);
-     }
+    }
 
     public static void save(Long id, String title, String description, double serves, String servesUnits, String[] amounts, String[] units, String[] ingredients, String steps, String source, String tags, Blob photo) {
         Recipe recipe;
@@ -190,11 +284,15 @@ public class Recipes extends CRUD {
     }
 
     public static void form(Long id) {
-         if (id != null) {
-             Recipe recipe = Recipe.findById(id);
-             render(recipe);
-         }
-         render();
-     }
+        User user = User.find("byEmail", Security.connected()).first();
+        Recipe recipe;
+        if (id != null) {
+            recipe = Recipe.findById(id);
+        } else {
+            recipe = new Recipe(user);
+        }
+
+        render(recipe);
+    }
 
 }

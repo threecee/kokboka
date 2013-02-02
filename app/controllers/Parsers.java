@@ -73,6 +73,17 @@ public class Parsers extends Controller {
         Logger.info(report);
     }
 
+
+    public static void ryddIIngredienser() {
+        List<Ingredient> ingredients = Ingredient.find("order by description desc").fetch();
+
+        for (Ingredient ingredient : ingredients) {
+            ingredient.description = cleanProductNames(ingredient.description);
+            ingredient.save();
+            convertPackageToWeight(ingredient);
+        }
+    }
+
     public static void importRema1000(boolean overskriving) {
         String urlTemplate = "http://www.rema.no/under100/?service=oppskrifter&allRecipes=true&page=";
 
@@ -125,15 +136,15 @@ public class Parsers extends Controller {
     private static void importRema1000Tags() {
         String urlTemplate = "http://www.rema.no/under100/?service=oppskrifter&allRecipes=true&page=1";
 
-            Document recipeDocument = getDocument(urlTemplate);
+        Document recipeDocument = getDocument(urlTemplate);
 
-            for (Node event : XPath.selectNodes("//div[@id='tags']/div/ul/li", recipeDocument)) {
-                tagRecipes(event);
-            }
+        for (Node event : XPath.selectNodes("//div[@id='tags']/div/ul/li", recipeDocument)) {
+            tagRecipes(event);
+        }
 
-            for (Node event : XPath.selectNodes("//div[@id='campaign_archive_container']/ul/li", recipeDocument)) {
-                tagRecipes(event);
-            }
+        for (Node event : XPath.selectNodes("//div[@id='campaign_archive_container']/ul/li", recipeDocument)) {
+            tagRecipes(event);
+        }
     }
 
     private static void tagRecipes(Node event) {
@@ -152,24 +163,24 @@ public class Parsers extends Controller {
             if (isApproved(name)) {
 
                 int page = 1;
-                  boolean morePages = true;
-                  while (morePages) {
+                boolean morePages = true;
+                while (morePages) {
 
-                      Document tagDocument = getDocument(url + urlTemplate + page);
+                    Document tagDocument = getDocument(url + urlTemplate + page);
 
-                      tagUrls = findRecipeUrls(tagDocument);
-                      morePages = tagUrls.size() > 0;
-                      page++;
+                    tagUrls = findRecipeUrls(tagDocument);
+                    morePages = tagUrls.size() > 0;
+                    page++;
 
-                        for (String tagUrl : tagUrls) {
-                            Recipe recipe = Recipe.find("bySource", tagUrl).first();
-                            if (recipe != null) {
-                                recipe.tagItWith(name);
-                                recipe.save();
-                                reporter("Tagget '" + recipe.title + "' med '" + name + "'");
-                            }
+                    for (String tagUrl : tagUrls) {
+                        Recipe recipe = Recipe.find("bySource", tagUrl).first();
+                        if (recipe != null) {
+                            recipe.tagItWith(name);
+                            recipe.save();
+                            reporter("Tagget '" + recipe.title + "' med '" + name + "'");
                         }
-                  }
+                    }
+                }
             }
 
         }
@@ -270,6 +281,7 @@ public class Parsers extends Controller {
             recipe.tags = new HashSet<Tag>();
             recipe.ingredients = new ArrayList<Ingredient>();
             recipe.save();
+            Ingredient.delete("recipe = ?", recipe);
 
         }
 
@@ -318,27 +330,38 @@ public class Parsers extends Controller {
     private static Pattern packagePattern = Pattern.compile("c?a? ?([0-9]+,?[0-9]*) ?(k?g)");
 
     private static void convertPackageToWeight(Ingredient originalIngredient) {
-        if (originalIngredient.unit == "pk") {
+        if (originalIngredient.unit.matches("pk|stk|pose")) {
             Matcher matcher = packagePattern.matcher(originalIngredient.description);
             if (matcher.find()) {
                 String amount = matcher.group(1);
                 String newDesc = matcher.replaceFirst("");
                 String unit = matcher.group(2);
-                Double amountDouble = Double.parseDouble(amount);
+                Double amountDouble = Double.parseDouble(amount.replace(",","."));
                 Double totalAmount = amountDouble * Double.parseDouble(originalIngredient.amount);
 
-                Logger.info("Replacing" + originalIngredient.amount + " " + originalIngredient.unit + " " + originalIngredient.description + " with: " + totalAmount + " " + unit + " " + newDesc);
+                reporter("Replacing " + originalIngredient.amount + " " + originalIngredient.unit + " " + originalIngredient.description + " with: " + totalAmount + " " + unit + " " + newDesc);
+                originalIngredient.amount = amountDouble + "";
+                originalIngredient.unit = unit;
+                originalIngredient.description = newDesc;
+                originalIngredient.save();
             }
         }
     }
 
-    private static String cleanProductNames(String produktnavn) {
-        String[] kjenteProdukter = new String[]{"Godehav", "Solvinge", "REMA 1000", "Tine", "Bama", "Kikkoman", "Nordfjord", "Blue Dragon", "Taga", "Finsbråten", "Hatting", "Mesterbakeren", "Grilstad", "Ideal", "Staur", "MaxMat", "Viddas", "frossen", " - NB! Sesongvare"};
+    static String[] kjenteProdukter = new String[]{"5%", "9%", "14%", "18%", "Toro", "Barilla", "Gilde", "Idun", "Mills", "Grovt og godt", "Godehav", "Solvinge", "REMA 1000", "Tine", "Bama", "Kikkoman", "Nordfjord", "Blue Dragon", "Taga", "Finsbråten", "Hatting", "Mesterbakeren", "Grilstad", "Ideal", "Staur", "MaxMat", "Viddas", "Gourmet", "Pampas", "frossen", "frosne", "naturell", "M/L,", " - NB! Sesongvare"};
+
+    private static String cleanProductNames(String beskrivelse) {
+        String produktnavn = beskrivelse;
 
         for (String kjentProdukt : kjenteProdukter) {
-            produktnavn = produktnavn.replaceAll(" *" + kjentProdukt + " *", "");
+            produktnavn = produktnavn.replaceAll(" *" + kjentProdukt + " *", " ");
         }
-        return produktnavn.trim();
+
+        produktnavn = produktnavn.trim();
+        if (produktnavn.compareToIgnoreCase(beskrivelse) != 0) {
+            reporter("Erstattet ingrediensbeskrivelse '" + beskrivelse + "' med '" + produktnavn + "'");
+        }
+        return produktnavn;
     }
 
     private static String getStep(Node event) {

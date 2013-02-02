@@ -68,11 +68,19 @@ public class Recipe extends Model {
         this.postedAt = new Date();
     }
 
-    public Recipe addIngredient(String amount, String unit, String description) {
+    public Recipe(User user) {
+        this.author = user;
+        this.ingredients = new ArrayList<Ingredient>();
+        this.tags = new HashSet<Tag>();
+        this.postedAt = new Date();
+
+    }
+
+    public Ingredient addIngredient(String amount, String unit, String description) {
         Ingredient newIngredient = new Ingredient(this, amount, unit, description).save();
         this.ingredients.add(newIngredient);
         this.save();
-        return this;
+        return newIngredient;
     }
 /*
     public void addPhoto(Blob photo) {

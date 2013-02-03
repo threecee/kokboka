@@ -320,7 +320,8 @@ public class Parsers extends Controller {
 
         WS.HttpResponse response = WS.url(photoUrl).get();
         InputStream fileStream = response.getStream();
-        String name = Calendar.getInstance().getTimeInMillis() + "" + ((int) (Math.random() * 100000)) + photoUrl.substring(photoUrl.length() - 4);
+//        String name = Calendar.getInstance().getTimeInMillis() + "" + ((int) (Math.random() * 100000)) + photoUrl.substring(photoUrl.length() - 4);
+        String name = recipe.id + photoUrl.substring(photoUrl.length() - 4);
         Image.save(name, fileStream);
         recipe.photoName = name;
 

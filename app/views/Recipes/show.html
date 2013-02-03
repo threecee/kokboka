@@ -1,9 +1,85 @@
-#{extends 'main.html' /}
+#{extends 'master.html' /}
 
 #{if recipe != null}
     #{set title:recipe.title /}
 
-    #{display recipe:recipe, as:'full' /}
+<div id="stacks">
+    <div id="tasks" class="stack" style="padding-left: 0px;">
+        <div class="tasks-scroll">
+
+
+            <h2 class="" style="font-size: 20px;">
+            ${recipe?.title}</h2>
+
+
+            <div class="whitetext" style="">
+            ${recipe?.description}</div>
+
+
+            <div class="" style="margin:2%">
+                <img id="bilde" src="${models.Image.get(recipe)}"/>
+            </div>
+
+
+            <h2 style="display: block; font-size: 20px">Oppskriften holder til</h2>
+
+            <div class="" style="">
+
+                <a class="input-date"><span class="icon input-date transparent"></span></a>
+                <span style="width:15%" id="serves" type="text" class="whitetext"
+                        >${utils.Currency.prettyDouble(recipe?.serves)}</span>
+                <span id="servesUnit" style="width:60%" class="whitetext"
+                        >${recipe?.servesUnit}</span>
+            </div>
+
+
+            <h2 style="display: block; font-size: 20px">
+                Ingredienser
+            </h2>
+
+            <div class="task-list">
+                <div class="grouped-tasks" rel="inbox">
+                    <ol class="tasks" id="ingredient-tasks" style="padding-left:0px;">
+                        #{list items:recipe.ingredients, as:'ingredient'}
+                            <li class="task-item" id="${ingredient.id}">
+                                <div class="task-body"><a class="task-checkbox"><span
+                                        class="icon task-checkbox "></span></a> <a class="icon task-separator"></a>
+
+                                    <div class="title-wrapper"><span
+                                            class="title">
+                                        <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
+                                    ${ingredient.description}</span>
+                                    </div>
+                                </div>
+                            </li>
+                        #{/list}
+                    </ol>
+
+                </div>
+            </div>
+
+            <h2 style="display: block; font-size: 20px">
+                Fremgangsmåte
+            </h2>
+
+            <div class="" style="">
+                <div name="steps" id="steps" class="whitetext"
+                     style="font-size: 14px;">${recipe?.steps.escape().nl2br()}</div>
+            </div>
+
+
+            <a href="@{Recipes.update(recipe.id)}"/>
+
+            <div class="customButton">Rediger</div>
+            </a>
+
+
+        </div>
+    </div>
+</div>
+
+
+
 #{/if}
 #{else }
 <h2>Fant ikke oppskrift!</h2>

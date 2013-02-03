@@ -23,12 +23,12 @@
 }
 
 #tasks .tasks-scroll {
-    overflow: auto;
+/*    overflow: auto;
     position: absolute;
     bottom: 0;
     top: 0;
     left: 0;
-    right: 0;
+    right: 0;      */
     padding-bottom: 9px
 }
 
@@ -48,7 +48,7 @@
 }
 
 #tasks >  {
-    padding: 6px 7px 0 17px
+    padding: 6px 7px 0 7px
 }
 
 #tasks .addtask {
@@ -153,4 +153,5 @@
 #tasks h2.no-results {
     font-size: 22px;
     font-weight: bold;
-    text-transform: none
+    text-transform: none;
+}

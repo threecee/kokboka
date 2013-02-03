@@ -1,12 +1,10 @@
-<div id="menu">
-		<div class="width">
+<div id="topmenu">
 			<ul>
-                <li class="first ${request.action == 'Recipes.favorites' ? 'active' : ''}"><a href="@{Recipes.favorites()}">Mine oppskrifter</a></li>
-				<li class="${request.action == 'Recipes.index' ? 'active' : ''}"><a href="@{Recipes.index()}">Alle oppskrifter</a></li>
-				<li class="${request.controller == "ShoppingLists" ? 'active' : ''}"><a href="@{ShoppingLists.showCurrent()}">Ukens handlelapp</a></li>
-				<li class="${request.action == "Recipes.showCurrent" ? 'active' : ''}"><a href="@{Recipes.showCurrent()}">Dagens oppskrift</a></li>
-                <li class="${request.action == "Users.preferences" ? 'active' : ''}"><a href="@{Users.preferences()}">Innstillinger</a></li>
+                <li class="first ${request.action == 'Recipes.favorites' ? 'active' : ''}"><a class="whitetext" href="@{Recipes.favorites()}">Mine oppskrifter</a></li>
+				<li class="${request.action == 'Recipes.index' ? 'active' : ''}"><a class="whitetext" href="@{Recipes.index()}">Alle oppskrifter</a></li>
+				<li class="${request.controller == "ShoppingLists" ? 'active' : ''}"><a class="whitetext" href="@{ShoppingLists.showCurrent()}">Ukens handlelapp</a></li>
+				<li class="${request.action == "Recipes.showCurrent" ? 'active' : ''}"><a class="whitetext" href="@{Recipes.showCurrent()}">Dagens oppskrift</a></li>
+                <li class="${request.action == "Users.preferences" ? 'active' : ''}"><a class="whitetext" href="@{Users.preferences()}">Innstillinger</a></li>
 			</ul>
-		</div>
 
 	</div>

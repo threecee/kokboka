@@ -19,8 +19,7 @@ public final class Image {
 
     private Recipe recipe;
 
-    public Image(Recipe recipe)
-    {
+    public Image(Recipe recipe) {
         this.recipe = recipe;
     }
 
@@ -63,6 +62,14 @@ public final class Image {
         File resizedFile = new File("" + Calendar.getInstance().getTimeInMillis());
 
         Images.resize(fullSize, resizedFile, 140, 140);
+
+        return new FileInputStream(resizedFile);
+    }
+
+    private static InputStream createRegular(File fullSize) throws IOException {
+        File resizedFile = new File("" + Calendar.getInstance().getTimeInMillis());
+
+        Images.resize(fullSize, resizedFile, 800, 600);
 
         return new FileInputStream(resizedFile);
     }
@@ -134,7 +141,7 @@ public final class Image {
                     // do nothing
                 }
             }
-            Logger.error("Could not connect to server.",e);
+            Logger.error("Could not connect to server.", e);
         }
 
         __main:
@@ -156,13 +163,13 @@ public final class Image {
 
             File inputFile = getFileFromInputStream(localFileStream);
 
-            InputStream input;
-            input = new FileInputStream(inputFile);
+ //           InputStream input;
+//            input = new FileInputStream(inputFile);
 
             ftp.storeFile("thumb_" + remote, createThumb(inputFile));
-            ftp.storeFile(remote, input);
+            ftp.storeFile(remote, createRegular(inputFile));
 
-            input.close();
+   //         input.close();
 
 
             ftp.noop(); // check that control connection is working OK

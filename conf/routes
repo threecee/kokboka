@@ -26,8 +26,8 @@ GET     /favicon.ico                            404
 GET     /admin/?                                Admin.index
 *       /admin                                  module:crud
 
-GET     /admin/mineoppskrifter/{id}                 Admin.form
-POST    /admin/mineoppskrifter/{id}                 Admin.save
+GET     /recipes/{id}/edit                 Recipes.edit
+POST    /recipes/{id}/edit                 Recipes.save
 GET     /recipes/new                          Recipes.form
 POST    /recipes/new                          Recipes.save
 GET     /admin/menus/delete/{id}            Menus.delete

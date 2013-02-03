@@ -1,41 +1,209 @@
 #{extends 'master.html' /}
 
 
+<script src="@{'/public/javascripts/upload/vendor/jquery.ui.widget.js'}" xmlns="http://www.w3.org/1999/html"></script>
+<script src="@{'/public/javascripts/upload/jquery.iframe-transport.js'}"></script>
+<script src="@{'/public/javascripts/upload/jquery.fileupload.js'}"></script>
+
+<script src="http://narf.pl/jquery-typing/jquery.typing-0.2.0.min.js"></script>
+
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/base/jquery-ui.css" id="theme">
+<!-- CSS to style the file input field as button and adjust the jQuery UI progress bars -->
+<link rel="stylesheet" href="http://blueimp.github.com/jQuery-File-Upload/css/jquery.fileupload-ui.css">
+
+<link rel="stylesheet" href="@{'/public/stylesheets/spinner.css'}">
+
+<script>
+    $(function () {
+        $('#thefile').fileupload({
+            dataType: 'json',
+            add: function (e, data) {
+                        data.submit();
+                $('img#bilde').hide();
+                $('#floatingBarsG').show();
+            },
+            done: function (e, data) {
+                $.each(data.result.files, function (index, file) {
+                    $('img#bilde').attr("src", file.url + "?random=2323" + Math.random());
+                    $('#floatingBarsG').hide();
+                    $('img#bilde').show();
+                });
+            }
+        });
+    });
+
+    var typewatch = function(){
+        var timer = 0;
+        return function(callback, ms){
+            clearTimeout (timer);
+            timer = setTimeout(callback, ms);
+        }
+    }();
+
+    $(document).ready(function () {
+
+
+        $("input#title").typing({stop: function (event, $elem) {updateField($elem)},delay: 2000});
+        $("textarea#description").typing({stop: function (event, $elem) {updateField($elem)},delay: 2000});
+        $("input#serves").typing({stop: function (event, $elem) {updateField($elem)},delay: 2000});
+        $("input#servesUnit").typing({stop: function (event, $elem) {updateField($elem)},delay: 2000});
+        $("textarea#steps").typing({stop: function (event, $elem) {updateField($elem)},delay: 2000});
+
+
+        $("input#add-description").keypress(function (e) {
+            if (e.which == 13) {
+                var amountInput = $(this).parent().find("input#add-amount");
+                var unitInput = $(this).parent().find("input#add-unit");
+                var descriptionInput = $(this);
+
+                addIngredient(amountInput.val(), unitInput.val(), $(this).val());
+                amountInput.val("");
+                unitInput.val("");
+                descriptionInput.val( "");
+
+
+            }
+        });
+
+        $("a.task-checkbox").click(function () {
+            removeIngredient(${recipe?.id}, $(this).parent().parent().attr("id"));
+            $(this).parent().parent().detach();
+        });
+
+
+    });
+
+
+    function addIngredient(amount, unit, description) {
+        $.ajax({
+            type: "POST",
+            url: "/recipes/addIngredient",
+            data: "id=" + ${recipe?.id} + "&amount=" + amount + "&unit=" + unit + "&description=" + description,
+            dataType: "xml"
+
+        }).always(function (data) {
+                    injectTask(data.responseText, amount, unit, description);
+
+                });
+    }
+    function removeIngredient(id, ingredientId) {
+        $.ajax({
+            type: "POST",
+            url: "/recipes/removeIngredient",
+            data: "recipeId=" + id + "&ingredientId=" + ingredientId ,
+            dataType: "xml"
+
+        });
+    }
+    function updateField(element) {
+        $.ajax({
+            type: "POST",
+            url: "/recipes/update" + $(element).attr("id"),
+            data: "id=" +  ${recipe?.id} + "&" + $(element).attr("id") + "=" + $(element).val(),
+            dataType: "xml"
+
+        });
+    }
+
+        var taskTemplate = "<li class=\"task-item\" id=\"$ID$\">" +
+                "<div class=\"task-body\"><a class=\"task-checkbox\"><span class=\"icon check-trash \"></span></a> " +
+                "<a class=\"icon task-separator\"></a>" +
+                "<div class=\"title-wrapper\"><span" +
+                "  class=\"title\"><span>$AMOUNT$ $UNIT$</span> $DESCRIPTION$</span>" +
+                "</div>" +
+                "</div>" +
+                "</li>";
+
+        function injectTask(id, amount, unit, description) {
+            var injectString = taskTemplate.replace("$ID$", id).replace("$AMOUNT$", amount).replace("$UNIT$", unit).replace("$DESCRIPTION$", description);
+
+            $('<div/>').html(injectString).prependTo("ol#ingredient-tasks");
+
+        }
+
+</script>
 
 <div id="stacks">
     <div id="tasks" class="stack" style="padding-left: 0px;">
         <div class="tasks-scroll">
 
 
-
-
-         <div class="addtask" style="">
-                 <input type="text" name="title"
-                        value="${recipe?.title}" id="title" class="transparent mousetrap" key-placeholder="placeholder_title_$" data-placeholder="title" placeholder="Tittel" style="font-size: 20px;" />
-         </div>
-
-
             <div class="addtask" style="">
-                    <textarea name="description" rows="5"
-                           value="${recipe?.description}" id="description" class="transparent mousetrap" key-placeholder="placeholder_title_$" data-placeholder="description" placeholder="Beskriv oppskriften her" style="font-size: 14px;"   ></textarea>
+                <input type="text" name="title"
+                       value="${recipe?.title}" id="title"  class="transparent mousetrap"
+                       key-placeholder="placeholder_title_$" data-placeholder="title" placeholder="Tittel"
+                       style="font-size: 20px;"/>
             </div>
 
 
+            <div class="addtask" style="">
+                <textarea name="description" rows="5"
+                          value="${recipe?.description}" id="description" class="transparent mousetrap"
+                          key-placeholder="placeholder_title_$" data-placeholder="description"
+                          placeholder="Beskriv oppskriften her" style="font-size: 14px;">${recipe?.description}</textarea>
+            </div>
+
+
+            <div class="addtask">
+                <form id="fileupload" action="@{Images.file()}?id=${recipe.id}" method="POST"
+                      enctype="multipart/form-data">
+                    <!-- Redirect browsers with JavaScript disabled to the origin page -->
+                    <noscript><input type="hidden" name="redirect"
+                                     value="http://blueimp.github.com/jQuery-File-Upload/"></noscript>
+                    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                    <div class="row fileupload-buttonbar">
+                        <div class="span7">
+                            <!-- The fileinput-button span is used to style the file input field as button -->
+                 <span class="btn btn-success fileinput-button">
+                     <i class="icon-plus icon-white"></i>
+                     <span>Legg til nytt bilde</span>
+                     <input id="thefile" type="file" name="file" data-url="@{Images.file()}?id=${recipe.id}">
+                 </span>
+                        </div>
+                        <!-- The global progress information -->
+                    </div>
+                    <!-- The loading indicator is shown during file processing -->
+                </form>
+
+
+                <div>
+                    <div class="preview" style="">
+                        <div id="floatingBarsG" style="display: none; margin-left: auto; margin-right: auto; margin-top: 132px; margin-bottom: 130px;">
+                            <div class="blockG" id="rotateG_01"></div>
+                            <div class="blockG" id="rotateG_02"></div>
+                            <div class="blockG" id="rotateG_03"></div>
+                            <div class="blockG" id="rotateG_04"></div>
+                            <div class="blockG" id="rotateG_05"></div>
+                            <div class="blockG" id="rotateG_06"></div>
+                            <div class="blockG" id="rotateG_07"></div>
+                            <div class="blockG" id="rotateG_08"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <img id="bilde" src="${models.Image.get(recipe)}"/>
+                </div>
+            </div>
+
+
+
             <h2 style="display: block; font-size: 20px">Oppskriften holder til</h2>
+
             <div class="addtask" style="">
 
                 <a class="input-date"><span class="icon input-date transparent"></span></a>
                 <input style="width:15%" id="serves" type="text" class="transparent mousetrap" maxlength="255"
-                       key-placeholder="placeholder_add_task_to_$" data-placeholder="amount" placeholder="antall">
-                <input id="servesUnit" style="width:60%" type="text" class="transparent mousetrap" maxlength="255"
-                       key-placeholder="placeholder_add_task_to_$" data-placeholder="Inbox"
-                       placeholder="enhet, for eksempel stk eller personer (trykk enter her for å legge til)">
+                       value="${utils.Currency.prettyDouble(recipe?.serves)}" key-placeholder="placeholder_add_task_to_$" data-placeholder="amount" placeholder="antall" />
+                <input id="servesUnit" value="${recipe?.servesUnit}" style="width:60%" type="text" class="transparent mousetrap" maxlength="255"
+                       key-placeholder="placeholder_add_task_to_$"  data-placeholder="Inbox"
+                       placeholder="enhet, for eksempel stk eller personer (trykk enter her for å legge til)" />
             </div>
 
 
-        <h2 style="display: block; font-size: 20px">
-        Ingredienser
-        </h2>
+            <h2 style="display: block; font-size: 20px">
+                Ingredienser
+            </h2>
+
             <div class="addtask" style="">
 
                 <a class="input-date"><span class="icon input-date transparent"></span></a>
@@ -57,9 +225,7 @@
 
                                 <div class="title-wrapper"><span
                                         class="title">
-                                    #{if !ingredient.type.equals(models.ShoppingListItemType.onthefly) }
                                         <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
-                                    #{/if}
                                 ${ingredient.description}</span>
                                 </div>
                             </div>
@@ -71,18 +237,27 @@
             </div>
 
             <h2 style="display: block; font-size: 20px">
-            Fremgangsmåte
+                Fremgangsmåte
             </h2>
+
             <div class="addtask" style="">
-                    <textarea name="steps" rows="5"
-                           value="${recipe?.steps}" id="steps" class="transparent mousetrap" key-placeholder="placeholder_title_$" data-placeholder="steps" placeholder="Beskriv fremgangsmåten her" style="font-size: 14px;"   ></textarea>
+                <textarea name="steps" rows="5"
+                          value="${recipe?.steps}" id="steps" class="transparent mousetrap"
+                          key-placeholder="placeholder_title_$" data-placeholder="steps"
+                          placeholder="Beskriv fremgangsmåten her" style="font-size: 14px;">${recipe?.steps}</textarea>
             </div>
+
+
+
+                <a href="@{Recipes.show(recipe.id)}"/>
+                    <div class="customButton">Ferdig</div>
+                </a>
+
 
 
         </div>
     </div>
 </div>
-
 
 
 <!--
@@ -171,7 +346,7 @@
         <div class="recipeImage">
 
             #{if recipe?.photoName }
-                <img src="${Images.get(recipe)}">
+                <img src="${models.Image.get(recipe)}">
             #{/if}
 
             #{field 'photo'}

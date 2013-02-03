@@ -27,10 +27,10 @@
                 var unitInput = $(this).parent().find("input#add-unit");
                 var descriptionInput = $(this);
 
-                addIngredient(amountInput.attr("value"), unitInput.attr("value"), $(this).attr("value"));
-                amountInput.attr("value", "");
-                unitInput.attr("value", "");
-                descriptionInput.attr("value", "");
+                addIngredient(amountInput.vla(), unitInput.val(), $(this).vla());
+                amountInput.val("");
+                unitInput.val("");
+                descriptionInput.val( "");
 
 
             }

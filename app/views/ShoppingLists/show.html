@@ -25,8 +25,8 @@
 
         $("input#addtask").keypress(function (e) {
             if (e.which == 13) {
-                addOnTheFlyIngredient(${menu.shoppingList.id}, $(this).attr("value"));
-                $(this).attr("value","");
+                addOnTheFlyIngredient(${menu.shoppingList.id}, $(this).val());
+                $(this).val("");
 
             }
         });
@@ -138,6 +138,16 @@
                     #{if menu!=null}
                         <a href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
                             <div class="customButton">Velg oppskrifter på nytt</div>
+                        </a>
+                    #{/if}
+                    #{if previousMenu != null}
+                        <a href="@{ShoppingLists.show(previousMenu.shoppingList.id)}" id="tilForrige">
+                            <div class="customButton">Til liste for uke ${menu!=null?utils.DateUtil.weekOfYear(previousMenu.usedFromDate):'?'}</div>
+                        </a>
+                    #{/if}
+                    #{if nextMenu != null}
+                        <a href="@{ShoppingLists.show(nextMenu.shoppingList.id)}" id="tilNeste">
+                            <div class="customButton">Til liste for uke ${menu!=null?utils.DateUtil.weekOfYear(nextMenu.usedFromDate):'?'}</div>
                         </a>
                     #{/if}
 

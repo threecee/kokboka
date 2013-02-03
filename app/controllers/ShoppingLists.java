@@ -26,8 +26,22 @@ public class ShoppingLists extends CRUD {
     public static void show(Long listId) {
         if (listId != null) {
             Menu menu = Menu.find("shoppingList is ?", ShoppingList.findById(listId)).first();
-
             User user = User.find("byEmail", Security.connected()).first();
+
+            List<Menu> menus = Menu.find("shoppingList != null order by usedFromDate asc").fetch();
+            int position = menus.indexOf(menu);
+
+            Menu previousMenu = null;
+            Menu nextMenu = null;
+
+            if(menus.size() > position + 2)
+            {
+                nextMenu = menus.get(position + 1);
+            }
+            if(position > 0)
+            {
+                previousMenu = menus.get(position - 1);
+            }
 
             List<ShoppingListIngredient> shoppingListChecked = null;
             List<ShoppingListIngredient> shoppingListUnchecked = null;
@@ -47,7 +61,7 @@ public class ShoppingLists extends CRUD {
                     }
                 }
             }
-            render("ShoppingLists/show.html", shoppingListChecked, shoppingListUnchecked, menu);
+            render("ShoppingLists/show.html", shoppingListChecked, shoppingListUnchecked, menu, nextMenu, previousMenu);
         }
 
         render("ShoppingLists/show.html");

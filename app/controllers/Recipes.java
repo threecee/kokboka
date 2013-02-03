@@ -2,6 +2,7 @@ package controllers;
 
 
 import models.*;
+import play.Logger;
 import play.db.jpa.Blob;
 import play.mvc.Before;
 import play.mvc.With;
@@ -81,6 +82,11 @@ public class Recipes extends CRUD {
         render(recipe, favorite);
     }
 
+    public static void update(Long id) {
+        Recipe recipe = Recipe.findById(id);
+        render("Recipes/form.html", recipe);
+    }
+
     public static void ingredients() {
         List<Ingredient> ingredients = Ingredient.findAll();
         renderJSON(ingredients);
@@ -128,7 +134,9 @@ public class Recipes extends CRUD {
         ingredient.amount = amount;
         ingredient.unit = unit;
         ingredient.description = description;
+        ingredient.save();
         response.print("<xml/>");
+
     }
 
     public static void removeIngredient(Long recipeId, Long ingredientId) {
@@ -288,8 +296,18 @@ public class Recipes extends CRUD {
         Recipe recipe;
         if (id != null) {
             recipe = Recipe.findById(id);
+            Logger.info("Hentet oppskrift nr" + recipe.id);
         } else {
-            recipe = new Recipe(user);
+            recipe = Recipe.find("title = null").first();
+            if(recipe == null)
+            {
+                recipe = new Recipe(user);
+                recipe.save();
+            }
+            else {
+                Logger.info("Hentet første tomme oppskrift - nr " + recipe.id);
+
+            }
         }
 
         render(recipe);

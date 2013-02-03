@@ -1,5 +1,7 @@
 package controllers;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import models.Image;
 import models.Recipe;
 import models.UploadedFile;
@@ -39,10 +41,16 @@ public class Images extends Controller {
 
         Image.save(recipe.photoName, file.get());
 
+        recipe.save();
+
         ArrayList<UploadedFile> uploadedFiles = new ArrayList<UploadedFile>();
         UploadedFile file1 = new UploadedFile(recipe.photoName, (int) file.getFile().length(), Image.get(recipe));
         file1.setThumbnail_url(Image.get(recipe));
+        uploadedFiles.add(file1);
 
-        renderJSON(uploadedFiles);
+        Gson gson = new GsonBuilder().create();
+        String jsonString = gson.toJson(uploadedFiles);
+
+        renderJSON("{\"files\": " + jsonString + " }");
 	}
 }

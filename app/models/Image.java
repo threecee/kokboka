@@ -17,6 +17,29 @@ import java.util.Calendar;
 public final class Image {
 
 
+    private Recipe recipe;
+
+    public Image(Recipe recipe)
+    {
+        this.recipe = recipe;
+    }
+
+
+    public String get() {
+        if (recipe.photoName != null) {
+            return "http://trippelc.com/kokboka/" + recipe.photoName;
+        } else {
+            return "/public/images/transparent.gif";
+        }
+    }
+
+    public String getThumb() {
+        if (recipe.photoName != null) {
+            return "http://trippelc.com/kokboka/thumb_" + recipe.photoName;
+        } else {
+            return "/public/images/food-plate-icons.jpg";
+        }
+    }
 
 
     public static String get(Recipe recipe) {
@@ -162,7 +185,7 @@ public final class Image {
         }
 
 
-    } // end main
+    }
 
     private static CopyStreamListener createListener() {
         return new CopyStreamListener() {

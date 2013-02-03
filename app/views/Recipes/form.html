@@ -5,13 +5,32 @@
 <div id="stacks">
     <div id="tasks" class="stack" style="padding-left: 0px;">
         <div class="tasks-scroll">
-            <div class="addtask" style="">
+
+
+
+
+         <div class="addtask" style="">
                  <input type="text" name="title"
                         value="${recipe?.title}" id="title" class="transparent mousetrap" key-placeholder="placeholder_title_$" data-placeholder="title" placeholder="Tittel" style="font-size: 20px;" />
          </div>
 
 
+            <div class="addtask" style="">
+                    <textarea name="description" rows="5"
+                           value="${recipe?.description}" id="description" class="transparent mousetrap" key-placeholder="placeholder_title_$" data-placeholder="description" placeholder="Beskriv oppskriften her" style="font-size: 14px;"   ></textarea>
+            </div>
 
+
+            <h2 style="display: block; font-size: 20px">Oppskriften holder til</h2>
+            <div class="addtask" style="">
+
+                <a class="input-date"><span class="icon input-date transparent"></span></a>
+                <input style="width:15%" id="serves" type="text" class="transparent mousetrap" maxlength="255"
+                       key-placeholder="placeholder_add_task_to_$" data-placeholder="amount" placeholder="antall">
+                <input id="servesUnit" style="width:60%" type="text" class="transparent mousetrap" maxlength="255"
+                       key-placeholder="placeholder_add_task_to_$" data-placeholder="Inbox"
+                       placeholder="enhet, for eksempel stk eller personer (trykk enter her for å legge til)">
+            </div>
 
 
         <h2 style="display: block; font-size: 20px">
@@ -26,7 +45,7 @@
                        key-placeholder="placeholder_add_task_to_$" data-placeholder="unit" placeholder="enhet">
                 <input id="add-description" style="width:60%" type="text" class="transparent mousetrap" maxlength="255"
                        key-placeholder="placeholder_add_task_to_$" data-placeholder="Inbox"
-                       placeholder="beskrivelse (trykk enter her for å legge til)">
+                       placeholder="navn på ingrediens (trykk enter her for å legge til)">
             </div>
             <div class="task-list">
                 <div class="grouped-tasks" rel="inbox">
@@ -50,15 +69,13 @@
 
                 </div>
             </div>
-            <h2 style="display: block; font-size: 20px">Oppskriften holder til</h2>
-            <div class="addtask" style="">
 
-                <a class="input-date"><span class="icon input-date transparent"></span></a>
-                <input style="width:15%" id="serves" type="text" class="transparent mousetrap" maxlength="255"
-                       key-placeholder="placeholder_add_task_to_$" data-placeholder="amount" placeholder="antall">
-                <input id="servesUnit" style="width:60%" type="text" class="transparent mousetrap" maxlength="255"
-                       key-placeholder="placeholder_add_task_to_$" data-placeholder="Inbox"
-                       placeholder="enhet, for eksempel stk eller personer (trykk enter her for å legge til)">
+            <h2 style="display: block; font-size: 20px">
+            Fremgangsmåte
+            </h2>
+            <div class="addtask" style="">
+                    <textarea name="steps" rows="5"
+                           value="${recipe?.steps}" id="steps" class="transparent mousetrap" key-placeholder="placeholder_title_$" data-placeholder="steps" placeholder="Beskriv fremgangsmåten her" style="font-size: 14px;"   ></textarea>
             </div>
 
 

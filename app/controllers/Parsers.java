@@ -348,7 +348,7 @@ public class Parsers extends Controller {
         }
     }
 
-    static String[] kjenteProdukter = new String[]{"5%", "9%", "14%", "18%", "Toro", "Barilla", "Gilde", "Idun", "Mills", "Grovt og godt", "Godehav", "Solvinge", "REMA 1000", "Tine", "Bama", "Kikkoman", "Nordfjord", "Blue Dragon", "Taga", "Finsbråten", "Hatting", "Mesterbakeren", "Grilstad", "Ideal", "Staur", "MaxMat", "Viddas", "Gourmet", "Pampas", "frossen", "frosne", "naturell", "M/L,", " - NB! Sesongvare"};
+    static String[] kjenteProdukter = new String[]{"Austin Lamb Chops","5%", "9%", "14%", "18%", "Toro", "Barilla", "Gilde", "Idun", "Mills", "Grovt og godt", "Godehav", "Solvinge", "REMA 1000", "Tine", "Bama", "Kikkoman", "Nordfjord", "Blue Dragon", "Taga", "Finsbråten", "Hatting", "Mesterbakeren", "Grilstad", "Ideal", "Staur", "MaxMat", "Viddas", "Gourmet", "Pampas", "frossen", "frosne", "naturell", "M/L,", " - NB! Sesongvare"};
 
     private static String cleanProductNames(String beskrivelse) {
         String produktnavn = beskrivelse;

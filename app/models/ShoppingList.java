@@ -13,14 +13,11 @@ import java.util.List;
 public class ShoppingList extends Model {
 
 
-    @OneToOne
-    public Menu menu;
 
     @OneToMany
     public List<ShoppingListIngredient> shoppingListIngredients;
 
-    public ShoppingList(Menu menu) {
-        this.menu = menu;
+    public ShoppingList() {
     }
 
     public ShoppingList addIngredient(double amount, String unit, String description) {

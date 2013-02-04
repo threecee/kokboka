@@ -46,7 +46,7 @@ public class ShoppingLists extends CRUD {
             List<ShoppingListIngredient> shoppingListChecked = null;
             List<ShoppingListIngredient> shoppingListUnchecked = null;
             if (menu != null) {
-                ShoppingList shoppingListItem = ShoppingList.find("menu = ?", menu).first();
+                ShoppingList shoppingListItem = menu.shoppingList;
                 if (shoppingListItem != null) {
                     List<ShoppingListIngredient> shoppingList = ShoppingListIngredient.find("shoppingList is ? order by description", shoppingListItem).fetch();
                     shoppingListChecked = new ArrayList<ShoppingListIngredient>();
@@ -93,7 +93,7 @@ public class ShoppingLists extends CRUD {
         ShoppingList shoppingList;
 
         if (menu.shoppingList == null) {
-            menu.shoppingList = new ShoppingList(menu).save();
+            menu.shoppingList = new ShoppingList().save();
             menu.save();
         }
 

@@ -1,6 +1,18 @@
 #{extends 'master.html' /}
 
 
+<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-1.7.min.js'}"></script>
+<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-ui.min.js'}"></script>
+<script type="text/javascript" language="javascript"
+        src="@{'/public/javascripts/jquery.ui.touch-punch.min.js'}"></script>
+<script type="text/javascript" language="javascript" src="@{'/public/javascripts/middagsplanlegger.js'}"></script>
+<link rel="stylesheet" type="text/css" media="screen, handheld"
+      href="@{'/public/stylesheets/middagsplanleggeren.css'}">
+<link rel="stylesheet" type="text/css" media="screen, handheld"
+      href="@{'/public/stylesheets/jquery/jquery-ui-1.8.16.custom.css'}">
+
+
+
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -134,7 +146,7 @@
             <h2 style="display: block; font-size: 20px">Antall personer oppskriftene skal ta utganspunkt i</h2>
 
             <p>
-
+            <div class="handlelapp_recipe_container">
             <div id="slider">
 
                 <!-- adult - slider -->
@@ -145,4 +157,5 @@
                 <span id="slider_Range">${user.preferredServings != null?utils.Currency.prettyDouble(user.preferredServings):2}</span>
 
             </div>
+</div>
             </p>

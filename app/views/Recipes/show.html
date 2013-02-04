@@ -66,13 +66,30 @@
             </div>
 
 
+<div class="buttonRow">
             <a class="fancyButtonLink" href="@{Recipes.update(recipe.id)}"/>
                           <div class="wrapper smallButton">
                               <span>Rediger</span>
                           </div>
 
             </a>
-
+#{if menu!=null}
+#{if menu.recipesInMenu.indexOf(recipe) > 0}
+    <a class="fancyButtonLink" href="@{Recipes.showInMenu(menu.recipesInMenu.get(menu.recipesInMenu.indexOf(recipe)-1).id, menu.id)}" id="tilForrige">
+        <div class="smallButton wrapper">
+            <span>Forrige</span>
+        </div>
+    </a>
+#{/if}
+    #{if menu.recipesInMenu.indexOf(recipe) < (menu.recipesInMenu.size()-1)}
+    <a class="fancyButtonLink" href="@{Recipes.showInMenu(menu.recipesInMenu.get(menu.recipesInMenu.indexOf(recipe)+1).id, menu.id)}" id="tilNeste">
+        <div class="smallButton wrapper">
+            <span>Neste</span>
+        </div>
+    </a>
+</div>
+#{/if}
+#{/if}
 
 
 

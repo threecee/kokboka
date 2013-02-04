@@ -132,24 +132,25 @@
         #{/list}
         </ol>
         <h2 class="heading">Handlinger</h2>
+
         <div class="buttonRow">
-    #{if menu!=null}
-        <a class="fancyButtonLink" href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
-            <div class="smallButton wrapper">
-                           <span>Velg oppskrifter på nytt</span>
-                       </div>
-        </a>
-    #{/if}
-        <a class="fancyButtonLink" href="@{ShoppingLists.showLastWeek(menu.id)}" id="tilForrige">
-            <div class="smallButton wrapper">
-                <span>Forrige uke</span>
-            </div>
-        </a>
-        <a class="fancyButtonLink" href="@{ShoppingLists.showNextWeek(menu.id)}" id="tilNeste">
-            <div class="smallButton wrapper">
-                <span>Neste uke</span>
-            </div>
-        </a>
+        #{if menu!=null}
+            <a class="fancyButtonLink" href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
+                <div class="smallButton wrapper">
+                    <span>Velg oppskrifter på nytt</span>
+                </div>
+            </a>
+        #{/if}
+            <a class="fancyButtonLink" href="@{ShoppingLists.showLastWeek(menu.id)}" id="tilForrige">
+                <div class="smallButton wrapper">
+                    <span>Forrige uke</span>
+                </div>
+            </a>
+            <a class="fancyButtonLink" href="@{ShoppingLists.showNextWeek(menu.id)}" id="tilNeste">
+                <div class="smallButton wrapper">
+                    <span>Neste uke</span>
+                </div>
+            </a>
         </div>
     </div>
 </div>

@@ -27,7 +27,7 @@ public class Recipes extends CRUD {
     public static void showCurrent() {
         User user = User.find("byEmail", Security.connected()).first();
 
-        Menu menu = Menu.find("usedFromDate = ?", DateUtil.getStartingDayThisWeek(new Date())).first();
+        Menu menu = Menu.find("author = ? and usedFromDate = ?", user, DateUtil.getStartingDayThisWeek(new Date())).first();
 
         if (menu != null) {
             int distance = DateUtil.distance(menu.usedFromDate, new Date());
@@ -35,9 +35,17 @@ public class Recipes extends CRUD {
             Recipe recipe = menu.getRecipeForDay(distance);
             boolean favorite = user.favorites.contains(recipe);
 
-            render("Recipes/show.html", recipe, favorite);
+            render("Recipes/show.html", recipe, favorite, menu);
         }
         render("Recipes/show.html");
+    }
+    public static void showInMenu(Long id, Long menuId) {
+        User user = User.find("byEmail", Security.connected()).first();
+        Recipe recipe = Recipe.findById(id);
+        Menu menu = Menu.findById(menuId);
+        boolean favorite = user.favorites.contains(recipe);
+        render("Recipes/show.html", recipe, favorite, menu);
+
     }
 
     public static void index(String[] tags) {

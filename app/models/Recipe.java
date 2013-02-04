@@ -1,14 +1,9 @@
 package models;
 
-import play.Logger;
-import play.db.jpa.Blob;
+import play.db.jpa.JPABase;
 import play.db.jpa.Model;
-import play.libs.Images;
 
 import javax.persistence.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.*;
 
 @Entity
@@ -18,6 +13,7 @@ public class Recipe extends Model {
     public String title;
 
     public Date postedAt;
+    public Date updatedAt;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     public List<Ingredient> ingredients;
@@ -35,8 +31,8 @@ public class Recipe extends Model {
     public double serves;
     public String servesUnit;
 
-   // public Blob photo;
-   // public Blob photoThumb;
+    // public Blob photo;
+    // public Blob photoThumb;
 
 
     @Basic
@@ -66,6 +62,7 @@ public class Recipe extends Model {
         this.serves = serves;
         this.servesUnit = servesUnit;
         this.postedAt = new Date();
+        this.updatedAt = postedAt;
     }
 
     public Recipe(User user) {
@@ -73,8 +70,16 @@ public class Recipe extends Model {
         this.ingredients = new ArrayList<Ingredient>();
         this.tags = new HashSet<Tag>();
         this.postedAt = new Date();
+        this.updatedAt = postedAt;
 
     }
+
+    public <T extends JPABase> T save() {
+        T returned = super.save();
+        updatedAt = new Date();
+        return returned;
+    }
+
 
     public Ingredient addIngredient(String amount, String unit, String description) {
         Ingredient newIngredient = new Ingredient(this, amount, unit, description).save();
@@ -82,20 +87,8 @@ public class Recipe extends Model {
         this.save();
         return newIngredient;
     }
-/*
-    public void addPhoto(Blob photo) {
-        photoThumb = new Blob();
-        File inputFile = new File("" + Calendar.getInstance().getTimeInMillis());
-        Images.resize(photo.getFile(), inputFile, 140, 140);
-        try {
-            FileInputStream fileInputStream = new FileInputStream(inputFile);
-            photoThumb.set(fileInputStream, photo.type());
-        } catch (FileNotFoundException e) {
-            Logger.error(e, "Fant ikke bildefil");
-        }
-        this.photo = photo;
-    }
-  */
+
+
     public Recipe tagItWith(String name) {
         if (!tags.contains(Tag.hashName(name))) {
             tags.add(Tag.findOrCreateByName(name));

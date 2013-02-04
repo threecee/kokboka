@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Handlelappen</title>
+    <title>#{get 'title' /}</title>
     <!--    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/> -->
     <meta name="viewport" content="width=device-width">
 
@@ -19,6 +19,10 @@
     <!-- Pinned Site Tasks -->
     <link rel="apple-touch-icon-precomposed"
           href="http://wunderlist2.s3.amazonaws.com/7ab04e5a1a69c2f258e3fffeebfd806baf4dca1e/images/icon.png"/>
+
+
+    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/kokboka/main.css'}" />
+
 
     <!--    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-1.7.min.js'}"></script>-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -41,24 +45,24 @@
           data-requiremodule="forms" data-requirecontext="styles"/>
  <!--   <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/responsive.css'}"
           data-requiremodule="responsive" data-requirecontext="styles"/> -->
-    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/touch.css'}"
+<!--    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/touch.css'}"
           data-requiremodule="touch" data-requirecontext="styles"/>
-
-    <link rel="stylesheet" type="text/css" media="screen, handheld"
+-->
+<!--    <link rel="stylesheet" type="text/css" media="screen, handheld"
           href="@{'/public/stylesheets/jquery/jquery-ui-1.8.16.custom.css'}"/>
-
+-->
     <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-ui.min.js'}"/>
     <script type="text/javascript" language="javascript"
             src="@{'/public/javascripts/jquery.ui.touch-punch.min.js'}"></script>
 </head>
-<body style="zoom: 1;background-color: rgba(120, 153, 78, 0.64)" class="">
+<body class="bodyClass">
 
 
+#{topmenu /}
 <div class="main-interface">
     <div id="stacks">
         <div id="tasks" class="stack" style="padding-left: 0px;">
             <div class="tasks-scroll">
-            #{topmenu /}
 #{doLayout /}
 
             </div>

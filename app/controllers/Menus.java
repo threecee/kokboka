@@ -70,6 +70,7 @@ public class Menus extends CRUD {
     }
 
 
+
     private static void initMenu(User user, String startingDayString) throws ParseException {
         Menu menu = null;
 

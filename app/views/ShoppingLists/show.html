@@ -25,7 +25,7 @@
 
         $("input#addtask").keypress(function (e) {
             if (e.which == 13) {
-                addOnTheFlyIngredient(${menu.shoppingList.id}, $(this).val());
+                addOnTheFlyIngredient(${menu?.shoppingList?.id}, $(this).val());
                 $(this).val("");
 
             }
@@ -57,97 +57,99 @@
             data: "id=" + id + "&description=" + description,
             dataType: "xml"
 
-        }).always(function(data){
-               injectTask(data.responseText, description);
+        }).always(function (data) {
+                    injectTask(data.responseText, description);
 
                 });
     }
 
-    var taskTemplate = "<li class=\"task-item\" id=\"$ID$\">"+
+    var taskTemplate = "<li class=\"task-item\" id=\"$ID$\">" +
             "<div class=\"task-body\"><a class=\"task-checkbox\"><span class=\"icon task-checkbox \"></span></a> " +
-                "<a class=\"icon task-separator\"></a>" +
-                    "<div class=\"title-wrapper\"><span" +
-                      "  class=\"title\">$DESCRIPTION$</span>"+
-                "</div>"+
-            "</div>"+
-        "</li>";
-    function injectTask(id, description)
-    {
-      var injectString = taskTemplate.replace("$ID$", id).replace("$DESCRIPTION$", description);
+            "<a class=\"icon task-separator\"></a>" +
+            "<div class=\"title-wrapper\"><span" +
+            "  class=\"title\">$DESCRIPTION$</span>" +
+            "</div>" +
+            "</div>" +
+            "</li>";
+    function injectTask(id, description) {
+        var injectString = taskTemplate.replace("$ID$", id).replace("$DESCRIPTION$", description);
 
-      $('<div/>').html(injectString).prependTo("ol#ingredient-tasks");
+        $('<div/>').html(injectString).prependTo("ol#ingredient-tasks");
 
     }
 </script>
 
 
-                <h2 style="display: block">Handlelapp for
-                    uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}</h2>
+<h2 style="display: block">Handlelapp for
+    uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}</h2>
 
-                <div class="addtask" style="">
-                    <a class="input-star">
+<div class="addtask" style="">
+    <a class="input-star">
                     <span
                             class="icon input-star transparent"></span></a>
-                    <a class="input-date"><span
-                            class="icon input-date transparent"></span></a>
-                    <input id="addtask" type="text" class="transparent mousetrap"
-                           maxlength="255"
-                           key-placeholder="placeholder_add_task_to_$"
-                           data-placeholder="Inbox"
-                           placeholder="Legg til vare i handlelisten...">
-                </div>
-                <div class="task-list">
-                    <div class="grouped-tasks" rel="inbox">
-                        <ol class="tasks" id="ingredient-tasks" style="padding-left:0px;">
-                        #{list items:shoppingListUnchecked, as:'ingredient'}
-                            <li class="task-item" id="${ingredient.id}">
-                                <div class="task-body"><a class="task-checkbox"><span
-                                        class="icon task-checkbox "></span></a> <a class="icon task-separator"></a>
+    <a class="input-date"><span
+            class="icon input-date transparent"></span></a>
+    <input id="addtask" type="text" class="transparent mousetrap"
+           maxlength="255"
+           key-placeholder="placeholder_add_task_to_$"
+           data-placeholder="Inbox"
+           placeholder="Legg til vare i handlelisten...">
+</div>
+<div class="task-list">
+    <div class="grouped-tasks" rel="inbox">
+        <ol class="tasks" id="ingredient-tasks" style="padding-left:0px;">
+        #{list items:shoppingListUnchecked, as:'ingredient'}
+            <li class="task-item" id="${ingredient.id}">
+                <div class="task-body"><a class="task-checkbox"><span
+                        class="icon task-checkbox "></span></a> <a class="icon task-separator"></a>
 
-                                    <div class="title-wrapper"><span
-                                            class="title">
+                    <div class="title-wrapper"><span
+                            class="title">
                                         #{if !ingredient.type.equals(models.ShoppingListItemType.onthefly) }
-                                        <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
+                                            <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
                                         #{/if}
-                                        ${ingredient.description}</span>
-                                    </div>
-                                </div>
-                            </li>
-                        #{/list}
-                        </ol>
-                        <h2 class="heading completed">
-                            <text rel="label_completed_tasks_heading">Ferdigstilte</text>
-                        </h2>
-                        <ol class="completed-tasks" style="padding-left:0px;">
-                        #{list items:shoppingListChecked, as:'ingredient'}
-                            <li class="task-item done" id="${ingredient.id}">
-                                <div class="task-body"><a class="task-checkbox task-checked"><span
-                                        class="icon task-checkbox  task-checked"></span></a> <a
-                                        class="icon task-separator"></a>
-
-                                    <div class="title-wrapper"><span
-                                            class="title"><span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span> ${ingredient.description}</span>
-                                    </div>
-                                </div>
-                            </li>
-                        #{/list}
-                        </ol>
-                        <h2 class="heading">Handlinger</h2>
-                    #{if menu!=null}
-                        <a href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
-                            <div class="customButton">Velg oppskrifter på nytt</div>
-                        </a>
-                    #{/if}
-                    #{if previousMenu != null}
-                        <a href="@{ShoppingLists.show(previousMenu.shoppingList.id)}" id="tilForrige">
-                            <div class="customButton">Til liste for uke ${menu!=null?utils.DateUtil.weekOfYear(previousMenu.usedFromDate):'?'}</div>
-                        </a>
-                    #{/if}
-                    #{if nextMenu != null}
-                        <a href="@{ShoppingLists.show(nextMenu.shoppingList.id)}" id="tilNeste">
-                            <div class="customButton">Til liste for uke ${menu!=null?utils.DateUtil.weekOfYear(nextMenu.usedFromDate):'?'}</div>
-                        </a>
-                    #{/if}
-
+                    ${ingredient.description}</span>
                     </div>
                 </div>
+            </li>
+        #{/list}
+        </ol>
+        <h2 class="heading completed">
+            <text rel="label_completed_tasks_heading">Ferdigstilte</text>
+        </h2>
+        <ol class="completed-tasks" style="padding-left:0px;">
+        #{list items:shoppingListChecked, as:'ingredient'}
+            <li class="task-item done" id="${ingredient.id}">
+                <div class="task-body"><a class="task-checkbox task-checked"><span
+                        class="icon task-checkbox  task-checked"></span></a> <a
+                        class="icon task-separator"></a>
+
+                    <div class="title-wrapper"><span
+                            class="title"><span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span> ${ingredient.description}</span>
+                    </div>
+                </div>
+            </li>
+        #{/list}
+        </ol>
+        <h2 class="heading">Handlinger</h2>
+        <div class="buttonRow">
+    #{if menu!=null}
+        <a class="fancyButtonLink" href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
+            <div class="smallButton wrapper">
+                           <span>Velg oppskrifter på nytt</span>
+                       </div>
+        </a>
+    #{/if}
+        <a class="fancyButtonLink" href="@{ShoppingLists.showLastWeek(menu.id)}" id="tilForrige">
+            <div class="smallButton wrapper">
+                <span>Forrige uke</span>
+            </div>
+        </a>
+        <a class="fancyButtonLink" href="@{ShoppingLists.showNextWeek(menu.id)}" id="tilNeste">
+            <div class="smallButton wrapper">
+                <span>Neste uke</span>
+            </div>
+        </a>
+        </div>
+    </div>
+</div>

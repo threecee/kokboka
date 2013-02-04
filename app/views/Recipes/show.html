@@ -6,24 +6,24 @@
 
 <h2 style="display: block; font-size: 20px">&nbsp;</h2>
 
-<div class="whitetext" style="display: block; font-size: 20px;">
+<div class="whitetext" style="display: block; font-size: 25px;">
  ${recipe?.title}</div>
 
 
-            <div class="whitetext" style="display: block;">
-            ${recipe?.description}</div>
+            <div class="innfelt" ><div class="innhold">${recipe?.description}</div>
+            </div>
 
 
-            <div class="" style="margin:2%">
+            <div class="recipeBilde" style="">
                 <img id="bilde" src="${models.Image.get(recipe)}"/>
             </div>
 
 
             <h2 style="display: block; font-size: 20px">Oppskriften holder til</h2>
 
-            <div class="" style="">
+            <div class="innfelt" style="">
 
-                <a class="input-date"><span class="icon input-date transparent"></span></a>
+
                 <span style="width:15%" id="serves" type="text" class="whitetext"
                         >${utils.Currency.prettyDouble(recipe?.serves)}</span>
                 <span id="servesUnit" style="width:60%" class="whitetext"
@@ -60,15 +60,17 @@
                 Fremgangsmåte
             </h2>
 
-            <div class="" style="">
-                <div name="steps" id="steps" class="whitetext"
+            <div class="innfelt" style="">
+                <div name="steps" id="steps" class="innhold"
                      style="font-size: 14px;">${recipe?.steps.escape().nl2br()}</div>
             </div>
 
 
-            <a href="@{Recipes.update(recipe.id)}"/>
+            <a class="fancyButtonLink" href="@{Recipes.update(recipe.id)}"/>
+                          <div class="wrapper smallButton">
+                              <span>Rediger</span>
+                          </div>
 
-            <div class="customButton">Rediger</div>
             </a>
 
 

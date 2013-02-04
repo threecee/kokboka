@@ -7,7 +7,7 @@
     <div id="venstremeny">
 
     #{if selectedTags.size() > 0 }
-        <h3>Fjern avgrensninger</h3>
+        <h3>Fjerne avgrensing:</h3>
         #{/if }
 <div>
 		<ul>
@@ -35,10 +35,6 @@
 </div>
 </div>
 #{/if}
-#{else }
-<div id="newrecipe">
-    <a href="@{Recipes.form()}"><span>+</span> legg inn en ny oppskrift</a>
-</div>#{/else}
 <div id="recipe_container">
 		<div id="recipeList">
             #{list items:recipes, as:'recipe'}

@@ -1,0 +1,310 @@
+#topmenu {
+    display: block;
+    width: 100%;
+    padding-bottom: 30px;
+    padding-left: 0px;
+    margin-left: 0px;
+}
+
+#topmenu li {
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    background: #eaeaea url("http://wunderlist2.s3.amazonaws.com/2b2576e3d0a5b892d1e5673e79caa7919a70eb94/images/textures/task.png") repeat-x;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    list-style: none;
+    position: relative;
+    height: 34px;
+
+    float: left;
+    padding: 5px;
+    margin: 3px;
+    text-decoration: none;
+    width: 15%;
+    text-align: center;
+}
+
+#topmenu a {
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+    font-size: 1.3vw;
+}
+
+.handlelapp_recipe_container {
+    margin-bottom: 20px;
+    clear: both;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f8f8f8;
+
+}
+
+.handlelapp_recipe_container .date {
+    width: 10%;
+    text-align: center;
+    margin: 8px 0 0 -10px;
+}
+
+.handlelapp_recipe_container .bildecontainer {
+    width: 10%;
+}
+
+.handlelapp_recipe_container img {
+    width: 100%;
+}
+
+.handlelapp_recipe_container .recipe_content {
+    width: 68%;
+    margin-left: 2%;
+
+}
+
+.handlelapp_recipe_container div, .handlelapp_recipe_container .bildecontainer {
+    float: left;
+}
+
+.handlelapp_recipe_container .date span {
+    display: block;
+    color: #1E6AA9;
+}
+
+.handlelapp_recipe_container .date .number {
+    font-size: 35px;
+    font-weight: bold;
+    color: #1E6AA9;
+}
+
+.handlelapp_recipe_container .date .month {
+    font-size: 17px;
+    margin: -6px 0 0 4px;
+    font-weight: normal;
+    font-color: #1E6AA9;
+}
+
+.handlelapp_recipe_container #slider {
+    padding: 10px;
+    color: #666;
+    font-size: 17px;
+    width: 100%;
+}
+
+.handlelapp_recipe_container h4 {
+
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.handlelapp_recipe_container .checkBox_container {
+
+    float: right;
+}
+
+UNUSED#slider {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    overflow: hidden;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 17px;
+}
+
+#slider strong {
+    display: block;
+    float: left;
+    height: 32px;
+    line-height: 32px;
+    font-size: 16px;
+}
+
+.ui-slider-horizontal .ui-slider-range {
+    background: #1e6aa9 url(../slider.png) center left
+}
+
+.ui-slider .ui-slider-handle {
+    background: #eee !important;
+    border: 2px solid #ccc !important;
+}
+
+.ui-slider .ui-slider-handle:hover {
+    background: #eee !important;
+    border: 2px solid #ccc !important;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+    top: -.4em;
+    margin-left: -.5em;
+}
+
+#slider > div {
+    width: 75%;
+    float: left;
+    height: 8px;
+    margin-top: 12px;
+    margin-left: 5px;
+}
+
+#slider span {
+    font-weight: bold;
+    float: right;
+    display: block;
+    height: 32px;
+    line-height: 32px;
+    color: #1e6aa9;
+    margin-right: 7px;
+}
+
+.innfelt {
+    -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4);
+    -moz-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4);
+    -ms-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4);
+    -o-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4);
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.3);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.1)));
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+    background: linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    position: relative;
+    margin: 12px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.4);
+    padding: 8px 12px;
+}
+
+.innfelt .innhold {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.recipeBilde {
+    margin: 2%;
+}
+
+.recipeBilde img {
+    width: 100%;
+}
+
+.bodyClass {
+    background-color: rgba(66, 83, 43, 0.639216);
+}
+
+.basicButton {
+
+    width: 140px;
+    height: 20px;
+    background-color: #012442;
+    border-radius: 5px;
+    color: whitesmoke;
+    vertical-align: middle;
+    padding-top: 5px;
+    padding-left: 10px;
+    margin-top: 5px;
+
+}
+
+.fancyButton, .fancyButtonLink div {
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    background: #eaeaea url("http://wunderlist2.s3.amazonaws.com/2b2576e3d0a5b892d1e5673e79caa7919a70eb94/images/textures/task.png") repeat-x;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    list-style: none;
+    position: relative;
+    height: 34px;
+    margin: 1px 1px 0 1px;
+}
+
+.fancyButtonLink {
+    text-decoration: none;
+    color: #000000;
+}
+
+.smallButton {
+    width: 20%;
+}
+
+.fancyButtonLink .wrapper {
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
+
+.fancyButtonLink div {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.buttonRow .wrapper {
+    float: left;
+    margin-right: 1%;
+}
+
+#topmenu .wrapper {
+    float: left;
+    margin-right: 1%;
+}
+
+
+#topmenu .wrapper {
+    width: 15%;
+}
+#showMenu {
+    display:none ;
+}
+
+@media only screen
+and (max-width : 400px) {
+    #topmenu .wrapper {
+        width: 100%;
+    }
+    #topmenu a {
+        text-decoration: none;
+        color: black;
+        font-size: 15px;
+        font-size: 4.5vw;
+    }
+    #topmenu {
+        display:none ;
+    }
+    #showMenu {
+        display:block ;
+    }
+}
+

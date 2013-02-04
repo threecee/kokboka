@@ -35,16 +35,12 @@
 
 
 <div class="weekplanner_buttons">
-    #{if menu.shoppingList != null }
-    <a href="@{ShoppingLists.show(menu.shoppingList.id)}" id="tilHandlelappen">
-        Til handlelapp
+    <a href="@{ShoppingLists.list(menu.id)}" id="lagHandlelappen">
+        Lag handlelapp
     </a>
-    #{/if}
-    #{else}
-        <a href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
-            Lag handlelapp
-        </a>
-    #{/else}
+    <a href="@{ShoppingLists.show(menu.id)}" id="tilHandlelappen">
+        Vis handlelapp
+    </a>
 
 </div>
 

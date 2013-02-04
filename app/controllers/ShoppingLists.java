@@ -8,6 +8,7 @@ import play.mvc.With;
 import utils.DateUtil;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,67 +24,52 @@ public class ShoppingLists extends CRUD {
         }
     }
 
-    public static void show(Long listId) {
-        if (listId != null) {
-            Menu menu = Menu.find("shoppingList is ?", ShoppingList.findById(listId)).first();
-            User user = User.find("byEmail", Security.connected()).first();
+    public static void showNextWeek(Long id) {
+        Menu menu = Menu.findById(id);
+        User user = User.find("byEmail", Security.connected()).first();
+        show(menu.getNextWeeksMenu(user).id);
+    }
 
-            List<Menu> menus = Menu.find("shoppingList != null order by usedFromDate asc").fetch();
-            int position = menus.indexOf(menu);
+    public static void showLastWeek(Long id) {
+        Menu menu = Menu.findById(id);
+        User user = User.find("byEmail", Security.connected()).first();
+        show(menu.getLastWeeksMenu(user).id);
+    }
 
-            Menu previousMenu = null;
-            Menu nextMenu = null;
-
-            if(menus.size() > position + 2)
-            {
-                nextMenu = menus.get(position + 1);
-            }
-            if(position > 0)
-            {
-                previousMenu = menus.get(position - 1);
-            }
+    public static void show(Long id) {
+        if (id != null) {
+            Menu menu = Menu.findById(id);
 
             List<ShoppingListIngredient> shoppingListChecked = null;
             List<ShoppingListIngredient> shoppingListUnchecked = null;
-            if (menu != null) {
-                ShoppingList shoppingListItem = menu.shoppingList;
-                if (shoppingListItem != null) {
-                    List<ShoppingListIngredient> shoppingList = ShoppingListIngredient.find("shoppingList is ? order by description", shoppingListItem).fetch();
-                    shoppingListChecked = new ArrayList<ShoppingListIngredient>();
-                    shoppingListUnchecked = new ArrayList<ShoppingListIngredient>();
-                    for (ShoppingListIngredient ingredient : shoppingList) {
-                        if (ingredient.checked) {
-                            shoppingListChecked.add(ingredient);
-                        } else {
-                            shoppingListUnchecked.add(ingredient);
+            ShoppingList shoppingListItem = menu.shoppingList;
+            if (shoppingListItem != null) {
+                List<ShoppingListIngredient> shoppingList = ShoppingListIngredient.find("shoppingList is ? order by description", shoppingListItem).fetch();
+                shoppingListChecked = new ArrayList<ShoppingListIngredient>();
+                shoppingListUnchecked = new ArrayList<ShoppingListIngredient>();
+                for (ShoppingListIngredient ingredient : shoppingList) {
+                    if (ingredient.checked) {
+                        shoppingListChecked.add(ingredient);
+                    } else {
+                        shoppingListUnchecked.add(ingredient);
 
-                        }
                     }
                 }
             }
-            render("ShoppingLists/show.html", shoppingListChecked, shoppingListUnchecked, menu, nextMenu, previousMenu);
+            render("ShoppingLists/show.html", shoppingListChecked, shoppingListUnchecked, menu);
         }
-
-        render("ShoppingLists/show.html");
 
     }
 
     public static void showCurrent() {
         User user = User.find("byEmail", Security.connected()).first();
+        Date startingDay = DateUtil.getStartingDay();
 
-        Menu menu = Menu.find("usedFromDate = ?", DateUtil.getStartingDay()).first();
-        List<ShoppingListIngredient> shoppingListChecked = null;
-        List<ShoppingListIngredient> shoppingListUnchecked = null;
-        if (menu != null) {
-            ShoppingList shoppingListItem = ShoppingList.find("menu = ?", menu).first();
-            if (shoppingListItem != null) {
-                show(shoppingListItem.id);
-            }
-
+        Menu menu = Menu.find("usedFromDate = ?", startingDay).first();
+        if (menu == null) {
+            menu = new Menu(user, startingDay).save();
         }
-
-        Long dummy = null;
-        show(dummy);
+        show(menu.id);
     }
 
     public static void list(Long menuId) {
@@ -125,7 +111,7 @@ public class ShoppingLists extends CRUD {
 
     public static void save(Long id, Long[] includeRecipes, String includePreferredRecipes) {
         User user = User.find("byEmail", Security.connected()).first();
-        ShoppingList shoppingList = ShoppingList.findById(id);
+        Menu menu = Menu.findById(id);
 
         HashMap<String, Object[]> ingredientMap = new HashMap<String, Object[]>();
 
@@ -152,28 +138,27 @@ public class ShoppingLists extends CRUD {
             }
         }
 
-        List<ShoppingListIngredient> nonIngredientsInShoppingList = ShoppingListIngredient.find("shoppingList = ? and type != ?", shoppingList, ShoppingListItemType.ingredient).fetch();
+        List<ShoppingListIngredient> nonIngredientsInShoppingList = ShoppingListIngredient.find("shoppingList = ? and type != ?", menu.shoppingList, ShoppingListItemType.ingredient).fetch();
 
 
-        shoppingList.shoppingListIngredients = new ArrayList<ShoppingListIngredient>();
-        shoppingList.save();
-        ShoppingListIngredient.delete("shoppingList = ? and type = ?", shoppingList, ShoppingListItemType.ingredient);
+        menu.shoppingList.shoppingListIngredients = new ArrayList<ShoppingListIngredient>();
+        menu.shoppingList.save();
+        ShoppingListIngredient.delete("shoppingList = ? and type = ?", menu.shoppingList, ShoppingListItemType.ingredient);
 
 
         for (Object[] objects : ingredientMap.values()) {
-            shoppingList.addIngredient((Double) objects[0], (String) objects[1], (String) objects[2]);
+            menu.shoppingList.addIngredient((Double) objects[0], (String) objects[1], (String) objects[2]);
         }
-        shoppingList.shoppingListIngredients.addAll(nonIngredientsInShoppingList);
-        if(includePreferredRecipes != null && includePreferredRecipes.compareToIgnoreCase("preferred") == 0)
-        {
+        menu.shoppingList.shoppingListIngredients.addAll(nonIngredientsInShoppingList);
+        if (includePreferredRecipes != null && includePreferredRecipes.compareToIgnoreCase("preferred") == 0) {
             for (ShoppingListIngredient preferredIngredient : user.favoriteIngredients) {
-                shoppingList.addIngredient(preferredIngredient.amount, preferredIngredient.unit, preferredIngredient.description);
+                menu.shoppingList.addIngredient(preferredIngredient.amount, preferredIngredient.unit, preferredIngredient.description);
             }
 
         }
 
-        shoppingList.save();
+        menu.shoppingList.save();
 
-        show(shoppingList.id);
+        show(menu.id);
     }
 }

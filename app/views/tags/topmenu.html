@@ -1,10 +1,59 @@
-<div id="topmenu">
-			<ul>
-                <li class="first ${request.action == 'Recipes.favorites' ? 'active' : ''}"><a class="whitetext" href="@{Recipes.favorites()}">Mine oppskrifter</a></li>
-				<li class="${request.action == 'Recipes.index' ? 'active' : ''}"><a class="whitetext" href="@{Recipes.index()}">Alle oppskrifter</a></li>
-				<li class="${request.controller == "ShoppingLists" ? 'active' : ''}"><a class="whitetext" href="@{ShoppingLists.showCurrent()}">Ukens handlelapp</a></li>
-				<li class="${request.action == "Recipes.showCurrent" ? 'active' : ''}"><a class="whitetext" href="@{Recipes.showCurrent()}">Dagens oppskrift</a></li>
-                <li class="${request.action == "Users.preferences" ? 'active' : ''}"><a class="whitetext" href="@{Users.preferences()}">Innstillinger</a></li>
-			</ul>
+<script type="text/javascript">
+    $(document).ready(function () {
 
-	</div>
+        $("#showMenu").click(function(){
+            if($("#topmenu").is(":visible"))
+        {
+            $("#topmenu").hide("slide", 100);
+            $("#showMenu").find("span").text("Vis meny");
+
+        }
+        else
+        {
+            $("#topmenu").show("slide", 100);
+            $("#showMenu").find("span").text("Skjul meny");
+
+        }
+    });
+
+
+    })
+    ;
+
+</script>
+
+
+<a id="showMenu" class="fancyButtonLink ${request.action == 'Recipes.favorites' ? 'active' : ''}" href="#">
+    <div class="wrapper" style="width:100%; margin-bottom: 5px;"><span>Vis meny</span></div>
+</a>
+
+<div id="topmenu">
+    <a class="fancyButtonLink ${request.action == 'Recipes.favorites' ? 'active' : ''}" href="@{Recipes.favorites()}"
+       id="">
+        <div class="wrapper"><span>Mine oppskrifter</span></div>
+    </a>
+    <a class="fancyButtonLink ${request.action == 'Recipes.index' ? 'active' : ''}" href="@{Recipes.index()}" id="">
+        <div class="wrapper"><span>Alle oppskrifter</span></div>
+    </a>
+    <a class="fancyButtonLink ${request.controller == "ShoppingLists" ? 'active' : ''}"
+       href="@{ShoppingLists.showCurrent()}" id="">
+        <div class="wrapper"><span>Ukens handlelapp</span></div>
+    </a>
+    <a class="fancyButtonLink ${request.action == "Recipes.showCurrent" ? 'active' : ''}"
+       href="@{Recipes.showCurrent()}" id="">
+        <div class="wrapper"><span>Dagens oppskrift</span></div>
+    </a>
+    <a class="fancyButtonLink ${request.action == "Users.preferences" ? 'active' : ''}" href=""@{Users.preferences()}"
+    id="">
+    <div class="wrapper"><span>Innstillinger</span></div>
+    </a>
+
+#{if request.action ==  'Recipes.favorites' || request.action ==  'Recipes.index'}
+    <a class="fancyButtonLink ${request.action == "Recipes.form()" ? 'active' : ''}" href="@{Recipes.form()}" id="">
+        <div class="wrapper"><span>Ny oppskrift</span></div>
+    </a>
+#{/if}
+
+    </ul>
+
+</div>

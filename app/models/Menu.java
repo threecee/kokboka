@@ -2,8 +2,10 @@ package models;
 
 
 import play.db.jpa.Model;
+import utils.DateUtil;
 
 import javax.persistence.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +33,7 @@ public class Menu extends Model {
         this.createdAt = new Date();
         this.usedFromDate = usedFromDate;
         this.recipesInMenu = new ArrayList<RecipeInMenu>();
+        this.shoppingList = new ShoppingList();
 
     }
 
@@ -71,5 +74,40 @@ public class Menu extends Model {
               }
          }
      }
+
+
+    public Menu getNextWeeksMenu(User user)
+    {
+        return getNextWeeksMenu(user, this);
+    }
+    public Menu getLastWeeksMenu(User user)
+    {
+       return getLastWeeksMenu(user, this);
+    }
+
+
+
+    public static Menu getNextWeeksMenu(User user, Menu thisWeeksMenu)
+    {
+       Date newDate =  utils.DateUtil.addDays(thisWeeksMenu.usedFromDate, 7);
+        return getMenu(user, newDate);
+    }
+    public static Menu getLastWeeksMenu(User user, Menu thisWeeksMenu)
+    {
+       Date newDate =  utils.DateUtil.addDays(thisWeeksMenu.usedFromDate, -7);
+        return getMenu(user, newDate);
+    }
+
+    public static Menu getMenu(User user, Date startingDay)  {
+        Menu menu = null;
+
+        if (startingDay != null) {
+            menu = Menu.find("author = ? and usedFromDate = ?", user, startingDay).first();
+
+            if (menu == null)
+                menu = new Menu(user, startingDay).save();
+        }
+    return menu;
+    }
 
 }

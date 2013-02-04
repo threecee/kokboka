@@ -42,7 +42,7 @@
     </p>
     <br/>
 
-#{form @save(shoppingList?.id)}
+#{form @save(menu?.id)}
     <h3>Dine valgte middager:</h3>
     <input type="hidden" name="service" value="handleliste"/>
     <!-- START Recipe item -->
@@ -56,20 +56,12 @@
                     <strong>${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}</strong>
                     <span>${utils.DateUtil.dayOfMonth(utils.DateUtil.addDays(menu.usedFromDate, i))} ${utils.DateUtil.monthOfYearShort(utils.DateUtil.addDays(menu.usedFromDate, i))}</span>
                 </div>
-                <a href="@{Recipes.show(menu.getRecipeForDay(i).id)}">
+                <a class="bildecontainer" href="@{Recipes.show(menu.getRecipeForDay(i).id)}">
                     <img class="oppskriftsBilde" src="${models.Image.getThumb(menu.getRecipeForDay(i))}"/>
                 </a>
 
                 <div class="recipe_content">
-                    <div class="checkBox_container">
-                        #{field 'includeRecipes'}
-                            <label for="${field.name}">Ta med</label>
-                            <input type="checkbox" name="${field.name}" id="${field.name}"
-                                   value="${menu.getRecipeForDay(i).id}" checked/>
-                        #{/field}
-                    </div>
 
-                    <h5></h5>
                     <h4><a href="@{Recipes.show(menu.getRecipeForDay(i).id)}">${menu.getRecipeForDay(i).title}</a></h4>
 
                     <p>
@@ -89,6 +81,13 @@
                            value="${utils.Servings.getPreferredServings(user, menu.getRecipeForDay(i))}"/>
 
                 </div>
+                <div class="checkBox_container">
+                     #{field 'includeRecipes'}
+                         <label for="${field.name}">Ta med</label>
+                         <input type="checkbox" name="${field.name}" id="${field.name}"
+                                value="${menu.getRecipeForDay(i).id}" checked/>
+                     #{/field}
+                 </div>
 
 
             </div>
@@ -118,16 +117,16 @@
 
     #{/list}
     <div class="handlelapp_recipe_container">
-        <div class="recipe_content">
-            <div class="checkBox_container">
-                #{field 'includePreferredRecipes'}
-                    <label for="${field.name}">Ta med</label>
-                    <input type="checkbox" name="${field.name}" value="preferred" id="${field.name}" checked/>
-                #{/field}
-            </div>
 
+        <div class="recipe_content">
             <h4 style="margin:8px;">Matvarer du har lagt inn som faste varer hver uke</h4>
 
+        </div>
+        <div class="checkBox_container">
+            #{field 'includePreferredRecipes'}
+                <label for="${field.name}">Ta med</label>
+                <input type="checkbox" name="${field.name}" value="preferred" id="${field.name}" checked/>
+            #{/field}
         </div>
     </div>
     <!-- END Recipe item -->

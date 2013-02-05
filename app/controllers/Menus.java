@@ -1,10 +1,7 @@
 package controllers;
 
 
-import models.Menu;
-import models.MenuDay;
-import models.Recipe;
-import models.User;
+import models.*;
 import play.mvc.Before;
 import play.mvc.With;
 import utils.DateUtil;
@@ -39,9 +36,11 @@ public class Menus extends CRUD {
 
         Recipe recipe = Recipe.findById(recipeId);
 
+        menu.deleteRecipeForDay(distance);
         menu.addRecipe(recipe, MenuDay.values()[distance]);
 
         menu.save();
+
     }
 
     public static void unplanrecipe(String day) throws ParseException {

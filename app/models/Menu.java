@@ -60,7 +60,10 @@ public class Menu extends Model {
 
     public void deleteRecipeForDay(int day)
      {
-         MenuDay menuDay = MenuDay.values()[day];
+         deleteRecipeForDay(MenuDay.values()[day]);
+     }
+    public void deleteRecipeForDay(MenuDay menuDay)
+     {
          for(RecipeInMenu recipeInMenu:recipesInMenu)
          {
               if(recipeInMenu.usedForDay.compareTo(menuDay) == 0)

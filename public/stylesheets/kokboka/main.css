@@ -540,6 +540,10 @@ UNUSED.ui-draggable-dragging img {
     z-index: 2000;
 }
 
+.bottomSpacer{
+    margin-bottom:150px;
+}
+
 @media only screen
 and (max-width : 400px) {
     #topmenu .wrapper, .buttonRow .smallButton {
@@ -659,4 +663,9 @@ and (max-width : 400px) {
         filter: alpha(opacity = 100);
     }
 
+    .bottomSpacer{
+        margin-bottom:0px;
+    }
+
 }
+

@@ -4,14 +4,30 @@
         $("#showMenu").click(function(){
             if($("#topmenu").is(":visible"))
         {
-            $("#topmenu").hide("slide", 100);
+            $("#topmenu").hide();
             $("#showMenu").find("span").text("Vis meny");
 
         }
         else
         {
-            $("#topmenu").show("slide", 100);
+            $("#topmenu").show();
             $("#showMenu").find("span").text("Skjul meny");
+
+        }
+    });
+
+
+        $("#showTags").click(function(){
+            if($("#venstremeny").is(":visible"))
+        {
+            $("#venstremeny").hide();
+            $("#showTags").find("span").text("Vis tags");
+
+        }
+        else
+        {
+            $("#venstremeny").show();
+            $("#showTags").find("span").text("Skjul tags");
 
         }
     });

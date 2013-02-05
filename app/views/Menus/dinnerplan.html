@@ -33,13 +33,21 @@
 </script>
 #{if menu != null }
 
-
 <div class="weekplanner_buttons">
-    <a href="@{ShoppingLists.show(menu.id)}" id="tilHandlelappen">
-        Vis handlelapp
+<a class="fancyButtonLink" href="@{ShoppingLists.list(menu.id)}" id="tilLagHandlelapp">
+    <div class="wrapper">
+        <span>Lag handlelapp</span>
+    </div>
+</a>
+    <a class="fancyButtonLink" href="@{ShoppingLists.show(menu.id)}" id="tilVisHandlelapp">
+        <div class="wrapper">
+            <span>Vis handlelapp</span>
+        </div>
     </a>
-
 </div>
+
+
+
 
 <div class="weekplanner_days">
     <ul id="mycarousel_days" class="jcarousel-skin-tango">

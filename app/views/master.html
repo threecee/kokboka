@@ -24,11 +24,6 @@
     <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/kokboka/main.css'}" />
 
 
-    <!--    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-1.7.min.js'}"></script>-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <!--[if lt IE 9]>
-    <script type="text/javascript">this.kaputBrowser = true;</script>
-    <![endif]-->
 
     <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/font.css'}"/>
     <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/tasks.css'}" data-requiremodule="tasks"
@@ -51,9 +46,26 @@
 <!--    <link rel="stylesheet" type="text/css" media="screen, handheld"
           href="@{'/public/stylesheets/jquery/jquery-ui-1.8.16.custom.css'}"/>
 -->
-    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-ui.min.js'}"/>
+
+    <!--    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-1.7.min.js'}"></script>-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
+    <!--[if lt IE 9]>
+    <script type="text/javascript">this.kaputBrowser = true;</script>
+    <![endif]-->
+
+    <script type="text/javascript" language="javascript"
+            src="@{'/public/javascripts/jcarousellite_1.0.1.min.js'}"></script>
+    <!--<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-ui.min.js'}"/>-->
     <script type="text/javascript" language="javascript"
             src="@{'/public/javascripts/jquery.ui.touch-punch.min.js'}"></script>
+    <script type="text/javascript" language="javascript"
+            src="@{'/public/javascripts/middagsplanlegger.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.cookie.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.json-2.3.min.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.cookie.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.jsoncookie.js'}"></script>
+    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery.getParams.js'}"></script>
 </head>
 <body class="bodyClass">
 
@@ -69,6 +81,9 @@
         </div>
     </div>
 </div>
+#{if request.action == 'Recipes.index' || request.action == 'Recipes.favorites' || request.action == 'Recipes.show'}
+    #{planningFooter menu:menu /}
+#{/if}
 
 </body>
 </html>

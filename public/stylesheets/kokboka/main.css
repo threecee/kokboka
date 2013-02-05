@@ -48,6 +48,8 @@
     overflow: hidden;
     border: 1px solid #ccc;
     border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
     background: #f8f8f8;
 
 }
@@ -281,12 +283,261 @@ UNUSED#slider {
     margin-right: 1%;
 }
 
-
 #topmenu .wrapper {
     width: 15%;
 }
+
 #showMenu {
-    display:none ;
+    display: none;
+}
+
+.recipeTagButton {
+
+    width: 140px;
+    height: 20px;
+    background-color: #012442;
+    border-radius: 5px;
+    color: whitesmoke;
+    vertical-align: middle;
+    padding-top: 5px;
+    padding-left: 10px;
+    margin-top: 5px;
+
+}
+
+#venstremeny {
+    float: left;
+}
+
+#recipeList {
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+#recipeList .recipeListItem {
+
+    padding-right: 10px;
+    padding-left: 13px;
+    overflow: hidden;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    float: left;
+}
+
+.recipeItem {
+    position: relative;
+}
+
+.recipeItem .recipeImage {
+    position: relative;
+    float: right;
+    width: 140px;
+    height: 140px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.recipeItem .recipeImage img {
+    width: 138px;
+    height: 138px;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    padding: 2px;
+    background-color: black;
+}
+
+div.recipeTitleBox {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 140px;
+
+    background-color: black;
+    font-family: 'tahoma';
+    font-size: 12px;
+    text-align: center;
+    color: white;
+    opacity: 0.6;
+    filter: alpha(opacity = 60);
+    border-radius: 0px 0px 8px 8px;
+    -moz-border-radius: 0px 0px 8px 8px;
+    -webkit-border-radius: 0px 0px 8px 8px;
+}
+
+p.recipeTitle {
+    padding: 5px;
+    margin: 0px;
+    opacity: 1;
+    filter: alpha(opacity = 100);
+}
+
+.ui-draggable-dragging {
+    margin-left: 60px;
+}
+
+.ui-draggable-dragging {
+}
+
+.ui-draggable-dragging .recipeImage img {
+    width: 77px;
+    height: 77px;
+    margin: 0;
+    position: relative;
+    float: none;
+    display: block;
+    background: url(../draggableDrag2.png) no-repeat top center;
+    padding: 8px 8px 30px 8px;
+}
+
+.ui-draggable-dragging h3,
+.ui-draggable-dragging p,
+.ui-draggable-dragging .recipePrice,
+.ui-draggable-dragging .recipeImage .recipeTime {
+    display: none;
+}
+
+UNUSED.ui-draggable-dragging img {
+    width: 77px;
+    height: 77px;
+    margin: 0;
+    position: relative;
+    float: none;
+    display: block;
+    background: url(../draggableDrag2.png) no-repeat top center !important;
+    padding: 8px 8px 50px 8px !important;
+}
+
+#middagsplanlegger #mycarousel_days .carouselitem_planner .cimg > img {
+    width: 98px;
+    height: 98px;
+    padding: 2px;
+    background-color: #000000;
+}
+
+#middagsplanlegger .weekplanner_buttons {
+    float: right;
+    width: 141px;
+    text-align: center;
+    color: #fff;
+}
+
+#middagsplanlegger .weekplanner_buttons a {
+    background: url(../handlelappBtn.png) no-repeat;
+    width: 141px;
+    height: 38px;
+    color: #000;
+    display: block;
+    color: #fff;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 38px;
+    padding-left: 5px;
+    margin-top: 4px;
+}
+
+#footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 130px;
+    width: 100%;
+    background: url(../footerBkgrnd_lq.png);
+    padding-top: 30px;
+    clear: both;
+    z-index: 30;
+}
+
+#footer.alleOppskrifter {
+
+}
+
+* html #footer {
+    position: absolute;
+    top: expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
+}
+
+#middagsplanlegger {
+    position: relative;
+    margin-top: 22px;
+}
+
+#middagsplanlegger .prev_planner {
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    overflow: hidden;
+    height: 100px;
+    background: url(../dagPrev.png) no-repeat center left;
+    margin-left: -30px;
+    cursor: pointer;
+}
+
+#middagsplanlegger .prev_planner span {
+    display: none;
+}
+
+#middagsplanlegger .next_planner {
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    right: 178px;
+    width: 15px;
+    overflow: hidden;
+    height: 100px;
+    background: url(../dagNext.png) no-repeat center right;
+    cursor: pointer;
+}
+
+#middagsplanlegger .next_planner span {
+    display: none;
+}
+
+#middagsplanlegger #mycarousel_days,
+#middagsplanlegger #mycarousel_days li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#middagsplanlegger #mycarousel_days {
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+#middagsplanlegger #mycarousel_days .carouselitem_planner {
+    width: 97px;
+    height: 97px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    margin: 0 15px 0 0;
+    padding: 0;
+}
+
+#middagsplanlegger #mycarousel_days li {
+    display: block;
+    float: left;
+}
+
+#middagsplanlegger #mycarousel_days .carouselitem_planner .cheader_day {
+    background: url(../dinnerPlanner_dayBkgrnd.png) no-repeat bottom;
+    color: #fff;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    height: 23px;
+    width: 100%;
+    background-color: black;
+    text-align: center;
+    line-height: 1.7;
+    z-index: 2000;
 }
 
 @media only screen
@@ -294,17 +545,96 @@ and (max-width : 400px) {
     #topmenu .wrapper {
         width: 100%;
     }
+
     #topmenu a {
         text-decoration: none;
         color: black;
         font-size: 15px;
         font-size: 4.5vw;
+        margin-bottom: 2%;
+        display: block;
+        height: 34px;
     }
-    #topmenu {
-        display:none ;
-    }
-    #showMenu {
-        display:block ;
-    }
-}
 
+    #topmenu {
+        display: none;
+    }
+
+    #showMenu {
+        display: block;
+    }
+
+    #venstremeny {
+        display: block;
+        float: none;
+        width: 100%;
+    }
+
+    #venstremeny ul {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .recipeTagButton {
+        width: 98%;
+    }
+
+    #footer {
+        display: none;
+    }
+
+    /*
+    #recipeList {
+           margin-top: 20px;
+       }
+    */
+    #recipeList .recipeListItem {
+
+        padding-right: 0px;
+        padding-left: 5px;
+        overflow: hidden;
+
+        padding-top: 5px;
+        padding-bottom: 5px;
+        float: left;
+    }
+
+    .recipeItem .recipeImage {
+        position: relative;
+        float: right;
+        width: 90px;
+        height: 90px;
+        margin-right: 5px;
+        margin-top: 5px;
+    }
+
+    .recipeItem .recipeImage img {
+        width: 88px;
+        height: 88px;
+        border-radius: 8px;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+        padding: 2px;
+        background-color: black;
+    }
+
+    div.recipeTitleBox {
+        width: 90px;
+        font-size: 11px;
+        text-align: center;
+        color: white;
+        opacity: 0.8;
+        filter: alpha(opacity = 80);
+        border-radius: 0px 0px 8px 8px;
+        -moz-border-radius: 0px 0px 8px 8px;
+        -webkit-border-radius: 0px 0px 8px 8px;
+    }
+
+    p.recipeTitle {
+        padding: 5px;
+        margin: 0px;
+        opacity: 1;
+        filter: alpha(opacity = 100);
+    }
+
+}

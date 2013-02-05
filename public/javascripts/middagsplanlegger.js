@@ -309,7 +309,7 @@ $(function() {
 					$.cookie('historySplash', 'show',{expires: 1, path: '/'});					
 				}
 			}
-			
+
 			/* ShowHistorySplash ()
 			 *
 			 * funksjonen sjekker om splashen har blitt vist før. Hvis ikke skal den vises n�.
@@ -317,7 +317,7 @@ $(function() {
 			 *
 			 * */
 
-			
+
 			 function showHistorySplash()
 			 {
 			 	if($.cookie("historySplash") == 'show')
@@ -327,16 +327,16 @@ $(function() {
 			 	}
 			 		
 			 }
-			
+
 			/* click-event for lukkeknappen p� historikksplash
 			 * 
 			 *	N�r knappen trykkes vil man kalle p� hideHistorySplash for � skjule splashbaren og lage en cookie
 			 **/
-			 
+
 			 $('.historikkSplashContainer .lukk').click(function(){
 			 	hideHistorySplash();	
 			 });
-			
+
 			/* hideHistorySplash ()
 			 *
 			 * funksjonen lager en cookie som sier at splashen er lukket av bruker. Dermed blir den borte i 5 dager
@@ -349,7 +349,7 @@ $(function() {
 				$('.historikkSplashContainer').fadeOut('slow');	
 			}
 			
-			
+
 
 /* deleteRecipe()
  * 

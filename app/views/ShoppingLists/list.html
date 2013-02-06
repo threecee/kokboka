@@ -8,6 +8,7 @@
             var number = parseInt($(mengde).text());
             number = number + 1;
             $(mengde).text(number);
+            $(this).parent().parent().parent().find("input.recipeAmounts").val(number);
         });
         $("span.minusknapp").click(function () {
             var mengde = $(this).parent().find(".mengde");
@@ -15,6 +16,7 @@
             if (number > 0) {
                 number = number - 1;
                 $(mengde).text(number);
+                $(this).parent().parent().parent().find("input.recipeAmounts").val(number);
             }
         });
 
@@ -68,6 +70,7 @@
 
                         <li class="task-item" id="${menu.getRecipeForDay(i).id}">
                             <input type="hidden" name="includeRecipes" id="${menu.getRecipeForDay(i).id}" value="${menu.getRecipeForDay(i).id}"/>
+                            <input type="hidden" class="recipeAmounts" name="recipeAmounts-${menu.getRecipeForDay(i).id}" id="${menu.getRecipeForDay(i).id}" value="${utils.Servings.getPreferredServings(user, menu, i)}"/>
 
                             <div class="task-body"><a class="task-checkbox task-checked"><span
                                     class="icon task-checkbox task-checked"></span></a>

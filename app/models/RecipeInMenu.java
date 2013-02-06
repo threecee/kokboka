@@ -19,6 +19,8 @@ public class RecipeInMenu extends Model {
     @ManyToOne
     public Menu menu;
 
+    public Double amount;
+
     public RecipeInMenu(Menu menu, Recipe recipe, MenuDay usedForDay) {
         this.menu = menu;
         this.recipe = recipe;

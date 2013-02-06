@@ -1,37 +1,26 @@
 #{extends 'master.html' /}
 
 
-<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-1.7.min.js'}"></script>
-<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-ui.min.js'}"></script>
-<script type="text/javascript" language="javascript"
-        src="@{'/public/javascripts/jquery.ui.touch-punch.min.js'}"></script>
-<script type="text/javascript" language="javascript" src="@{'/public/javascripts/middagsplanlegger.js'}"></script>
-<link rel="stylesheet" type="text/css" media="screen, handheld"
-      href="@{'/public/stylesheets/middagsplanleggeren.css'}">
-<link rel="stylesheet" type="text/css" media="screen, handheld"
-      href="@{'/public/stylesheets/jquery/jquery-ui-1.8.16.custom.css'}">
-
-
-
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $("#slider_adult").slider({
-            value:${user.preferredServings != null?user.preferredServings:2},
-            min: 0,
-            max: 8,
-            range: 'min',
-            step: 1,
-            slide: function (event, ui) {
-                if (ui.value == 0)
-                    return false;
-                $("#slider_Range").text(ui.value);
-
-            },
-            stop: function (event, ui) {
-                      savePreferredServings(ui.value);
+        $("span.plussknapp").click(function () {
+            var mengde = $(this).parent().find(".mengde");
+            var number = parseInt($(mengde).text());
+            number = number + 1;
+            $(mengde).text(number);
+            savePreferredServings(number);
+        });
+        $("span.minusknapp").click(function () {
+            var mengde = $(this).parent().find(".mengde");
+            var number = parseInt($(mengde).text());
+            if (number > 0) {
+                number = number - 1;
+                $(mengde).text(number);
+                savePreferredServings(number);
             }
         });
+
 
         $("input#add-description").keypress(function (e) {
             if (e.which == 13) {
@@ -42,7 +31,7 @@
                 addIngredient(amountInput.val(), unitInput.val(), $(this).val());
                 amountInput.val("");
                 unitInput.val("");
-                descriptionInput.val( "");
+                descriptionInput.val("");
 
 
             }
@@ -88,74 +77,85 @@
         });
     }
 
-        var taskTemplate = "<li class=\"task-item\" id=\"$ID$\">" +
-                "<div class=\"task-body\"><a class=\"task-checkbox\"><span class=\"icon check-trash \"></span></a> " +
-                "<a class=\"icon task-separator\"></a>" +
-                "<div class=\"title-wrapper\"><span" +
-                "  class=\"title\"><span>$AMOUNT$ $UNIT$</span> $DESCRIPTION$</span>" +
-                "</div>" +
-                "</div>" +
-                "</li>";
+    var taskTemplate = "<li class=\"task-item\" id=\"$ID$\">" +
+            "<div class=\"task-body\"><a class=\"task-checkbox\"><span class=\"icon check-trash \"></span></a> " +
+            "<a class=\"icon task-separator\"></a>" +
+            "<div class=\"title-wrapper\"><span" +
+            "  class=\"title\"><span>$AMOUNT$ $UNIT$</span> $DESCRIPTION$</span>" +
+            "</div>" +
+            "</div>" +
+            "</li>";
 
-        function injectTask(id, amount, unit, description) {
-            var injectString = taskTemplate.replace("$ID$", id).replace("$AMOUNT$", amount).replace("$UNIT$", unit).replace("$DESCRIPTION$", description);
+    function injectTask(id, amount, unit, description) {
+        var injectString = taskTemplate.replace("$ID$", id).replace("$AMOUNT$", amount).replace("$UNIT$", unit).replace("$DESCRIPTION$", description);
 
-            $('<div/>').html(injectString).prependTo("ol#ingredient-tasks");
+        $('<div/>').html(injectString).prependTo("ol#ingredient-tasks");
 
-        }
+    }
 
 
 </script>
 
+<div id="profil">
+    <div class="whitetext toppOverskrift" style="margin-bottom: 30px">Din profil</div>
 
-            <h2 style="display: block; font-size: 20px">Matvarer som legges til handlelappen hver uke</h2>
+    <div class="whitetext overskrift">Matvarer som legges til handlelappen hver uke</div>
 
-            <div class="addtask" style="">
+    <div class="addtask" style="">
 
-                <a class="input-date"><span class="icon input-date transparent"></span></a>
-                <input style="width:15%" id="add-amount" type="text" class="transparent mousetrap" maxlength="255"
-                       key-placeholder="placeholder_add_task_to_$" data-placeholder="amount" placeholder="Mengde">
-                <input id="add-unit" style="width:15%" type="text" class="transparent mousetrap" maxlength="255"
-                       key-placeholder="placeholder_add_task_to_$" data-placeholder="unit" placeholder="enhet">
-                <input id="add-description" style="width:60%" type="text" class="transparent mousetrap" maxlength="255"
-                       key-placeholder="placeholder_add_task_to_$" data-placeholder="Inbox"
-                       placeholder="beskrivelse (trykk enter her for å legge til)">
-            </div>
-            <div class="task-list">
-                <div class="grouped-tasks" rel="inbox">
-                    <ol class="tasks" id="ingredient-tasks" style="padding-left:0px;">
-                    #{list items:shoppingList, as:'ingredient'}
-                        <li class="task-item" id="${ingredient.id}">
-                            <div class="task-body"><a class="task-checkbox"><span
-                                    class="icon check-trash "></span></a> <a class="icon task-separator"></a>
+        <a class="input-date"><span class="icon input-date transparent"></span></a>
+        <input style="width:15%" id="add-amount" type="text" class="transparent mousetrap" maxlength="255"
+               key-placeholder="placeholder_add_task_to_$" data-placeholder="amount" placeholder="Mengde">
+        <input id="add-unit" style="width:15%" type="text" class="transparent mousetrap" maxlength="255"
+               key-placeholder="placeholder_add_task_to_$" data-placeholder="unit" placeholder="enhet">
+        <input id="add-description" style="width:60%" type="text" class="transparent mousetrap" maxlength="255"
+               key-placeholder="placeholder_add_task_to_$" data-placeholder="Inbox"
+               placeholder="beskrivelse (trykk enter her for å legge til)">
+    </div>
+    <div class="task-list">
+        <div class="grouped-tasks" rel="inbox">
+            <ol class="tasks" id="ingredient-tasks" style="padding-left:0px;">
+            #{list items:shoppingList, as:'ingredient'}
+                <li class="task-item" id="${ingredient.id}">
+                    <div class="task-body"><a class="task-checkbox"><span
+                            class="icon check-trash "></span></a> <a class="icon task-separator"></a>
 
-                                <div class="title-wrapper"><span
-                                        class="title">
+                        <div class="title-wrapper"><span
+                                class="title">
                                     #{if !ingredient.type.equals(models.ShoppingListItemType.onthefly) }
                                         <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
                                     #{/if}
-                                ${ingredient.description}</span>
-                                </div>
-                            </div>
-                        </li>
-                    #{/list}
-                    </ol>
+                        ${ingredient.description}</span>
+                        </div>
+                    </div>
+                </li>
+            #{/list}
+            </ol>
 
-                </div>
-            </div>
-            <h2 style="display: block; font-size: 20px">Antall personer oppskriftene skal ta utganspunkt i</h2>
+        </div>
+    </div>
+    <div class="whitetext overskrift">Oppskriftenes dimensjonering</div>
 
-            <p>
-            <div class="handlelapp_recipe_container">
-            <div id="slider">
+    <div class="task-list">
+        <div class="grouped-tasks" rel="inbox">
+            <ol class="tasks" id="menu-tasks" style="padding-left:0px;">
+                <li class="task-item noduedate">
+                    <div class="task-body">
+                        <div class="selector">
+                            <span class="minusknapp"></span>
+                            <span class="plussknapp"></span>
+                                    <span class="tekst">Til <span style="float: none" class="mengde"
+                                                                  id="slider">${user.preferredServings != null?utils.Currency.prettyDouble(user.preferredServings):2}</span> personer</span>
+                        </div>
+                        <div class="title-wrapper"><span
+                                class="title">Antall personer oppskriftene skal ta utganspunkt i
+                                    </span>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </div>
 
-                <!-- adult - slider -->
-                <strong>Mengde:</strong>
 
-                <div id="slider_adult"></div>
-                <span>personer</span>
-                <span id="slider_Range">${user.preferredServings != null?utils.Currency.prettyDouble(user.preferredServings):2}</span>
-
-            </div>
 </div>
-            </p>

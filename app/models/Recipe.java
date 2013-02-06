@@ -81,7 +81,7 @@ public class Recipe extends Model {
     }
 
 
-    public Ingredient addIngredient(String amount, String unit, String description) {
+    public Ingredient addIngredient(Double amount, String unit, String description) {
         Ingredient newIngredient = new Ingredient(this, amount, unit, description).save();
         this.ingredients.add(newIngredient);
         this.save();

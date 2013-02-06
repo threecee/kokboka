@@ -24,6 +24,19 @@ public class ShoppingLists extends CRUD {
         }
     }
 
+
+    public static void uke(int uke) {
+
+        Date startDag = DateUtil.getStartingDayForWeek(uke);
+
+        User user = User.find("byEmail", Security.connected()).first();
+        Menu menu = Menu.find("user = ? and usedForDate = ?", user, startDag).first();
+        if (menu == null) {
+            menu = new Menu(user, startDag).save();
+        }
+        show(menu.id);
+    }
+
     public static void showNextWeek(Long id) {
         Menu menu = Menu.findById(id);
         User user = User.find("byEmail", Security.connected()).first();
@@ -115,29 +128,36 @@ public class ShoppingLists extends CRUD {
 
         HashMap<String, Object[]> ingredientMap = new HashMap<String, Object[]>();
 
-        for (Long recipeId : includeRecipes) {
-            Recipe recipe = Recipe.findById(recipeId);
-            String amountString = params.get("recipeAmounts-" + recipeId);
-            int amount = 2;
-            try {
-                amount = Integer.parseInt(amountString);
-            } catch (NumberFormatException e) {
-                Logger.error("Greide ikke å parse recipeAmounts-felt", e);
-            }
+        if (includeRecipes != null) {
+            for (Long recipeId : includeRecipes) {
+                if (recipeId != null) {
+                    Recipe recipe = Recipe.findById(recipeId);
+                    String amountString = params.get("recipeAmounts-" + recipeId);
+                    int amount = 2;
+                    try {
+                        amount = Integer.parseInt(amountString);
+                    } catch (NumberFormatException e) {
+                        Logger.error("Greide ikke å parse recipeAmounts-felt", e);
+                    }
 
-            double multiplier = amount / recipe.serves;
+                    RecipeInMenu recipeInMenu = RecipeInMenu.find("menu = ? and recipe = ?", menu, recipe).first();
+                    recipeInMenu.amount = (double) amount;
+                    recipeInMenu.save();
 
-            for (Ingredient ingredient : recipe.ingredients) {
-                String key = ingredient.unit.toLowerCase() + ingredient.description.toLowerCase();
-                if (ingredientMap.containsKey(key)) {
-                    double currentAmount = (Double) ingredientMap.get(key)[0];
-                    ingredientMap.get(key)[0] = Double.parseDouble(ingredient.amount) * multiplier + currentAmount;
-                } else {
-                    ingredientMap.put(key, new Object[]{Double.parseDouble(ingredient.amount) * multiplier, ingredient.unit, ingredient.description});
+
+
+                    for (Ingredient ingredient : recipe.ingredients) {
+                        String key = ingredient.unit.toLowerCase() + ingredient.description.toLowerCase();
+                        if (ingredientMap.containsKey(key)) {
+                            double currentAmount = (Double) ingredientMap.get(key)[0];
+                            ingredientMap.get(key)[0] = ingredient.getScaledAmount(menu) + currentAmount;
+                        } else {
+                            ingredientMap.put(key, new Object[]{ ingredient.getScaledAmount(menu), ingredient.unit, ingredient.description});
+                        }
+                    }
                 }
             }
         }
-
         List<ShoppingListIngredient> nonIngredientsInShoppingList = ShoppingListIngredient.find("shoppingList = ? and type != ?", menu.shoppingList, ShoppingListItemType.ingredient).fetch();
 
 
@@ -150,7 +170,7 @@ public class ShoppingLists extends CRUD {
             menu.shoppingList.addIngredient((Double) objects[0], (String) objects[1], (String) objects[2]);
         }
         menu.shoppingList.shoppingListIngredients.addAll(nonIngredientsInShoppingList);
-        if (includePreferredRecipes != null && includePreferredRecipes.compareToIgnoreCase("preferred") == 0) {
+        if (includePreferredRecipes != null && includePreferredRecipes.compareToIgnoreCase("faste") == 0) {
             for (ShoppingListIngredient preferredIngredient : user.favoriteIngredients) {
                 menu.shoppingList.addIngredient(preferredIngredient.amount, preferredIngredient.unit, preferredIngredient.description);
             }

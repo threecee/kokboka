@@ -81,8 +81,8 @@ public class BasicTest extends UnitTest {
         User bob = new User("bob@gmail.com", "secret", "Bob").save();
         Recipe rep = new Recipe(bob, "Kake", "info om kake", "bake smake kake", "http://www.dinmat.no", 20, "stk").save();
 
-        rep.addIngredient("1", "stk", "agurk").save();
-        rep.addIngredient("2", "stk", "sitroner").save();
+        rep.addIngredient(1.0, "stk", "agurk").save();
+        rep.addIngredient(2.0, "stk", "sitroner").save();
 
         // Retrieve all comments
         List<Ingredient> tofuIngredients = Ingredient.find("byRecipe", rep).fetch();

@@ -5,13 +5,13 @@
 
 #{if selectedTags != null }
 <a id="showTags" class="fancyButtonLink" href="#">
-    <div class="wrapper" style="width:100%; margin-bottom: 5px;"><span>Vis tags</span></div>
+    <div class="wrapper" style="width:100%; margin-bottom: 5px;"><span>Skjul tags</span></div>
 </a>
     <div id="venstremeny">
 
     #{if selectedTags.size() > 0 }
         <h3>Fjerne avgrensing:</h3>
-        #{/if }
+
 <div>
 		<ul>
             #{list items:selectedTags, as:'tag'}
@@ -24,7 +24,7 @@
 		</ul>
 </div>
 <br/>
-<h3>Avgrense:</h3>
+    #{/if }<h3>Avgrense:</h3>
 <div>
 		<ul>
             #{list items:availableTags, as:'tag'}

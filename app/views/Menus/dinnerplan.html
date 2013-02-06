@@ -34,16 +34,12 @@
 #{if menu != null }
 
 <div class="weekplanner_buttons">
-<a class="fancyButtonLink" href="@{ShoppingLists.list(menu.id)}" id="tilLagHandlelapp">
+<a class="fancyButtonLink" href="@{Menus.show(menu.id)}" id="tilLagHandlelapp">
     <div class="wrapper">
-        <span>Lag handlelapp</span>
+        <span>Vis meny</span>
     </div>
 </a>
-    <a class="fancyButtonLink" href="@{ShoppingLists.show(menu.id)}" id="tilVisHandlelapp">
-        <div class="wrapper">
-            <span>Vis handlelapp</span>
-        </div>
-    </a>
+
 </div>
 
 

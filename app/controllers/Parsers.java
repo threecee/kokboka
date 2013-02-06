@@ -288,17 +288,17 @@ public class Parsers extends Controller {
 
         for (Node event : XPath.selectNodes("//div[@id='recipe']/div[@class='rightColumn']/div/div[@class='ingredient_parent']", recipeDocument)) {
 
-            String amount = "0";
+            Double amount = 0.0;
             String unit = "";
             String ingredientName = "";
 
             String mengdeEnhet = XPath.selectText("div[@class='mengdeEnhet']", event);
             if (mengdeEnhet != null) {
                 String[] mengdeEnhetArray = mengdeEnhet.trim().split(" ");
-                amount = mengdeEnhetArray[0];
+                String amountString = mengdeEnhetArray[0];
                 unit = mengdeEnhetArray[1];
-                if (amount != null) {
-                    amount = amount.replace(",", ".");
+                if (amountString != null) {
+                    amount = Double.parseDouble(amountString.replace(",", "."));
                 }
             }
 
@@ -338,10 +338,10 @@ public class Parsers extends Controller {
                 String newDesc = matcher.replaceFirst("");
                 String unit = matcher.group(2);
                 Double amountDouble = Double.parseDouble(amount.replace(",","."));
-                Double totalAmount = amountDouble * Double.parseDouble(originalIngredient.amount);
+                Double totalAmount = amountDouble * originalIngredient.amount;
 
                 reporter("Replacing " + originalIngredient.amount + " " + originalIngredient.unit + " " + originalIngredient.description + " with: " + totalAmount + " " + unit + " " + newDesc);
-                originalIngredient.amount = amountDouble + "";
+                originalIngredient.amount = amountDouble;
                 originalIngredient.unit = unit;
                 originalIngredient.description = newDesc;
                 originalIngredient.save();
@@ -349,7 +349,7 @@ public class Parsers extends Controller {
         }
     }
 
-    static String[] kjenteProdukter = new String[]{"Austin Lamb Chops","5%", "9%", "14%", "18%", "Toro", "Barilla", "Gilde", "Idun", "Mills", "Grovt og godt", "Godehav", "Solvinge", "REMA 1000", "Tine", "Bama", "Kikkoman", "Nordfjord", "Blue Dragon", "Taga", "Finsbråten", "Hatting", "Mesterbakeren", "Grilstad", "Ideal", "Staur", "MaxMat", "Viddas", "Gourmet", "Pampas", "frossen", "frosne", "naturell", "M/L,", " - NB! Sesongvare"};
+    static String[] kjenteProdukter = new String[]{"Gaea","Austin Lamb Chops","5%", "9%", "14%", "18%", "10%", "Toro", "Barilla", "Gilde", "Idun", "Mills", "Grovt og godt", "Godehav", "Solvinge", "REMA 1000", "Tine", "Bama", "Kikkoman", "Nordfjord", "Blue Dragon", "Taga", "Finsbråten", "Hatting", "Mesterbakeren", "Grilstad", "Ideal", "Staur", "MaxMat", "Viddas", "Gourmet", "Pampas", "frossen", "frosne", "naturell", "M/L,", " - NB! Sesongvare"};
 
     private static String cleanProductNames(String beskrivelse) {
         String produktnavn = beskrivelse;

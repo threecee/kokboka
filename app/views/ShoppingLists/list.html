@@ -1,33 +1,46 @@
-#{extends 'main.html' /}
+#{extends 'master.html' /}
 
 <script type="text/javascript">
     $(document).ready(function () {
 
-
-        if ($(".handlelapp_recipe_container").length == 0) {
-            $("p.disclaimer").text("Du har ikke valgt noen middager i middagsplanleggeren.");
-            $("div#velgDager form").remove();
-            $("div#deling").remove();
-        }
-
-
-        $("input[type=checkbox]").click(function () {
-            if (this.checked) {
-
-                $(this).closest('.handlelapp_recipe_container').find(".oppskriftsdata-print").addClass('selected');
-                $(this).closest('.handlelapp_recipe_container').find(".oppskriftsdata-print").find("input[type=checkbox]").attr('checked', true);
-
-            } else {
-                $(this).closest('.handlelapp_recipe_container').find(".oppskriftsdata-print").removeClass('selected');
-                $(this).closest('.handlelapp_recipe_container').find(".oppskriftsdata-print").find("input[type=checkbox]").attr('checked', false)
+        $("span.plussknapp").click(function () {
+            var mengde = $(this).parent().find(".mengde");
+            var number = parseInt($(mengde).text());
+            number = number + 1;
+            $(mengde).text(number);
+        });
+        $("span.minusknapp").click(function () {
+            var mengde = $(this).parent().find(".mengde");
+            var number = parseInt($(mengde).text());
+            if (number > 0) {
+                number = number - 1;
+                $(mengde).text(number);
             }
         });
 
 
-        $('#deling').styleSwitcher();
+        $("a.task-checkbox").click(function () {
+            if (!$(this).hasClass("task-checked")) {
+                checkRecipe($(this).parent().parent());
+                $(this).addClass("task-checked");
+                $(this).find("span.task-checkbox").addClass("task-checked");
+            }
+            else {
+                unCheckRecipe($(this).parent().parent());
+                $(this).removeClass("task-checked");
+                $(this).find("span.task-checkbox").removeClass("task-checked");
+            }
+        });
 
     });
 
+
+    function checkRecipe(element) {
+        $(element).find("input").val($(element).find("input").attr("id"));
+    }
+    function unCheckRecipe(element) {
+        $(element).find("input").val("");
+    }
 
 </script>
 
@@ -35,117 +48,86 @@
 <!-- START velgDager -->
 <div id="velgDager">
 
-    <h2>Lag handlelapp</h2>
+    <div class="whitetext toppOverskrift">Lag handlelapp</div>
 
-    <p class="disclaimer">
+    <p class="whitetext">
         Her kan du velge oppskriftene du vil ha med på handlelappen.
     </p>
     <br/>
 
 #{form @save(menu?.id)}
-    <h3>Dine valgte middager:</h3>
-    <input type="hidden" name="service" value="handleliste"/>
+    <div class="whitetext overskrift" style="margin-bottom: 15px;">Dine valgte middager</div>
     <!-- START Recipe item -->
-    #{list items:0..6, as:'i'}
+    <div class="task-list">
+        <div class="grouped-tasks" rel="inbox">
+            <ol class="tasks" id="menu-tasks" style="padding-left:0px;">
+                #{list items:0..6, as:'i'}
 
 
-        #{if menu.getRecipeForDay(i) != null}
+                    #{if menu.getRecipeForDay(i) != null}
 
-            <div class="handlelapp_recipe_container">
-                <div class="date">
-                    <strong>${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}</strong>
-                    <span>${utils.DateUtil.dayOfMonth(utils.DateUtil.addDays(menu.usedFromDate, i))} ${utils.DateUtil.monthOfYearShort(utils.DateUtil.addDays(menu.usedFromDate, i))}</span>
-                </div>
-                <a class="bildecontainer" href="@{Recipes.show(menu.getRecipeForDay(i).id)}">
-                    <img class="oppskriftsBilde" src="${models.Image.getThumb(menu.getRecipeForDay(i))}"/>
-                </a>
+                        <li class="task-item" id="${menu.getRecipeForDay(i).id}">
+                            <input type="hidden" name="includeRecipes" id="${menu.getRecipeForDay(i).id}" value="${menu.getRecipeForDay(i).id}"/>
 
-                <div class="recipe_content">
+                            <div class="task-body"><a class="task-checkbox task-checked"><span
+                                    class="icon task-checkbox task-checked"></span></a>
+                                <a class="icon task-separator"></a>
 
-                    <h4><a href="@{Recipes.show(menu.getRecipeForDay(i).id)}">${menu.getRecipeForDay(i).title}</a></h4>
+                                <div class="selector">
+                                    <span class="minusknapp"></span>
+                                    <span class="plussknapp"></span>
+                                    <span class="tekst">Til <span style="float: none" class="mengde"
+                                                                  id="slider_${i}_Range">${utils.Servings.getPreferredServings(user, menu, i)}</span> ${menu.getRecipeForDay(i).servesUnit}</span>
+                                </div>
+                                <a class="duedate">${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}</a>
+                                <a class="icon task-separator2"></a>
 
-                    <p>
+                                <div class="title-wrapper"><span
+                                        class="title">
+                                    <a href="@{Recipes.show(menu.getRecipeForDay(i).id)}">${menu.getRecipeForDay(i).title}</a></span>
+                                </div>
 
-                    <div id="slider">
 
-                        <!-- adult - slider -->
-                        <strong>Mengde:</strong>
+                            </div>
 
-                        <div id="slider_${i}"></div>
-                    <span>${menu.getRecipeForDay(i).servesUnit}</span>
-                        <span id="slider_${i}_Range">${utils.Servings.getPreferredServings(user, menu.getRecipeForDay(i))}</span>
+                        </li>
 
+
+                    #{/if}
+
+
+                #{/list}
+
+                <li class="task-item noduedate" >
+                    <input type="hidden" id="faste" name="includePreferredRecipes" value="faste"></input>
+
+                    <div class="task-body"><a class="task-checkbox task-checked"><span
+                            class="icon task-checkbox task-checked"></span></a> <a class="icon task-separator"></a>
+
+                        <div class="title-wrapper"><span
+                                class="title">
+                            Matvarer du har lagt inn som faste varer hver uke</span>
+                        </div>
                     </div>
-                    </p>
-                    <input type="hidden" name="recipeAmounts-${menu.getRecipeForDay(i).id}" id="day-${i}"
-                           value="${utils.Servings.getPreferredServings(user, menu.getRecipeForDay(i))}"/>
 
-                </div>
-                <div class="checkBox_container">
-                     #{field 'includeRecipes'}
-                         <label for="${field.name}">Ta med</label>
-                         <input type="checkbox" name="${field.name}" id="${field.name}"
-                                value="${menu.getRecipeForDay(i).id}" checked/>
-                     #{/field}
-                 </div>
+                </li>
 
 
-            </div>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $("#slider_${i}").slider({
-                        value:${utils.Servings.getPreferredServings(user, menu.getRecipeForDay(i))},
-                        min: 0,
-                        max: 8,
-                        range: 'min',
-                        step: 1,
-                        slide: function (event, ui) {
-                            if (ui.value == 0)
-                                return false;
-                            $("#slider_${i}_Range").text(ui.value);
-                            $("#day_${i}").attr("value",ui.value);
-                        },
-                        stop: function (event, ui) {
-                            //saveRecipeAndUpdateRecipedata(ui.value, $('#slider_child').slider('value'));
-                        }
-                    });
-                });
-            </script>
+            </ol>
 
-        #{/if}
-
-
-    #{/list}
-    <div class="handlelapp_recipe_container">
-
-        <div class="recipe_content">
-            <h4 style="margin:8px;">Matvarer du har lagt inn som faste varer hver uke</h4>
-
-        </div>
-        <div class="checkBox_container">
-            #{field 'includePreferredRecipes'}
-                <label for="${field.name}">Ta med</label>
-                <input type="checkbox" name="${field.name}" value="preferred" id="${field.name}" checked/>
-            #{/field}
         </div>
     </div>
+
     <!-- END Recipe item -->
-    <input type="submit" value="Lag handlelapp" class="submit_button blue_button"/>
+    <input type="submit" value="Vis handlelapp" class="fancySubmitButton"/>
+
+
+    </a>
+
+
 #{/form}
 
 
 </div>
 <!-- END velgDager -->
-
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('div#menu').find('li').removeClass('active');
-
-        $('div#menu').find('li:eq(5)').addClass('active');
-
-
-    });
-
-</script>
 

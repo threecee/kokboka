@@ -147,7 +147,11 @@
                     <span>Velg oppskrifter på nytt</span>
                 </div>
             </a>
-        #{/if}
+            <a class="fancyButtonLink" href="@{Menus.show(menu.id)}" id="tilHandlelappen">
+                <div class="smallButton wrapper">
+                    <span>Vis menyen</span>
+                </div>
+            </a>
             <a class="fancyButtonLink" href="@{ShoppingLists.showLastWeek(menu.id)}" id="tilForrige">
                 <div class="smallButton wrapper">
                     <span>Forrige uke</span>
@@ -158,6 +162,7 @@
                     <span>Neste uke</span>
                 </div>
             </a>
+        #{/if}
         </div>
     </div>
 </div>

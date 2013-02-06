@@ -23,8 +23,44 @@ public class Menus extends CRUD {
         }
     }
 
+    public static void uke(int uke) {
+
+       Date startDag = DateUtil.getStartingDayForWeek(uke);
+
+        User user = User.find("byEmail", Security.connected()).first();
+        Menu menu = Menu.find("user = ? and usedForDate = ?", user, startDag).first();
+        if(menu == null)
+        {
+            menu = new Menu(user, startDag).save();
+        }
+        show(menu.id);
+    }
+
+
+    public static void showNextWeek(Long id) {
+        Menu menu = Menu.findById(id);
+        User user = User.find("byEmail", Security.connected()).first();
+        show(menu.getNextWeeksMenu(user).id);
+    }
+
+    public static void showLastWeek(Long id) {
+        Menu menu = Menu.findById(id);
+        User user = User.find("byEmail", Security.connected()).first();
+        show(menu.getLastWeeksMenu(user).id);
+    }
 
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+
+
+      public static void unplanrecipefrommenu(Long menuId, Long recipeId) throws ParseException {
+          Menu menu = Menu.findById(menuId);
+          Recipe recipe = Recipe.findById(recipeId);
+
+          menu.deleteRecipe(recipe);
+      }
+
+
 
     public static void planrecipe(Long recipeId, String day) throws ParseException {
         User user = User.find("byEmail", Security.connected()).first();
@@ -102,5 +138,14 @@ public class Menus extends CRUD {
         Menu.findById(id)._delete();
     }
 
+
+    public static void show(Long id)
+    {
+
+        Menu menu = Menu.findById(id);
+
+        render(menu);
+
+    }
 
 }

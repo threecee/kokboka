@@ -2,9 +2,20 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+GET     /meny/{<[0-9]+>menuId}/dag/{<[0-9]+>index} Recipes.showInMenu
+GET     /meny/dagensoppskrift Recipes.showCurrent
+GET     /meny/{<[0-9]+>id} Menus.show
+
+GET     /oppskrifter/mine             Recipes.favorites
 GET     /oppskrifter/{<[0-9]+>id}             Recipes.show
 GET     /oppskrifter/{tag}                    Recipes.listTagged
 GET     /oppskrifter                            Recipes.index
+
+
+GET     /handlelapp/{<[0-9]+>id}         ShoppingLists.show
+GET     /handlelapp/ukens         ShoppingLists.showCurrent
+GET     /profil         Users.preferences
+
 
 # Home page
 GET     /                                       Application.index

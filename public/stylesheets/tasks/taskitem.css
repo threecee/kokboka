@@ -17,6 +17,34 @@ UNUSEDli.task-item.blur {
     opacity: 0
 }
 
+#velgDager .task-item .duedate, #visMeny .task-item .duedate {
+font-size: 11px;
+color: #3b6594;
+line-height: 14px;
+margin: 11px 10px 0 41px;
+text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+max-width: 200px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+ position: absolute;
+}
+
+
+.task-item .duedate {
+float: right;
+font-size: 11px;
+color: #3b6594;
+line-height: 14px;
+margin: 11px 10px 0 7px;
+text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+max-width: 200px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+
 UNUSEDli.task-item.dragging {
     z-index: 9999 !important;
     width: 300px;
@@ -132,6 +160,19 @@ li.task-item .task-body .icon.task-separator {
     cursor: default
 }
 
+#velgDager li.task-item .task-body .icon.task-separator2, #visMeny li.task-item .task-body .icon.task-separator2, #profil li.task-item .task-body .icon.task-separator2 {
+    position: absolute;
+    left: 86px;
+    top: 1px;
+    height: 100%;
+    cursor: default;
+    width:2px;
+}
+#velgDager .selector span, #visMeny .selector span, #profil .selector span, #showRecipe .selector span  {
+  float: right;
+
+}
+
 li.task-item .task-body .icon.task-checkbox, li.task-item .task-body .icon.check-trash {
     position: absolute;
     left: 9px;
@@ -153,6 +194,13 @@ li.task-item .task-body .title-wrapper {
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
+li.task-item .task-body .title-wrapper .title a {
+    text-decoration: none;
+    color: #423e3e;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+
 li.task-item .task-body .title-wrapper .task-attachment {
     height: 18px;
     margin-top: -3px;
@@ -160,3 +208,37 @@ li.task-item .task-body .title-wrapper .task-attachment {
 }
 
 
+#velgDager li.task-item .task-body .title-wrapper, #visMeny li.task-item .task-body .title-wrapper{
+    margin: 0 0 0 94px;
+
+}
+#velgDager li.noduedate .task-body .title-wrapper {
+    margin: 0 0 0 41px;
+
+}
+#showRecipe li.noduedate .task-body .title-wrapper{
+    margin: 0 0 0 10px;
+
+}
+
+.plussknapp, .minusknapp {
+
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    margin-top: 7px;
+    display: inline-block;
+
+}
+.plussknapp {
+    background: url("../../images/plus.png") no-repeat;
+    background-size: contain;
+}
+.minusknapp {
+    background: url("../../images/minus.png") no-repeat;
+    background-size: contain;
+}
+#velgDager .selector .tekst, #profil .selector .tekst, #showRecipe .selector .tekst {
+    margin-top: 8px;
+    margin-right: 10px;
+}

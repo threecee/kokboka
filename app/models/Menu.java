@@ -2,10 +2,8 @@ package models;
 
 
 import play.db.jpa.Model;
-import utils.DateUtil;
 
 import javax.persistence.*;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,63 +43,63 @@ public class Menu extends Model {
 
     }
 
-    public Recipe getRecipeForDay(int day)
-    {
+    public Recipe getRecipeForDay(int day) {
         MenuDay menuDay = MenuDay.values()[day];
-        for(RecipeInMenu recipeInMenu:recipesInMenu)
-        {
-             if(recipeInMenu.usedForDay.compareTo(menuDay) == 0)
-             {
-                 return recipeInMenu.recipe;
-             }
+        for (RecipeInMenu recipeInMenu : recipesInMenu) {
+            if (recipeInMenu.usedForDay.compareTo(menuDay) == 0) {
+                return recipeInMenu.recipe;
+            }
         }
         return null;
     }
 
-    public void deleteRecipeForDay(int day)
-     {
-         deleteRecipeForDay(MenuDay.values()[day]);
-     }
-    public void deleteRecipeForDay(MenuDay menuDay)
-     {
-         for(RecipeInMenu recipeInMenu:recipesInMenu)
-         {
-              if(recipeInMenu.usedForDay.compareTo(menuDay) == 0)
-              {
-                  recipesInMenu.remove(recipeInMenu);
-                  recipeInMenu.delete();
-                  save();
-                  break;
-                  //recipeInMenu.delete();
+    public int getDayOfRecipe(Recipe recipe) {
+        for (int i = 0; i < recipesInMenu.size(); i++) {
+            if (recipesInMenu.get(i).recipe.id == recipe.id) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
-              }
-         }
-     }
+    public void deleteRecipeForDay(int day) {
+        deleteRecipeForDay(MenuDay.values()[day]);
+    }
+
+    public void deleteRecipeForDay(MenuDay menuDay) {
+        for (RecipeInMenu recipeInMenu : recipesInMenu) {
+            if (recipeInMenu.usedForDay.compareTo(menuDay) == 0) {
+                recipesInMenu.remove(recipeInMenu);
+                recipeInMenu.delete();
+                save();
+                break;
+                //recipeInMenu.delete();
+
+            }
+        }
+    }
 
 
-    public Menu getNextWeeksMenu(User user)
-    {
+    public Menu getNextWeeksMenu(User user) {
         return getNextWeeksMenu(user, this);
     }
-    public Menu getLastWeeksMenu(User user)
-    {
-       return getLastWeeksMenu(user, this);
+
+    public Menu getLastWeeksMenu(User user) {
+        return getLastWeeksMenu(user, this);
     }
 
 
-
-    public static Menu getNextWeeksMenu(User user, Menu thisWeeksMenu)
-    {
-       Date newDate =  utils.DateUtil.addDays(thisWeeksMenu.usedFromDate, 7);
-        return getMenu(user, newDate);
-    }
-    public static Menu getLastWeeksMenu(User user, Menu thisWeeksMenu)
-    {
-       Date newDate =  utils.DateUtil.addDays(thisWeeksMenu.usedFromDate, -7);
+    public static Menu getNextWeeksMenu(User user, Menu thisWeeksMenu) {
+        Date newDate = utils.DateUtil.addDays(thisWeeksMenu.usedFromDate, 7);
         return getMenu(user, newDate);
     }
 
-    public static Menu getMenu(User user, Date startingDay)  {
+    public static Menu getLastWeeksMenu(User user, Menu thisWeeksMenu) {
+        Date newDate = utils.DateUtil.addDays(thisWeeksMenu.usedFromDate, -7);
+        return getMenu(user, newDate);
+    }
+
+    public static Menu getMenu(User user, Date startingDay) {
         Menu menu = null;
 
         if (startingDay != null) {
@@ -110,7 +108,18 @@ public class Menu extends Model {
             if (menu == null)
                 menu = new Menu(user, startingDay).save();
         }
-    return menu;
+        return menu;
     }
 
+    public void deleteRecipe(Recipe recipe) {
+        for (RecipeInMenu recipeInMenu : recipesInMenu) {
+            if (recipeInMenu.recipe.id == recipe.id) {
+                recipesInMenu.remove(recipeInMenu);
+                recipeInMenu.delete();
+                save();
+                break;
+
+            }
+        }
+    }
 }

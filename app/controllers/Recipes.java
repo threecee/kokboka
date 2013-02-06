@@ -35,16 +35,16 @@ public class Recipes extends CRUD {
             Recipe recipe = menu.getRecipeForDay(distance);
             boolean favorite = user.favorites.contains(recipe);
 
-            render("Recipes/show.html", recipe, favorite, menu);
+            render("Recipes/show.html", user, recipe, favorite, menu);
         }
         render("Recipes/show.html");
     }
-    public static void showInMenu(Long id, Long menuId) {
+    public static void showInMenu(Long menuId, int index) {
         User user = User.find("byEmail", Security.connected()).first();
-        Recipe recipe = Recipe.findById(id);
         Menu menu = Menu.findById(menuId);
+        Recipe recipe = menu.getRecipeForDay(index);
         boolean favorite = user.favorites.contains(recipe);
-        render("Recipes/show.html", recipe, favorite, menu);
+        render("Recipes/show.html", user, recipe, favorite, menu);
 
     }
 
@@ -87,7 +87,7 @@ public class Recipes extends CRUD {
         User user = User.find("byEmail", Security.connected()).first();
         Recipe recipe = Recipe.findById(id);
         boolean favorite = user.favorites.contains(recipe);
-        render(recipe, favorite);
+        render(user, recipe, favorite);
     }
 
     public static void update(Long id) {
@@ -130,14 +130,14 @@ public class Recipes extends CRUD {
     }
 
 
-    public static void addIngredient(Long id, String amount, String unit, String description) {
+    public static void addIngredient(Long id, Double amount, String unit, String description) {
         Recipe recipe = Recipe.findById(id);
         Ingredient ingredient = recipe.addIngredient(amount, unit, description);
         recipe.save();
         response.print(ingredient.id);
     }
 
-    public static void updateIngredient(Long id, String amount, String unit, String description) {
+    public static void updateIngredient(Long id, Double amount, String unit, String description) {
         Ingredient ingredient = Ingredient.findById(id);
         ingredient.amount = amount;
         ingredient.unit = unit;
@@ -231,7 +231,7 @@ public class Recipes extends CRUD {
         render("Recipes/index.html", recipes);
     }
 
-    public static void save(Long id, String title, String description, double serves, String servesUnits, String[] amounts, String[] units, String[] ingredients, String steps, String source, String tags, Blob photo) {
+    public static void save(Long id, String title, String description, double serves, String servesUnits, Double[] amounts, String[] units, String[] ingredients, String steps, String source, String tags, Blob photo) {
         Recipe recipe;
 
         if (id == null) {
@@ -295,8 +295,8 @@ public class Recipes extends CRUD {
         index();
     }
 
-    private static boolean isValid(String amount, String ingredient) {
-        return amount != null && amount.length() > 0 && ingredient != null && ingredient.length() > 0;
+    private static boolean isValid(Double amount, String ingredient) {
+        return amount != null && ingredient != null && ingredient.length() > 0;
     }
 
     public static void form(Long id) {

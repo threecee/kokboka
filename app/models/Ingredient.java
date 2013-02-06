@@ -35,7 +35,7 @@ public class Ingredient extends Model {
     }
 
     public Double getScaledAmount(User user) {
-        return getScaledAmount(user, null, null, this);
+        return getScaledAmount(user, null, recipe, this);
     }
 
     public Double getScaledAmount(User user, Menu menu) {
@@ -52,17 +52,17 @@ public class Ingredient extends Model {
 
     public static Double getScaledServing(User user, Menu menu, Recipe recipe) {
 
-        if (recipe.servesUnit != null && (recipe.servesUnit.compareToIgnoreCase("personer") == 0 || recipe.servesUnit.compareToIgnoreCase("porsjoner") == 0)) {
+        if (recipe != null && recipe.servesUnit != null && (recipe.servesUnit.compareToIgnoreCase("personer") == 0 || recipe.servesUnit.compareToIgnoreCase("porsjoner") == 0)) {
             if (menu != null) {
                 RecipeInMenu recipeInMenu = RecipeInMenu.find("menu = ? and recipe = ?", menu, recipe).first();
                 if (recipeInMenu.amount != null) {
                     return recipeInMenu.amount;
                 }
             }
+        }
             if (user != null && user.preferredServings != null) {
                 return user.preferredServings;
             }
-        }
         return recipe.serves;
     }
 

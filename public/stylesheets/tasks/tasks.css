@@ -83,17 +83,20 @@
 }
 
 #tasks .addtask input::-webkit-input-placeholder, #tasks .addtask textarea::-webkit-input-placeholder {
-    color: #dbdbdb;
+    color: #f0f0f0;
+    font-style: italic;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45)
 }
 
 #tasks .addtask input:-moz-placeholder, #tasks .addtask textarea:-moz-placeholder {
-    color: #dbdbdb;
+    color: #f0f0f0;
+    font-style: italic;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45)
 }
 
 #tasks .addtask input:-ms-input-placeholder, #tasks .addtask textarea:-ms-input-placeholder {
-    color: #dbdbdb;
+    color: #f0f0f0;
+    font-style: italic;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.45)
 }
 

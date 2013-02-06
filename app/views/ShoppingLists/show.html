@@ -11,6 +11,10 @@
                 $(this).parent().parent().addClass("done");
                 var taskItem = $(this).parent().parent().detach();
                 taskItem.prependTo(".completed-tasks");
+                if(!$("#ferdigstilte-overskrift").is(":visible"))
+                {
+                    $("#ferdigstilte-overskrift").show();
+                }
             }
             else {
                 unCheckIngredient($(this).parent().parent().attr("id"));
@@ -19,7 +23,10 @@
                 $(this).parent().parent().removeClass("done");
                 var taskItem = $(this).parent().parent().detach();
                 taskItem.prependTo(".tasks");
-
+                if($(".completed-tasks:not(:has(*))"))
+                {
+                    $("#ferdigstilte-overskrift").hide();
+                }
             }
         });
 
@@ -80,8 +87,8 @@
 </script>
 
 
-<h2 style="display: block">Handlelapp for
-    uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}</h2>
+<div class="whitetext toppOverskrift">Handlelapp for
+    uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}</div>
 
 <div class="addtask" style="">
     <a class="input-star">
@@ -114,9 +121,9 @@
             </li>
         #{/list}
         </ol>
-        <h2 class="heading completed">
+        <div id="ferdigstilte-overskrift" style="${shoppingListChecked.size() == 0? 'display:none':''}" class="whitetext overskrift completed">
             <text rel="label_completed_tasks_heading">Ferdigstilte</text>
-        </h2>
+        </div>
         <ol class="completed-tasks" style="padding-left:0px;">
         #{list items:shoppingListChecked, as:'ingredient'}
             <li class="task-item done" id="${ingredient.id}">
@@ -131,7 +138,7 @@
             </li>
         #{/list}
         </ol>
-        <h2 class="heading">Handlinger</h2>
+        <div class="margin-bottom:20px;"/>
 
         <div class="buttonRow">
         #{if menu!=null}

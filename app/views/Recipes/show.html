@@ -3,99 +3,106 @@
 #{if recipe != null}
     #{set title:recipe.title /}
 
-
-<h2 style="display: block; font-size: 20px">&nbsp;</h2>
-
-<div class="whitetext" style="display: block; font-size: 25px;">
- ${recipe?.title}</div>
+<div class="whitetext toppOverskrift">
+${recipe?.title}</div>
 
 
-            <div class="innfelt" ><div class="innhold">${recipe?.description}</div>
-            </div>
+<div class="innfelt">
+    <div class="innhold">${recipe?.description}</div>
+</div>
 
 
-            <div class="recipeBilde" style="">
-                <img id="bilde" src="${models.Image.get(recipe)}"/>
-            </div>
+<div class="recipeBilde" style="">
+    <img id="bilde" src="${models.Image.get(recipe)}"/>
+</div>
 
 
-            <h2 style="display: block; font-size: 20px">Oppskriften holder til</h2>
+<div class="whitetext overskrift">Oppskriften holder til</div>
 
-            <div class="innfelt" style="">
+<div class="innfelt" style="">
 
 
                 <span style="width:15%" id="serves" type="text" class="whitetext"
                         >${utils.Currency.prettyDouble(recipe?.serves)}</span>
                 <span id="servesUnit" style="width:60%" class="whitetext"
                         >${recipe?.servesUnit}</span>
-            </div>
-
-
-            <h2 style="display: block; font-size: 20px">
-                Ingredienser
-            </h2>
-
-            <div class="task-list">
-                <div class="grouped-tasks" rel="inbox">
-                    <ol class="tasks" id="ingredient-tasks" style="padding-left:0px;">
-                        #{list items:recipe.ingredients, as:'ingredient'}
-                            <li class="task-item" id="${ingredient.id}">
-                                <div class="task-body"><a class="task-checkbox"><span
-                                        class="icon task-checkbox "></span></a> <a class="icon task-separator"></a>
-
-                                    <div class="title-wrapper"><span
-                                            class="title">
-                                        <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
-                                    ${ingredient.description}</span>
-                                    </div>
-                                </div>
-                            </li>
-                        #{/list}
-                    </ol>
-
-                </div>
-            </div>
-
-            <h2 style="display: block; font-size: 20px">
-                Fremgangsmåte
-            </h2>
-
-            <div class="innfelt" style="">
-                <div name="steps" id="steps" class="innhold"
-                     style="font-size: 14px;">${recipe?.steps?.escape().nl2br()}</div>
-            </div>
-
-
-<div class="buttonRow">
-            <a class="fancyButtonLink" href="@{Recipes.update(recipe.id)}"/>
-                          <div class="wrapper smallButton">
-                              <span>Rediger</span>
-                          </div>
-
-            </a>
-#{if menu!=null}
-#{if menu.recipesInMenu.indexOf(recipe) > 0}
-    <a class="fancyButtonLink" href="@{Recipes.showInMenu(menu.recipesInMenu.get(menu.recipesInMenu.indexOf(recipe)-1).id, menu.id)}" id="tilForrige">
-        <div class="smallButton wrapper">
-            <span>Forrige</span>
-        </div>
-    </a>
-#{/if}
-    #{if menu.recipesInMenu.indexOf(recipe) < (menu.recipesInMenu.size()-1)}
-    <a class="fancyButtonLink" href="@{Recipes.showInMenu(menu.recipesInMenu.get(menu.recipesInMenu.indexOf(recipe)+1).id, menu.id)}" id="tilNeste">
-        <div class="smallButton wrapper">
-            <span>Neste</span>
-        </div>
-    </a>
 </div>
-#{/if}
-#{/if}
+
+
+<div class="whitetext overskrift">
+    Ingredienser
+</div>
+
+<div class="task-list">
+    <div class="grouped-tasks" rel="inbox">
+        <ol class="tasks" id="ingredient-tasks" style="padding-left:0px;">
+            #{list items:recipe.ingredients, as:'ingredient'}
+                <li class="task-item" id="${ingredient.id}">
+                    <div class="task-body"><a class="task-checkbox"><span
+                            class="icon task-checkbox "></span></a> <a class="icon task-separator"></a>
+
+                        <div class="title-wrapper"><span
+                                class="title">
+                                        <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
+                        ${ingredient.description}</span>
+                        </div>
+                    </div>
+                </li>
+            #{/list}
+        </ol>
+
+    </div>
+</div>
+
+<div class="whitetext overskrift">
+    Fremgangsmåte
+</div>
+
+<div class="innfelt" style="">
+    <div name="steps" id="steps" class="innhold"
+         style="font-size: 14px;">${recipe?.steps?.escape().nl2br()}</div>
+</div>
+
+
 
 
 
 
 #{/if}
 #{else }
-<h2>Fant ikke oppskrift!</h2>
+<div class="whitetext toppOverskrift">
+Fant ikke oppskrift!</div>
+
 #{/else}
 
+#{if recipe != null}
+<div class="buttonRow">
+    <a class="fancyButtonLink" href="@{Recipes.update(recipe.id)}"/>
+
+    <div class="wrapper smallButton">
+        <span>Rediger</span>
+    </div>
+
+    </a>
+    #{if menu!=null}
+        #{if menu.recipesInMenu.indexOf(recipe) > 0}
+            <a class="fancyButtonLink"
+               href="@{Recipes.showInMenu(menu.recipesInMenu.get(menu.recipesInMenu.indexOf(recipe)-1).id, menu.id)}"
+               id="tilForrige">
+                <div class="smallButton wrapper">
+                    <span>Forrige</span>
+                </div>
+            </a>
+        #{/if}
+        #{if menu.recipesInMenu.indexOf(recipe) < (menu.recipesInMenu.size()-1)}
+            <a class="fancyButtonLink"
+               href="@{Recipes.showInMenu(menu.recipesInMenu.get(menu.recipesInMenu.indexOf(recipe)+1).id, menu.id)}"
+               id="tilNeste">
+                <div class="smallButton wrapper">
+                    <span>Neste</span>
+                </div>
+            </a>
+        #{/if}
+    #{/if}
+</div>
+#{/if}

@@ -535,23 +535,6 @@ UNUSED.ui-draggable-dragging .recipeTime {
 
 
 
-UNUSED.ui-state-hover {
-	width: 97px;
-	height: 98px;
-	border-radius: 8px;
-	border: none!important;
-	margin-left: 2px;
-	background: #49aada!important;
-}
-
-
-
-
-.ui-state-hover *{
-	display: none!important;
-}
-
-
 
 
 

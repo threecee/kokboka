@@ -16,6 +16,10 @@ public class Ingredient extends Model {
     @ManyToOne
     public Recipe recipe;
 
+
+    @ManyToOne
+    public IngredientType ingredientType;
+
     public Ingredient(Recipe recipe, String amount, String unit, String description) {
         this.recipe = recipe;
         this.amount = amount;

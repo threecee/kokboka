@@ -86,7 +86,14 @@
 
 
         $("#myTags").tagit({
-            availableTags: ${recipe?.tagsAsCommaSeparatedList().raw()}
+            availableTags: ${models.Tag.tagsAsCommaSeparatedList().raw()},
+            allowSpaces:true,
+            beforeTagAdded: function(event, ui) {
+                  addTag(ui.tag);
+              },
+            beforeTagRemoved: function(event, ui) {
+                removeTag(ui.tag);
+            }
         });
     });
 
@@ -112,6 +119,24 @@
 
             });
         }
+    function addTag(tag) {
+        $.ajax({
+            type: "POST",
+            url: "/recipes/addTag",
+            data: "id=" + ${recipe?.id} +"&tag=" + tag,
+            dataType: "xml"
+
+        });
+    }
+    function removeTag(tag) {
+        $.ajax({
+            type: "POST",
+            url: "/recipes/removeTag",
+            data: "id=" + ${recipe?.id} +"&tag=" + tag,
+            dataType: "xml"
+
+        });
+    }
 
         function updateField(element) {
             $.ajax({
@@ -161,9 +186,9 @@
 <div class="addtask" style="">
     <div id="tags" class="transparent mousetrap">
         <ul id="myTags">
-            <!-- Existing list items will be pre-added to the tags -->
-            <li>Tag1</li>
-            <li>Tag2</li>
+            #{list items:recipe?.tags, as:"tag"}
+                <li>${tag.name}</li>
+            #{/list}
         </ul>
     </div>
 </div>

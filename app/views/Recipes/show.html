@@ -1,5 +1,9 @@
 #{extends 'master.html' /}
 
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/base/jquery-ui.css" id="theme">
+<link rel="stylesheet" href="@{'/public/stylesheets/jquery.tagit.css'}">
+<link rel="stylesheet" href="@{'/public/stylesheets/tagit.ui-kokboka.css'}">
+
 <div id="showRecipe">
     <script type="text/javascript">
         $(document).ready(function () {
@@ -75,6 +79,23 @@
     <div class="innfelt">
         <div class="innhold">${recipe?.description}</div>
     </div>
+<div id="tags" class="">
+    <div class="">
+        <ul id="myTags" class="tagit ui-widget ui-widget-content ui-corner-all">
+            <li class="intro">Tagget med </li>
+            #{list items:recipe?.tags, as:"tag"}
+                <li class="tagit-choice ui-widget-content ui-state-default ui-corner-all tagit-choice-editable">
+                    <a href="@{Recipes.index(tag.nameHash)}">
+                        <span class="tagit-label">${tag.name}</span>
+                    </a>
+                </li>
+            #{/list}
+            <li class="outro">
+                Brukt i ${models.RecipeInMenu.find("menu.author = ? and recipe = ?", user, recipe).fetch().size()} av dine menyer, ${models.RecipeInMenu.find("recipe = ?", recipe).fetch().size()} totalt
+            </li>
+        </ul></div>
+</div>
+
     <div class="task-list">
         <div class="grouped-tasks" rel="inbox">
             <ol class="tasks" id="menu-tasks" style="padding-left:0px;">

@@ -109,20 +109,4 @@ public class Recipe extends Model {
         ).bind("tags", tags).bind("size", tags.length).fetch();
     }
 
-    public String tagsAsCommaSeparatedList()
-    {
-        String result = "[";
-        for(Tag tag:tags)
-        {
-            result += "\"" + tag.name + "\", ";
-        }
-        if(tags.size() > 0)
-        {
-          result =  result.substring(0, result.length()-2);
-        }
-
-        result += "]";
-
-        return result;
-    }
-}
+   }

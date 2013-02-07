@@ -1,0 +1,11 @@
+#{extends 'master.html' /}
+
+
+#{list items:ingredients, as:"ingredient"}
+<div class="innfelt">
+    <div class="innhold">
+        ${ingredient.description}, oppskrift: <a href="@{Recipes.show(ingredient.recipe.id)}">${ingredient.recipe.title}</a>
+    </div>
+</div>
+
+#{/list}

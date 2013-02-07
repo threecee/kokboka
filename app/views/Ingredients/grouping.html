@@ -1,10 +1,65 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-  <title></title>
-</head>
-<body>
+#{extends 'master.html' /}
 
-</body>
-</html>
+<script src="@{'/public/javascripts/tag-it.min.js'}"></script>
+
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/base/jquery-ui.css" id="theme">
+
+<link rel="stylesheet" href="@{'/public/stylesheets/jquery.tagit.css'}">
+<link rel="stylesheet" href="@{'/public/stylesheets/tagit.ui-kokboka.css'}">
+
+<script>
+
+    $(document).ready(function () {
+
+        $(".myTags").tagit({
+            availableTags: ${models.IngredientType.asCommaSeparatedList().raw()},
+            tagLimit: 1,
+            allowSpaces: true,
+            beforeTagAdded: function (event, ui) {
+                addIngredient($(this).parent().parent().find(".ingredient_name").text(), ui.tagLabel);
+            },
+            beforeTagRemoved: function (event, ui) {
+                removeIngredient($(this).parent().parent().find(".ingredient_name").text(), ui.tagLabel);
+            }
+        });
+    });
+
+    function addIngredient(description, type) {
+        $.ajax({
+            type: "POST",
+            url: "/ingredients/addType",
+            data: "description=" + description + "&type=" + type,
+            dataType: "xml"
+        });
+    }
+
+    function removeIngredient(description, type) {
+        $.ajax({
+            type: "POST",
+            url: "/ingredients/removeType",
+            data: "description=" + description + "&type=" + type,
+            dataType: "xml"
+
+        });
+    }
+
+
+</script>
+
+
+
+#{list items:descriptions, as:"ingredient"}
+<div class="innfelt">
+    <div class="ingredient_name innhold">
+    ${ingredient}
+    </div>
+    <div class="innhold">
+        <ul class="myTags">
+            #{if models.IngredientType.findForDescription(ingredient) != null}
+                <li>${models.IngredientType.findForDescription(ingredient).name}</li>
+            #{/if}
+        </ul>
+    </div>
+</div>
+
+#{/list}

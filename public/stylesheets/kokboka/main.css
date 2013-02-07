@@ -568,7 +568,7 @@ margin-right: 2%;
 }
 
 .bottomSpacer{
-    margin-bottom:150px;
+    margin-bottom:180px;
 }
 
 
@@ -609,6 +609,13 @@ margin-right: 2%;
     float: right;
     margin-top: 4px;
     color: rgb(236, 236, 236);
+}
+
+.outro, .intro{
+    padding-top: 4px;
+}
+.outro {
+    padding-left: 15px;
 }
 
 @media only screen

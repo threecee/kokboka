@@ -19,7 +19,6 @@ import play.mvc.With;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -329,27 +328,49 @@ public class Parsers extends Controller {
     }
 
     private static Pattern packagePattern = Pattern.compile("c?a? ?([0-9]+,?[0-9]*) ?(k?g)");
+    private static Pattern packagePatternFlerPack = Pattern.compile("([0-9]+)-? ?(pk)");
 
-    private static void convertPackageToWeight(Ingredient originalIngredient) {
-        if (originalIngredient.unit.matches("pk|stk|pose")) {
-            Matcher matcher = packagePattern.matcher(originalIngredient.description);
-            if (matcher.find()) {
-                String amount = matcher.group(1);
-                String newDesc = matcher.replaceFirst("");
-                String unit = matcher.group(2);
-                Double amountDouble = Double.parseDouble(amount.replace(",","."));
-                Double totalAmount = amountDouble * originalIngredient.amount;
 
-                reporter("Replacing " + originalIngredient.amount + " " + originalIngredient.unit + " " + originalIngredient.description + " with: " + totalAmount + " " + unit + " " + newDesc);
-                originalIngredient.amount = amountDouble;
-                originalIngredient.unit = unit;
-                originalIngredient.description = newDesc;
-                originalIngredient.save();
-            }
+    private static void processMatchesInIngredients(Matcher matcher, Ingredient originalIngredient) {
+        if (matcher.find()) {
+            String amount = matcher.group(1);
+            String newDesc = matcher.replaceFirst("");
+            String unit = matcher.group(2);
+            Double amountDouble = Double.parseDouble(amount.replace(",", "."));
+            Double totalAmount = amountDouble * originalIngredient.amount;
+
+            reporter("Replacing " + originalIngredient.amount + " " + originalIngredient.unit + " " + originalIngredient.description + " with: " + totalAmount + " " + unit + " " + newDesc);
+            originalIngredient.amount = amountDouble;
+            originalIngredient.unit = unit;
+            originalIngredient.description = newDesc;
+            originalIngredient.save();
         }
     }
 
-    static String[] kjenteProdukter = new String[]{"Gaea","Austin Lamb Chops","5%", "9%", "14%", "18%", "10%", "Toro", "Barilla", "Gilde", "Idun", "Mills", "Grovt og godt", "Godehav", "Solvinge", "REMA 1000", "Tine", "Bama", "Kikkoman", "Nordfjord", "Blue Dragon", "Taga", "Finsbråten", "Hatting", "Mesterbakeren", "Grilstad", "Ideal", "Staur", "MaxMat", "Viddas", "Gourmet", "Pampas", "frossen", "frosne", "naturell", "M/L,", " - NB! Sesongvare"};
+    private static void convertPackageToWeight(Ingredient originalIngredient) {
+        if (originalIngredient.unit.matches("pk|stk|pose|poser|boks|bokser")) {
+            Matcher matcher = packagePattern.matcher(originalIngredient.description);
+            processMatchesInIngredients(matcher, originalIngredient);
+            matcher = packagePatternFlerPack.matcher(originalIngredient.description);
+            processMatchesInIngredients(matcher, originalIngredient);
+        }
+    }
+        /*
+        else if(originalIngredient.unit.matches("g|kg"))
+        {
+            Matcher matcher = packagePattern.matcher(originalIngredient.description);
+            if (matcher.find()) {
+                String newDesc = matcher.replaceFirst("");
+
+                reporter("Replacing " + originalIngredient.amount + " " + originalIngredient.unit + " " + originalIngredient.description + " with: " + originalIngredient.amount + " " + originalIngredient.unit + " " + newDesc);
+                originalIngredient.description = newDesc;
+                originalIngredient.save();
+            }
+
+        } */
+
+
+static String[] kjenteProdukter = new String[]{"Ybarra", "Apetina", "classic", "premium", "Gaea", "Austin Lamb Chops", "5%", "9%", "14%", "18%", "10%", "Toro", "Barilla", "Gilde", "Idun", "Mills", "Grovt og godt", "Godehav", "Solvinge", "REMA 1000", "Tine", "Bama", "Kikkoman", "Nordfjord", "Blue Dragon", "Taga", "Finsbråten", "Hatting", "Mesterbakeren", "Grilstad", "Ideal", "Staur", "MaxMat", "Viddas", "Gourmet", "Pampas", "frossen", "frosne", "naturell", "M/L,", "- NB! Sesongvare"};
 
     private static String cleanProductNames(String beskrivelse) {
         String produktnavn = beskrivelse;
@@ -358,7 +379,27 @@ public class Parsers extends Controller {
             produktnavn = produktnavn.replaceAll(" *" + kjentProdukt + " *", " ");
         }
 
+
         produktnavn = produktnavn.trim();
+        if (produktnavn.endsWith(",")) {
+            produktnavn = produktnavn.substring(0, produktnavn.length() - 1);
+            produktnavn = produktnavn.trim();
+
+        }
+        if (produktnavn.compareToIgnoreCase("Stjernebacon skive") == 0) {
+            produktnavn = "Bacon";
+        }
+        if (produktnavn.compareToIgnoreCase("Kyllingfile") == 0) {
+            produktnavn = "Kyllingfilet";
+        }
+        if (produktnavn.compareToIgnoreCase("Spanske kjøttbolle") == 0) {
+            produktnavn = "Spanske kjøttboller";
+        }
+        if (produktnavn.compareToIgnoreCase("Greske kjøttbolle") == 0) {
+            produktnavn = "Greske kjøttboller";
+        }
+
+
         if (produktnavn.compareToIgnoreCase(beskrivelse) != 0) {
             reporter("Erstattet ingrediensbeskrivelse '" + beskrivelse + "' med '" + produktnavn + "'");
         }

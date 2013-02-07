@@ -9,7 +9,8 @@ GET     /meny Menus.index
 
 GET     /oppskrifter/mine             Recipes.favorites
 GET     /oppskrifter/{<[0-9]+>id}             Recipes.show
-GET     /oppskrifter/{tag}                    Recipes.listTagged
+GET     /oppskrifter/{<[0-9]+>id}/rediger     Recipes.update
+GET     /oppskrifter/tags/{tag}                    Recipes.listTagged
 GET     /oppskrifter                            Recipes.index
 
 
@@ -24,7 +25,8 @@ GET     /profil         Users.preferences
 GET     /                                       Application.index
 
 # New route to ingredients method
-GET     /ingredients                                  Recipes.ingredients
+GET     /ingredienser                                  Ingredients.index
+GET     /ingredienser/rydding                                  Ingredients.housekeeping
 
 # New route to recipes method
 GET     /recipes.json                                  Recipes.recipes_json

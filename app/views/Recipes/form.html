@@ -7,11 +7,15 @@
 
 <script src="http://narf.pl/jquery-typing/jquery.typing-0.2.0.min.js"></script>
 
+<script src="@{'/public/javascripts/tag-it.min.js'}"></script>
+
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/base/jquery-ui.css" id="theme">
 <!-- CSS to style the file input field as button and adjust the jQuery UI progress bars -->
 <link rel="stylesheet" href="http://blueimp.github.com/jQuery-File-Upload/css/jquery.fileupload-ui.css">
 
 <link rel="stylesheet" href="@{'/public/stylesheets/spinner.css'}">
+<link rel="stylesheet" href="@{'/public/stylesheets/jquery.tagit.css'}">
+<link rel="stylesheet" href="@{'/public/stylesheets/tagit.ui-kokboka.css'}">
 
 <script>
     $(function () {
@@ -24,7 +28,7 @@
             },
             done: function (e, data) {
                 $.each(data.result.files, function (index, file) {
-                    $('img#bilde').attr("src", file.url + "?random=2323" + Math.random());
+                    $('img#bilde').attr("src", file.url + "?random=" + Math.random());
                     $('#floatingBarsG').hide();
                     $('img#bilde').show();
                 });
@@ -81,55 +85,60 @@
         });
 
 
+        $("#myTags").tagit({
+            availableTags: ${recipe?.tagsAsCommaSeparatedList().raw()}
+        });
     });
 
+        function addIngredient(amount, unit, description) {
+            $.ajax({
+                type: "POST",
+                url: "/recipes/addIngredient",
+                data: "id=" + ${recipe?.id} +"&amount=" + amount + "&unit=" + unit + "&description=" + description,
+                dataType: "xml"
 
-    function addIngredient(amount, unit, description) {
-        $.ajax({
-            type: "POST",
-            url: "/recipes/addIngredient",
-            data: "id=" + ${recipe?.id} +"&amount=" + amount + "&unit=" + unit + "&description=" + description,
-            dataType: "xml"
+            }).always(function (data) {
+                        injectTask(data.responseText, amount, unit, description);
 
-        }).always(function (data) {
-                    injectTask(data.responseText, amount, unit, description);
+                    });
+        }
 
-                });
-    }
-    function removeIngredient(id, ingredientId) {
-        $.ajax({
-            type: "POST",
-            url: "/recipes/removeIngredient",
-            data: "recipeId=" + id + "&ingredientId=" + ingredientId,
-            dataType: "xml"
+        function removeIngredient(id, ingredientId) {
+            $.ajax({
+                type: "POST",
+                url: "/recipes/removeIngredient",
+                data: "recipeId=" + id + "&ingredientId=" + ingredientId,
+                dataType: "xml"
 
-        });
-    }
-    function updateField(element) {
-        $.ajax({
-            type: "POST",
-            url: "/recipes/update" + $(element).attr("id"),
-            data: "id=" +  ${recipe?.id} +"&" + $(element).attr("id") + "=" + $(element).val(),
-            dataType: "xml"
+            });
+        }
 
-        });
-    }
+        function updateField(element) {
+            $.ajax({
+                type: "POST",
+                url: "/recipes/update" + $(element).attr("id"),
+                data: "id=" +  ${recipe?.id} +"&" + $(element).attr("id") + "=" + $(element).val(),
+                dataType: "xml"
 
-    var taskTemplate = "<li class=\"task-item\" id=\"$ID$\">" +
-            "<div class=\"task-body\"><a class=\"task-checkbox\"><span class=\"icon check-trash \"></span></a> " +
-            "<a class=\"icon task-separator\"></a>" +
-            "<div class=\"title-wrapper\"><span" +
-            "  class=\"title\"><span>$AMOUNT$ $UNIT$</span> $DESCRIPTION$</span>" +
-            "</div>" +
-            "</div>" +
-            "</li>";
+            });
+        }
 
-    function injectTask(id, amount, unit, description) {
-        var injectString = taskTemplate.replace("$ID$", id).replace("$AMOUNT$", amount).replace("$UNIT$", unit).replace("$DESCRIPTION$", description);
+        var taskTemplate = "<li class=\"task-item\" id=\"$ID$\">" +
+                "<div class=\"task-body\"><a class=\"task-checkbox\"><span class=\"icon check-trash \"></span></a> " +
+                "<a class=\"icon task-separator\"></a>" +
+                "<div class=\"title-wrapper\"><span" +
+                "  class=\"title\"><span>$AMOUNT$ $UNIT$</span> $DESCRIPTION$</span>" +
+                "</div>" +
+                "</div>" +
+                "</li>";
 
-        $('<div/>').html(injectString).prependTo("ol#ingredient-tasks");
+        function injectTask(id, amount, unit, description) {
+            var injectString = taskTemplate.replace("$ID$", id).replace("$AMOUNT$", amount).replace("$UNIT$", unit).replace("$DESCRIPTION$", description);
 
-    }
+            $('<div/>').html(injectString).prependTo("ol#ingredient-tasks");
+
+        }
+
 
 </script>
 
@@ -149,6 +158,15 @@
               placeholder="Beskriv oppskriften her" style="font-size: 14px;">${recipe?.description}</textarea>
 </div>
 
+<div class="addtask" style="">
+    <div id="tags" class="transparent mousetrap">
+        <ul id="myTags">
+            <!-- Existing list items will be pre-added to the tags -->
+            <li>Tag1</li>
+            <li>Tag2</li>
+        </ul>
+    </div>
+</div>
 
 <div class="addtask">
     <form id="fileupload" action="@{Images.file()}?id=${recipe.id}" method="POST"
@@ -207,7 +225,7 @@
 </div>
 
 
-<div class="whitetext overskrift" >
+<div class="whitetext overskrift">
     Ingredienser
 </div>
 

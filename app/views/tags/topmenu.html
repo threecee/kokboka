@@ -51,9 +51,12 @@
     <a class="fancyButtonLink ${request.action == 'Recipes.index' ? 'active' : ''}" href="@{Recipes.index()}" id="">
         <div class="wrapper"><span>Alle oppskrifter</span></div>
     </a>
+    <a class="fancyButtonLink ${request.action == "Menus.index" ? 'active' : ''}" href="@{Menus.index()}">
+    <div class="wrapper"><span>Menyer</span></div>
+    </a>
     <a class="fancyButtonLink ${request.controller == "ShoppingLists" ? 'active' : ''}"
        href="@{ShoppingLists.showCurrent()}" id="">
-        <div class="wrapper"><span>Ukens handlelapp</span></div>
+        <div class="wrapper"><span>Handlelapp</span></div>
     </a>
     <a class="fancyButtonLink ${request.action == "Recipes.showCurrent" ? 'active' : ''}"
        href="@{Recipes.showCurrent()}" id="">
@@ -63,12 +66,12 @@
     <div class="wrapper"><span>Innstillinger</span></div>
     </a>
 
-#{if request.action ==  'Recipes.favorites' || request.action ==  'Recipes.index'}
-    <a class="fancyButtonLink ${request.action == "Recipes.form()" ? 'active' : ''}" href="@{Recipes.form()}" id="">
-        <div class="wrapper"><span>Ny oppskrift</span></div>
-    </a>
-#{/if}
-
     </ul>
 
 </div>
+
+#{if request.action ==  'Recipes.favorites' }
+    <a class="fancyButtonLink ${request.action == "Recipes.form()" ? 'active' : ''}" style="display: block; margin-top: 20px;" href="@{Recipes.form()}" id="">
+        <div class="wrapper smallButton"><span>Ny oppskrift</span></div>
+    </a>
+#{/if}

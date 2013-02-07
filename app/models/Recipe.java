@@ -72,6 +72,7 @@ public class Recipe extends Model {
         this.postedAt = new Date();
         this.updatedAt = postedAt;
 
+
     }
 
     public <T extends JPABase> T save() {
@@ -106,5 +107,22 @@ public class Recipe extends Model {
         return Recipe.find(
                 "select distinct p from Recipe p join p.tags as t where t.nameHash in (:tags) group by p.id, p.author, p.title, p.description, p.steps, p.source, p.postedAt having count(t.id) = :size"
         ).bind("tags", tags).bind("size", tags.length).fetch();
+    }
+
+    public String tagsAsCommaSeparatedList()
+    {
+        String result = "[";
+        for(Tag tag:tags)
+        {
+            result += "\"" + tag.name + "\", ";
+        }
+        if(tags.size() > 0)
+        {
+          result =  result.substring(0, result.length()-2);
+        }
+
+        result += "]";
+
+        return result;
     }
 }

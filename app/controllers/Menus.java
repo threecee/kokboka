@@ -1,7 +1,10 @@
 package controllers;
 
 
-import models.*;
+import models.Menu;
+import models.MenuDay;
+import models.Recipe;
+import models.User;
 import play.mvc.Before;
 import play.mvc.With;
 import utils.DateUtil;
@@ -9,6 +12,7 @@ import utils.DateUtil;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 @With(Secure.class)
@@ -25,12 +29,11 @@ public class Menus extends CRUD {
 
     public static void uke(int uke) {
 
-       Date startDag = DateUtil.getStartingDayForWeek(uke);
+        Date startDag = DateUtil.getStartingDayForWeek(uke);
 
         User user = User.find("byEmail", Security.connected()).first();
         Menu menu = Menu.find("user = ? and usedForDate = ?", user, startDag).first();
-        if(menu == null)
-        {
+        if (menu == null) {
             menu = new Menu(user, startDag).save();
         }
         show(menu.id);
@@ -52,14 +55,12 @@ public class Menus extends CRUD {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
+    public static void unplanrecipefrommenu(Long menuId, Long recipeId) throws ParseException {
+        Menu menu = Menu.findById(menuId);
+        Recipe recipe = Recipe.findById(recipeId);
 
-      public static void unplanrecipefrommenu(Long menuId, Long recipeId) throws ParseException {
-          Menu menu = Menu.findById(menuId);
-          Recipe recipe = Recipe.findById(recipeId);
-
-          menu.deleteRecipe(recipe);
-      }
-
+        menu.deleteRecipe(recipe);
+    }
 
 
     public static void planrecipe(Long recipeId, String day) throws ParseException {
@@ -105,7 +106,6 @@ public class Menus extends CRUD {
     }
 
 
-
     private static void initMenu(User user, String startingDayString) throws ParseException {
         Menu menu = null;
 
@@ -115,17 +115,14 @@ public class Menus extends CRUD {
 
             if (menu == null)
                 menu = new Menu(user, startingDay).save();
-        }
-        else {
+        } else {
             if (user.activeMenu != null) {
                 menu = Menu.findById(user.activeMenu.getId());
-            }
-            else {
-            //if (menu == null || (DateUtil.distance(DateUtil.getStartingDay(), menu.usedFromDate) < 0)) {
+            } else {
+                //if (menu == null || (DateUtil.distance(DateUtil.getStartingDay(), menu.usedFromDate) < 0)) {
 
                 menu = Menu.find("author = ? and usedFromDate = ?", user, DateUtil.getStartingDay()).first();
-                if(menu == null)
-                {
+                if (menu == null) {
                     menu = new Menu(user, DateUtil.getStartingDay()).save();
                 }
             }
@@ -138,14 +135,15 @@ public class Menus extends CRUD {
         Menu.findById(id)._delete();
     }
 
-
-    public static void show(Long id)
-    {
-
+    public static void show(Long id) {
         Menu menu = Menu.findById(id);
-
         render(menu);
+    }
 
+    public static void index()
+    {
+        List<Menu> menus = Menu.find("order by usedFromDate desc").fetch();
+        render(menus);
     }
 
 }

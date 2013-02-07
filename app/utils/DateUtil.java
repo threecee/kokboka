@@ -5,10 +5,19 @@ import models.MenuDay;
 import models.MenuMonth;
 import models.MenuMonthShort;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtil {
+
+
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+
+    public static String prettyDate(Date date) {
+        return dateFormat.format(date);
+    }
 
 
     public static String dayOfMonth(Date date) {

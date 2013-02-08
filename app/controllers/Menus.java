@@ -80,6 +80,22 @@ public class Menus extends CRUD {
 
     }
 
+    public static void planrecipeByDay(Long recipeId, String day) throws ParseException {
+        User user = User.find("byEmail", Security.connected()).first();
+
+        int dayInt = Integer.parseInt(day);
+
+        Menu menu = Menu.findById(user.activeMenu.getId());
+
+        Recipe recipe = Recipe.findById(recipeId);
+
+        menu.deleteRecipeForDay(dayInt);
+        menu.addRecipe(recipe, MenuDay.values()[dayInt]);
+
+        menu.save();
+
+    }
+
     public static void unplanrecipe(String day) throws ParseException {
         User user = User.find("byEmail", Security.connected()).first();
 
@@ -104,6 +120,21 @@ public class Menus extends CRUD {
 
         render(menu);
     }
+    public static void dinnerplanMobile(Long recipeId) throws ParseException {
+         User user = User.find("byEmail", Security.connected()).first();
+
+            Recipe newrecipe = Recipe.findById(recipeId);
+
+         Menu menu = null;
+
+         initMenu(user, null);
+
+         if (user != null && user.activeMenu != null) {
+             menu = Menu.findById(user.activeMenu.getId());
+         }
+
+         render(menu, newrecipe);
+     }
 
 
     private static void initMenu(User user, String startingDayString) throws ParseException {

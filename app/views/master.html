@@ -69,7 +69,9 @@
 <body class="bodyClass">
 
 
+#{if request.action != 'Recipes.dinnerplanMobile'}
 #{topmenu /}
+#{/if}
 <div class="main-interface">
     <div id="stacks">
         <div id="tasks" class="stack" style="padding-left: 0px;">
@@ -81,7 +83,12 @@
     </div>
 </div>
 #{if request.action == 'Recipes.index' || request.action == 'Recipes.favorites' || request.action == 'Recipes.show'}
+#{if false &&  util.Device.isMobile(request.headers.get("user-agent") )}
+    #{planningFooterMobile menu:menu /}
+#{/if}
+#{else}
     #{planningFooter menu:menu /}
+#{/else}
 #{/if}
 #{else}
 <div style="margin-bottom:30px"/>

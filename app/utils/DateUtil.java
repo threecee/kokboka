@@ -31,6 +31,9 @@ public class DateUtil {
         cal.setTime(date);
         return MenuDay.fromIndex(cal.get(Calendar.DAY_OF_WEEK) - 1) + "";
     }
+    public static String dayOfWeek(int day) {
+        return MenuDay.fromIndex(day) + "";
+    }
 
     public static int weekOfYear(Date date) {
         Calendar cal = setupCalendar();

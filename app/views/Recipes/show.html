@@ -5,84 +5,82 @@
 <link rel="stylesheet" href="@{'/public/stylesheets/tagit.ui-kokboka.css'}">
 
 <div id="showRecipe">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("a.task-checkbox").click(function () {
-                if (!$(this).hasClass("task-checked")) {
-                    $(this).addClass("task-checked");
-                    $(this).find("span.task-checkbox").addClass("task-checked");
-                    $(this).parent().parent().addClass("done");
-                }
-                else {
-                    $(this).removeClass("task-checked");
-                    $(this).find("span.task-checkbox").removeClass("task-checked");
-                    $(this).parent().parent().removeClass("done");
-                }
-            });
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("a.task-checkbox").click(function () {
+            if (!$(this).hasClass("task-checked")) {
+                $(this).addClass("task-checked");
+                $(this).find("span.task-checkbox").addClass("task-checked");
+                $(this).parent().parent().addClass("done");
+            }
+            else {
+                $(this).removeClass("task-checked");
+                $(this).find("span.task-checkbox").removeClass("task-checked");
+                $(this).parent().parent().removeClass("done");
+            }
+        });
 
 
-            $("span.plussknapp").click(function () {
-                var mengde = $(this).parent().find(".mengde");
-                var number = parseInt($(mengde).text());
-                var newNumber = number + 1;
+        $("span.plussknapp").click(function () {
+            var mengde = $(this).parent().find(".mengde");
+            var number = parseInt($(mengde).text());
+            var newNumber = number + 1;
+            $(mengde).text(newNumber);
+            scaleRecipe(number, newNumber);
+        });
+        $("span.minusknapp").click(function () {
+            var mengde = $(this).parent().find(".mengde");
+            var number = parseInt($(mengde).text());
+            if (number > 0) {
+                var newNumber = number - 1;
                 $(mengde).text(newNumber);
                 scaleRecipe(number, newNumber);
-            });
-            $("span.minusknapp").click(function () {
-                var mengde = $(this).parent().find(".mengde");
-                var number = parseInt($(mengde).text());
-                if (number > 0) {
-                    var newNumber = number - 1;
-                    $(mengde).text(newNumber);
-                    scaleRecipe(number, newNumber);
-                }
-            });
-
-
-        });
-        if (typeof String.prototype.endsWith !== 'function') {
-            String.prototype.endsWith = function(suffix) {
-                return this.indexOf(suffix, this.length - suffix.length) !== -1;
-            };
-        }
-
-        function scaleRecipe(number, newNumber) {
-            $("#ingredient-tasks span.mengde").each(function (){
-                    $(this).text(scaleIngredient($(this).text().trim(), number, newNumber));
-        }
-        );
-        }
-
-
-        function scaleIngredient(amount, serving, scaledServing) {
-            var multiplier = scaledServing / serving;
-
-            var roundedNumber = Number(amount * multiplier).toFixed(1);
-            if( (roundedNumber+"").endsWith(".0") )
-            {
-                roundedNumber = Number(roundedNumber).toFixed(0);
             }
-            return roundedNumber;
+        });
+
+
+    });
+    if (typeof String.prototype.endsWith !== 'function') {
+        String.prototype.endsWith = function (suffix) {
+            return this.indexOf(suffix, this.length - suffix.length) !== -1;
+        };
+    }
+
+    function scaleRecipe(number, newNumber) {
+        $("#ingredient-tasks span.mengde").each(function () {
+                    $(this).text(scaleIngredient($(this).text().trim(), number, newNumber));
+                }
+        );
+    }
+
+
+    function scaleIngredient(amount, serving, scaledServing) {
+        var multiplier = scaledServing / serving;
+
+        var roundedNumber = Number(amount * multiplier).toFixed(1);
+        if ((roundedNumber + "").endsWith(".0")) {
+            roundedNumber = Number(roundedNumber).toFixed(0);
         }
+        return roundedNumber;
+    }
 
 
-
-    </script>
+</script>
 
 #{if recipe != null}
     #{set title:recipe.title /}
 
-    <div class="whitetext toppOverskrift">
-    ${recipe?.title}</div>
+<div class="whitetext toppOverskrift">
+${recipe?.title}</div>
 
 
-    <div class="innfelt">
-        <div class="innhold">${recipe?.description}</div>
-    </div>
+<div class="innfelt">
+    <div class="innhold">${recipe?.description}</div>
+</div>
 <div id="tags" class="">
     <div class="">
         <ul id="myTags" class="tagit ui-widget ui-widget-content ui-corner-all">
-            <li class="intro">Tagget med </li>
+            <li class="intro">Tagget med</li>
             #{list items:recipe?.tags, as:"tag"}
                 <li class="tagit-choice ui-widget-content ui-state-default ui-corner-all tagit-choice-editable">
                     <a href="@{Recipes.index(tag.nameHash)}">
@@ -91,52 +89,54 @@
                 </li>
             #{/list}
             <li class="outro">
-                Brukt i ${models.RecipeInMenu.find("menu.author = ? and recipe = ?", user, recipe).fetch().size()} av dine menyer, ${models.RecipeInMenu.find("recipe = ?", recipe).fetch().size()} totalt
+                Brukt i ${models.RecipeInMenu.find("menu.author = ? and recipe = ?", user, recipe).fetch().size()} av
+                dine menyer, ${models.RecipeInMenu.find("recipe = ?", recipe).fetch().size()} totalt
             </li>
-        </ul></div>
+        </ul>
+    </div>
 </div>
 
-    <div class="task-list">
-        <div class="grouped-tasks" rel="inbox">
-            <ol class="tasks" id="menu-tasks" style="padding-left:0px;">
-                <li class="task-item noduedate">
-                    <div class="task-body">
-                        <div class="selector">
-                            <span class="minusknapp"></span>
-                            <span class="plussknapp"></span>
+<div class="task-list">
+    <div class="grouped-tasks" rel="inbox">
+        <ol class="tasks" id="menu-tasks" style="padding-left:0px;">
+            <li class="task-item noduedate">
+                <div class="task-body">
+                    <div class="selector">
+                        <span class="minusknapp"></span>
+                        <span class="plussknapp"></span>
                                 <span class="tekst"> <span style="float: none" class="mengde"
                                         >${utils.Servings.getPreferredServings(user, menu, recipe)}</span> ${recipe?.servesUnit}</span>
-                        </div>
-                        <div class="title-wrapper"><span
-                                class="title">Oppskriften holder til
-                                </span>
-                        </div>
                     </div>
-                </li>
-            </ol>
-        </div>
+                    <div class="title-wrapper"><span
+                            class="title">Oppskriften holder til
+                                </span>
+                    </div>
+                </div>
+            </li>
+        </ol>
     </div>
+</div>
 
 
-    <div class="recipeBilde" style="">
-        <img id="bilde" src="${models.Image.get(recipe)}"/>
-    </div>
+<div class="recipeBilde" style="">
+    <img id="bilde" src="${models.Image.get(recipe)}"/>
+</div>
 
 
-    <div class="whitetext overskrift">
-        Ingredienser
-    </div>
+<div class="whitetext overskrift">
+    Ingredienser
+</div>
 
-    <div class="task-list">
-        <div class="grouped-tasks" rel="inbox">
-            <ol class="tasks" id="ingredient-tasks" style="padding-left:0px;">
-                #{list items:recipe.ingredients, as:'ingredient'}
-                    <li class="task-item" id="${ingredient.id}">
-                        <div class="task-body"><a class="task-checkbox"><span
-                                class="icon task-checkbox "></span></a> <a class="icon task-separator"></a>
+<div class="task-list">
+    <div class="grouped-tasks" rel="inbox">
+        <ol class="tasks" id="ingredient-tasks" style="padding-left:0px;">
+            #{list items:recipe.ingredients, as:'ingredient'}
+                <li class="task-item" id="${ingredient.id}">
+                    <div class="task-body"><a class="task-checkbox"><span
+                            class="icon task-checkbox "></span></a> <a class="icon task-separator"></a>
 
-                            <div class="title-wrapper"><span
-                                    class="title">
+                        <div class="title-wrapper"><span
+                                class="title">
                                 <span>
                                     <span style="float: none" class="mengde">
                                     #{if menu != null}
@@ -146,24 +146,24 @@
                                     ${utils.Currency.prettyDouble(ingredient.getScaledAmount(user))}
                                     #{/else}
                                 </span> ${ingredient.unit}</span>
-                            ${ingredient.description}</span>
-                            </div>
+                        ${ingredient.description}</span>
                         </div>
-                    </li>
-                #{/list}
-            </ol>
+                    </div>
+                </li>
+            #{/list}
+        </ol>
 
-        </div>
     </div>
+</div>
 
-    <div class="whitetext overskrift">
-        Fremgangsmåte
-    </div>
+<div class="whitetext overskrift">
+    Fremgangsmåte
+</div>
 
-    <div class="innfelt" style="">
-        <div name="steps" id="steps" class="innhold"
-             style="font-size: 14px;">${recipe?.steps?.escape().nl2br()}</div>
-    </div>
+<div class="innfelt" style="">
+    <div name="steps" id="steps" class="innhold"
+         style="font-size: 14px;">${recipe?.steps?.escape().nl2br()}</div>
+</div>
 
 
 
@@ -172,46 +172,46 @@
 
 #{/if}
 #{else }
-    <div class="whitetext toppOverskrift">
-        Fant ikke oppskrift!
-    </div>
+<div class="whitetext toppOverskrift">
+    Fant ikke oppskrift!
+</div>
 
 #{/else}
 
 #{if recipe != null}
-    <div class="buttonRow">
-        <a class="fancyButtonLink" href="@{Recipes.update(recipe.id)}"/>
+<div class="buttonRow">
+    <a class="fancyButtonLink" href="@{Recipes.update(recipe.id)}"/>
 
-        <div class="wrapper smallButton">
-            <span>Rediger</span>
-        </div>
+    <div class="wrapper smallButton">
+        <span>Rediger</span>
+    </div>
 
+    </a>
+    #{if menu!=null}
+        <a class="fancyButtonLink" href="@{Menus.show(menu.id)}" id="tilHandlelappen">
+            <div class="smallButton wrapper">
+                <span>Vis menyen</span>
+            </div>
         </a>
-        #{if menu!=null}
-            <a class="fancyButtonLink" href="@{Menus.show(menu.id)}" id="tilHandlelappen">
+        #{if menu.getDayOfRecipe(recipe) > 0}
+            <a class="fancyButtonLink"
+               href="@{Recipes.showInMenu(menu.id, menu.getDayOfRecipe(recipe)-1)}"
+               id="tilForrige">
                 <div class="smallButton wrapper">
-                    <span>Vis menyen</span>
+                    <span>Forrige</span>
                 </div>
             </a>
-            #{if menu.getDayOfRecipe(recipe) > 0}
-                <a class="fancyButtonLink"
-                   href="@{Recipes.showInMenu(menu.id, menu.getDayOfRecipe(recipe)-1)}"
-                   id="tilForrige">
-                    <div class="smallButton wrapper">
-                        <span>Forrige</span>
-                    </div>
-                </a>
-            #{/if}
-            #{if menu.getDayOfRecipe(recipe) < (menu.recipesInMenu.size()-1)}
-                <a class="fancyButtonLink"
-                   href="@{Recipes.showInMenu(menu.id, menu.getDayOfRecipe(recipe)+1)}"
-                   id="tilNeste">
-                    <div class="smallButton wrapper">
-                        <span>Neste</span>
-                    </div>
-                </a>
-            #{/if}
         #{/if}
-    </div>
+        #{if menu.getDayOfRecipe(recipe) < (menu.recipesInMenu.size()-1)}
+            <a class="fancyButtonLink"
+               href="@{Recipes.showInMenu(menu.id, menu.getDayOfRecipe(recipe)+1)}"
+               id="tilNeste">
+                <div class="smallButton wrapper">
+                    <span>Neste</span>
+                </div>
+            </a>
+        #{/if}
+    #{/if}
+</div>
 #{/if}
 </div>

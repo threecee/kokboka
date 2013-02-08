@@ -1,0 +1,60 @@
+<style>
+body {
+font-family:verdana;
+font-size:15px;
+}
+
+a {color:#333; text-decoration:none}
+a:hover {color:#ccc; text-decoration:none}
+
+#mask {
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:9000;
+  background-color:#000;
+  display:none;
+}
+
+#boxes .window {
+  position:fixed;
+  left:0;
+  top:0;
+  width:440px;
+  height:200px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes #dialog {
+  width:100%;
+  height:100%;
+  padding:10px;
+  background-color:#ffffff;
+}
+
+</style>
+<script type="text/javascript" language="javascript" src="@{'/public/javascripts/middagsplanleggerMobile.js'}"></script>
+
+
+<div id="boxes" style="display: none">
+
+    <div id="dialog" class="window"/>
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $.get("/menus/dinnerplanMobile?recipeId=${recipe.id}", function (data) {
+                    $('#dialog').append(data, loadContent());
+                });
+
+                function loadContent() {
+                    		$.getScript('/public/javascripts/middagsplanleggerMobile.js');
+                }
+            });
+
+        </script>
+
+    </div>

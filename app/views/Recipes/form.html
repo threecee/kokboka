@@ -123,7 +123,7 @@
         $.ajax({
             type: "POST",
             url: "/recipes/addTag",
-            data: "id=" + ${recipe?.id} +"&tag=" + tag,
+            data: "id=" + ${recipe?.id} +"&tag=" + $(tag).find(".tagit-label").text(),
             dataType: "xml"
 
         });
@@ -132,7 +132,7 @@
         $.ajax({
             type: "POST",
             url: "/recipes/removeTag",
-            data: "id=" + ${recipe?.id} +"&tag=" + tag,
+            data: "id=" + ${recipe?.id} +"&tag=" + $(tag).find(".tagit-label").text(),
             dataType: "xml"
 
         });

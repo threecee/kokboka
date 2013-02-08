@@ -855,6 +855,10 @@ and (max-width : 400px) {
     .skilleheader .text {
         padding-right: 6px;
     }
+    .skilleheader .datospenn {
+       font-size: 10px;
+    }
+
 
 }
 

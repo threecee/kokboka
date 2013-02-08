@@ -71,15 +71,19 @@
     #{set title:recipe.title /}
 
 <div class="whitetext toppOverskrift">
-${recipe?.title}</div>
+${recipe?.title}
+</div>
 
 
+#{if recipe.description != null}
 <div class="innfelt">
     <div class="innhold">${recipe?.description}</div>
 </div>
+#{/if}
 <div id="tags" class="">
     <div class="">
         <ul id="myTags" class="tagit ui-widget ui-widget-content ui-corner-all">
+            #{if recipe.tags != null && recipe.tags.size() > 0}
             <li class="intro">Tagget med</li>
             #{list items:recipe?.tags, as:"tag"}
                 <li class="tagit-choice ui-widget-content ui-state-default ui-corner-all tagit-choice-editable">
@@ -88,9 +92,15 @@ ${recipe?.title}</div>
                     </a>
                 </li>
             #{/list}
+            #{/if}
             <li class="outro">
+            #{if models.RecipeInMenu.find("recipe = ?", recipe).fetch().size() > 0}
                 Brukt i ${models.RecipeInMenu.find("menu.author = ? and recipe = ?", user, recipe).fetch().size()} av
                 dine menyer, ${models.RecipeInMenu.find("recipe = ?", recipe).fetch().size()} totalt
+            #{/if}
+             #{else }
+             Foreløpig ikke brukt i noen menyer.
+             #{/else}
             </li>
         </ul>
     </div>

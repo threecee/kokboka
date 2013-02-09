@@ -94,6 +94,19 @@ public class Parsers extends Controller {
             convertPackageToWeightRydding(ingredient);
         }
     }
+    public static void ryddIIngrediensTyper() {
+        List<IngredientType> ingredienttypes = IngredientType.findAll();
+
+        for (IngredientType ingredientType : ingredienttypes) {
+            ingredientType.name = ingredientType.name.toLowerCase();
+
+            for(int i = 0; i< ingredientType.descriptions.size(); i++)
+            {
+                ingredientType.descriptions.set(i, ingredientType.descriptions.get(i).toLowerCase());
+            }
+            ingredientType.save();
+        }
+    }
 
     public static void importRema1000(boolean overskriving) {
         String urlTemplate = "http://www.rema.no/under100/?service=oppskrifter&allRecipes=true&page=";

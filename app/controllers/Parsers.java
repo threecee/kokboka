@@ -83,6 +83,18 @@ public class Parsers extends Controller {
         }
     }
 
+    public static void ryddIIngredienserMaksi() {
+        List<Ingredient> ingredients = Ingredient.find("order by description desc").fetch();
+
+        for (Ingredient ingredient : ingredients) {
+            ingredient.description = cleanProductNames(ingredient.description);
+            ingredient.description = ingredient.description.toLowerCase();
+            ingredient.save();
+            convertPackageToWeight(ingredient);
+            convertPackageToWeightRydding(ingredient);
+        }
+    }
+
     public static void importRema1000(boolean overskriving) {
         String urlTemplate = "http://www.rema.no/under100/?service=oppskrifter&allRecipes=true&page=";
 
@@ -355,9 +367,9 @@ public class Parsers extends Controller {
             processMatchesInIngredients(matcher, originalIngredient);
         }
     }
-        /*
-        else if(originalIngredient.unit.matches("g|kg"))
-        {
+
+    private static void convertPackageToWeightRydding(Ingredient originalIngredient) {
+        if (originalIngredient.unit.matches("g|kg")) {
             Matcher matcher = packagePattern.matcher(originalIngredient.description);
             if (matcher.find()) {
                 String newDesc = matcher.replaceFirst("");
@@ -367,10 +379,11 @@ public class Parsers extends Controller {
                 originalIngredient.save();
             }
 
-        } */
+        }
+    }
 
 
-static String[] kjenteProdukter = new String[]{"Ybarra", "Apetina", "classic", "premium", "Gaea", "Austin Lamb Chops", "5%", "9%", "14%", "18%", "10%", "Toro", "Barilla", "Gilde", "Idun", "Mills", "Grovt og godt", "Godehav", "Solvinge", "REMA 1000", "Tine", "Bama", "Kikkoman", "Nordfjord", "Blue Dragon", "Taga", "Finsbråten", "Hatting", "Mesterbakeren", "Grilstad", "Ideal", "Staur", "MaxMat", "Viddas", "Gourmet", "Pampas", "frossen", "frosne", "naturell", "M/L,", "- NB! Sesongvare"};
+    static String[] kjenteProdukter = new String[]{"Ybarra", "Apetina", "classic", "premium", "Gaea", "Austin Lamb Chops", "5%", "9%", "14%", "18%", "10%", "Toro", "Barilla", "Gilde", "Idun", "Mills", "Grovt og godt", "Godehav", "Solvinge", "REMA 1000", "Tine", "Bama", "Kikkoman", "Nordfjord", "Blue Dragon", "Taga", "Finsbråten", "Hatting", "Mesterbakeren", "Grilstad", "Ideal", "Staur", "MaxMat", "Viddas", "Gourmet", "Pampas", "frossen", "frosne", "naturell", "M/L,", "- NB! Sesongvare"};
 
     private static String cleanProductNames(String beskrivelse) {
         String produktnavn = beskrivelse;

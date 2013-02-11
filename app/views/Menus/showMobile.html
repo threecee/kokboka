@@ -69,12 +69,12 @@
         </div>
 
         #{if menu.shoppingList!=null }
-            <a data-role="button" href="@{ShoppingLists.show(menu.id)}">
+            <a data-role="button" href="@{ShoppingLists.showMobile(menu.id)}">
                  Handlelapp for meny
              </a>
         #{/if}
         #{else }
-            <a data-role="button" href="@{ShoppingLists.list(menu.id)}">
+            <a data-role="button" href="@{ShoppingLists.listMobile(menu.id)}">
                  Handlelapp for meny
              </a>
         #{/else}

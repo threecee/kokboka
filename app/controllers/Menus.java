@@ -82,6 +82,20 @@ public class Menus extends CRUD {
         renderShowNextWeek(id, true);
     }
 
+    public static void showThisWeekMobile() {
+           int uke = DateUtil.weekOfYear(new Date());
+            Date startDag = DateUtil.getStartingDayForWeek(uke);
+
+            User user = User.find("byEmail", Security.connected()).first();
+            Menu menu = Menu.find("author = ? and usedFromDate = ?", user, startDag).first();
+            if (menu == null) {
+                menu = new Menu(user, startDag).save();
+            }
+
+        render("Menus/showMobile.html", menu);
+    }
+
+
     private static void renderShowNextWeek(Long id, boolean isMobile) {
         Menu thismenu = Menu.findById(id);
         User user = User.find("byEmail", Security.connected()).first();

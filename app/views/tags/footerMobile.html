@@ -1,0 +1,9 @@
+<div data-role="footer" data-id="foo1" data-position="fixed">
+	<div data-role="navbar"  data-iconpos="top">
+		<ul>
+			<li ><a data-icon="grid" href="@{Recipes.indexMobile()}"  class="${request.controller == "Recipes"?"ui-btn-active ui-state-persist":""}">Oppskrift</a></li>
+			<li><a data-icon="plus" href="@{Menus.indexMobile()}" class="${request.controller == "Menus"  ?"ui-btn-active ui-state-persist":""}">Meny</a></li>
+            <li><a data-icon="check" href="@{ShoppingLists.showCurrentMobile()}" class="${request.controller == "ShoppingLists" ?"ui-btn-active ui-state-persist":""}">Handle</a></li>
+		</ul>
+	</div><!-- /navbar -->
+</div><!-- /footer -->

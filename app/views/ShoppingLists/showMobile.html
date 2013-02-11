@@ -1,0 +1,221 @@
+#{extends 'masterMobileMega.html' /}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("div.ui-checkbox").click(function () {
+            if (!$(this).find("label").hasClass("ui-checkbox-on")) {
+                checkIngredient($(this).find("input").attr("id"));
+                var taskItem = $(this).detach();
+
+               move(taskItem, "#ingredient-tasks", "#completed-tasks");
+
+            }
+            else {
+                unCheckIngredient($(this).find("input").attr("id"));
+                var taskItem = $(this).detach();
+                move(taskItem, "#completed-tasks", "#ingredient-tasks");
+            }
+        });
+
+
+        function move(taskItem, anchorFrom, anchorTo)
+        {
+                //if taskItem is om top
+                  if (taskItem.find("label").hasClass("ui-corner-top")) { //&& !($("#ingredient-tasks:not(:has(*))"))) {
+
+                 $(anchorFrom + " div.ui-controlgroup-controls div.ui-checkbox:first").find("label").addClass("ui-corner-top");
+                }
+
+                if (taskItem.find("label").hasClass("ui-corner-bottom"))
+                {
+                    //if (!($("#ingredient-tasks:not(:has(*))"))) {
+                        $(anchorFrom + " div.ui-controlgroup-controls div.ui-checkbox:last").find("label").addClass("ui-corner-bottom").addClass("ui-controlgroup-last");
+                    //}
+                }
+                taskItem.find("label").addClass("ui-corner-top");
+                taskItem.find("label").removeClass("ui-corner-bottom").removeClass("ui-controlgroup-last");
+
+
+                if (!$(anchorTo + " div.ui-controlgroup-controls div.ui-checkbox").length) {
+                    taskItem.find("label").addClass("ui-corner-bottom").addClass("ui-controlgroup-last");
+                }
+                else {
+                    $( anchorTo + " div.ui-controlgroup-controls div.ui-checkbox:first").find("label").removeClass("ui-corner-top");
+
+                }
+
+                taskItem.prependTo(anchorTo + " div.ui-controlgroup-controls");
+
+
+        }
+
+        $("input#addtask").keypress(function (e) {
+            if (e.which == 13) {
+                addOnTheFlyIngredient(${menu?.shoppingList?.id}, $(this).val());
+                $(this).val("");
+
+            }
+        });
+
+    });
+
+
+    function checkIngredient(id) {
+        $.ajax({
+            type: "POST",
+            url: "/shoppinglists/check",
+            data: "id=" + id,
+            dataType: "xml"
+        });
+    }
+    function unCheckIngredient(id) {
+        $.ajax({
+            type: "POST",
+            url: "/shoppinglists/uncheck",
+            data: "id=" + id,
+            dataType: "xml"
+        });
+    }
+    function addOnTheFlyIngredient(id, description) {
+        $.ajax({
+            type: "POST",
+            url: "/shoppinglists/addOnTheFly",
+            data: "id=" + id + "&description=" + description,
+            dataType: "xml"
+
+        }).always(function (data) {
+                    injectTask(data.responseText, description);
+
+                });
+    }
+
+    var taskTemplate = "<li class=\"task-item\" id=\"$ID$\">" +
+            "<div class=\"task-body\"><a class=\"task-checkbox\"><span class=\"icon task-checkbox \"></span></a> " +
+            "<a class=\"icon task-separator\"></a>" +
+            "<div class=\"title-wrapper\"><span" +
+            "  class=\"title\">$DESCRIPTION$</span>" +
+            "</div>" +
+            "</div>" +
+            "</li>";
+    function injectTask(id, description) {
+        var injectString = taskTemplate.replace("$ID$", id).replace("$DESCRIPTION$", description);
+
+        $('<div/>').html(injectString).prependTo("ol#ingredient-tasks");
+
+    }
+</script>
+
+
+<!-- Oppskrift -->
+<div data-role="page" id="tasks">
+    <div data-theme="a" data-role="header">
+        <h1>Handlelapp for
+            uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}</h1>
+        <a href="@{ShoppingLists.listMobile()}" data-direction="reverse" data-transition="slide"
+           data-icon="back" data-role="button" data-theme="a">Tilbake</a>
+    </div>
+    <div data-role="content">
+
+        <div data-role="navbar" data-iconpos="none">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" class="ui-btn-active ui-state-persist">
+                        Alfabetisk
+                    </a>
+                </li>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="">
+                        Type
+                    </a>
+                </li>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="">
+                        Oppskrift
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="ingredient-tasks" data-role="fieldcontain">
+            <fieldset data-role="controlgroup" data-type="vertical">
+                <legend>
+                    Varer
+                </legend>
+            #{list items:shoppingListUnchecked, as:'ingredient'}
+                <input id="${ingredient.id}" name="" type="checkbox">
+                <label for="${ingredient.id}">
+                    #{if !ingredient.type.equals(models.ShoppingListItemType.onthefly) }
+                        <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
+                    #{/if}
+                ${ingredient.description}
+                </label>
+            #{/list}
+
+            </fieldset>
+        </div>
+
+        <div id="completed-tasks" data-role="fieldcontain">
+            <fieldset data-role="controlgroup" data-type="vertical">
+                <legend>
+                    Ferdigstilte
+                </legend>
+            #{list items:shoppingListChecked, as:'ingredient'}
+                <input id="${ingredient.id}" name="" type="checkbox" checked="true">
+                <label for="${ingredient.id}">
+                    #{if !ingredient.type.equals(models.ShoppingListItemType.onthefly) }
+                        <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
+                    #{/if}
+                ${ingredient.description}
+                </label>
+            #{/list}
+
+            </fieldset>
+        </div>
+
+        <div class="margin-bottom:30px;"/>
+
+        <!--
+        <div class="addtask" style="">
+            <a class="input-star">
+                           <span
+                                   class="icon input-star transparent"></span></a>
+            <a class="input-date"><span
+                    class="icon input-date transparent"></span></a>
+            <input id="addtask" type="text" class="transparent mousetrap"
+                   maxlength="255"
+                   key-placeholder="placeholder_add_task_to_$"
+                   data-placeholder="Inbox"
+                   placeholder="Legg til vare i handlelisten...">
+        </div>
+        <div class="margin-bottom:20px;"/>
+
+        <div class="buttonRow">
+        #{if menu!=null}
+            <a class="fancyButtonLink" href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
+                <div class="smallButton wrapper">
+                    <span>Velg oppskrifter på nytt</span>
+                </div>
+            </a>
+            <a class="fancyButtonLink" href="@{Menus.show(menu.id)}" id="tilHandlelappen">
+                <div class="smallButton wrapper">
+                    <span>Vis menyen</span>
+                </div>
+            </a>
+            <a class="fancyButtonLink" href="@{ShoppingLists.showLastWeek(menu.id)}" id="tilForrige">
+                <div class="smallButton wrapper">
+                    <span>Forrige uke</span>
+                </div>
+            </a>
+            <a class="fancyButtonLink" href="@{ShoppingLists.showNextWeek(menu.id)}" id="tilNeste">
+                <div class="smallButton wrapper">
+                    <span>Neste uke</span>
+                </div>
+            </a>
+        #{/if}
+        </div>
+        -->
+    </div>
+#{footerMobile /}
+</div>
+
+

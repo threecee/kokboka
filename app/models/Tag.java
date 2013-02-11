@@ -45,6 +45,7 @@ public class Tag extends Model implements Comparable<Tag> {
         return tag;
     }
 
+
     public static Collection<Tag> findTagsFromRecipes(List<Recipe> recipes) {
         HashMap<String, Tag> stringTagHashMap = new HashMap<String, Tag>();
 

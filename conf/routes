@@ -2,7 +2,9 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /meny/{<[0-9]+>menuId}/dag/{<[0-9]+>index} Recipes.showInMenu
+GET     /mobile Application.indexMobile
+
+GET     /meny/{<[0-9]+>menuId}/dag/{<[0-9]+>index} Menus.showInMenu
 GET     /meny/dagensoppskrift Recipes.showCurrent
 GET     /meny/{<[0-9]+>id} Menus.show
 GET     /meny Menus.index

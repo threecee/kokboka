@@ -20,12 +20,26 @@ public class Users extends CRUD {
         }
     }
 
-    public static void preferences() {
+    private static void preferencesRender(boolean isMobile) {
         User user = User.find("byEmail", Security.connected()).first();
 
         List<ShoppingListIngredient> shoppingList = user.favoriteIngredients;
 
-        render(user, shoppingList);
+        if (isMobile) {
+            render("Users/preferencesMobile.html", user, shoppingList);
+
+        } else {
+            render(user, shoppingList);
+        }
+    }
+
+    public static void preferences() {
+       preferencesRender(false);
+
+    }
+
+    public static void preferencesMobile() {
+        preferencesRender(true);
 
     }
 

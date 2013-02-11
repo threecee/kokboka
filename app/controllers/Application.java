@@ -25,6 +25,10 @@ public class Application extends Controller {
         String user = Security.connected();
         render();
     }
+    public static void indexMobile() {
+        String user = Security.connected();
+        redirect("Recipes.indexMobile", true);
+    }
 
 
 

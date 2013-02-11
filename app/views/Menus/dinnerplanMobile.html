@@ -1,28 +1,5 @@
 
 
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $("li.task-item").click(function () {
-            addRecipe($(this).attr("id"), ${newrecipe.id});
-            $(this).find(".title").html("${newrecipe.title}");
-        });
-    });
-
-    function addRecipe(day, recipeId) {
-        $.ajax({
-
-     				   type: "POST",
-     				   url: "/menus/planrecipeByDay",
-     				   data: "recipeId=" + recipeId + "&day="+day,
-     				   dataType: "xml"
-     			    });
-    }
-
-
-</script>
-
-
 
 <div id="visMeny">
     <div class="whitetext toppOverskrift">Meny for

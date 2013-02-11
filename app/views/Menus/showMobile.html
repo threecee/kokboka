@@ -1,0 +1,87 @@
+#{extends 'masterMobileMega.html' /}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("a.check-trash").click(function () {
+            removeRecipe($(this).parent().parent().attr("id"));
+            $(this).parent().parent().detach();
+        });
+    });
+
+    function removeRecipe(recipeId) {
+        $.ajax({
+            type: "POST",
+            url: "/menus/unplanrecipefrommenu",
+            data: "menuId=${menu.id}" + "&recipeId=" + recipeId ,
+            dataType: "xml"
+
+        });
+    }
+
+
+</script>
+
+
+
+<div data-role="page" id="visMeny">
+    <div data-theme="a" data-role="header">
+        <h1>Meny for
+                uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}</h1>
+        <a href="@{Menus.indexMobile()}" data-direction="reverse" data-transition="slide"
+           data-icon="back" data-role="button" data-theme="a">Tilbake</a>
+
+    </div>
+    <div data-role="content">
+
+
+                    <div class="task-list">
+                        <div class="grouped-tasks" rel="inbox">
+                            <ol class="tasks" id="menu-tasks" style="padding-left:0px;">
+                                #{list items:0..6, as:'i'}
+
+                                        <li class="task-item" id="${i}">
+                                            <div class="task-body"><a class="check-trash"><span
+                                                    class="icon check-trash"></span></a>
+                                                <a class="icon task-separator"></a>
+
+
+                                                <a class="duedate">${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}</a>
+                                                <a class="icon task-separator2"></a>
+
+                                                <div class="title-wrapper"><span
+                                                        class="title">
+                                    #{if menu.getRecipeForDay(i) != null}
+                                       <a href="@{Recipes.showMobile(menu.getRecipeForDay(i).id)}">${menu.getRecipeForDay(i).title}</a>
+                                    #{/if}
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                #{/list}
+                            </ol>
+
+                        </div>
+
+
+        </div>
+
+        #{if menu.shoppingList!=null }
+            <a data-role="button" href="@{ShoppingLists.show(menu.id)}">
+                 Handlelapp for meny
+             </a>
+        #{/if}
+        #{else }
+            <a data-role="button" href="@{ShoppingLists.list(menu.id)}">
+                 Handlelapp for meny
+             </a>
+        #{/else}
+    </div>
+#{footerMobile /}
+
+
+</div>
+
+

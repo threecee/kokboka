@@ -1,0 +1,36 @@
+#{extends 'masterMobileMega.html' /}
+<!-- innstillinger -->
+<div data-role="page" id="innstillinger">
+    <div data-theme="a" data-role="header">
+        <h1>Innstillinger</h1><a href="@{Application.indexMobile()}" data-direction="reverse" data-transition="slide"
+                                 data-icon="back" data-role="button" data-theme="a">Tilbake</a>
+    </div>
+    <div data-role="content">
+        <div data-role="fieldcontain">
+            <fieldset data-role="controlgroup">
+                <label for="slider1">
+                    Value:
+                </label>
+                <input type="range" name="slider" value="2" min="0" max="10" data-highlight="true">
+            </fieldset>
+            <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            #{list items:shoppingList, as:'ingredient'}
+                <li data-theme="c" class="task-item" id="${ingredient.id}">
+                    <div class="task-body"><a class="task-checkbox"><span
+                            class="icon check-trash "></span></a> <a class="icon task-separator"></a>
+
+                        <div class="title-wrapper"><span
+                                class="title">
+                                    #{if !ingredient.type.equals(models.ShoppingListItemType.onthefly) }
+                                        <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
+                                    #{/if}
+                        ${ingredient.description}</span>
+                        </div>
+                    </div>
+                </li>
+            #{/list}
+            </ul>
+        </div>
+    </div>
+</div>
+

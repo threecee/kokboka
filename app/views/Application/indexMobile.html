@@ -1,0 +1,33 @@
+#{extends 'masterMobile.html' /}
+#{set title:'Home' /}
+
+<!-- Home -->
+<div data-role="page" id="home">
+    <div data-theme="a" data-role="header">
+        <h1>Kokboka</h1>
+        		<a href="@{Users.preferencesMobile()}" data-icon="gear"  data-transition="slide" class="ui-btn-right">&nbsp;</a>
+
+        <div data-role="fieldcontain">
+            <fieldset data-role="controlgroup">
+                <label for="search">
+                </label>
+                <input name="" id="search" placeholder="Søk" value="" type="search" />
+            </fieldset>
+        </div>
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Alle oppskrifter
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Favoritter
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div data-role="content">
+    </div>
+    #{footerMobile /}
+</div>

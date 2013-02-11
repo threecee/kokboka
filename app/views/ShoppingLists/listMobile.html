@@ -1,0 +1,136 @@
+#{extends 'masterMobileMega.html' /}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("span.plussknapp").click(function () {
+            var mengde = $(this).parent().find(".mengde");
+            var number = parseInt($(mengde).text());
+            number = number + 1;
+            $(mengde).text(number);
+            $(this).parent().parent().parent().find("input.recipeAmounts").val(number);
+        });
+        $("span.minusknapp").click(function () {
+            var mengde = $(this).parent().find(".mengde");
+            var number = parseInt($(mengde).text());
+            if (number > 0) {
+                number = number - 1;
+                $(mengde).text(number);
+                $(this).parent().parent().parent().find("input.recipeAmounts").val(number);
+            }
+        });
+
+
+        $("a.task-checkbox").click(function () {
+            if (!$(this).hasClass("task-checked")) {
+                checkRecipe($(this).parent().parent());
+                $(this).addClass("task-checked");
+                $(this).find("span.task-checkbox").addClass("task-checked");
+            }
+            else {
+                unCheckRecipe($(this).parent().parent());
+                $(this).removeClass("task-checked");
+                $(this).find("span.task-checkbox").removeClass("task-checked");
+            }
+        });
+
+    });
+
+
+    function checkRecipe(element) {
+        $(element).find("input").val($(element).find("input").attr("id"));
+    }
+    function unCheckRecipe(element) {
+        $(element).find("input").val("");
+    }
+
+</script>
+
+
+<!-- START velgDager -->
+<div id="velgDager">
+
+    <div class="whitetext toppOverskrift">Lag handlelapp</div>
+
+    <p class="whitetext">
+        Her kan du velge oppskriftene du vil ha med på handlelappen.
+    </p>
+    <br/>
+
+#{form @save(menu?.id)}
+    <div class="whitetext overskrift" style="margin-bottom: 15px;">Dine valgte middager</div>
+    <!-- START Recipe item -->
+    <div class="task-list">
+        <div class="grouped-tasks" rel="inbox">
+            <ol class="tasks" id="menu-tasks" style="padding-left:0px;">
+                #{list items:0..6, as:'i'}
+
+
+                    #{if menu.getRecipeForDay(i) != null}
+
+                        <li class="task-item" id="${menu.getRecipeForDay(i).id}">
+                            <input type="hidden" name="includeRecipes" id="${menu.getRecipeForDay(i).id}" value="${menu.getRecipeForDay(i).id}"/>
+                            <input type="hidden" class="recipeAmounts" name="recipeAmounts-${menu.getRecipeForDay(i).id}" id="${menu.getRecipeForDay(i).id}" value="${utils.Servings.getPreferredServings(user, menu, i)}"/>
+
+                            <div class="task-body"><a class="task-checkbox task-checked"><span
+                                    class="icon task-checkbox task-checked"></span></a>
+                                <a class="icon task-separator"></a>
+
+                                <div class="selector">
+                                    <span class="minusknapp"></span>
+                                    <span class="plussknapp"></span>
+                                    <span class="tekst">Til <span style="float: none" class="mengde"
+                                                                  id="slider_${i}_Range">${utils.Servings.getPreferredServings(user, menu, i)}</span> ${menu.getRecipeForDay(i).servesUnit}</span>
+                                </div>
+                                <a class="duedate">${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}</a>
+                                <a class="icon task-separator2"></a>
+
+                                <div class="title-wrapper"><span
+                                        class="title">
+                                    <a href="@{Recipes.show(menu.getRecipeForDay(i).id)}">${menu.getRecipeForDay(i).title}</a></span>
+                                </div>
+
+
+                            </div>
+
+                        </li>
+
+
+                    #{/if}
+
+
+                #{/list}
+
+                <li class="task-item noduedate" >
+                    <input type="hidden" id="faste" name="includePreferredRecipes" value="faste"></input>
+
+                    <div class="task-body"><a class="task-checkbox task-checked"><span
+                            class="icon task-checkbox task-checked"></span></a> <a class="icon task-separator"></a>
+
+                        <div class="title-wrapper"><span
+                                class="title">
+                            Matvarer du har lagt inn som faste varer hver uke</span>
+                        </div>
+                    </div>
+
+                </li>
+
+
+            </ol>
+
+        </div>
+    </div>
+
+    <!-- END Recipe item -->
+    <input type="submit" value="Vis handlelapp" class="fancySubmitButton"/>
+
+
+    </a>
+
+
+#{/form}
+
+
+</div>
+<!-- END velgDager -->
+

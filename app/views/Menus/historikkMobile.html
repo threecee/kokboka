@@ -1,0 +1,67 @@
+#{extends 'masterMobileMega.html' /}
+
+<div data-role="page" id="visMeny">
+    <div data-theme="a" data-role="header">
+        <h1>Historikk</h1>
+        <a href="@{Menus.indexMobile()}" data-direction="reverse" data-transition="slide"
+           data-icon="back" data-role="button" data-theme="a">Tilbake</a>
+
+    </div>
+    <div data-role="content">
+
+        <div data-role="collapsible-set">
+
+        #{set countMenus = 0 /}
+        #{list items:menus, as:'menu'}
+            #{if menu != null && menu.recipesInMenu != null && menu.recipesInMenu.size() > 0 }
+        #{set countMenus = countMenus + 1 /}
+                <div data-role="collapsible" data-collapsed="${ countMenus == 1?"false":"true" }">
+                    <h3>
+                        Meny for
+                        uke ${menu!=null && menu.usedFromDate != null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}
+                        <span class="datospenn">(${utils.DateUtil.prettyDate(menu.usedFromDate)}
+                            - ${utils.DateUtil.prettyDate(utils.DateUtil.addDays(menu.usedFromDate,6))})</span>
+                    </h3>
+
+                    <div class="task-list">
+                        <div class="grouped-tasks" rel="inbox">
+                            <ol class="tasks" id="menu-tasks" style="padding-left:0px;">
+                                #{list items:0..6, as:'i'}
+                                    #{if menu.getRecipeForDay(i) != null}
+                                        <li class="task-item" id="${menu.getRecipeForDay(i).id}">
+                                            <div class="task-body"><a class="check-trash"><span
+                                                    class="icon check-trash"></span></a>
+                                                <a class="icon task-separator"></a>
+
+
+                                                <a class="duedate">${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}</a>
+                                                <a class="icon task-separator2"></a>
+
+                                                <div class="title-wrapper"><span
+                                                        class="title">
+                                       <a href="@{Recipes.showMobile(menu.getRecipeForDay(i).id)}">${menu.getRecipeForDay(i).title}</a></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    #{/if}
+                                #{/list}
+                            </ol>
+
+                        </div>
+                    </div>
+                </div>
+            #{/if}
+        #{/list}
+
+
+        </div>
+
+
+    </div>
+#{footerMobile /}
+
+
+</div>
+
+
+

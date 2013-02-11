@@ -73,6 +73,64 @@ public class Parsers extends Controller {
     }
 
 
+    public static void ryddIFremgangsmate() {
+        List<Recipe> recipes = Recipe.find("order by title desc").fetch();
+
+        for (Recipe recipe : recipes) {
+            recipe.steps = cleanSteps(recipe.steps);
+            recipe.save();
+        }
+    }
+
+    static Pattern cleanLonelyNumbers = Pattern.compile("^(\\s*[0-9]+)");
+    static Pattern cleanLeadingSpace = Pattern.compile("^\\s*");
+    static Pattern cleanDoubleLineBreaks = Pattern.compile("\\s*\\n\\s*\\n\\s*\\n", Pattern.MULTILINE);
+    private static String cleanSteps(String steps) {
+        String original = steps;
+
+        steps = runMatcherPerLine(cleanLeadingSpace, steps, "");
+        steps = runMatcherPerLine(cleanLonelyNumbers, steps, "\n");
+        steps = runMatcherPerLine(cleanLeadingSpace, steps, "");
+        steps = runMatcher(cleanDoubleLineBreaks, steps, "\n\n");
+        steps = runMatcherPerLine(cleanLeadingSpace, steps, "");
+
+
+        reporter("Byttet ut: ------------------\n" +  original);
+        reporter("med : ------------------\n" +  steps);
+        reporter("------------------\n");
+
+        return steps;
+    }
+
+
+    private static String runMatcherPerLine(Pattern pattern, String source, String replace)
+    {
+        String[] sourceLines = source.split("\n");
+        StringBuffer result = new StringBuffer();
+
+        for(String sourceLine: sourceLines)
+        {
+             String resultLine = runMatcher(pattern, sourceLine, replace);
+            result.append(resultLine + "\n");
+        }
+
+         return result.toString();
+    }
+
+    private static String runMatcher(Pattern pattern, String source, String replace)
+    {
+
+        Matcher matcher = pattern.matcher(source);
+        StringBuffer myStringBuffer = new StringBuffer();
+        while (matcher.find())
+        {
+                matcher.appendReplacement(myStringBuffer, replace);
+        }
+            matcher.appendTail(myStringBuffer);
+        return myStringBuffer.toString();
+    }
+
+
     public static void ryddIIngredienser() {
         List<Ingredient> ingredients = Ingredient.find("order by description desc").fetch();
 

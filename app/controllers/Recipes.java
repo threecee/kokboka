@@ -25,30 +25,41 @@ public class Recipes extends CRUD {
     }
 
     public static void showCurrent() {
+        renderShowCurrent(false);
+    }
+
+    public static void showCurrentMobile() {
+        renderShowCurrent(true);
+    }
+
+
+
+    public static void indexMobile() {
+        render("Recipes/indexMobile.html");
+    }
+    public static void indexMobileAll() {
+        indexRender(null, true);
+    }
+    public static void indexMobileTags(String[] tags) {
+        indexRender(tags, true);
+    }
+    public static void indexMobileFromMenus(String[] tags) {
         User user = User.find("byEmail", Security.connected()).first();
 
-        Menu menu = Menu.find("author = ? and usedFromDate = ?", user, DateUtil.getStartingDayThisWeek(new Date())).first();
+        List<Recipe> recipes = RecipeInMenu.findUsedInMenu(user);
 
-        if (menu != null) {
-            int distance = DateUtil.distance(menu.usedFromDate, new Date());
 
-            Recipe recipe = menu.getRecipeForDay(distance);
-            boolean favorite = user.favorites.contains(recipe);
-
-            render("Recipes/show.html", user, recipe, favorite, menu);
-        }
-        render("Recipes/show.html");
-    }
-    public static void showInMenu(Long menuId, int index) {
-        User user = User.find("byEmail", Security.connected()).first();
-        Menu menu = Menu.findById(menuId);
-        Recipe recipe = menu.getRecipeForDay(index);
-        boolean favorite = user.favorites.contains(recipe);
-        render("Recipes/show.html", user, recipe, favorite, menu);
+        render("Recipes/indexMobile.html", recipes);
 
     }
+
+
 
     public static void index(String[] tags) {
+        indexRender(tags, false);
+    }
+
+    private static void indexRender(String[] tags, boolean isMobile) {
         List<Recipe> recipes;
         List<Tag> selectedTags = new ArrayList<Tag>();
         Collection<Tag> availableTags = new ArrayList<Tag>();
@@ -79,15 +90,19 @@ public class Recipes extends CRUD {
 
         List<Map> tagCloud = Tag.getCloud();
 
-
-        render(selectedTags, availableTags, tagCloud, recipes);
+        if (isMobile) {
+            render("Recipes/indexMobile.html", selectedTags, availableTags, tagCloud, recipes);
+        } else {
+            render(selectedTags, availableTags, tagCloud, recipes);
+        }
     }
 
     public static void show(Long id) {
-        User user = User.find("byEmail", Security.connected()).first();
-        Recipe recipe = Recipe.findById(id);
-        boolean favorite = user.favorites.contains(recipe);
-        render(user, recipe, favorite);
+        renderShow(id, false);
+    }
+
+    public static void showMobile(Long id) {
+        renderShow(id, false);
     }
 
     public static void update(Long id) {
@@ -214,6 +229,7 @@ public class Recipes extends CRUD {
     public static void removeTag(Long id, String tag) {
         Recipe recipe = Recipe.findById(id);
         recipe.tags.remove(Tag.hashName(tag));
+
         recipe.save();
         response.print("<xml/>");
 
@@ -224,11 +240,86 @@ public class Recipes extends CRUD {
 
     }
 
+    private static void renderShow(Long id, boolean isMobile) {
+        User user = User.find("byEmail", Security.connected()).first();
+        Recipe recipe = Recipe.findById(id);
+        boolean favorite = user.favorites.contains(recipe);
+        if (isMobile) {
+            render("Recipes/showMobile.html", user, recipe, favorite);
+        } else {
+            render(user, recipe, favorite);
+        }
+    }
 
-    public static void favorites() {
+    private static void renderShowCurrent(boolean isMobile) {
+        User user = User.find("byEmail", Security.connected()).first();
+
+        Menu menu = Menu.find("author = ? and usedFromDate = ?", user, DateUtil.getStartingDayThisWeek(new Date())).first();
+
+        if (menu != null) {
+            int distance = DateUtil.distance(menu.usedFromDate, new Date());
+
+            Recipe recipe = menu.getRecipeForDay(distance);
+            boolean favorite = user.favorites.contains(recipe);
+
+            if (isMobile) {
+
+                render("Recipes/showMobile.html", user, recipe, favorite, menu);
+            } else {
+                render("Recipes/show.html", user, recipe, favorite, menu);
+
+            }
+        }
+        if (isMobile) {
+            render("Recipes/showMobile.html");
+        } else {
+            render("Recipes/show.html");
+        }
+
+    }
+
+    private static void renderFavorites(boolean isMobile) {
         User user = User.find("byEmail", Security.connected()).first();
         List<Recipe> recipes = user.favorites;
-        render("Recipes/index.html", recipes);
+        if (isMobile) {
+            render("Recipes/indexMobile.html", recipes);
+        } else {
+            render("Recipes/index.html", recipes);
+        }
+
+    }
+
+    private static void renderForm(Long id, boolean isMobile) {
+        User user = User.find("byEmail", Security.connected()).first();
+        Recipe recipe;
+        if (id != null) {
+            recipe = Recipe.findById(id);
+            Logger.info("Hentet oppskrift nr" + recipe.id);
+        } else {
+            recipe = Recipe.find("title = null").first();
+            if (recipe == null) {
+                recipe = new Recipe(user);
+                recipe.save();
+            } else {
+                Logger.info("Hentet første tomme oppskrift - nr " + recipe.id);
+
+            }
+        }
+        if (isMobile) {
+            render("Recipes/formMobile.html");
+        }
+        {
+            render(recipe);
+        }
+    }
+
+
+    public static void favorites() {
+        renderFavorites(false);
+    }
+
+    public static void favoritesMobile() {
+        renderFavorites(true);
     }
 
     public static void save(Long id, String title, String description, double serves, String servesUnits, Double[] amounts, String[] units, String[] ingredients, String steps, String source, String tags, Blob photo) {
@@ -300,25 +391,11 @@ public class Recipes extends CRUD {
     }
 
     public static void form(Long id) {
-        User user = User.find("byEmail", Security.connected()).first();
-        Recipe recipe;
-        if (id != null) {
-            recipe = Recipe.findById(id);
-            Logger.info("Hentet oppskrift nr" + recipe.id);
-        } else {
-            recipe = Recipe.find("title = null").first();
-            if(recipe == null)
-            {
-                recipe = new Recipe(user);
-                recipe.save();
-            }
-            else {
-                Logger.info("Hentet første tomme oppskrift - nr " + recipe.id);
+        renderForm(id, false);
+    }
 
-            }
-        }
-
-        render(recipe);
+    public static void formMobile(Long id) {
+        renderForm(id, true);
     }
 
 }

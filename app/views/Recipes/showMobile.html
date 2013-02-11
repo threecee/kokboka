@@ -1,0 +1,185 @@
+#{extends 'masterMobileMega.html' /}
+
+<link rel="stylesheet" href="@{'/public/stylesheets/jquery.tagit.css'}">
+<link rel="stylesheet" href="@{'/public/stylesheets/tagit.ui-kokboka.css'}">
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("a.task-checkbox").click(function () {
+                if (!$(this).hasClass("task-checked")) {
+                    $(this).addClass("task-checked");
+                    $(this).find("span.task-checkbox").addClass("task-checked");
+                    $(this).parent().parent().addClass("done");
+                }
+                else {
+                    $(this).removeClass("task-checked");
+                    $(this).find("span.task-checkbox").removeClass("task-checked");
+                    $(this).parent().parent().removeClass("done");
+                }
+            });
+
+
+            $("span.plussknapp").click(function () {
+                var mengde = $(this).parent().find(".mengde");
+                var number = parseInt($(mengde).text());
+                var newNumber = number + 1;
+                $(mengde).text(newNumber);
+                scaleRecipe(number, newNumber);
+            });
+            $("span.minusknapp").click(function () {
+                var mengde = $(this).parent().find(".mengde");
+                var number = parseInt($(mengde).text());
+                if (number > 0) {
+                    var newNumber = number - 1;
+                    $(mengde).text(newNumber);
+                    scaleRecipe(number, newNumber);
+                }
+            });
+
+
+        });
+        if (typeof String.prototype.endsWith !== 'function') {
+            String.prototype.endsWith = function (suffix) {
+                return this.indexOf(suffix, this.length - suffix.length) !== -1;
+            };
+        }
+
+        function scaleRecipe(number, newNumber) {
+            $("#ingredient-tasks span.mengde").each(function () {
+                        $(this).text(scaleIngredient($(this).text().trim(), number, newNumber));
+                    }
+            );
+        }
+
+
+        function scaleIngredient(amount, serving, scaledServing) {
+            var multiplier = scaledServing / serving;
+
+            var roundedNumber = Number(amount * multiplier).toFixed(1);
+            if ((roundedNumber + "").endsWith(".0")) {
+                roundedNumber = Number(roundedNumber).toFixed(0);
+            }
+            return roundedNumber;
+        }
+
+
+    </script>
+
+#{if recipe != null}
+#{set title:recipe.title /}
+
+
+    <!-- Oppskrift -->
+    <div data-role="page" id="showRecipe">
+        <div data-theme="a" data-role="header">
+            <h1>${recipe?.title}</h1>
+            <a href="@{Recipes.indexMobile()}" data-direction="reverse" data-transition="slide"
+               data-icon="back" data-role="button" data-theme="a">Tilbake</a>
+        </div>
+        <div data-role="content">
+
+        #{if recipe.description != null}
+            <div class="innfelt">
+                <div class="innhold">${recipe?.description}</div>
+            </div>
+        #{/if}
+            <div id="tags" class="">
+                <div class="">
+                    <ul id="myTags" class="tagit ui-widget ui-widget-content ui-corner-all">
+                    #{if recipe.tags != null && recipe.tags.size() > 0}
+                        <li class="intro">Tagget med</li>
+                        #{list items:recipe?.tags, as:"tag"}
+                            <li class="tagit-choice ui-widget-content ui-state-default ui-corner-all tagit-choice-editable">
+                                <a href="@{Recipes.index(tag.nameHash)}">
+                                    <span class="tagit-label">${tag.name}</span>
+                                </a>
+                            </li>
+                        #{/list}
+                    #{/if}
+                        <li class="outro">
+                        #{if models.RecipeInMenu.find("recipe = ?", recipe).fetch().size() > 0}
+                            Brukt
+                            i ${models.RecipeInMenu.find("menu.author = ? and recipe = ?", user, recipe).fetch().size()}
+                            av
+                            dine menyer, ${models.RecipeInMenu.find("recipe = ?", recipe).fetch().size()} totalt
+                        #{/if}
+                        #{else }
+                            Foreløpig ikke brukt i noen menyer.
+                        #{/else}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="task-list">
+                <div class="grouped-tasks" rel="inbox">
+                    <ol class="tasks" id="menu-tasks" style="padding-left:0px;">
+                        <li class="task-item noduedate">
+                            <div class="task-body">
+                                <div class="selector">
+                                    <span class="minusknapp"></span>
+                                    <span class="plussknapp"></span>
+                                    <span class="tekst"> <span style="float: none" class="mengde"
+                                            >${utils.Servings.getPreferredServings(user, menu, recipe)}</span> ${recipe?.servesUnit}</span>
+                                </div>
+                                <div class="title-wrapper"><span
+                                        class="title">Oppskriften holder til
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="recipeBilde" style="">
+                <img id="bilde" src="${models.Image.get(recipe)}"/>
+            </div>
+
+
+            <div class="whitetext overskrift">
+                Ingredienser
+            </div>
+
+            <div class="task-list">
+                <div class="grouped-tasks" rel="inbox">
+                    <ol class="tasks" id="ingredient-tasks" style="padding-left:0px;">
+                    #{list items:recipe.ingredients, as:'ingredient'}
+                        <li class="task-item" id="${ingredient.id}">
+                            <div class="task-body"><a class="task-checkbox"><span
+                                    class="icon task-checkbox "></span></a> <a class="icon task-separator"></a>
+
+                                <div class="title-wrapper"><span
+                                        class="title">
+                                    <span>
+                                        <span style="float: none" class="mengde">
+                                        #{if menu != null}
+                                        ${utils.Currency.prettyDouble(ingredient.getScaledAmount(menu))}
+                                        #{/if}
+                                        #{else }
+                                        ${utils.Currency.prettyDouble(ingredient.getScaledAmount(user))}
+                                        #{/else}
+                                    </span> ${ingredient.unit}</span>
+                                ${ingredient.description}</span>
+                                </div>
+                            </div>
+                        </li>
+                    #{/list}
+                    </ol>
+
+                </div>
+            </div>
+
+            <div class="whitetext overskrift">
+                Fremgangsmåte
+            </div>
+
+            <div class="innfelt" style="">
+                <div name="steps" id="steps" class="innhold"
+                     style="font-size: 14px;">${recipe?.steps?.escape().nl2br()}</div>
+            </div>
+
+        </div>
+        #{footerMobile /}
+    </div>
+#{/if}

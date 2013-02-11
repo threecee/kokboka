@@ -16,6 +16,14 @@
     <meta name="msapplication-TileColor" content="#6176ff"/>
     <meta name="msapplication-TileImage" content="f417268b-81a2-43e0-a800-60bf210ad5a1.png"/>
     <meta name="msapplication-starturl" content="./"/>
+
+
+    <script type="text/javascript">
+   	 var mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
+   	</script>
+
+
+
     <!-- Pinned Site Tasks -->
     <link rel="apple-touch-icon-precomposed"
           href="http://wunderlist2.s3.amazonaws.com/7ab04e5a1a69c2f258e3fffeebfd806baf4dca1e/images/icon.png"/>
@@ -37,16 +45,6 @@
           data-requiremodule="sprite" data-requirecontext="styles"/>
     <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/forms.css'}"
           data-requiremodule="forms" data-requirecontext="styles"/>
-    <!--   <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/responsive.css'}"
-          data-requiremodule="responsive" data-requirecontext="styles"/> -->
-    <!--    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/tasks/touch.css'}"
-          data-requiremodule="touch" data-requirecontext="styles"/>
--->
-    <!--    <link rel="stylesheet" type="text/css" media="screen, handheld"
-          href="@{'/public/stylesheets/jquery/jquery-ui-1.8.16.custom.css'}"/>
--->
-
-    <!--    <script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-1.7.min.js'}"></script>-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
     <!--[if lt IE 9]>
@@ -55,7 +53,6 @@
 
     <script type="text/javascript" language="javascript"
             src="@{'/public/javascripts/jcarousellite_1.0.1.min.js'}"></script>
-    <!--<script type="text/javascript" language="javascript" src="@{'/public/javascripts/jquery-ui.min.js'}"/>-->
     <script type="text/javascript" language="javascript"
             src="@{'/public/javascripts/jquery.ui.touch-punch.min.js'}"></script>
     <script type="text/javascript" language="javascript"
@@ -83,7 +80,7 @@
     </div>
 </div>
 #{if request.action == 'Recipes.index' || request.action == 'Recipes.favorites' || request.action == 'Recipes.show'}
-#{if false &&  util.Device.isMobile(request.headers.get("user-agent") )}
+#{if false && util.Device.isMobile(request.headers.get("user-agent") )}
     #{planningFooterMobile menu:menu /}
 #{/if}
 #{else}
@@ -94,5 +91,8 @@
 <div style="margin-bottom:30px"/>
 #{/else}
 
+
+<div id="mask"></div>
+</div>
 </body>
 </html>

@@ -197,6 +197,16 @@ ${recipe?.title}
     </div>
 
     </a>
+    #{if recipe != null}
+
+    <a class="fancyButtonLink" href="@{Recipes.update(recipe.id)}"/>
+
+    <div class="wrapper smallButton">
+        <span>Rediger</span>
+    </div>
+
+    </a>
+    #{/if}
     #{if menu!=null}
         <a class="fancyButtonLink" href="@{Menus.show(menu.id)}" id="tilHandlelappen">
             <div class="smallButton wrapper">
@@ -205,7 +215,7 @@ ${recipe?.title}
         </a>
         #{if menu.getDayOfRecipe(recipe) > 0}
             <a class="fancyButtonLink"
-               href="@{Recipes.showInMenu(menu.id, menu.getDayOfRecipe(recipe)-1)}"
+               href="@{Menus.showInMenu(menu.id, menu.getDayOfRecipe(recipe)-1)}"
                id="tilForrige">
                 <div class="smallButton wrapper">
                     <span>Forrige</span>
@@ -214,7 +224,7 @@ ${recipe?.title}
         #{/if}
         #{if menu.getDayOfRecipe(recipe) < (menu.recipesInMenu.size()-1)}
             <a class="fancyButtonLink"
-               href="@{Recipes.showInMenu(menu.id, menu.getDayOfRecipe(recipe)+1)}"
+               href="@{Menus.showInMenu(menu.id, menu.getDayOfRecipe(recipe)+1)}"
                id="tilNeste">
                 <div class="smallButton wrapper">
                     <span>Neste</span>

@@ -50,6 +50,13 @@ public class ShoppingLists extends CRUD {
     }
 
     public static void show(Long id) {
+        show(id, false);
+    }
+    public static void showMobile(Long id) {
+        show(id, true);
+    }
+
+    private static void show(Long id, boolean  isMobile) {
         if (id != null) {
             Menu menu = Menu.findById(id);
 
@@ -69,12 +76,27 @@ public class ShoppingLists extends CRUD {
                     }
                 }
             }
+
+            if(isMobile){
+                render("ShoppingLists/showMobile.html", shoppingListChecked, shoppingListUnchecked, menu);
+
+            }
+            else {
             render("ShoppingLists/show.html", shoppingListChecked, shoppingListUnchecked, menu);
+            }
         }
 
     }
 
+
     public static void showCurrent() {
+        showCurrent(false);
+    }
+    public static void showCurrentMobile() {
+        showCurrent(true);
+    }
+
+    private static void showCurrent(boolean isMobile) {
         User user = User.find("byEmail", Security.connected()).first();
         Date startingDay = DateUtil.getStartingDay();
 
@@ -82,10 +104,18 @@ public class ShoppingLists extends CRUD {
         if (menu == null) {
             menu = new Menu(user, startingDay).save();
         }
-        show(menu.id);
+        show(menu.id, isMobile);
     }
 
+
     public static void list(Long menuId) {
+        list(menuId, false);
+    }
+    public static void listMobile(Long menuId) {
+        list(menuId, true);
+    }
+
+    private static void list(Long menuId, boolean isMobile) {
         Menu menu = Menu.findById(menuId);
         User user = User.find("byEmail", Security.connected()).first();
 
@@ -98,7 +128,12 @@ public class ShoppingLists extends CRUD {
 
         shoppingList = menu.shoppingList;
 
+        if(isMobile)
+        {
+            render("ShoppingLists/listMobile.html", menu, shoppingList, user);
+        }   else {
         render(menu, shoppingList, user);
+        }
     }
 
     public static void addOnTheFly(Long id, String description) {

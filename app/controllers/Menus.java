@@ -39,18 +39,86 @@ public class Menus extends CRUD {
         show(menu.id);
     }
 
+    public static void showInMenu(Long menuId, int index) {
+        renderShowInMenu(menuId, index, false);
+    }
+
+    public static void showInMenuMobile(Long menuId, int index) {
+        renderShowInMenu(menuId, index, true);
+    }
+
+    private static void renderShowInMenu(Long menuId, int index, boolean isMobile) {
+        User user = User.find("byEmail", Security.connected()).first();
+        Menu menu = Menu.findById(menuId);
+        Recipe recipe = menu.getRecipeForDay(index);
+        boolean favorite = user.favorites.contains(recipe);
+        if (isMobile) {
+            render("Recipes/showMobile.html", user, recipe, favorite, menu);
+
+        } else {
+            render("Recipes/show.html", user, recipe, favorite, menu);
+        }
+
+    }
 
     public static void showNextWeek(Long id) {
-        Menu menu = Menu.findById(id);
+        renderShowNextWeek(id, false);
+    }
+
+    public static void showNextWeekMobile(Long id) {
+        if(id == null)
+        {
+           int uke = DateUtil.weekOfYear(new Date());
+            Date startDag = DateUtil.getStartingDayForWeek(uke);
+
+            User user = User.find("byEmail", Security.connected()).first();
+            Menu menu = Menu.find("author = ? and usedFromDate = ?", user, startDag).first();
+            if (menu == null) {
+                menu = new Menu(user, startDag).save();
+            }
+           id = menu.id;
+        }
+
+        renderShowNextWeek(id, true);
+    }
+
+    private static void renderShowNextWeek(Long id, boolean isMobile) {
+        Menu thismenu = Menu.findById(id);
         User user = User.find("byEmail", Security.connected()).first();
-        show(menu.getNextWeeksMenu(user).id);
+
+        Menu menu = Menu.findById(thismenu.getNextWeeksMenu(user).id);
+
+        if (isMobile) {
+            render("Menus/showMobile.html", menu);
+
+        } else {
+            render("Menus/show.html", menu);
+        }
     }
 
     public static void showLastWeek(Long id) {
-        Menu menu = Menu.findById(id);
-        User user = User.find("byEmail", Security.connected()).first();
-        show(menu.getLastWeeksMenu(user).id);
+        renderShowLastWeek(id, false);
     }
+
+    public static void showLastWeekMobile(Long id) {
+        renderShowLastWeek(id, true);
+    }
+
+    private static void renderShowLastWeek(Long id, boolean isMobile) {
+        Menu thismenu = Menu.findById(id);
+        User user = User.find("byEmail", Security.connected()).first();
+
+        Menu menu = Menu.findById(thismenu.getLastWeeksMenu(user).id);
+
+        if (isMobile) {
+            render("Menus/showMobile.html", menu);
+
+        } else {
+            render("Menus/show.html", menu);
+        }
+
+    }
+
 
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -120,21 +188,22 @@ public class Menus extends CRUD {
 
         render(menu);
     }
-    public static void dinnerplanMobile(Long recipeId) throws ParseException {
-         User user = User.find("byEmail", Security.connected()).first();
 
-            Recipe newrecipe = Recipe.findById(recipeId);
+    public static void dinnerplanMobile() throws ParseException {
+        User user = User.find("byEmail", Security.connected()).first();
 
-         Menu menu = null;
+        //   Recipe newrecipe = Recipe.findById(recipeId);
 
-         initMenu(user, null);
+        Menu menu = null;
 
-         if (user != null && user.activeMenu != null) {
-             menu = Menu.findById(user.activeMenu.getId());
-         }
+        initMenu(user, null);
 
-         render(menu, newrecipe);
-     }
+        if (user != null && user.activeMenu != null) {
+            menu = Menu.findById(user.activeMenu.getId());
+        }
+
+        render(menu);
+    }
 
 
     private static void initMenu(User user, String startingDayString) throws ParseException {
@@ -171,10 +240,36 @@ public class Menus extends CRUD {
         render(menu);
     }
 
-    public static void index()
-    {
-        List<Menu> menus = Menu.find("order by usedFromDate desc").fetch();
-        render(menus);
+
+    public static void index() {
+        indexRender(false);
     }
+
+    public static void indexMobile() {
+        indexRender(false);
+    }
+
+    public static void historikkMobile() {
+        historikkRender(true);
+    }
+
+    private static void historikkRender(boolean isMobile) {
+        List<Menu> menus = Menu.find("order by usedFromDate desc").fetch();
+        if (isMobile) {
+            render("Menus/historikkMobile.html", menus);
+        }
+    }
+
+
+    private static void indexRender(boolean isMobile) {
+        List<Menu> menus = Menu.find("order by usedFromDate desc").fetch();
+
+        if (isMobile) {
+            render("Menus/indexMobile.html", menus);
+        } else {
+            render(menus);
+        }
+    }
+
 
 }

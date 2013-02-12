@@ -17,7 +17,7 @@ public class Currency {
         return "undefined";
     }
 
-    public static String prettyDouble(double doubleString) {
+    public static String prettyDoubleOld(double doubleString) {
         DecimalFormat df2 = new DecimalFormat("#####0.0");
         double dd2dec = new Double(df2.format(doubleString)).doubleValue();
 
@@ -26,5 +26,36 @@ public class Currency {
         return newValue.replaceAll("\\.0", "");
 
     }
+
+
+    private static String prettyDouble(double doubleString)
+    {
+        DecimalFormat df2 = new DecimalFormat("#####0.0");
+        double dd2dec = new Double(df2.format(doubleString)).doubleValue();
+        doubleString = dd2dec;
+
+         String resultString = doubleString + "";
+
+        if(doubleString > 1000)
+        {
+            int result = (int) Math.round(doubleString/100)*100;
+            resultString = result + "";
+        }
+        else if(doubleString > 100)
+        {
+            int result = (int) Math.round(doubleString/10)*10;
+            resultString = result + "";
+        }
+        else if(doubleString > 10)
+        {
+            int result = (int) Math.round(doubleString);
+            resultString = result + "";
+        }
+
+
+        return resultString.replaceAll("\\.0", "");
+
+    }
+
 
 }

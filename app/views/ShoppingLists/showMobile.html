@@ -2,55 +2,49 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("div.ui-checkbox").click(function () {
-            if (!$(this).find("label").hasClass("ui-checkbox-on")) {
-                checkIngredient($(this).find("input").attr("id"));
-                var taskItem = $(this).detach();
-
-               move(taskItem, "#ingredient-tasks", "#completed-tasks");
-
-            }
-            else {
-                unCheckIngredient($(this).find("input").attr("id"));
-                var taskItem = $(this).detach();
-                move(taskItem, "#completed-tasks", "#ingredient-tasks");
-            }
+    $(document).on('pageinit', function () {
+        $("a#sorter-alfabetisk").click(function () {
         });
 
 
-        function move(taskItem, anchorFrom, anchorTo)
-        {
-                //if taskItem is om top
-                  if (taskItem.find("label").hasClass("ui-corner-top")) { //&& !($("#ingredient-tasks:not(:has(*))"))) {
-
-                 $(anchorFrom + " div.ui-controlgroup-controls div.ui-checkbox:first").find("label").addClass("ui-corner-top");
-                }
-
-                if (taskItem.find("label").hasClass("ui-corner-bottom"))
-                {
-                    //if (!($("#ingredient-tasks:not(:has(*))"))) {
-                        $(anchorFrom + " div.ui-controlgroup-controls div.ui-checkbox:last").find("label").addClass("ui-corner-bottom").addClass("ui-controlgroup-last");
-                    //}
-                }
-                taskItem.find("label").addClass("ui-corner-top");
-                taskItem.find("label").removeClass("ui-corner-bottom").removeClass("ui-controlgroup-last");
+        $("a#sorter-type").click(function () {
 
 
-                if (!$(anchorTo + " div.ui-controlgroup-controls div.ui-checkbox").length) {
-                    taskItem.find("label").addClass("ui-corner-bottom").addClass("ui-controlgroup-last");
-                }
-                else {
-                    $( anchorTo + " div.ui-controlgroup-controls div.ui-checkbox:first").find("label").removeClass("ui-corner-top");
 
-                }
+        });
 
-                taskItem.prependTo(anchorTo + " div.ui-controlgroup-controls");
 
+
+        $("div.ui-checkbox").on('change', 'input:checkbox', function () {
+
+            boxActivated($(this).parent());
+        });
+
+        $("div.ui-checkbox").click(function () {
+            boxActivated($(this));
+        });
+        /* $("div.ui-checkbox").live('tap', function () {
+             boxActivated($(this));
+          }); */
+
+        function boxActivated(box) {
+            if (!box.find("label").hasClass("ui-checkbox-on")) {
+                checkIngredient(box.find("input").attr("id"));
+                var taskItem = box.detach();
+
+                move(taskItem, "#ingredient-tasks", "#completed-tasks");
+
+            }
+            else {
+                unCheckIngredient(box.find("input").attr("id"));
+                var taskItem = box.detach();
+                move(taskItem, "#completed-tasks", "#ingredient-tasks");
+            }
 
         }
 
-        $("input#addtask").keypress(function (e) {
+
+        $("input#add-task-input").keypress(function (e) {
             if (e.which == 13) {
                 addOnTheFlyIngredient(${menu?.shoppingList?.id}, $(this).val());
                 $(this).val("");
@@ -59,6 +53,39 @@
         });
 
     });
+
+    function move(taskItem, anchorFrom, anchorTo) {
+        //if taskItem is om top
+        if (taskItem.find("label").hasClass("ui-corner-top")) { //&& !($("#ingredient-tasks:not(:has(*))"))) {
+
+            $(anchorFrom + " div.ui-controlgroup-controls div.ui-checkbox:first").find("label").addClass("ui-corner-top");
+        }
+
+        if (taskItem.find("label").hasClass("ui-corner-bottom")) {
+            $(anchorFrom + " div.ui-controlgroup-controls div.ui-checkbox:last").find("label").addClass("ui-corner-bottom").addClass("ui-controlgroup-last");
+        }
+        inject(taskItem, anchorTo);
+
+    }
+
+    function inject(taskItem, anchorTo) {
+
+         taskItem.find("label").addClass("ui-corner-top");
+         taskItem.find("label").removeClass("ui-corner-bottom").removeClass("ui-controlgroup-last");
+
+
+         if (!$(anchorTo + " div.ui-controlgroup-controls div.ui-checkbox").length) {
+             taskItem.find("label").addClass("ui-corner-bottom").addClass("ui-controlgroup-last");
+         }
+         else {
+             $(anchorTo + " div.ui-controlgroup-controls div.ui-checkbox:first").find("label").removeClass("ui-corner-top");
+
+         }
+
+         taskItem.prependTo(anchorTo + " div.ui-controlgroup-controls");
+
+
+     }
 
 
     function checkIngredient(id) {
@@ -90,6 +117,14 @@
                 });
     }
 
+
+
+    var taskTemplateNEW = "<div class=\"ui-checkbox\">" +
+    "<input id=\"$ID$\" name=\"\" type=\"checkbox\">" +
+            "<label for=\"$ID$\" data-corners=\"true\" data-shadow=\"false\" data-iconshadow=\"true\" data-wrapperels=\"span\" data-icon=\"checkbox-off\" data-theme=\"c\" class=\"ui-btn ui-btn-icon-left ui-checkbox-off ui-btn-up-c\">" +
+            "<span class=\"ui-btn-inner\"><span class=\"ui-btn-text\">$DESCRIPTION$</span>"                                             +
+            "<span class=\"ui-icon ui-icon-checkbox-off ui-icon-shadow\">&nbsp;</span></span></label></div>";
+
     var taskTemplate = "<li class=\"task-item\" id=\"$ID$\">" +
             "<div class=\"task-body\"><a class=\"task-checkbox\"><span class=\"icon task-checkbox \"></span></a> " +
             "<a class=\"icon task-separator\"></a>" +
@@ -99,10 +134,8 @@
             "</div>" +
             "</li>";
     function injectTask(id, description) {
-        var injectString = taskTemplate.replace("$ID$", id).replace("$DESCRIPTION$", description);
-
-        $('<div/>').html(injectString).prependTo("ol#ingredient-tasks");
-
+        var injectString = taskTemplateNEW.replace("$ID$", id).replace("$DESCRIPTION$", description);
+        inject($('<div/>').html(injectString), "#ingredient-tasks");
     }
 </script>
 
@@ -120,29 +153,33 @@
         <div data-role="navbar" data-iconpos="none">
             <ul>
                 <li>
-                    <a href="#page1" data-transition="fade" data-theme="" class="ui-btn-active ui-state-persist">
+                    <a href="#" id="sorter-alfabetisk" data-transition="fade" data-theme="" class="ui-btn-active ui-state-persist">
                         Alfabetisk
                     </a>
                 </li>
                 <li>
-                    <a href="#page1" data-transition="fade" data-theme="">
+                    <a href="#" id="sorter-type" data-transition="flip" data-theme="">
                         Type
                     </a>
                 </li>
                 <li>
-                    <a href="#page1" data-transition="fade" data-theme="">
+                    <a href="#" id="sorter-oppskrift" data-transition="flip" data-theme="">
                         Oppskrift
                     </a>
                 </li>
             </ul>
         </div>
+        <div data-role="fieldcontain" id="add-task">
+                   <fieldset data-role="controlgroup">
+                       <label for="add-task-input">
+                       </label>
+                       <input name="add-task-input" id="add-task-input" placeholder="Legg til" value="" type="text">
+                   </fieldset>
+               </div>
         <div id="ingredient-tasks" data-role="fieldcontain">
             <fieldset data-role="controlgroup" data-type="vertical">
-                <legend>
-                    Varer
-                </legend>
             #{list items:shoppingListUnchecked, as:'ingredient'}
-                <input id="${ingredient.id}" name="" type="checkbox">
+                <input id="${ingredient.id}" name="${ingredient.description}" type="checkbox" data-varetype="${models.IngredientType.findForDescription(ingredient.description)?.name}" data-recipe="${ingredient.findRecipe(menu)}">
                 <label for="${ingredient.id}">
                     #{if !ingredient.type.equals(models.ShoppingListItemType.onthefly) }
                         <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
@@ -155,7 +192,7 @@
         </div>
 
         <div id="completed-tasks" data-role="fieldcontain">
-            <fieldset data-role="controlgroup" data-type="vertical">
+            <fieldset data-role="controlgroup" data-type="vertical" style="margin-bottom: 90px;">
                 <legend>
                     Ferdigstilte
                 </legend>
@@ -172,7 +209,6 @@
             </fieldset>
         </div>
 
-        <div class="margin-bottom:30px;"/>
 
         <!--
         <div class="addtask" style="">

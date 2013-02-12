@@ -5,6 +5,7 @@ import play.db.jpa.Model;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "my_ingredient")
@@ -65,6 +66,7 @@ public class Ingredient extends Model {
             }
         return recipe.serves;
     }
+
 
 
 }

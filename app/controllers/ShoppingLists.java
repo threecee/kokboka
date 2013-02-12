@@ -50,13 +50,13 @@ public class ShoppingLists extends CRUD {
     }
 
     public static void show(Long id) {
-        show(id, false);
+        show(id, false, null);
     }
     public static void showMobile(Long id) {
-        show(id, true);
+        show(id, true, null);
     }
 
-    private static void show(Long id, boolean  isMobile) {
+    private static void show(Long id, boolean  isMobile, String sortering) {
         if (id != null) {
             Menu menu = Menu.findById(id);
 
@@ -90,13 +90,13 @@ public class ShoppingLists extends CRUD {
 
 
     public static void showCurrent() {
-        showCurrent(false);
+        showCurrent(false, null);
     }
-    public static void showCurrentMobile() {
-        showCurrent(true);
+    public static void showCurrentMobile(String sortering) {
+        showCurrent(true, sortering);
     }
 
-    private static void showCurrent(boolean isMobile) {
+    private static void showCurrent(boolean isMobile, String sortering) {
         User user = User.find("byEmail", Security.connected()).first();
         Date startingDay = DateUtil.getStartingDay();
 
@@ -104,7 +104,7 @@ public class ShoppingLists extends CRUD {
         if (menu == null) {
             menu = new Menu(user, startingDay).save();
         }
-        show(menu.id, isMobile);
+        show(menu.id, isMobile, sortering);
     }
 
 

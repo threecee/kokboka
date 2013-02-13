@@ -680,6 +680,16 @@ margin-right: 2%;
     padding-left: 15px;
 }
 
+
+.ui-checkbox-on .ui-btn-text {
+text-decoration: line-through;
+text-line-through-style: initial;
+text-line-through-mode: continuous;
+text-line-through-width: 2px;
+text-shadow: none;
+color: grey;
+}
+
 @media only screen
 and (max-width : 400px) {
 

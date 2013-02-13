@@ -48,7 +48,7 @@ public class ShoppingListIngredient extends Model {
 
         String result = "";
         for (int i = 0; i < recipes.size(); i++) {
-            result += "" + recipes.get(i).id + "@@@" + recipes.get(i).title + ";";
+            result += "" + recipes.get(i).id + ";";
         }
 
         if (result.endsWith(";")) result = result.substring(0, result.length() - 1);

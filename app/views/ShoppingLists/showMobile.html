@@ -3,29 +3,6 @@
 
 <script type="text/javascript">
     $(document).on('pageinit', function () {
-        $("a#sorter-alfabetisk").click(function () {
-        });
-
-
-        $("zzza#sorter-type").click(function () {
-
-            $("#ingredient-tasks div.ui-checkbox").each(function () {
-
-                var type = $(this).find("input").attr("data-varetype");
-                if (type = !null && type != "" && type != "true" && type != true) {
-                    var typeArray = type.split("@@@");
-
-                    var typeId = typeArray[0];
-                    var typeName = typeArray[1];
-
-                    injectGroup("#" + typeId, typeName);
-                    move($(this), "#ingredient-tasks", "#" + typeId);
-                }
-
-
-            });
-
-        });
 
 
         $("div.ui-checkbox").on('change', 'input:checkbox', function () {
@@ -33,25 +10,73 @@
             boxActivated($(this).parent());
         });
 
-        $("div.ui-checkbox").click(function () {
-            boxActivated($(this));
-        });
-        /* $("div.ui-checkbox").live('tap', function () {
-             boxActivated($(this));
-          }); */
+      //  $("div.ui-checkbox").click(function () {
+      //      boxActivated($(this));
+      //  });
 
         function boxActivated(box) {
+            var fromId = box.parent().parent().parent().attr("id");
+            var sortering = "${sortering}";
+
             if (!box.find("label").hasClass("ui-checkbox-on")) {
                 checkIngredient(box.find("input").attr("id"));
                 var taskItem = box.detach();
 
-                move(taskItem, "#ingredient-tasks", "#completed-tasks");
+                if (sortering != null && sortering == "oppskrift") {
 
+                    $("#" + taskItem.find("input").attr("id")).parent().remove();
+                }
+
+                move(taskItem, fromId, "#completed-tasks");
             }
             else {
                 unCheckIngredient(box.find("input").attr("id"));
+                var toId = "#ingredient-tasks";
+
+                if (sortering != null) {
+                    if (sortering == "type") {
+                        var vareId = box.find("input").attr("data-varetype");
+                        if (vareId != null && vareId != "") {
+                            toId = "#" + vareId + "-types";
+                        }
+                    }
+                    else if (sortering == "oppskrift") {
+                        var recipeId = box.find("input").attr("data-recipe");
+                        if (recipeId != null && recipeId != "") {
+                            if(recipeId.indexOf(";")>0)
+                            {
+                                var splitRecipes = recipeId.split(";");
+                                var toId = new Array();
+                                for(var i = 0; i < splitRecipes.length; i++)
+                                {
+                                     toId[i] = "#" + splitRecipes[i] + "-recipes";
+                                }
+                            }
+                            else
+                            {
+                                toId = "#" + recipeId + "-recipes";
+                            }
+                        }
+                    }
+                }
                 var taskItem = box.detach();
-                move(taskItem, "#completed-tasks", "#ingredient-tasks");
+
+                if (toId instanceof Array) {
+                    for(var i = 0; i < toId.length; i++)
+                    {
+                        var newItem = taskItem.clone();
+                        newItem.find("label").removeClass("ui-checkbox-on");
+                        newItem.find("label").addClass("ui-checkbox-off");
+                        newItem.find("span.ui-icon-checkbox-on").removeClass("ui-icon-checkbox-on").addClass("ui-icon-checkbox-off");
+
+                        move(newItem, fromId, toId[i]);
+                    }
+
+
+                }
+                 else {
+                    move(taskItem, fromId, toId);
+                }
             }
 
         }
@@ -175,18 +200,22 @@
             <ul>
                 <li>
                     <a href="@{ShoppingLists.showCurrentMobile("alfabetisk")}" id="sorter-alfabetisk"
-                       data-transition="fade" data-theme="" class="${sortering == null || sortering == "" || sortering == 'alfabetisk'?'ui-btn-active ui-state-persist':''}">
+                       data-transition="fade" data-theme=""
+                       class="${sortering == null || sortering == "" || sortering == 'alfabetisk'?'ui-btn-active ui-state-persist':''}">
                         Alfabetisk
                     </a>
                 </li>
                 <li>
-                    <a href="@{ShoppingLists.showCurrentMobile("type")}" class="${sortering == 'type'?'ui-btn-active ui-state-persist':''}" id="sorter-type" data-transition="flip"
+                    <a href="@{ShoppingLists.showCurrentMobile("type")}"
+                       class="${sortering == 'type'?'ui-btn-active ui-state-persist':''}" id="sorter-type"
+                       data-transition="flip"
                        data-theme="">
                         Type
                     </a>
                 </li>
                 <li>
-                    <a href="@{ShoppingLists.showCurrentMobile("oppskrift")}" class="${sortering == 'oppskrift'?'ui-btn-active ui-state-persist':''}" id="sorter-oppskrift"
+                    <a href="@{ShoppingLists.showCurrentMobile("oppskrift")}"
+                       class="${sortering == 'oppskrift'?'ui-btn-active ui-state-persist':''}" id="sorter-oppskrift"
                        data-transition="flip" data-theme="">
                         Oppskrift
                     </a>
@@ -216,8 +245,9 @@
                         <legend>Ikke kategorisert</legend>
                         #{list items:shoppingListUncheckedByType.get(key), as:'ingredient'}
                             #{set ingredient:ingredient /}
+                            #{set menu:menu /}
                             #{checkBoxItem /}
-                         #{/list}
+                        #{/list}
                     #{/if}
                 #{/list}
             #{/elseif}
@@ -227,8 +257,9 @@
                         <legend>Ikke fra oppskrift</legend>
                         #{list items:shoppingListUncheckedByRecipe.get(key), as:'ingredient'}
                             #{set ingredient:ingredient /}
+                            #{set menu:menu /}
                             #{checkBoxItem /}
-                         #{/list}
+                        #{/list}
                     #{/if}
                 #{/list}
             #{/elseif}
@@ -238,15 +269,16 @@
     #{if sortering == "type"}
         #{list items:shoppingListUncheckedByType.keySet(), as:'key'}
             #{if key != -1 }
-            <div id="${key}-types" data-role="fieldcontain">
-                <fieldset data-role="controlgroup" data-type="vertical">
-                    <legend>${models.IngredientType.findById(key).name}</legend>
-                    #{list items:shoppingListUncheckedByType.get(key), as:'ingredient'}
-                    #{set ingredient:ingredient /}
-                    #{checkBoxItem /}
-                 #{/list}
-            </fieldset>
-            </div>
+                <div id="${key}-types" data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="vertical">
+                        <legend>${models.IngredientType.findById(key).name}</legend>
+                        #{list items:shoppingListUncheckedByType.get(key), as:'ingredient'}
+                            #{set ingredient:ingredient /}
+                            #{set menu:menu /}
+                            #{checkBoxItem /}
+                        #{/list}
+                    </fieldset>
+                </div>
             #{/if}
         #{/list}
     #{/if}
@@ -257,10 +289,11 @@
                     <fieldset data-role="controlgroup" data-type="vertical">
                         <legend>${models.Recipe.findById(key).title}</legend>
                         #{list items:shoppingListUncheckedByRecipe.get(key), as:'ingredient'}
-                        #{set ingredient:ingredient /}
-                        #{checkBoxItem /}
-                     #{/list}
-                </fieldset>
+                            #{set ingredient:ingredient /}
+                            #{set menu:menu /}
+                            #{checkBoxItem /}
+                        #{/list}
+                    </fieldset>
                 </div>
             #{/if}
         #{/list}
@@ -273,6 +306,7 @@
                 </legend>
             #{list items:shoppingListChecked, as:'ingredient'}
                 #{set ingredient:ingredient /}
+                #{set menu:menu /}
                 #{checkBoxItemChecked /}
             #{/list}
 

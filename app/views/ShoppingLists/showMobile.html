@@ -188,13 +188,10 @@
 
 <!-- Oppskrift -->
 <div data-role="page" id="tasks">
-    <div data-theme="a" data-role="header">
+#{headerMobile /}
+    <div data-role="content">
         <h1>Handlelapp for
             uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}</h1>
-        <a href="@{ShoppingLists.listMobile()}" data-direction="reverse" data-transition="slide"
-           data-icon="back" data-role="button" data-theme="a">Tilbake</a>
-    </div>
-    <div data-role="content">
 
         <div data-role="navbar" data-iconpos="none">
             <ul>
@@ -313,47 +310,6 @@
             </fieldset>
         </div>
 
-
-        <!--
-        <div class="addtask" style="">
-            <a class="input-star">
-                           <span
-                                   class="icon input-star transparent"></span></a>
-            <a class="input-date"><span
-                    class="icon input-date transparent"></span></a>
-            <input id="addtask" type="text" class="transparent mousetrap"
-                   maxlength="255"
-                   key-placeholder="placeholder_add_task_to_$"
-                   data-placeholder="Inbox"
-                   placeholder="Legg til vare i handlelisten...">
-        </div>
-        <div class="margin-bottom:20px;"/>
-
-        <div class="buttonRow">
-        #{if menu!=null}
-            <a class="fancyButtonLink" href="@{ShoppingLists.list(menu.id)}" id="tilHandlelappen">
-                <div class="smallButton wrapper">
-                    <span>Velg oppskrifter på nytt</span>
-                </div>
-            </a>
-            <a class="fancyButtonLink" href="@{Menus.show(menu.id)}" id="tilHandlelappen">
-                <div class="smallButton wrapper">
-                    <span>Vis menyen</span>
-                </div>
-            </a>
-            <a class="fancyButtonLink" href="@{ShoppingLists.showLastWeek(menu.id)}" id="tilForrige">
-                <div class="smallButton wrapper">
-                    <span>Forrige uke</span>
-                </div>
-            </a>
-            <a class="fancyButtonLink" href="@{ShoppingLists.showNextWeek(menu.id)}" id="tilNeste">
-                <div class="smallButton wrapper">
-                    <span>Neste uke</span>
-                </div>
-            </a>
-        #{/if}
-        </div>
-        -->
     </div>
 #{footerMobile /}
 </div>

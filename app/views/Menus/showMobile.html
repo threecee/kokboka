@@ -26,14 +26,10 @@
 
 
 <div data-role="page" id="visMeny">
-    <div data-theme="a" data-role="header">
+#{headerMobile /}
+    <div data-role="content">
         <h1>Meny for
                 uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}</h1>
-        <a href="@{Menus.indexMobile()}" data-direction="reverse" data-transition="slide"
-           data-icon="back" data-role="button" data-theme="a">Tilbake</a>
-
-    </div>
-    <div data-role="content">
 
 
                     <div class="task-list">

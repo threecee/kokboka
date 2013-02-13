@@ -71,12 +71,9 @@
 
     <!-- Oppskrift -->
     <div data-role="page" id="showRecipe">
-        <div data-theme="a" data-role="header">
-            <h1>${recipe?.title}</h1>
-            <a href="@{Recipes.indexMobile()}" data-direction="reverse" data-transition="slide"
-               data-icon="back" data-role="button" data-theme="a">Tilbake</a>
-        </div>
+#{headerMobile /}
         <div data-role="content">
+            <h1>${recipe?.title}</h1>
 
         #{if recipe.description != null}
             <div class="innfelt">

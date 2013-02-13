@@ -1,0 +1,23 @@
+<div data-theme="a" data-role="header">
+<h1>
+#{if request.controller == "Recipes"}
+    Oppskrift
+#{/if}
+#{elseif request.controller == "Menus"}
+    Meny
+#{/elseif}
+#{elseif request.controller == "ShoppingLists"}
+    Handle
+#{/elseif}
+#{elseif request.controller == "Users"}
+    Profil
+#{/elseif}
+</h1>
+#{if request.action != "Recipes.indexMobile" && request.action !=  "Menus.indexMobile" && request.action !=  "ShoppingLists.showCurrentMobile" }
+    <a href="#"  data-rel="back"  data-direction="reverse" data-transition="slide"
+       data-icon="back" data-role="button" data-theme="a">Tilbake</a>
+#{/if}
+    <a href="@{Users.preferencesMobile()}"  data-transition="flip"
+       data-icon="gear" data-role="button" data-iconpos="right" class="ui-btn-right" data-theme="a">Profil</a>
+
+</div>

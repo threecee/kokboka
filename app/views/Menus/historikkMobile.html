@@ -1,13 +1,9 @@
 #{extends 'masterMobileMega.html' /}
 
 <div data-role="page" id="visMeny">
-    <div data-theme="a" data-role="header">
-        <h1>Historikk</h1>
-        <a href="@{Menus.indexMobile()}" data-direction="reverse" data-transition="slide"
-           data-icon="back" data-role="button" data-theme="a">Tilbake</a>
-
-    </div>
+#{headerMobile /}
     <div data-role="content">
+        <h1>Historikk</h1>
 
         <div data-role="collapsible-set">
 

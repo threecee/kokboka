@@ -7,12 +7,25 @@
         });
 
 
-        $("a#sorter-type").click(function () {
+        $("zzza#sorter-type").click(function () {
+
+            $("#ingredient-tasks div.ui-checkbox").each(function () {
+
+                var type = $(this).find("input").attr("data-varetype");
+                if (type = !null && type != "" && type != "true" && type != true) {
+                    var typeArray = type.split("@@@");
+
+                    var typeId = typeArray[0];
+                    var typeName = typeArray[1];
+
+                    injectGroup("#" + typeId, typeName);
+                    move($(this), "#ingredient-tasks", "#" + typeId);
+                }
 
 
+            });
 
         });
-
 
 
         $("div.ui-checkbox").on('change', 'input:checkbox', function () {
@@ -70,22 +83,22 @@
 
     function inject(taskItem, anchorTo) {
 
-         taskItem.find("label").addClass("ui-corner-top");
-         taskItem.find("label").removeClass("ui-corner-bottom").removeClass("ui-controlgroup-last");
+        taskItem.find("label").addClass("ui-corner-top");
+        taskItem.find("label").removeClass("ui-corner-bottom").removeClass("ui-controlgroup-last");
 
 
-         if (!$(anchorTo + " div.ui-controlgroup-controls div.ui-checkbox").length) {
-             taskItem.find("label").addClass("ui-corner-bottom").addClass("ui-controlgroup-last");
-         }
-         else {
-             $(anchorTo + " div.ui-controlgroup-controls div.ui-checkbox:first").find("label").removeClass("ui-corner-top");
+        if (!$(anchorTo + " div.ui-controlgroup-controls div.ui-checkbox").length) {
+            taskItem.find("label").addClass("ui-corner-bottom").addClass("ui-controlgroup-last");
+        }
+        else {
+            $(anchorTo + " div.ui-controlgroup-controls div.ui-checkbox:first").find("label").removeClass("ui-corner-top");
 
-         }
+        }
 
-         taskItem.prependTo(anchorTo + " div.ui-controlgroup-controls");
+        taskItem.prependTo(anchorTo + " div.ui-controlgroup-controls");
 
 
-     }
+    }
 
 
     function checkIngredient(id) {
@@ -118,11 +131,13 @@
     }
 
 
+    var groupTemplate = "<div id=\"$ID$\" data-role=\"fieldcontain\" class=\"ui-field-contain ui-body ui-br\"><fieldset data-role=\"controlgroup\" data-type=\"vertical\" class=\"ui-corner-all ui-controlgroup ui-controlgroup-vertical\"><div class=\"ui-controlgroup-controls\"><label>$DESCRIPTION$</label></div></fieldset></div>";
+
 
     var taskTemplateNEW = "<div class=\"ui-checkbox\">" +
-    "<input id=\"$ID$\" name=\"\" type=\"checkbox\">" +
+            "<input id=\"$ID$\" name=\"\" type=\"checkbox\">" +
             "<label for=\"$ID$\" data-corners=\"true\" data-shadow=\"false\" data-iconshadow=\"true\" data-wrapperels=\"span\" data-icon=\"checkbox-off\" data-theme=\"c\" class=\"ui-btn ui-btn-icon-left ui-checkbox-off ui-btn-up-c\">" +
-            "<span class=\"ui-btn-inner\"><span class=\"ui-btn-text\">$DESCRIPTION$</span>"                                             +
+            "<span class=\"ui-btn-inner\"><span class=\"ui-btn-text\">$DESCRIPTION$</span>" +
             "<span class=\"ui-icon ui-icon-checkbox-off ui-icon-shadow\">&nbsp;</span></span></label></div>";
 
     var taskTemplate = "<li class=\"task-item\" id=\"$ID$\">" +
@@ -136,6 +151,12 @@
     function injectTask(id, description) {
         var injectString = taskTemplateNEW.replace("$ID$", id).replace("$DESCRIPTION$", description);
         inject($('<div/>').html(injectString), "#ingredient-tasks");
+    }
+    function injectGroup(id, description) {
+        if (!$(id).length) {
+            var injectString = groupTemplate.replace("$ID$", id).replace("$DESCRIPTION$", description);
+            $('<div/>').html(injectString).insertBefore("#ingredient-tasks");
+        }
     }
 </script>
 
@@ -153,43 +174,97 @@
         <div data-role="navbar" data-iconpos="none">
             <ul>
                 <li>
-                    <a href="#" id="sorter-alfabetisk" data-transition="fade" data-theme="" class="ui-btn-active ui-state-persist">
+                    <a href="@{ShoppingLists.showCurrentMobile("alfabetisk")}" id="sorter-alfabetisk"
+                       data-transition="fade" data-theme="" class="${sortering == null || sortering == "" || sortering == 'alfabetisk'?'ui-btn-active ui-state-persist':''}">
                         Alfabetisk
                     </a>
                 </li>
                 <li>
-                    <a href="#" id="sorter-type" data-transition="flip" data-theme="">
+                    <a href="@{ShoppingLists.showCurrentMobile("type")}" class="${sortering == 'type'?'ui-btn-active ui-state-persist':''}" id="sorter-type" data-transition="flip"
+                       data-theme="">
                         Type
                     </a>
                 </li>
                 <li>
-                    <a href="#" id="sorter-oppskrift" data-transition="flip" data-theme="">
+                    <a href="@{ShoppingLists.showCurrentMobile("oppskrift")}" class="${sortering == 'oppskrift'?'ui-btn-active ui-state-persist':''}" id="sorter-oppskrift"
+                       data-transition="flip" data-theme="">
                         Oppskrift
                     </a>
                 </li>
             </ul>
         </div>
         <div data-role="fieldcontain" id="add-task">
-                   <fieldset data-role="controlgroup">
-                       <label for="add-task-input">
-                       </label>
-                       <input name="add-task-input" id="add-task-input" placeholder="Legg til" value="" type="text">
-                   </fieldset>
-               </div>
-        <div id="ingredient-tasks" data-role="fieldcontain">
-            <fieldset data-role="controlgroup" data-type="vertical">
-            #{list items:shoppingListUnchecked, as:'ingredient'}
-                <input id="${ingredient.id}" name="${ingredient.description}" type="checkbox" data-varetype="${models.IngredientType.findForDescription(ingredient.description)?.name}" data-recipe="${ingredient.findRecipe(menu)}">
-                <label for="${ingredient.id}">
-                    #{if !ingredient.type.equals(models.ShoppingListItemType.onthefly) }
-                        <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
-                    #{/if}
-                ${ingredient.description}
+            <fieldset data-role="controlgroup">
+                <label for="add-task-input">
                 </label>
-            #{/list}
-
+                <input name="add-task-input" id="add-task-input" placeholder="Legg til" value="" type="text">
             </fieldset>
         </div>
+
+
+        <div id="ingredient-tasks" data-role="fieldcontain">
+            <fieldset data-role="controlgroup" data-type="vertical">
+            #{if sortering == null || sortering == "" || sortering == "alfabetisk"  }
+                #{list items:shoppingListUnchecked, as:'ingredient'}
+                    #{set ingredient:ingredient /}
+                    #{checkBoxItem /}
+                #{/list}
+            #{/if}
+            #{elseif sortering == "type"}
+                #{list items:shoppingListUncheckedByType.keySet(), as:'key'}
+                    #{if key == -1 }
+                        <legend>Ikke kategorisert</legend>
+                        #{list items:shoppingListUncheckedByType.get(key), as:'ingredient'}
+                            #{set ingredient:ingredient /}
+                            #{checkBoxItem /}
+                         #{/list}
+                    #{/if}
+                #{/list}
+            #{/elseif}
+            #{elseif sortering == "oppskrift"}
+                #{list items:shoppingListUncheckedByRecipe.keySet(), as:'key'}
+                    #{if key == -1 }
+                        <legend>Ikke fra oppskrift</legend>
+                        #{list items:shoppingListUncheckedByRecipe.get(key), as:'ingredient'}
+                            #{set ingredient:ingredient /}
+                            #{checkBoxItem /}
+                         #{/list}
+                    #{/if}
+                #{/list}
+            #{/elseif}
+            </fieldset>
+        </div>
+
+    #{if sortering == "type"}
+        #{list items:shoppingListUncheckedByType.keySet(), as:'key'}
+            #{if key != -1 }
+            <div id="${key}-types" data-role="fieldcontain">
+                <fieldset data-role="controlgroup" data-type="vertical">
+                    <legend>${models.IngredientType.findById(key).name}</legend>
+                    #{list items:shoppingListUncheckedByType.get(key), as:'ingredient'}
+                    #{set ingredient:ingredient /}
+                    #{checkBoxItem /}
+                 #{/list}
+            </fieldset>
+            </div>
+            #{/if}
+        #{/list}
+    #{/if}
+    #{elseif sortering == "oppskrift"}
+        #{list items:shoppingListUncheckedByRecipe.keySet(), as:'key'}
+            #{if key != -1 }
+                <div id="${key}-recipes" data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="vertical">
+                        <legend>${models.Recipe.findById(key).title}</legend>
+                        #{list items:shoppingListUncheckedByRecipe.get(key), as:'ingredient'}
+                        #{set ingredient:ingredient /}
+                        #{checkBoxItem /}
+                     #{/list}
+                </fieldset>
+                </div>
+            #{/if}
+        #{/list}
+    #{/elseif}
 
         <div id="completed-tasks" data-role="fieldcontain">
             <fieldset data-role="controlgroup" data-type="vertical" style="margin-bottom: 90px;">
@@ -197,13 +272,8 @@
                     Ferdigstilte
                 </legend>
             #{list items:shoppingListChecked, as:'ingredient'}
-                <input id="${ingredient.id}" name="" type="checkbox" checked="true">
-                <label for="${ingredient.id}">
-                    #{if !ingredient.type.equals(models.ShoppingListItemType.onthefly) }
-                        <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
-                    #{/if}
-                ${ingredient.description}
-                </label>
+                #{set ingredient:ingredient /}
+                #{checkBoxItemChecked /}
             #{/list}
 
             </fieldset>

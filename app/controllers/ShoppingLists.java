@@ -52,13 +52,17 @@ public class ShoppingLists extends CRUD {
     public static void show(Long id) {
         show(id, false, null);
     }
+
     public static void showMobile(Long id) {
         show(id, true, null);
     }
 
-    private static void show(Long id, boolean  isMobile, String sortering) {
+    private static void show(Long id, boolean isMobile, String sortering) {
         if (id != null) {
             Menu menu = Menu.findById(id);
+
+            HashMap<Long, List<ShoppingListIngredient>> shoppingListUncheckedByType = new HashMap<Long, List<ShoppingListIngredient>>();
+            HashMap<Long, List<ShoppingListIngredient>> shoppingListUncheckedByRecipe = new HashMap<Long, List<ShoppingListIngredient>>();
 
             List<ShoppingListIngredient> shoppingListChecked = null;
             List<ShoppingListIngredient> shoppingListUnchecked = null;
@@ -71,27 +75,56 @@ public class ShoppingLists extends CRUD {
                     if (ingredient.checked) {
                         shoppingListChecked.add(ingredient);
                     } else {
+
+                        IngredientType type = IngredientType.findForDescription(ingredient.description);
+                        List<Recipe> recipes = ingredient.findRecipe(menu);
+                        Long nullid = new Long(-1);
+
+                        for (Recipe recipe : recipes) {
+                            if (recipe != null) {
+                                addIngredientToList(shoppingListUncheckedByRecipe, ingredient, recipe.id);
+                            } else {
+                                addIngredientToList(shoppingListUncheckedByRecipe, ingredient, nullid);
+                            }
+                        }
+                        if (recipes.isEmpty()) {
+                            addIngredientToList(shoppingListUncheckedByRecipe, ingredient, nullid);
+
+                        }
+                        if (type != null) {
+                            addIngredientToList(shoppingListUncheckedByType, ingredient, type.id);
+                        } else {
+                            addIngredientToList(shoppingListUncheckedByType, ingredient, nullid);
+                        }
+
                         shoppingListUnchecked.add(ingredient);
 
                     }
                 }
             }
 
-            if(isMobile){
-                render("ShoppingLists/showMobile.html", shoppingListChecked, shoppingListUnchecked, menu);
+            if (isMobile) {
+                render("ShoppingLists/showMobile.html", shoppingListChecked, shoppingListUnchecked, shoppingListUncheckedByType, shoppingListUncheckedByRecipe, menu, sortering);
 
-            }
-            else {
-            render("ShoppingLists/show.html", shoppingListChecked, shoppingListUnchecked, menu);
+            } else {
+                render("ShoppingLists/show.html", shoppingListChecked, shoppingListUnchecked, shoppingListUncheckedByType, shoppingListUncheckedByRecipe, menu, sortering);
             }
         }
 
+    }
+
+    private static void addIngredientToList(HashMap<Long, List<ShoppingListIngredient>> listHashMap, ShoppingListIngredient ingredient, Long longId) {
+        if (!listHashMap.containsKey(longId)) {
+            listHashMap.put(longId, new ArrayList<ShoppingListIngredient>());
+        }
+        listHashMap.get(longId).add(ingredient);
     }
 
 
     public static void showCurrent() {
         showCurrent(false, null);
     }
+
     public static void showCurrentMobile(String sortering) {
         showCurrent(true, sortering);
     }
@@ -111,6 +144,7 @@ public class ShoppingLists extends CRUD {
     public static void list(Long menuId) {
         list(menuId, false);
     }
+
     public static void listMobile(Long menuId) {
         list(menuId, true);
     }
@@ -128,11 +162,10 @@ public class ShoppingLists extends CRUD {
 
         shoppingList = menu.shoppingList;
 
-        if(isMobile)
-        {
+        if (isMobile) {
             render("ShoppingLists/listMobile.html", menu, shoppingList, user);
-        }   else {
-        render(menu, shoppingList, user);
+        } else {
+            render(menu, shoppingList, user);
         }
     }
 
@@ -180,14 +213,13 @@ public class ShoppingLists extends CRUD {
                     recipeInMenu.save();
 
 
-
                     for (Ingredient ingredient : recipe.ingredients) {
                         String key = ingredient.unit.toLowerCase() + ingredient.description.toLowerCase();
                         if (ingredientMap.containsKey(key)) {
                             double currentAmount = (Double) ingredientMap.get(key)[0];
                             ingredientMap.get(key)[0] = ingredient.getScaledAmount(menu) + currentAmount;
                         } else {
-                            ingredientMap.put(key, new Object[]{ ingredient.getScaledAmount(menu), ingredient.unit, ingredient.description});
+                            ingredientMap.put(key, new Object[]{ingredient.getScaledAmount(menu), ingredient.unit, ingredient.description});
                         }
                     }
                 }

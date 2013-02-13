@@ -1,0 +1,11 @@
+#{if ingredient != null}
+<input id="${ingredient.id}" name="${ingredient.description}" type="checkbox" checked="true"
+       data-varetype="${models.IngredientType.findForDescription(ingredient.description)?.toArrayString()}"
+       data-recipe="${ingredient.findRecipeAsString(menu)}">
+<label for="${ingredient.id}">
+    #{if !ingredient.type.equals(models.ShoppingListItemType.onthefly) }
+        <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
+    #{/if}
+${ingredient.description}
+</label>
+#{/if}

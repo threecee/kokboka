@@ -86,4 +86,10 @@ public class IngredientType extends Model {
             }
         }
     }
+
+    public String toArrayString()
+    {
+        return id + "@@@" + name ;
+
+    }
 }

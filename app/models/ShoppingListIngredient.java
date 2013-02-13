@@ -1,8 +1,10 @@
 package models;
 
+import play.Logger;
 import play.db.jpa.Model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,20 +34,26 @@ public class ShoppingListIngredient extends Model {
         this.type = type;
     }
 
-    public String findRecipe(Menu menu)
-      {
-          List<Recipe> recipes = RecipeInMenu.find("select rim.recipe from RecipeInMenu rim join rim.recipe.ingredients as i where i.description = ? and rim.menu = ?", description, menu).fetch();
+    public List<Recipe> findRecipe(Menu menu) {
+        List<Recipe> recipes = new ArrayList<Recipe>();
+        if(menu != null){
+            recipes = RecipeInMenu.find("select rim.recipe from RecipeInMenu rim join rim.recipe.ingredients as i where i.description = ? and rim.menu = ?", description, menu).fetch();
+        }
 
-          String result = "";
-          for(int i = 0; i < recipes.size(); i++)
-          {
-              result += "["+ recipes.get(i).id + "][" + recipes.get(i).title + "];";
+        return recipes;
+    }
 
-          }
+    public String findRecipeAsString(Menu menu) {
+        List<Recipe> recipes = findRecipe(menu);
 
-          if(result.endsWith(";")) result = result.substring(0, result.length()-1);
+        String result = "";
+        for (int i = 0; i < recipes.size(); i++) {
+            result += "" + recipes.get(i).id + "@@@" + recipes.get(i).title + ";";
+        }
 
-          return result.trim();
-      }
+        if (result.endsWith(";")) result = result.substring(0, result.length() - 1);
+
+        return result.trim();
+    }
 
 }

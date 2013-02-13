@@ -196,14 +196,14 @@
         <div data-role="navbar" data-iconpos="none">
             <ul>
                 <li>
-                    <a href="@{ShoppingLists.showCurrentMobile("alfabetisk")}" id="sorter-alfabetisk"
+                    <a href="@{ShoppingLists.showMobile(menu.id, "alfabetisk")}" id="sorter-alfabetisk"
                        data-transition="fade" data-theme=""
                        class="${sortering == null || sortering == "" || sortering == 'alfabetisk'?'ui-btn-active ui-state-persist':''}">
                         Alfabetisk
                     </a>
                 </li>
                 <li>
-                    <a href="@{ShoppingLists.showCurrentMobile("type")}"
+                    <a href="@{ShoppingLists.showMobile(menu.id, "type")}"
                        class="${sortering == 'type'?'ui-btn-active ui-state-persist':''}" id="sorter-type"
                        data-transition="flip"
                        data-theme="">
@@ -211,7 +211,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="@{ShoppingLists.showCurrentMobile("oppskrift")}"
+                    <a href="@{ShoppingLists.showMobile(menu.id, "oppskrift")}"
                        class="${sortering == 'oppskrift'?'ui-btn-active ui-state-persist':''}" id="sorter-oppskrift"
                        data-transition="flip" data-theme="">
                         Oppskrift

@@ -18,23 +18,9 @@
             }
         });
 
-        $("a#favoritt").click(function () {
-            if ($(this).attr("data-theme") == "b") {
-                removeFavorite(${recipe.id});
-                $(this).attr("data-theme", "c");
-                $(this).removeClass("ui-btn-up-b");
-                $(this).removeClass("ui-btn-hover-b");
-                $(this).removeClass("ui-btn-down-b");
-                $(this).addClass("ui-btn-up-c");
-            }
-            else {
-                addFavorite(${recipe.id});
-                $(this).attr("data-theme", "b");
-                $(this).removeClass("ui-btn-up-c");
-                $(this).removeClass("ui-btn-hover-c");
-                $(this).removeClass("ui-btn-down-c");
-                $(this).addClass("ui-btn-up-b");
-            }
+
+        $("a#favoritt").live("tap", function () {
+            handleFavoritt($(this));
             return false;
         });
 
@@ -81,6 +67,26 @@
             roundedNumber = Number(roundedNumber).toFixed(0);
         }
         return roundedNumber;
+    }
+
+    function handleFavoritt(favoritt)
+    {
+        if (favoritt.attr("data-theme") == "b") {
+                       removeFavorite(${recipe.id});
+            favoritt.attr("data-theme", "c");
+            favoritt.removeClass("ui-btn-up-b");
+            favoritt.removeClass("ui-btn-hover-b");
+            favoritt.removeClass("ui-btn-down-b");
+            favoritt.addClass("ui-btn-up-c");
+                   }
+                   else {
+                       addFavorite(${recipe.id});
+            favoritt.attr("data-theme", "b");
+            favoritt.removeClass("ui-btn-up-c");
+            favoritt.removeClass("ui-btn-hover-c");
+            favoritt.removeClass("ui-btn-down-c");
+            favoritt.addClass("ui-btn-up-b");
+                   }
     }
 
     function addFavorite(id) {
@@ -213,12 +219,12 @@
     </div>
     <div class="ui-grid-a">
          <div class="ui-block-a">
-             <a data-role="button" href="#page1" data-icon="check" data-iconpos="left">
+             <a data-role="button" href="@{Recipes.formMobile(recipe.id)}" data-icon="check" data-iconpos="left">
                  Rediger
              </a>
          </div>
          <div class="ui-block-b">
-             <a data-role="button" href="#page1" data-icon="plus" data-iconpos="right">
+             <a data-role="button" href="#" data-icon="plus" data-iconpos="right">
                  Bruk
              </a>
          </div>

@@ -53,8 +53,8 @@ public class ShoppingLists extends CRUD {
         show(id, false, null);
     }
 
-    public static void showMobile(Long id) {
-        show(id, true, null);
+    public static void showMobile(Long id, String sortering) {
+        show(id, true, sortering);
     }
 
     private static void show(Long id, boolean isMobile, String sortering) {

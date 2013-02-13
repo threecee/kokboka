@@ -109,6 +109,9 @@ public class Recipe extends Model {
         ).bind("tags", tags).bind("size", tags.length).fetch();
     }
 
-
+    public boolean isFavorite(User user)
+    {
+        return user.favorites.contains(this);
+    }
 
    }

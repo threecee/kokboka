@@ -4,6 +4,9 @@
 <!-- Oppskrift -->
 <div data-role="page" id="oppskrift">
     <div data-theme="a" data-role="header">
+        <a data-role="button" data-transition="flip" href="@{Users.preferencesMobile()}" data-icon="gear"
+                data-iconpos="right" class="ui-btn-right">
+                </a>
         <h1>
         #{if request.action == "Recipes.indexMobile" }
             Oppskrifter

@@ -28,7 +28,7 @@ public class Currency {
     }
 
 
-    private static String prettyDouble(double doubleString)
+    public static String prettyDouble(double doubleString)
     {
         DecimalFormat df2 = new DecimalFormat("#####0.0");
         double dd2dec = new Double(df2.format(doubleString)).doubleValue();

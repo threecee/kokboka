@@ -2,7 +2,7 @@
 
 
 <script type="text/javascript">
-    $(document).on('pageinit', function () {
+    $(document).bind('ready', function () {
 
 
         $("div.ui-checkbox").on('change', 'input:checkbox', function () {
@@ -10,9 +10,6 @@
             boxActivated($(this).parent());
         });
 
-      //  $("div.ui-checkbox").click(function () {
-      //      boxActivated($(this));
-      //  });
 
         function boxActivated(box) {
             var fromId = box.parent().parent().parent().attr("id");
@@ -187,7 +184,7 @@
 
 
 <!-- Oppskrift -->
-<div data-role="page" id="tasks">
+<div data-role="page" id="tasksPage">
 #{headerMobile /}
     <div data-role="content">
         <h1>Handlelapp for

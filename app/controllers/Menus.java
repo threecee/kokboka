@@ -250,8 +250,20 @@ public class Menus extends CRUD {
     }
 
     public static void show(Long id) {
+        renderShow(id, false);
+    }
+    public static void showMobile(Long id) {
+        renderShow(id, true);
+    }
+
+    private static void renderShow(Long id, boolean isMobile) {
         Menu menu = Menu.findById(id);
-        render(menu);
+        if (isMobile) {
+            render("Menus/showMobile.html", menu);
+        }
+        else{
+           render(menu);
+        }
     }
 
 

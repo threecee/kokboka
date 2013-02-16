@@ -306,7 +306,7 @@ public class Recipes extends CRUD {
             }
         }
         if (isMobile) {
-            render("Recipes/formMobile.html");
+            render("Recipes/formMobile.html", recipe);
         }
         {
             render(recipe);

@@ -1,3 +1,5 @@
+#{if !utils.Device.isMobile(request)}
+
 #{extends 'main.html' /}
 
         <div class="profile_wrapper">
@@ -73,3 +75,39 @@
 
 
     </div>
+
+
+#{/if}
+#{else }
+
+    #{extends 'masterMobile.html' /}
+
+    <div data-role="dialog">
+
+    		<div data-role="header" data-theme="d">
+    			<h1>Logg inn</h1>
+
+    		</div>
+
+    		<div data-role="content" data-theme="c">
+
+            #{form @authenticate()}
+                				<div style="padding:10px 20px;">
+                		          <label for="username" class="ui-hidden-accessible">Epost:</label>
+                		          <input type="text" name="username" id="username" value="" placeholder="E-post" data-theme="a" />
+
+                		          <label for="password" class="ui-hidden-accessible">Password:</label>
+                		          <input type="password" name="password" id="password" value="" placeholder="Passord" data-theme="a" />
+
+                		    	  <button type="submit" data-theme="b">Logg inn</button>
+                				</div>
+            #{/form}
+
+
+
+    		</div>
+    	</div>
+
+
+
+#{/else}

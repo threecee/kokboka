@@ -1,6 +1,9 @@
 package controllers;
 
 import models.User;
+import play.libs.Crypto;
+import play.mvc.Http;
+import utils.Device;
 
 public class Security extends Secure.Security {
 
@@ -13,9 +16,11 @@ public class Security extends Secure.Security {
         sendTo();
     }
 
+
     static void onAuthenticated() {
        sendTo();
     }
+
 
     static void sendTo()
     {

@@ -2,9 +2,9 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).bind("ready", function () {
 
-        $("a.check-trash").click(function () {
+        $("a.check-trash").tap(function () {
             removeRecipe($(this).parent().parent().attr("id"));
             $(this).parent().parent().detach();
         });
@@ -32,12 +32,10 @@
                 uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}</h1>
 
 
-                    <div class="task-list">
-                        <div class="grouped-tasks" rel="inbox">
-                            <ol class="tasks" id="menu-tasks" style="padding-left:0px;">
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
                                 #{list items:0..6, as:'i'}
 
-                                        <li class="task-item" id="${i}">
+                                        <li data-theme="c" class="task-item" id="${i}">
                                             <div class="task-body"><a class="check-trash"><span
                                                     class="icon check-trash"></span></a>
                                                 <a class="icon task-separator"></a>
@@ -49,7 +47,7 @@
                                                 <div class="title-wrapper"><span
                                                         class="title">
                                     #{if menu.getRecipeForDay(i) != null}
-                                       <a href="@{Recipes.showMobile(menu.getRecipeForDay(i).id)}">${menu.getRecipeForDay(i).title}</a>
+                                       <a data-transition="slide" href="@{Recipes.showMobile(menu.getRecipeForDay(i).id)}">${menu.getRecipeForDay(i).title}</a>
                                     #{/if}
                                                 </span>
                                                 </div>
@@ -57,13 +55,9 @@
                                         </li>
 
                                 #{/list}
-                            </ol>
+        </ul>
 
-                        </div>
-
-
-        </div>
-
+    #{if request.action == "Menus.showNextWeekMobile" || request.action == "Menus.showThisWeekMobile" }
         #{if menu.shoppingList!=null }
             <a data-role="button" href="@{ShoppingLists.showMobile(menu.id)}">
                  Handlelapp for meny
@@ -74,6 +68,7 @@
                  Handlelapp for meny
              </a>
         #{/else}
+    #{/if}
     </div>
 #{footerMobile /}
 

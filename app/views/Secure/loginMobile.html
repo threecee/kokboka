@@ -1,75 +1,29 @@
-#{extends 'main.html' /}
+#{extends 'masterMobile.html' /}
 
-        <div class="profile_wrapper">
-        	<div class="login">
-        		<h3>Logg inn</h3>
-            #{form @authenticate()}
+<div data-role="dialog">
 
-            		#{if flash.error}
-            			<p class="error">
-            				&{flash.error}
-            			</p>
-            		#{/if}
-            		#{if flash.success}
-            			<p class="success">
-            				&{flash.success}
-            			</p>
-            		#{/if}
+		<div data-role="header" data-theme="d">
+			<h1>Logg inn</h1>
 
+		</div>
 
-        			<br clear="all">
+		<div data-role="content" data-theme="c">
 
-        			<label>Brukernavn</label>
-                    <input type="text" name="username" id="username" value="${flash.username}" />
-        			<br clear="all">
+            <form action="@{authenticate()}">
+            				<div style="padding:10px 20px;">
+            		          <label for="username" class="ui-hidden-accessible">Epost:</label>
+            		          <input type="text" name="user" id="username" value="" placeholder="username" data-theme="a" />
 
-        			<label>Passord</label>
-                    <input type="password" name="password" id="password" value="" />
-        			<br clear="all"><br>
-        			<br>
-                    <input type="checkbox" name="remember" id="remember" value="true" checked="true" style="display: none" />
+            		          <label for="password" class="ui-hidden-accessible">Password:</label>
+            		          <input type="password" name="pass" id="password" value="" placeholder="password" data-theme="a" />
 
-        			<input type="submit" class="customButton" value="Logg inn">
-            #{/form}
-        	</div>
+            		    	  <button type="submit" data-theme="b">Logg inn</button>
+            				</div>
+            			</form>
 
 
-<!--
-        	<div class="register">
-        		<h3>Ny konto</h3>
 
-        			<form action="/under100/createUser.do" method="post" name="UserForm">
+		</div>
+	</div>
 
 
-        				<br clear="all">
-
-        				<label>Ønsket brukernavn</label>
-        				<input type="text" value="" name="userName">
-        				<br clear="all">
-
-        				<label>Ønsket passord</label>
-        				<input type="password" name="password">
-
-        				<br clear="all">
-
-        				<label>Epostadresse</label>
-        				<input type="text" value="" name="email">
-        				<br clear="all"><br>
-
-                        <label>Ønsker å motta nyhetsbrev</label>
-                        <input type="checkbox" value="on" name="newsletter" autocomplete="off">
-
-                        <br clear="all"><br>
-
-        				<input type="submit" class="customButton" value="Registrer">
-
-        				<input type="hidden" value="/?service=registration_success" name="successUrl">
-        				<input type="hidden" value="/?service=loginOrRegister&amp;action=register" name="errorUrl">
-        			</form>
-
-
-        	</div>
--->
-
-
-    </div>

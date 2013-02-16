@@ -1,0 +1,44 @@
+<script type="text/javascript">
+    $(document).bind('ready', function () {
+
+        $("button.addRecipeToMenuButton").live("click", function () {
+            addRecipe($("#showRecipe").attr("data-id"), $(this).attr("data-day"));
+
+            $( "#popupPanel" ).popup('close');
+
+             return false;
+         });
+
+
+
+        function addRecipe(recipeId, day){
+            $.ajax({
+
+                   type: "POST",
+                   url: "/menus/planrecipe",
+                   data: "recipeId=" + recipeId + "&day="+day,
+                   dataType: "xml"
+
+                });
+        }
+ });
+
+</script>
+<h1>Uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}</h1>
+
+
+#{list items:0..6, as:'i'}
+            <button data-theme="a" class="addRecipeToMenuButton" data-day="${utils.DateUtil.addDays(menu.usedFromDate, i).format("yyyy-MM-dd")}" data-icon="${menu.getRecipeForDay(i) != null?'grid':''}" data-mini="true">${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}</button>
+#{/list}
+
+
+<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+			<div data-role="header" data-theme="a" class="ui-corner-top">
+				<h1>Erstatte oppskrift?</h1>
+			</div>
+			<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+				<h3 class="ui-title">Denne dagen har allerede en oppskrift.</h3>
+				<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Angre</a>
+				<a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">Overskriv</a>
+			</div>
+		</div>

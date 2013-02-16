@@ -1,10 +1,17 @@
 #{extends 'masterMobileMega.html' /}
 
-<link rel="stylesheet" href="@{'/public/stylesheets/jquery.tagit.css'}">
-<link rel="stylesheet" href="@{'/public/stylesheets/tagit.ui-kokboka.css'}">
-
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).on('pageinit', function () {
+
+        $( "#popupPanel" ).on({
+              popupbeforeposition: function() {
+                  var h = $( window ).height();
+
+                  $( "#popupPanel" ).css( "height", h );
+              }
+          });
+
+
         $("a.task-checkbox").click(function () {
             if (!$(this).hasClass("task-checked")) {
                 $(this).addClass("task-checked");
@@ -25,7 +32,6 @@
         });
 
 
-
         $("span.plussknapp").click(function () {
             var mengde = $(this).parent().find(".mengde");
             var number = parseInt($(mengde).text());
@@ -44,152 +50,157 @@
         });
 
 
-    });
-    if (typeof String.prototype.endsWith !== 'function') {
-        String.prototype.endsWith = function (suffix) {
-            return this.indexOf(suffix, this.length - suffix.length) !== -1;
-        };
-    }
-
-    function scaleRecipe(number, newNumber) {
-        $("#ingredient-tasks span.mengde").each(function () {
-                    $(this).text(scaleIngredient($(this).text().trim(), number, newNumber));
-                }
-        );
-    }
-
-
-    function scaleIngredient(amount, serving, scaledServing) {
-        var multiplier = scaledServing / serving;
-
-        var roundedNumber = Number(amount * multiplier).toFixed(1);
-        if ((roundedNumber + "").endsWith(".0")) {
-            roundedNumber = Number(roundedNumber).toFixed(0);
+        if (typeof String.prototype.endsWith !== 'function') {
+            String.prototype.endsWith = function (suffix) {
+                return this.indexOf(suffix, this.length - suffix.length) !== -1;
+            };
         }
-        return roundedNumber;
-    }
 
-    function handleFavoritt(favoritt)
-    {
-        if (favoritt.attr("data-theme") == "b") {
-                       removeFavorite(${recipe.id});
-            favoritt.attr("data-theme", "c");
-            favoritt.removeClass("ui-btn-up-b");
-            favoritt.removeClass("ui-btn-hover-b");
-            favoritt.removeClass("ui-btn-down-b");
-            favoritt.addClass("ui-btn-up-c");
-                   }
-                   else {
-                       addFavorite(${recipe.id});
-            favoritt.attr("data-theme", "b");
-            favoritt.removeClass("ui-btn-up-c");
-            favoritt.removeClass("ui-btn-hover-c");
-            favoritt.removeClass("ui-btn-down-c");
-            favoritt.addClass("ui-btn-up-b");
-                   }
-    }
+        function scaleRecipe(number, newNumber) {
+            $("#ingredient-tasks span.mengde").each(function () {
+                        $(this).text(scaleIngredient($(this).text().trim(), number, newNumber));
+                    }
+            );
+        }
 
-    function addFavorite(id) {
-        $.ajax({
-            type: "POST",
-            url: "/recipes/addFavorite",
-            data: "id=" + id,
-            dataType: "xml"
-        });
-    }
-    function removeFavorite(id) {
-        $.ajax({
-            type: "POST",
-            url: "/recipes/removeFavorite",
-            data: "id=" + id,
-            dataType: "xml"
-        });
-    }
+
+        function scaleIngredient(amount, serving, scaledServing) {
+            var multiplier = scaledServing / serving;
+
+            var roundedNumber = Number(amount * multiplier).toFixed(1);
+            if ((roundedNumber + "").endsWith(".0")) {
+                roundedNumber = Number(roundedNumber).toFixed(0);
+            }
+            return roundedNumber;
+        }
+
+        function handleFavoritt(favoritt) {
+            if (favoritt.attr("data-theme") == "b") {
+                removeFavorite($("#showRecipe").attr("data-id"));
+                favoritt.attr("data-theme", "c");
+                favoritt.removeClass("ui-btn-up-b");
+                favoritt.removeClass("ui-btn-hover-b");
+                favoritt.removeClass("ui-btn-down-b");
+                favoritt.addClass("ui-btn-up-c");
+            }
+            else {
+                addFavorite($("#showRecipe").attr("data-id"));
+                favoritt.attr("data-theme", "b");
+                favoritt.removeClass("ui-btn-up-c");
+                favoritt.removeClass("ui-btn-hover-c");
+                favoritt.removeClass("ui-btn-down-c");
+                favoritt.addClass("ui-btn-up-b");
+            }
+        }
+
+        function addFavorite(id) {
+            $.ajax({
+                type: "POST",
+                url: "/recipes/addFavorite",
+                data: "id=" + id,
+                dataType: "xml"
+            });
+        }
+
+        function removeFavorite(id) {
+            $.ajax({
+                type: "POST",
+                url: "/recipes/removeFavorite",
+                data: "id=" + id,
+                dataType: "xml"
+            });
+        }
+    });
+
 
 </script>
+
+
 
 #{if recipe != null}
     #{set title:recipe.title /}
 
 
 <!-- Oppskrift -->
-<div data-role="page" id="showRecipe">
+<div data-role="page" id="showRecipe" data-id="${recipe.id}">
     #{headerMobile /}
-<div data-role="content">
-    <h1>${recipe?.title}</h1>
+    <div data-role="content">
+        <h1>${recipe?.title}</h1>
 
-    #{if recipe.description != null}
-        <div class="innfelt">
-            <div class="innhold">${recipe?.description}</div>
-        </div>
-    #{/if}
-<div class="tagger">
-    #{if recipe.tags != null && recipe.tags.size() > 0}
-    <span>Tagget med</span>
-    #{list items:recipe?.tags, as:"tag"}
-        <span>
+        #{if recipe.description != null}
+            <div class="innfelt">
+                <div class="innhold">${recipe?.description}</div>
+            </div>
+        #{/if}
+        <div class="tagger">
+            #{if recipe.tags != null && recipe.tags.size() > 0}
+                <span>Tagget med</span>
+                #{list items:recipe?.tags, as:"tag"}
+                    <span>
                                 <a href="@{Recipes.indexMobileTags(tag.nameHash)}">
                                     <span class="tagit-label">${tag.name}</span>
                                 </a>
                             </span>,&nbsp;
-    #{/list}
-#{/if}
-    <span>
+                #{/list}
+            #{/if}
+            <span>
                         #{if models.RecipeInMenu.find("recipe = ?", recipe).fetch().size() > 0}
                             brukt
                             i ${models.RecipeInMenu.find("menu.author = ? and recipe = ?", user, recipe).fetch().size()}
                             av
                             dine menyer, ${models.RecipeInMenu.find("recipe = ?", recipe).fetch().size()} totalt
                         #{/if}
-                        #{else }
-                            foreløpig ikke brukt i noen menyer.
-                        #{/else}
+                #{else }
+                    foreløpig ikke brukt i noen menyer.
+                #{/else}
                         </span>
-</div>
+        </div>
 
-    <a data-role="button" ${recipe.isFavorite(user)?"data-theme='b\'":""} href="#" id="favoritt" data-icon="star" data-iconpos="right">
-                Favoritt
-            </a>
-    <div class="task-list">
-        <div class="grouped-tasks" rel="inbox">
-            <ol class="tasks" id="menu-tasks" style="padding-left:0px;">
-                <li class="task-item noduedate">
-                    <div class="task-body">
-                        <div class="selector">
-                            <span class="minusknapp"></span>
-                            <span class="plussknapp"></span>
+        <a data-role="button" ${recipe.isFavorite(user)?"data-theme='b\'":""} href="#" id="favoritt" data-icon="star"
+           data-iconpos="right">
+            Favoritt
+        </a>
+
+        <div class="task-list">
+            <div class="grouped-tasks" rel="inbox">
+                <ol class="tasks" id="menu-tasks" style="padding-left:0px;">
+                    <li class="task-item noduedate">
+                        <div class="task-body">
+                            <div class="selector">
+                                <span class="minusknapp"></span>
+                                <span class="plussknapp"></span>
                                     <span class="tekst"> <span style="float: none" class="mengde"
                                             >${utils.Servings.getPreferredServings(user, menu, recipe)}</span> ${recipe?.servesUnit}</span>
-                        </div>
-                        <div class="title-wrapper"><span
-                                class="title">Oppskriften holder til
+                            </div>
+                            <div class="title-wrapper"><span
+                                    class="title">Oppskriften holder til
                                     </span>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            </ol>
+                    </li>
+                </ol>
+            </div>
         </div>
-    </div>
 
-    <div class="recipeBilde" style="">
-        <img id="bilde" src="${models.Image.get(recipe)}"/>
-    </div>
+        <div class="recipeBilde" style="">
+            <img id="bilde" src="${models.Image.get(recipe)}"/>
+        </div>
 
 
-    <div class="whitetext overskrift">
-        Ingredienser
-    </div>
+        <div class="whitetext overskrift">
+            Ingredienser
+        </div>
 
-    <div class="task-list">
-        <div class="grouped-tasks" rel="inbox">
-            <ol class="tasks" id="ingredient-tasks" style="padding-left:0px;">
-            #{list items:recipe.ingredients, as:'ingredient'}
-                <li class="task-item" id="${ingredient.id}">
-                    <div class="task-body"><a class="task-checkbox"><span
-                            class="icon task-checkbox "></span></a> <a class="icon task-separator"></a>
+        <div class="task-list">
+            <div class="grouped-tasks" rel="inbox">
+                <ol class="tasks" id="ingredient-tasks" style="padding-left:0px;">
+                    #{list items:recipe.ingredients, as:'ingredient'}
+                        <li class="task-item" id="${ingredient.id}">
+                            <div class="task-body"><a class="task-checkbox"><span
+                                    class="icon task-checkbox "></span></a> <a class="icon task-separator"></a>
 
-                        <div class="title-wrapper"><span
-                                class="title">
+                                <div class="title-wrapper"><span
+                                        class="title">
                                     <span>
                                         <span style="float: none" class="mengde">
                                         #{if menu != null}
@@ -199,38 +210,45 @@
                                         ${utils.Currency.prettyDouble(ingredient.getScaledAmount(user))}
                                         #{/else}
                                     </span> ${ingredient.unit}</span>
-                        ${ingredient.description}</span>
-                        </div>
-                    </div>
-                </li>
-            #{/list}
-            </ol>
+                                ${ingredient.description}</span>
+                                </div>
+                            </div>
+                        </li>
+                    #{/list}
+                </ol>
 
+            </div>
         </div>
-    </div>
 
-    <div class="whitetext overskrift">
-        Fremgangsmåte
-    </div>
+        <div class="whitetext overskrift">
+            Fremgangsmåte
+        </div>
 
-    <div class="innfelt" style="">
-        <div name="steps" id="steps" class="innhold"
-             style="font-size: 14px;">${recipe?.steps?.escape().nl2br()}</div>
-    </div>
-    <div class="ui-grid-a" >
-         <div class="ui-block-a">
-             <a data-role="button" href="@{Recipes.formMobile(recipe.id)}" data-icon="check" data-iconpos="left">
-                 Rediger
-             </a>
-         </div>
-         <div class="ui-block-b">
-             <a data-role="button" href="#" data-icon="plus" data-iconpos="right">
-                 Bruk
-             </a>
-         </div>
-     </div>
+        <div class="innfelt" style="">
+            <div name="steps" id="steps" class="innhold"
+                 style="font-size: 14px;">${recipe?.steps?.escape().nl2br()}</div>
+        </div>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <a data-role="button" href="@{Recipes.formMobile(recipe.id)}" data-icon="check" data-iconpos="left">
+                    Rediger
+                </a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#popupPanel" data-icon="plus" data-iconpos="right" data-rel="popup" data-transition="slide" data-position-to="window" data-role="button">Bruk</a>
 
+            </div>
+        </div>
+
+    </div>
+    <div data-role="popup" id="popupPanel" data-corners="false" data-theme="none" data-shadow="false"
+         data-tolerance="0,0">
+
+        #{set menu:user.activeMenu /}
+        #{menuMobile /}
+
+    </div>    #{footerMobile /}
 </div>
-#{footerMobile /}
-</div>
+
+
 #{/if}

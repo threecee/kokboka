@@ -1,14 +1,9 @@
 package controllers;
 
-import models.*;
+import models.User;
 import play.mvc.Before;
 import play.mvc.Controller;
-import utils.TagUtil;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import utils.Device;
 
 public class Application extends Controller {
 
@@ -23,13 +18,17 @@ public class Application extends Controller {
 
     public static void index() {
         String user = Security.connected();
-        render();
+        if (Device.isMobile(request)) {
+            redirect("Recipes.indexMobile", true);
+        } else {
+            render();
+        }
     }
+
     public static void indexMobile() {
         String user = Security.connected();
         redirect("Recipes.indexMobile", true);
     }
-
 
 
 }

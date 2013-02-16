@@ -2,23 +2,6 @@
 
 
 <script type="text/javascript">
-    $(document).bind("ready", function () {
-
-        $("a.check-trash").tap(function () {
-            removeRecipe($(this).parent().parent().attr("id"));
-            $(this).parent().parent().detach();
-        });
-    });
-
-    function removeRecipe(recipeId) {
-        $.ajax({
-            type: "POST",
-            url: "/menus/unplanrecipefrommenu",
-            data: "menuId=${menu.id}" + "&recipeId=" + recipeId ,
-            dataType: "xml"
-
-        });
-    }
 
 
 </script>

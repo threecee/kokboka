@@ -1,48 +1,7 @@
 #{extends 'masterMobileMega.html' /}
 
 <script type="text/javascript">
-    $(document).ready(function () {
 
-        $("span.plussknapp").click(function () {
-            var mengde = $(this).parent().find(".mengde");
-            var number = parseInt($(mengde).text());
-            number = number + 1;
-            $(mengde).text(number);
-            $(this).parent().parent().parent().find("input.recipeAmounts").val(number);
-        });
-        $("span.minusknapp").click(function () {
-            var mengde = $(this).parent().find(".mengde");
-            var number = parseInt($(mengde).text());
-            if (number > 0) {
-                number = number - 1;
-                $(mengde).text(number);
-                $(this).parent().parent().parent().find("input.recipeAmounts").val(number);
-            }
-        });
-
-
-        $("a.task-checkbox").click(function () {
-            if (!$(this).hasClass("task-checked")) {
-                checkRecipe($(this).parent().parent());
-                $(this).addClass("task-checked");
-                $(this).find("span.task-checkbox").addClass("task-checked");
-            }
-            else {
-                unCheckRecipe($(this).parent().parent());
-                $(this).removeClass("task-checked");
-                $(this).find("span.task-checkbox").removeClass("task-checked");
-            }
-        });
-
-    });
-
-
-    function checkRecipe(element) {
-        $(element).find("input").val($(element).find("input").attr("id"));
-    }
-    function unCheckRecipe(element) {
-        $(element).find("input").val("");
-    }
 
 </script>
 

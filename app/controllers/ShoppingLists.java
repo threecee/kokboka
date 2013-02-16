@@ -170,7 +170,10 @@ public class ShoppingLists extends CRUD {
     }
 
     public static void addOnTheFly(Long id, String description) {
-        ShoppingList shoppingList = ShoppingList.findById(id);
+        Menu menu = Menu.findById(id);
+
+
+        ShoppingList shoppingList = menu.shoppingList;
         ShoppingListIngredient ingredient = shoppingList.addOnTheFly(description);
         shoppingList.save();
         response.print(ingredient.id);

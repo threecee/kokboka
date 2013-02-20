@@ -215,15 +215,16 @@
             var mengde = $(this).parent().find(".mengde");
             var number = parseInt($(mengde).text());
             var newNumber = number + 1;
-            $(mengde).text(newNumber);
+            $(this).parent().parent().parent().find(".mengde").each( function(){ $(this).text(newNumber); });
             scaleRecipe(number, newNumber);
+            return false;
         });
         $("#showRecipe span.minusknapp").live("click", function () {
             var mengde = $(this).parent().find(".mengde");
             var number = parseInt($(mengde).text());
             if (number > 0) {
                 var newNumber = number - 1;
-                $(mengde).text(newNumber);
+                $(this).parent().parent().parent().find(".mengde").each( function(){ $(this).text(newNumber); });
                 scaleRecipe(number, newNumber);
             }
         });
@@ -236,7 +237,7 @@
         }
 
         function scaleRecipe(number, newNumber) {
-            $("#ingredient-tasks span.mengde").each(function () {
+            $("#ingredient-tasks .ui-btn-text span").each(function () {
                         $(this).text(scaleIngredient($(this).text().trim(), number, newNumber));
                     }
             );
@@ -343,17 +344,23 @@
 <!-- MENUS SHOW_MOBILE -->
     $(document).bind("ready", function () {
 
-        $("a.check-trash").tap(function () {
-            removeRecipe($(this).parent().parent().attr("id"));
-            $(this).parent().parent().detach();
+        $("a.check-trash").live("click", function () {
+            if(confirm("Fjerne oppskrift fra meny?")){
+            removeRecipe($("#visMeny").attr("data-menu-id"), $(this).parent().parent().attr("id"));
+            var link = $(this).parent().find(".title a");
+            link.html("&nbsp;");
+            link.attr("href", "");
+            }
+            return false;
+
         });
     });
 
-    function removeRecipe(recipeId) {
+    function removeRecipe(menuId, recipeId) {
         $.ajax({
             type: "POST",
             url: "/menus/unplanrecipefrommenu",
-            data: "menuId=${menu.id}" + "&recipeId=" + recipeId ,
+            data: "menuId=" + menuId + "&recipeId=" + recipeId ,
             dataType: "xml"
 
         });
@@ -366,13 +373,13 @@
 
         $("#showRecipe button.addRecipeToMenuButton").live("click", function () {
 
-            //if($(this).attr("data-hasrecipe") == "true" )
-           // {
-           //   confirmRecipe($(this).attr("data-day"));
+            if(($(this).attr("data-hasrecipe") == "true" && confirm("Denne dagen inneholder allerede en oppskrift. Erstatte?") || $(this).attr("data-hasrecipe") != "true" ))
+            {
+
           //  }
           //  else {
             addRecipe($(this).attr("data-day"));
-          //  }
+            }
 
              return false;
          });
@@ -396,3 +403,36 @@
         }
  });
 <!-- MENUMOBILE TAG END -->
+
+    <!-- PROFIL START -->
+
+
+    $("#profil span.plussknapp").live("click", function () {
+        var mengde = $(this).parent().find(".mengde");
+        var number = parseInt($(mengde).text());
+        var newNumber = number + 1;
+        changePreferredServings(newNumber);
+        $(this).parent().parent().parent().find(".mengde").each( function(){ $(this).text(newNumber); });
+        return false;
+    });
+    $("#profil span.minusknapp").live("click", function () {
+        var mengde = $(this).parent().find(".mengde");
+        var number = parseInt($(mengde).text());
+        if (number > 0) {
+            var newNumber = number - 1;
+            changePreferredServings(newNumber);
+            $(this).parent().parent().parent().find(".mengde").each( function(){ $(this).text(newNumber); });
+        }
+        return false;
+    });
+
+
+    function changePreferredServings(amount) {
+        $.ajax({
+            type: "POST",
+            url: "/users/preferredservings",
+            data: "amount=" + amount,
+            dataType: "xml"
+        });
+    }
+    <!-- PROFIL END -->

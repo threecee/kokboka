@@ -47,68 +47,43 @@
             Favoritt
         </a>
 
-        <div class="task-list">
-            <div class="grouped-tasks" rel="inbox">
-                <ol class="tasks" id="menu-tasks" style="padding-left:0px;">
-                    <li class="task-item noduedate">
-                        <div class="task-body">
-                            <div class="selector">
-                                <span class="minusknapp"></span>
-                                <span class="plussknapp"></span>
-                                    <span class="tekst"> <span style="float: none" class="mengde"
-                                            >${utils.Servings.getPreferredServings(user, menu, recipe)}</span> ${recipe?.servesUnit}</span>
-                            </div>
-                            <div class="title-wrapper"><span
-                                    class="title">Oppskriften holder til
-                                    </span>
-                            </div>
-                        </div>
-                    </li>
-                </ol>
-            </div>
-        </div>
+<span class="mengdeSelector">
+        <button data-mini="true" class="" style="text-align: left;" data-theme="a" >
+            <div class="selector">
+                                            <span class="minusknapp"></span>
+                                            <span class="plussknapp"></span>
+                                                <span class="tekst"> <span style="float: none" class="mengde"
+                                                        >${utils.Servings.getPreferredServings(user, menu, recipe)}</span> ${recipe?.servesUnit}</span>
+                                        </div>
+                                        <div class="title-wrapper"><span
+                                                class="title">Holder til
+                                                </span>
+                                        </div>
+        </button>
+</span>
 
         <div class="recipeBilde" style="">
             <img id="bilde" src="${models.Image.get(recipe)}"/>
         </div>
 
 
-        <div class="whitetext overskrift">
+        <h3>
             Ingredienser
+        </h3>
+
+        <div id="ingredient-tasks" data-role="fieldcontain">
+            <fieldset data-role="controlgroup" data-type="vertical">
+                #{list items:recipe.ingredients, as:'ingredient'}
+                    #{set ingredient:ingredient /}
+                    #{set scaling:true /}
+                    #{checkBoxItem /}
+                #{/list}
+            </fieldset>
         </div>
 
-        <div class="task-list">
-            <div class="grouped-tasks" rel="inbox">
-                <ol class="tasks" id="ingredient-tasks" style="padding-left:0px;">
-                    #{list items:recipe.ingredients, as:'ingredient'}
-                        <li class="task-item" id="${ingredient.id}">
-                            <div class="task-body"><a class="task-checkbox"><span
-                                    class="icon task-checkbox "></span></a> <a class="icon task-separator"></a>
-
-                                <div class="title-wrapper"><span
-                                        class="title">
-                                    <span>
-                                        <span style="float: none" class="mengde">
-                                        #{if menu != null}
-                                        ${utils.Currency.prettyDouble(ingredient.getScaledAmount(menu))}
-                                        #{/if}
-                                        #{else }
-                                        ${utils.Currency.prettyDouble(ingredient.getScaledAmount(user))}
-                                        #{/else}
-                                    </span> ${ingredient.unit}</span>
-                                ${ingredient.description}</span>
-                                </div>
-                            </div>
-                        </li>
-                    #{/list}
-                </ol>
-
-            </div>
-        </div>
-
-        <div class="whitetext overskrift">
+        <h3>
             Fremgangsmåte
-        </div>
+        </h3>
 
         <div class="innfelt" style="">
             <div name="steps" id="steps" class="innhold"
@@ -127,13 +102,11 @@
         </div>
 
     </div>
-    <div data-role="popup" id="popupPanel" data-corners="false" data-theme="none" data-shadow="false"
-         data-tolerance="0,0">
-
         #{set menu:user.activeMenu /}
         #{menuMobile /}
 
-    </div>    #{footerMobile /}
+
+    #{footerMobile /}
 </div>
 
 

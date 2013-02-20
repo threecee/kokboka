@@ -1,24 +1,19 @@
 #{extends 'masterMobileMega.html' /}
 
 
-<script type="text/javascript">
 
 
-</script>
-
-
-
-<div data-role="page" id="visMeny">
+<div data-role="page" id="visMeny" data-menu-id="${menu!=null?menu.id:''}">
 #{headerMobile /}
     <div data-role="content">
         <h1>Meny for
                 uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}</h1>
 
 
-        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+        <ul data-role="listview" data-divider-theme="b" data-theme="b" data-inset="true">
                                 #{list items:0..6, as:'i'}
 
-                                        <li data-theme="c" class="task-item" id="${i}">
+                                        <li data-theme="c" class="task-item" id="${menu.getRecipeForDay(i) != null?menu.getRecipeForDay(i).id:''}">
                                             <div class="task-body"><a class="check-trash"><span
                                                     class="icon check-trash"></span></a>
                                                 <a class="icon task-separator"></a>
@@ -30,8 +25,12 @@
                                                 <div class="title-wrapper"><span
                                                         class="title">
                                     #{if menu.getRecipeForDay(i) != null}
-                                       <a data-transition="slide" href="@{Recipes.showMobile(menu.getRecipeForDay(i).id)}">${menu.getRecipeForDay(i).title}</a>
+                                        <a data-transition="slide" href="@{Recipes.showMobile(menu.getRecipeForDay(i).id)}">${menu.getRecipeForDay(i).title}</a>
                                     #{/if}
+                                                    #{else }
+                                                        <a data-transition="slide" href="#">&nbsp;</a>
+                                                    #{/else}
+
                                                 </span>
                                                 </div>
                                             </div>

@@ -8,6 +8,7 @@ import models.Tag;
 import play.*;
 import play.mvc.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,6 +31,14 @@ public class Ingredients extends CRUD {
 
     }
 
+
+    public static void autocompleteDescriptions(String term){
+
+        List<String> ingredients = Ingredient.find("select distinct(i.description) from Ingredient i where i.description like ? order by i.description", term + "%").fetch();
+
+
+        renderJSON(ingredients);
+    }
 
     public static void addType(String description, String type) {
         IngredientType.addIngredient(description.trim(), type.trim());

@@ -1,11 +1,15 @@
 #{if ingredient != null}
-<input id="${ingredient.id}" name="${ingredient.description}" type="checkbox"
-       data-varetype="${models.IngredientType.findForDescription(ingredient.description)?.toArrayString()}"
-       data-recipe="${ingredient.findRecipeAsString(menu)}">
+<input id="${ingredient.id}" class="${deletable != null && deletable?'deletableCheckbox':''}" name="${ingredient.description}" type="checkbox"
+       data-varetype="${ingredient instanceof models.ShoppingListIngredient?models.IngredientType.findForDescription(ingredient.description)?.toArrayString():''}"
+       data-recipe="${menu!=null?ingredient.findRecipeAsString(menu):''}">
 <label for="${ingredient.id}">
-    #{if !ingredient.type.equals(models.ShoppingListItemType.onthefly) }
-        <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
+    #{if scaling != null && scaling}
+    <span>#{if menu != null}${utils.Currency.prettyDouble(ingredient.getScaledAmount(menu))}#{/if}
+        #{else }${utils.Currency.prettyDouble(ingredient.getScaledAmount(user))}#{/else}</span> ${ingredient.unit}
     #{/if}
+    #{elseif !(ingredient instanceof models.ShoppingListIngredient) || (ingredient instanceof models.ShoppingListIngredient && !ingredient.type.equals(models.ShoppingListItemType.onthefly)) }
+        <span>${utils.Currency.prettyDouble(ingredient.amount)}</span> ${ingredient.unit}
+    #{/elseif}
 ${ingredient.description}
 </label>
 #{/if}

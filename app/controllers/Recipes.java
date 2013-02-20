@@ -35,7 +35,8 @@ public class Recipes extends CRUD {
 
 
     public static void indexMobile() {
-        render("Recipes/indexMobile.html");
+        boolean hasCurrent = hasCurrentRecipe();
+        render("Recipes/indexMobile.html", hasCurrent);
     }
     public static void indexMobileAll() {
         indexRender(null, true);
@@ -249,6 +250,22 @@ public class Recipes extends CRUD {
         } else {
             render(user, recipe, favorite);
         }
+    }
+
+    private static boolean hasCurrentRecipe() {
+        User user = User.find("byEmail", Security.connected()).first();
+
+        Menu menu = Menu.find("author = ? and usedFromDate = ?", user, DateUtil.getStartingDayThisWeek(new Date())).first();
+
+        if (menu != null) {
+            int distance = DateUtil.distance(menu.usedFromDate, new Date());
+
+            Recipe recipe = menu.getRecipeForDay(distance);
+
+            return recipe != null;
+
+        }
+        return false;
     }
 
     private static void renderShowCurrent(boolean isMobile) {

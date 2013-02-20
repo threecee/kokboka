@@ -1,15 +1,25 @@
 #{extends 'masterMobileMega.html' /}
 <!-- innstillinger -->
-<div data-role="page" id="innstillinger">
+<div data-role="page" id="profil">
 #{headerMobile /}
     <div data-role="content">
         <div data-role="fieldcontain">
-            <fieldset data-role="controlgroup">
-                <label for="slider1">
-                    Value:
-                </label>
-                <input type="range" name="slider" value="2" min="0" max="10" data-highlight="true">
-            </fieldset>
+            <span class="mengdeSelector">
+                    <button data-mini="true" class="" style="text-align: left;" data-theme="a">
+                        <div class="selector">
+                            <span class="minusknapp"></span>
+                            <span class="plussknapp"></span>
+                            <span class="tekst">
+                                <span style="float: none" class="mengde">
+                                ${utils.Currency.prettyDouble(user.preferredServings)}</span> personer</span>
+                        </div>
+                        <div class="title-wrapper"><span
+                                class="title">Standardporsjonering
+                                                            </span>
+                        </div>
+                    </button>
+            </span>
+
             <ul data-role="listview" data-divider-theme="b" data-inset="true">
             #{list items:shoppingList, as:'ingredient'}
                 <li data-theme="c" class="task-item" id="${ingredient.id}">

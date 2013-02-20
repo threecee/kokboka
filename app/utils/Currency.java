@@ -9,7 +9,7 @@ public class Currency {
     public static String prettyDouble(String doubleString) {
         try{
         return prettyDouble(Double.parseDouble(doubleString));
-        } catch (NumberFormatException e)
+        } catch (Exception e)
         {
             Logger.error(e.getMessage(), e);
 

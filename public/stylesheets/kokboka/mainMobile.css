@@ -12,3 +12,32 @@
 #popupPanel .ui-btn {
     margin: 2em 15px;
 }
+.addTask .ui-btn-inner {
+    height: 19px;
+    padding-top: 8px;
+}
+
+.addTaskTop  .ui-field-contain {
+    margin-bottom:0.2em;
+    padding-bottom:0em;
+}
+.addTaskBottom .ui-field-contain {
+    margin-top:0.2em;
+    padding-top:0em;
+}
+
+
+#editRecipe .ui-icon-checkbox-off {
+    background-image: url("../../images/trashcan2.png");
+    cursor: pointer;
+    vertical-align: middle;
+    display: inline-block;
+    background-position: 0px 0px;
+    width: 14px;
+    height: 18px;
+}
+
+#editRecipe #suggestions .ui-link-inherit {
+    padding: 0px;
+    padding-left:15px;
+}

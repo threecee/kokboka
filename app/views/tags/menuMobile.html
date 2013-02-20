@@ -1,23 +1,14 @@
-<script type="text/javascript">
+<div data-role="popup" id="popupPanel" data-corners="false" data-theme="none" data-shadow="false"
+     data-tolerance="0,0">
 
 
-</script>
+
 <h1>Uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}</h1>
 
 
 #{list items:0..6, as:'i'}
-            <button data-theme="a" class="addRecipeToMenuButton" data-day="${utils.DateUtil.addDays(menu.usedFromDate, i).format("yyyy-MM-dd")}" data-icon="${menu.getRecipeForDay(i) != null?'grid':''}" data-hasrecipe="${menu.getRecipeForDay(i) != null?'true':'false'}" data-mini="true">${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}</button>
+     <button data-theme="a"  class="addRecipeToMenuButton" data-day="${utils.DateUtil.addDays(menu.usedFromDate, i).format("yyyy-MM-dd")}" data-icon="${menu.getRecipeForDay(i) != null?'grid':''}" data-hasrecipe="${menu.getRecipeForDay(i) != null?'true':'false'}" data-mini="true">${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}</button>
 #{/list}
 
 
-<a style="display: none" href="#" id="replaceRecipeButton" data-rel="dialog" data-transition="pop">Open dialog</a>
-<div data-role="popup" id="replaceRecipePopupDialog" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
-			<div data-role="header" data-theme="a" class="ui-corner-top">
-				<h1>Erstatte oppskrift?</h1>
-			</div>
-			<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-				<h3 class="ui-title">Denne dagen har allerede en oppskrift.</h3>
-				<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Angre</a>
-				<a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">Overskriv</a>
-			</div>
-		</div>
+</div>

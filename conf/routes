@@ -9,11 +9,28 @@ GET     /meny/dagensoppskrift Recipes.showCurrent
 GET     /meny/{<[0-9]+>id} Menus.show
 GET     /meny Menus.index
 
+GET     /mobile/oppskrifter/mine             Recipes.favoritesMobile
+GET     /mobile/oppskrifter/{<[0-9]+>id}             Recipes.showMobile
+GET     /mobile/oppskrifter/{<[0-9]+>id}/rediger     Recipes.formMobile
+GET     /mobile/oppskrifter                            Recipes.indexMobile
+GET     /mobile/oppskrifter/alle                            Recipes.indexMobileAll
+GET     /mobile/oppskrifter/imenyer                            Recipes.indexMobileFromMenus
+GET     /mobile/oppskrifter/tags/{<[0-9A-Za-zÆØÅæøå]+>tags}                            Recipes.indexMobileTags
+
+
+
 GET     /oppskrifter/mine             Recipes.favorites
 GET     /oppskrifter/{<[0-9]+>id}             Recipes.show
 GET     /oppskrifter/{<[0-9]+>id}/rediger     Recipes.update
 GET     /oppskrifter/tags/{tag}                    Recipes.listTagged
 GET     /oppskrifter                            Recipes.index
+
+
+GET     /mobile/handlelapp
+GET     /mobile/handlelapp/lag/{<[0-9]+>menuId}         ShoppingLists.listMobile
+GET     /mobile/handlelapp/{<[0-9]+>id}         ShoppingLists.showMobile
+GET     /mobile/handlelapp/ukens         ShoppingLists.showCurrentMobile
+GET     /mobile/profil         Users.preferencesMobile
 
 
 GET     /handlelapp/lag/{<[0-9]+>menuId}         ShoppingLists.list

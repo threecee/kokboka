@@ -13,30 +13,24 @@
                                 <span style="float: none" class="mengde">
                                 ${utils.Currency.prettyDouble(user.preferredServings)}</span> personer</span>
                         </div>
-                        <div class="title-wrapper"><span
-                                class="title">Standardporsjonering
-                                                            </span>
+                        <div class="title-wrapper"><span class="title">Standardporsjonering</span>
                         </div>
                     </button>
             </span>
 
-            <ul data-role="listview" data-divider-theme="b" data-inset="true">
-            #{list items:shoppingList, as:'ingredient'}
-                <li data-theme="c" class="task-item" id="${ingredient.id}">
-                    <div class="task-body"><a class="task-checkbox"><span
-                            class="icon check-trash "></span></a> <a class="icon task-separator"></a>
 
-                        <div class="title-wrapper"><span
-                                class="title">
-                                    #{if !ingredient.type.equals(models.ShoppingListItemType.onthefly) }
-                                        <span>${utils.Currency.prettyDouble(ingredient.amount)} ${ingredient.unit}</span>
-                                    #{/if}
-                        ${ingredient.description}</span>
-                        </div>
-                    </div>
-                </li>
-            #{/list}
-            </ul>
+        #{addTaskMobile /}
+
+
+            <div id="ingredient-tasks" data-role="fieldcontain">
+                <fieldset data-role="controlgroup" data-type="vertical">
+                #{list items:shoppingList, as:'ingredient'}
+                        #{set ingredient:ingredient /}
+                        #{set deletable:true /}
+                        #{checkBoxItem /}
+                    #{/list}
+                </fieldset>
+            </div>
         </div>
     </div>
 </div>

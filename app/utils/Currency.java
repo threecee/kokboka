@@ -30,6 +30,10 @@ public class Currency {
 
     public static String prettyDouble(double doubleString)
     {
+
+        try {
+
+
         DecimalFormat df2 = new DecimalFormat("#####0.0");
         double dd2dec = new Double(df2.format(doubleString)).doubleValue();
         doubleString = dd2dec;
@@ -54,6 +58,11 @@ public class Currency {
 
 
         return resultString.replaceAll("\\.0", "");
+        } catch (Exception e)
+        {
+            Logger.error(e.getMessage());
+            return "undefined";
+        }
 
     }
 

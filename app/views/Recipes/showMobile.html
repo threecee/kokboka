@@ -20,27 +20,23 @@
         #{/if}
         <div class="tagger">
             #{if recipe.tags != null && recipe.tags.size() > 0}
-                <span>Tagget med</span>
+                <span class="">Tagget med</span>
                 #{list items:recipe?.tags, as:"tag"}
-                    <span>
-                                <a href="@{Recipes.indexMobileTags(tag.nameHash)}">
-                                    <span class="tagit-label">${tag.name}</span>
-                                </a>
-                            </span>,&nbsp;
+    <a href="@{Recipes.indexMobileTags(tag.nameHash)}"><span class="tagit-label">${tag.name}</span></a>&nbsp;
                 #{/list}
             #{/if}
-            <span>
-                        #{if models.RecipeInMenu.find("recipe = ?", recipe).fetch().size() > 0}
-                            brukt
-                            i ${models.RecipeInMenu.find("menu.author = ? and recipe = ?", user, recipe).fetch().size()}
-                            av
-                            dine menyer, ${models.RecipeInMenu.find("recipe = ?", recipe).fetch().size()} totalt
-                        #{/if}
-                #{else }
-                    foreløpig ikke brukt i noen menyer.
-                #{/else}
-                        </span>
         </div>
+        <div class="innfelt" style="font-size: 12px">
+                    #{if models.RecipeInMenu.find("recipe = ?", recipe).fetch().size() > 0}
+                        Brukt
+                        i ${models.RecipeInMenu.find("menu.author = ? and recipe = ?", user, recipe).fetch().size()}
+                        av
+                        dine menyer, ${models.RecipeInMenu.find("recipe = ?", recipe).fetch().size()} totalt
+                    #{/if}
+            #{else }
+                Foreløpig ikke brukt i noen menyer.
+            #{/else}
+                    </div>
 
         <a data-role="button" ${recipe.isFavorite(user)?"data-theme='b\'":""} href="#" id="favoritt" data-icon="star"
            data-iconpos="right">
@@ -50,15 +46,15 @@
 <span class="mengdeSelector">
         <button data-mini="true" class="" style="text-align: left;" data-theme="a" >
             <div class="selector">
-                                            <span class="minusknapp"></span>
-                                            <span class="plussknapp"></span>
-                                                <span class="tekst"> <span style="float: none" class="mengde"
-                                                        >${utils.Servings.getPreferredServings(user, menu, recipe)}</span> ${recipe?.servesUnit}</span>
-                                        </div>
-                                        <div class="title-wrapper"><span
-                                                class="title">Holder til
-                                                </span>
-                                        </div>
+                <span class="minusknapp"></span>
+                <span class="plussknapp"></span>
+                    <span class="tekst"> <span style="float: none" class="mengde"
+                            >${utils.Servings.getPreferredServings(user, menu, recipe)}</span> ${recipe?.servesUnit}</span>
+            </div>
+            <div class="title-wrapper"><span
+                    class="title">Holder til
+                    </span>
+            </div>
         </button>
 </span>
 
@@ -74,6 +70,7 @@
         <div id="ingredient-tasks" data-role="fieldcontain">
             <fieldset data-role="controlgroup" data-type="vertical">
                 #{list items:recipe.ingredients, as:'ingredient'}
+                    #{set user:user /}
                     #{set ingredient:ingredient /}
                     #{set scaling:true /}
                     #{checkBoxItem /}

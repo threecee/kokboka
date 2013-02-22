@@ -1,15 +1,13 @@
-    $(document).bind('ready', function () {
+    $(document).bind('pageinit', "#tasksPage", function () {
 
-
-        $("#tasksPage div.ui-checkbox").live('change', 'input:checkbox', function () {
-
-            boxActivated($(this));
+        $(document).on('change', "#tasksPage div.ui-checkbox input:checkbox", function (event) {
+            boxActivated($(this).parent());
         });
 
 
         function boxActivated(box) {
             var fromId = box.parent().parent().parent().attr("id");
-            var sortering = "${sortering}";
+            var sortering = $("#tasksPage").attr("data-sortering");
 
             if (!box.find("label").hasClass("ui-checkbox-on")) {
                 checkIngredient(box.find("input").attr("id"));
@@ -75,7 +73,7 @@
         }
 
 
-        $("#tasksPage input#add-task-input").live("keypress", function (e) {
+        $(document).on('keypress', "#tasksPage input#add-task-input", function (e) {
             if (e.which == 13) {
                 addOnTheFlyIngredient($("#tasksPage").attr("data-menu-id"), $(this).val());
                 $(this).val("");
@@ -180,18 +178,15 @@
 
 
 <!-- RECIPES SHOWMOBILE START -->
-    $(document).bind('ready', function () {
+    $(document).on('pageinit', "#showRecipe", function () {
 
-        $( "#showRecipe #popupPanel" ).live({
-              popupbeforeposition: function() {
+        $(document).on('popupbeforeposition', "#showRecipe #popupPanel", function() {
                   var h = $( window ).height();
-
                   $( "#popupPanel" ).css( "height", h );
-              }
+
           });
 
-
-        $("#showRecipe a.task-checkbox").live("click", function () {
+        $(document).on('vclick', "#showRecipe a.task-checkbox", function () {
             if (!$(this).hasClass("task-checked")) {
                 $(this).addClass("task-checked");
                 $(this).find("span.task-checkbox").addClass("task-checked");
@@ -205,13 +200,13 @@
         });
 
 
-        $("#showRecipe a#favoritt").live("tap", function () {
+        $(document).on('vclick', "#showRecipe a#favoritt", function () {
             handleFavoritt($(this));
             return false;
         });
 
 
-        $("#showRecipe span.plussknapp").live("click", function () {
+        $(document).on('vclick', "#showRecipe span.plussknapp", function () {
             var mengde = $(this).parent().find(".mengde");
             var number = parseInt($(mengde).text());
             var newNumber = number + 1;
@@ -219,7 +214,7 @@
             scaleRecipe(number, newNumber);
             return false;
         });
-        $("#showRecipe span.minusknapp").live("click", function () {
+        $(document).on('vclick', "#showRecipe span.minusknapp", function () {
             var mengde = $(this).parent().find(".mengde");
             var number = parseInt($(mengde).text());
             if (number > 0) {
@@ -295,16 +290,16 @@
     <!-- RECIPES SHOWMOBILE STOP -->
 
 <!-- SHOPINGLISTS LIST_MOBILE -->
-    $(document).bind("ready", function () {
+    $(document).on("pageinit", "#velgDager", function () {
 
-        $("#velgDager span.plussknapp").click(function () {
+        $(document).on('vclick', "#velgDager span.plussknapp", function () {
             var mengde = $(this).parent().find(".mengde");
             var number = parseInt($(mengde).text());
             number = number + 1;
             $(mengde).text(number);
             $(this).parent().parent().parent().find("input.recipeAmounts").val(number);
         });
-        $("#velgDager span.minusknapp").click(function () {
+        $(document).on('vclick', "#velgDager span.minusknapp", function () {
             var mengde = $(this).parent().find(".mengde");
             var number = parseInt($(mengde).text());
             if (number > 0) {
@@ -315,7 +310,7 @@
         });
 
 
-        $("#velgDager a.task-checkbox").click(function () {
+        $(document).on('vclick', "#velgDager a.task-checkbox", function () {
             if (!$(this).hasClass("task-checked")) {
                 checkRecipe($(this).parent().parent());
                 $(this).addClass("task-checked");
@@ -342,9 +337,9 @@
 
 
 <!-- MENUS SHOW_MOBILE -->
-    $(document).bind("ready", function () {
+    $(document).on("pageinit", "#visMeny", function () {
 
-        $("a.check-trash").live("click", function () {
+        $(document).on('vclick', "#visMeny a.check-trash", function () {
             if(confirm("Fjerne oppskrift fra meny?")){
             removeRecipe($("#visMeny").attr("data-menu-id"), $(this).parent().parent().attr("id"));
             var link = $(this).parent().find(".title a");
@@ -369,16 +364,13 @@
 <!-- MENUS SHOW_MOBILE END -->
 
 <!-- MENUMOBILE TAG -->
-    $(document).bind('ready', function () {
+    $(document).on('pageinit', "#showRecipe", function () {
 
-        $("#showRecipe button.addRecipeToMenuButton").live("click", function () {
+        $(document).on('vclick', "#showRecipe button.addRecipeToMenuButton", function () {
 
             if(($(this).attr("data-hasrecipe") == "true" && confirm("Denne dagen inneholder allerede en oppskrift. Erstatte?") || $(this).attr("data-hasrecipe") != "true" ))
             {
-
-          //  }
-          //  else {
-            addRecipe($(this).attr("data-day"));
+                addRecipe($(this).attr("data-day"));
             }
 
              return false;
@@ -404,35 +396,3 @@
  });
 <!-- MENUMOBILE TAG END -->
 
-    <!-- PROFIL START -->
-
-
-    $("#profil span.plussknapp").live("click", function () {
-        var mengde = $(this).parent().find(".mengde");
-        var number = parseInt($(mengde).text());
-        var newNumber = number + 1;
-        changePreferredServings(newNumber);
-        $(this).parent().parent().parent().find(".mengde").each( function(){ $(this).text(newNumber); });
-        return false;
-    });
-    $("#profil span.minusknapp").live("click", function () {
-        var mengde = $(this).parent().find(".mengde");
-        var number = parseInt($(mengde).text());
-        if (number > 0) {
-            var newNumber = number - 1;
-            changePreferredServings(newNumber);
-            $(this).parent().parent().parent().find(".mengde").each( function(){ $(this).text(newNumber); });
-        }
-        return false;
-    });
-
-
-    function changePreferredServings(amount) {
-        $.ajax({
-            type: "POST",
-            url: "/users/preferredservings",
-            data: "amount=" + amount,
-            dataType: "xml"
-        });
-    }
-    <!-- PROFIL END -->

@@ -66,9 +66,8 @@ public class Menus extends CRUD {
     }
 
     public static void showNextWeekMobile(Long id) {
-        if(id == null)
-        {
-           int uke = DateUtil.weekOfYear(new Date());
+        if (id == null) {
+            int uke = DateUtil.weekOfYear(new Date());
             Date startDag = DateUtil.getStartingDayForWeek(uke);
 
             User user = User.find("byEmail", Security.connected()).first();
@@ -76,21 +75,21 @@ public class Menus extends CRUD {
             if (menu == null) {
                 menu = new Menu(user, startDag).save();
             }
-           id = menu.id;
+            id = menu.id;
         }
 
         renderShowNextWeek(id, true);
     }
 
     public static void showThisWeekMobile() {
-           int uke = DateUtil.weekOfYear(new Date());
-            Date startDag = DateUtil.getStartingDayForWeek(uke);
+        int uke = DateUtil.weekOfYear(new Date());
+        Date startDag = DateUtil.getStartingDayForWeek(uke);
 
-            User user = User.find("byEmail", Security.connected()).first();
-            Menu menu = Menu.find("author = ? and usedFromDate = ?", user, startDag).first();
-            if (menu == null) {
-                menu = new Menu(user, startDag).save();
-            }
+        User user = User.find("byEmail", Security.connected()).first();
+        Menu menu = Menu.find("author = ? and usedFromDate = ?", user, startDag).first();
+        if (menu == null) {
+            menu = new Menu(user, startDag).save();
+        }
 
         render("Menus/showMobile.html", menu);
     }
@@ -203,21 +202,30 @@ public class Menus extends CRUD {
         render(menu);
     }
 
-    public static void dinnerplanMobile() throws ParseException {
+    public static void dinnerplanMobile(Long id, String direction) throws ParseException {
+        Menu thismenu = Menu.findById(id);
         User user = User.find("byEmail", Security.connected()).first();
-
-        //   Recipe newrecipe = Recipe.findById(recipeId);
-
         Menu menu = null;
-
-        initMenu(user, null);
-
-        if (user != null && user.activeMenu != null) {
-            menu = Menu.findById(user.activeMenu.getId());
+        if (direction != null) {
+            if (direction.compareToIgnoreCase("back") == 0) {
+                menu = Menu.findById(thismenu.getLastWeeksMenu(user).id);
+            } else {
+                menu = Menu.findById(thismenu.getNextWeeksMenu(user).id);
+            }
         }
 
-        render(menu);
+        user.activeMenu = menu;
+        user.save();
+
+
+
+
+        //response.setContentTypeIfNotSet("application/json");
+        renderJSON(new viewmodels.Menu(menu));
+        //response.print(jsonString);
     }
+
+
 
 
     private static void initMenu(User user, String startingDayString) throws ParseException {
@@ -252,6 +260,7 @@ public class Menus extends CRUD {
     public static void show(Long id) {
         renderShow(id, false);
     }
+
     public static void showMobile(Long id) {
         renderShow(id, true);
     }
@@ -260,9 +269,8 @@ public class Menus extends CRUD {
         Menu menu = Menu.findById(id);
         if (isMobile) {
             render("Menus/showMobile.html", menu);
-        }
-        else{
-           render(menu);
+        } else {
+            render(menu);
         }
     }
 

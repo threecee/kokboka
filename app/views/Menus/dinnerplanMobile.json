@@ -1,0 +1,13 @@
+"id": "${menu.id}",
+"usedFromDate": "${menu.usedFromDate.format('yyyy-MM-dd')}",
+"heading": "Uke ${utils.DateUtil.weekOfYear(menu.usedFromDate)}",
+"recipes": [
+#{list items:0..6, as:'i'}
+    "recipe": {
+        "day": " ${utils.DateUtil.addDays(menu.usedFromDate, i).format("yyyy-MM-dd")}",
+        "name": "${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}",
+        "hasRecipe": "${menu.getRecipeForDay(i) != null?'true':'false'}",
+    }#{if i < 6 },#{/if}
+#{/list}
+
+]

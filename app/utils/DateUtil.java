@@ -12,11 +12,12 @@ import java.util.Date;
 public class DateUtil {
 
 
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    public static SimpleDateFormat dateFormatDots = new SimpleDateFormat("dd.MM.yyyy");
+    public static SimpleDateFormat dateFormatDash = new SimpleDateFormat("yyyy-MM-dd");
 
 
     public static String prettyDate(Date date) {
-        return dateFormat.format(date);
+        return dateFormatDots.format(date);
     }
 
 

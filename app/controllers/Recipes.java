@@ -116,15 +116,6 @@ public class Recipes extends CRUD {
         renderJSON(ingredients);
     }
 
-    public static void recipes_json() {
-        List<Recipe> recipes = Recipe.findAll();
-        List<Ingredient> ingredients = Ingredient.findAll();
-        // renderJSON(recipes);
-        List<Object> allEntities = new ArrayList<Object>();
-        allEntities.addAll(recipes);
-        allEntities.addAll(ingredients);
-        renderXml(allEntities);
-    }
 
     public static void listTagged(String tag) {
         List<Recipe> recipes = Recipe.findTaggedWith(tag);
@@ -229,7 +220,20 @@ public class Recipes extends CRUD {
 
     public static void removeTag(Long id, String tag) {
         Recipe recipe = Recipe.findById(id);
-        recipe.tags.remove(Tag.hashName(tag));
+
+        String hashedTag = Tag.hashName(tag);
+
+        for(Tag existingTag: recipe.tags)
+        {
+            if(hashedTag.compareToIgnoreCase(existingTag.nameHash) == 0)
+            {
+                recipe.tags.remove(existingTag);
+                break;
+            }
+
+        }
+
+
 
         recipe.save();
         response.print("<xml/>");

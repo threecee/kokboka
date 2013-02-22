@@ -1,14 +1,73 @@
-<div data-role="popup" id="popupPanel" data-corners="false" data-theme="none" data-shadow="false"
+<div data-role="popup" id="popupPanel" data-menu-id="${menu.id}" data-corners="false" data-theme="none" data-shadow="false"
      data-tolerance="0,0">
 
+    <script type="text/javascript">
+
+        $(document).on('pageinit', '#showRecipe', function () {
+
+            $(document).on('vclick', '#popupPanel #menuSelectorTop .ui-btn-divider-left', menuMobileBack);
+            $(document).on('vclick', '#popupPanel #menuSelectorTop .ui-btn-divider-right', menuMobileForward);
+        });
+
+        function menuMobileBack(event) {
+            menuMobileLoad($("#popupPanel").attr("data-menu-id"), "back");
+
+        }
+        function menuMobileForward(event) {
+            menuMobileLoad($("#popupPanel").attr("data-menu-id"), "forward");
+        }
+
+        function menuMobileLoad(id, direction) {
+            $.getJSON('/menus/dinnerplanMobile?id=' + id + "&direction=" + direction, function (data) {
 
 
-<h1>Uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}</h1>
+                var items = [];
+
+                $("#popupPanel #menuSelectorTop #menuHeading").text(data.heading);
+                $("#popupPanel").attr("data-menu-id", data.id);
+
+                $.each(data.days, function (i, day) {
+                    var icon = day.hasRecipe ? "grid" : "";
+                    items.push('<button data-theme="a" class="addRecipeToMenuButton" data-day="' + day.dayDate + '" data-icon="' + icon + '" data-hasrecipe="' + day.hasRecipe + '" data-mini="true">' + day.dayName + '</button>');
+
+                });
+
+                var slideDirection = direction == "back"?"right":"left";
+                $('#popupPanel #menuButtons').html(items.join('')).trigger('create');
+            })
+            .error(function() { alert("error"); })
+            ;
+        }
 
 
-#{list items:0..6, as:'i'}
-     <button data-theme="a"  class="addRecipeToMenuButton" data-day="${utils.DateUtil.addDays(menu.usedFromDate, i).format("yyyy-MM-dd")}" data-icon="${menu.getRecipeForDay(i) != null?'grid':''}" data-hasrecipe="${menu.getRecipeForDay(i) != null?'true':'false'}" data-mini="true">${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}</button>
-#{/list}
+    </script>
 
+
+    <div id="menuSelectorTop" data-role="button"
+         data-corners="true"
+         data-shadow="true"
+         data-wrapperels="span"
+         data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c">
+       <span class="ui-btn-inner ui-btn-corner-all">
+           <span id="menuHeading" class="ui-btn-text">
+               Uke ${menu!=null?utils.DateUtil.weekOfYear(menu.usedFromDate):'?'}
+                      </span>
+               <span class="ui-icon ui-icon-right ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
+               <span class="ui-icon ui-icon-left ui-icon-arrow-l ui-icon-shadow">&nbsp;</span>
+           <span class="ui-btn-divider-left">&nbsp;</span>
+           <span class="ui-btn-divider-right">&nbsp;</span>
+       </span>
+    </div>
+
+
+    <div id="menuButtons">
+    #{list items:0..6, as:'i'}
+        <button data-theme="a" class="addRecipeToMenuButton"
+                data-day="${utils.DateUtil.addDays(menu.usedFromDate, i).format("yyyy-MM-dd")}"
+                data-icon="${menu.getRecipeForDay(i) != null?'grid':''}"
+                data-hasrecipe="${menu.getRecipeForDay(i) != null?'true':'false'}"
+                data-mini="true">${utils.DateUtil.dayOfWeek(utils.DateUtil.addDays(menu.usedFromDate, i))}</button>
+    #{/list}
+    </div>
 
 </div>

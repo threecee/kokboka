@@ -45,6 +45,10 @@ public class Ingredient extends Model {
 
     public static Double getScaledAmount(User user, Menu menu, Recipe recipe, Ingredient ingredient) {
         double scaledServing = getScaledServing(user, menu, recipe);
+        if(recipe.serves < 1)
+        {
+            recipe.serves = 1;
+        }
         double multiplier = scaledServing / recipe.serves;
 
         return ingredient.amount * multiplier;

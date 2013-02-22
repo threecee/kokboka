@@ -1,0 +1,41 @@
+<div class="addTask">
+<div class="ui-grid-a addTaskTop">
+    <div class="ui-block-a" style="width:25%">
+        <div data-role="fieldcontain">
+            <fieldset data-role="controlgroup">
+                <input id="add-amount" type="text" class="transparent mousetrap" maxlength="255"
+                       data-placeholder="mengde" placeholder="mengde">
+
+            </fieldset>
+        </div>
+    </div>
+    <div class="ui-block-b" style="width:74%">
+        <div data-role="fieldcontain">
+            <fieldset data-role="controlgroup">
+                <input id="add-unit" type="text" class="transparent mousetrap" maxlength="255"
+                       key-placeholder="placeholder_add_task_to_$" data-placeholder="unit" placeholder="enhet">
+            </fieldset>
+        </div>
+    </div>
+</div>
+<div class="ui-grid-a addTaskBottom">
+    <div class="ui-block-a" style="width:85%">
+        <div data-role="fieldcontain">
+            <fieldset data-role="controlgroup">
+                <input id="add-description" type="text" class="transparent mousetrap" maxlength="255"
+                       key-placeholder="placeholder_add_task_to_$" data-placeholder="Inbox"
+                       placeholder="navn på ingrediens">
+            </fieldset>
+        </div>
+    </div>
+    <div class="ui-block-b" style="width:14%">
+        <div data-role="fieldcontain">
+            <fieldset data-role="controlgroup">
+                <button id="addIngredientButton" data-theme="a"  data-mini="true">OK</button>
+                </fieldset>
+        </div>
+    </div>
+</div>
+    <ul class="suggestions" id="ingredientSuggestions" data-role="listview" data-inset="true">
+    </ul>
+</div>

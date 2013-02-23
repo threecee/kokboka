@@ -80,13 +80,6 @@
 
 
 
-    function inject(taskItem, anchorTo) {
-      $("#tasksPage " + anchorTo + " .ui-controlgroup-controls").prepend(taskItem).parent().trigger("create")
-        $("#tasksPage fieldset").controlgroup("refresh");
-    }
-
-
-
     var groupTemplate = "<div id=\"$ID$\" data-role=\"fieldcontain\" class=\"ui-field-contain ui-body ui-br\"><fieldset data-role=\"controlgroup\" data-type=\"vertical\" class=\"ui-corner-all ui-controlgroup ui-controlgroup-vertical\"><div class=\"ui-controlgroup-controls\"><label>$DESCRIPTION$</label></div></fieldset></div>";
 
     var shoppingListItemOnTheFlyTemplate =
@@ -95,19 +88,6 @@
                    "data-recipe=\"$RECIPE$\" />"       +
             "<label for=\"$ID$\">$DESCRIPTION$</label>";
 
-    var shoppingListItemTemplate =
-        "<input id=\"$ID$\" name=\"$DESCRIPTION$\" type=\"checkbox\" $CHECKED$ "+
-                   "data-varetype=\"$VARETYPE$\""   +
-                   "data-recipe=\"$RECIPE$\" />"       +
-            "<label for=\"$ID$\"><span>$AMOUNT$</span> $UNIT$ $DESCRIPTION$</label>";
-
-
-
-    var taskTemplateNEW =
-            "<input id=\"$ID$\" name=\"\" type=\"checkbox\">" +
-            "<label for=\"$ID$\" data-corners=\"true\" data-shadow=\"false\" data-iconshadow=\"true\" data-wrapperels=\"span\" data-icon=\"checkbox-off\" data-theme=\"c\" class=\"ui-btn ui-btn-icon-left ui-checkbox-off ui-btn-up-c\">" +
-            "<span class=\"ui-btn-inner\"><span class=\"ui-btn-text\">$DESCRIPTION$</span>" +
-            "<span class=\"ui-icon ui-icon-checkbox-off ui-icon-shadow\">&nbsp;</span></span></label>";
 
 
     function injectRegularTask(target, taskItem, checked) {
@@ -120,25 +100,11 @@
         var varetype = inputItem.attr("data-varetype");
         var recipe = inputItem.attr("data-recipe");
 
-
-        if (varetype == null ) varetype = "";
-        if (recipe == null ) recipe = "";
-
-        var injectString = shoppingListItemTemplate.replace("$ID$", id).replace("$ID$", id).replace("$DESCRIPTION$", description).replace("$DESCRIPTION$", description).replace("$VARETYPE$", varetype).replace("$RECIPE$", recipe).replace("$AMOUNT$", amount).replace("$UNIT$", unit);
-        if(checked != null)
-        {
-            injectString = injectString.replace("$CHECKED$","checked=\"true\"");
-        }
-        else{
-            injectString = injectString.replace("$CHECKED$","");
-        }
-
-        inject(injectString, target);
+        views.injectCheckbox("#tasksPage", target, id, amount, unit, description, varetype, recipe, checked);
     }
 
     function injectOnTheFlyTask(id, description) {
-        var injectString = shoppingListItemOnTheFlyTemplate.replace("$ID$", id).replace("$ID$", id).replace("$DESCRIPTION$", description).replace("$DESCRIPTION$", description);
-        inject(injectString, "#ingredient-tasks");
+        views.injectCheckbox("#tasksPage", "#ingredient-tasks", id, null, null, description);
     }
 
 

@@ -1,3 +1,8 @@
+
+
+
+
+
     $(document).bind('pageinit', "#tasksPage", function () {
 
         $(document).on('change', "#tasksPage div.ui-checkbox input:checkbox", function (event) {
@@ -10,7 +15,7 @@
             var sortering = $("#tasksPage").attr("data-sortering");
 
             if (!box.find("label").hasClass("ui-checkbox-on")) {
-                checkIngredient(box.find("input").attr("id"));
+               services.checkShoppingListIngredient(box.find("input").attr("id"));
                 var taskItem = box.detach();
 
                 if (sortering != null && sortering == "oppskrift") {
@@ -21,7 +26,7 @@
                 move(taskItem, fromId, "#completed-tasks");
             }
             else {
-                unCheckIngredient(box.find("input").attr("id"));
+                services.unCheckShoppingListIngredient(box.find("input").attr("id"));
                 var toId = "#ingredient-tasks";
 
                 if (sortering != null) {
@@ -75,7 +80,7 @@
 
         $(document).on('keypress', "#tasksPage input#add-task-input", function (e) {
             if (e.which == 13) {
-                addOnTheFlyIngredient($("#tasksPage").attr("data-menu-id"), $(this).val());
+                 services.addOnTheFlyShoppingListIngredient($("#tasksPage").attr("data-menu-id"), $(this).val(), injectTask);
                 $(this).val("");
 
             }
@@ -117,35 +122,6 @@
     }
 
 
-    function checkIngredient(id) {
-        $.ajax({
-            type: "POST",
-            url: "/shoppinglists/check",
-            data: "id=" + id,
-            dataType: "xml"
-        });
-    }
-    function unCheckIngredient(id) {
-        $.ajax({
-            type: "POST",
-            url: "/shoppinglists/uncheck",
-            data: "id=" + id,
-            dataType: "xml"
-        });
-    }
-    function addOnTheFlyIngredient(id, description) {
-        $.ajax({
-            type: "POST",
-            url: "/shoppinglists/addOnTheFly",
-            data: "id=" + id + "&description=" + description,
-            dataType: "xml"
-
-        }).always(function (data) {
-                    injectTask(data.responseText, description);
-
-                });
-    }
-
 
     var groupTemplate = "<div id=\"$ID$\" data-role=\"fieldcontain\" class=\"ui-field-contain ui-body ui-br\"><fieldset data-role=\"controlgroup\" data-type=\"vertical\" class=\"ui-corner-all ui-controlgroup ui-controlgroup-vertical\"><div class=\"ui-controlgroup-controls\"><label>$DESCRIPTION$</label></div></fieldset></div>";
 
@@ -179,20 +155,6 @@
                   $( "#popupPanel" ).css( "height", h );
 
           });
-
-        $(document).on('vclick', "#showRecipe a.task-checkbox", function () {
-            if (!$(this).hasClass("task-checked")) {
-                $(this).addClass("task-checked");
-                $(this).find("span.task-checkbox").addClass("task-checked");
-                $(this).parent().parent().addClass("done");
-            }
-            else {
-                $(this).removeClass("task-checked");
-                $(this).find("span.task-checkbox").removeClass("task-checked");
-                $(this).parent().parent().removeClass("done");
-            }
-        });
-
 
         $(document).on('vclick', "#showRecipe a#favoritt", function () {
             handleFavoritt($(this));
@@ -245,16 +207,18 @@
 
         function handleFavoritt(favoritt) {
             if (favoritt.attr("data-theme") == "b") {
-                removeFavorite($("#showRecipe").attr("data-id"));
+                services.removeRecipeAsFavorite($("#showRecipe").attr("data-id"));
                 favoritt.attr("data-theme", "c");
+
                 favoritt.removeClass("ui-btn-up-b");
                 favoritt.removeClass("ui-btn-hover-b");
                 favoritt.removeClass("ui-btn-down-b");
                 favoritt.addClass("ui-btn-up-c");
             }
             else {
-                addFavorite($("#showRecipe").attr("data-id"));
+                services.addRecipeAsFavorite($("#showRecipe").attr("data-id"));
                 favoritt.attr("data-theme", "b");
+
                 favoritt.removeClass("ui-btn-up-c");
                 favoritt.removeClass("ui-btn-hover-c");
                 favoritt.removeClass("ui-btn-down-c");
@@ -262,23 +226,7 @@
             }
         }
 
-        function addFavorite(id) {
-            $.ajax({
-                type: "POST",
-                url: "/recipes/addFavorite",
-                data: "id=" + id,
-                dataType: "xml"
-            });
-        }
 
-        function removeFavorite(id) {
-            $.ajax({
-                type: "POST",
-                url: "/recipes/removeFavorite",
-                data: "id=" + id,
-                dataType: "xml"
-            });
-        }
     });
 
     <!-- RECIPES SHOWMOBILE STOP -->
@@ -333,9 +281,9 @@
 <!-- MENUS SHOW_MOBILE -->
     $(document).on("pageinit", "#visMeny", function () {
 
-        $(document).on('vclick', "#visMeny a.check-trash", function () {
+        $(document).on('click', "#visMeny a.check-trash", function () {
             if(confirm("Fjerne oppskrift fra meny?")){
-            removeRecipe($("#visMeny").attr("data-menu-id"), $(this).parent().parent().attr("id"));
+            services.removeRecipeFromMenu($("#visMeny").attr("data-menu-id"), $(this).parent().parent().attr("id"));
             var link = $(this).parent().find(".title a");
             link.html("&nbsp;");
             link.attr("href", "");
@@ -345,15 +293,7 @@
         });
     });
 
-    function removeRecipe(menuId, recipeId) {
-        $.ajax({
-            type: "POST",
-            url: "/menus/unplanrecipefrommenu",
-            data: "menuId=" + menuId + "&recipeId=" + recipeId ,
-            dataType: "xml"
 
-        });
-    }
 
 <!-- MENUS SHOW_MOBILE END -->
 
@@ -364,7 +304,8 @@
 
             if(($(this).attr("data-hasrecipe") == "true" && confirm("Denne dagen inneholder allerede en oppskrift. Erstatte?") || $(this).attr("data-hasrecipe") != "true" ))
             {
-                addRecipe($(this).attr("data-day"));
+                services.addRecipeToMenu($("#showRecipe").attr("data-id"), $(this).attr("data-day"));
+                $( "#popupPanel" ).popup('close');
             }
 
              return false;
@@ -375,18 +316,6 @@
             $('#replaceRecipeButton').click();
         }
 
-        function addRecipe(day){
-            var recipeId = $("#showRecipe").attr("data-id");
-            $.ajax({
-
-                   type: "POST",
-                   url: "/menus/planrecipe",
-                   data: "recipeId=" + recipeId + "&day="+day,
-                   dataType: "xml"
-
-                });
-            $( "#popupPanel" ).popup('close');
-        }
  });
 <!-- MENUMOBILE TAG END -->
 

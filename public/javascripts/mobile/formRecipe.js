@@ -47,60 +47,14 @@
 
     var EditRecipe = (function() {
 
-     var taskTemplateRecipe = "<div class=\"ui-checkbox\">" +
+     var taskTemplateRecipe =
              "<input id=\"$ID$\" name=\"\" type=\"checkbox\">" +
              "<label for=\"$ID$\" data-corners=\"true\" data-shadow=\"false\" data-iconshadow=\"true\" data-wrapperels=\"span\" data-icon=\"checkbox-off\" data-theme=\"c\" class=\"ui-btn ui-btn-icon-left ui-checkbox-off ui-btn-up-c\">" +
              "<span class=\"ui-btn-inner\"><span class=\"ui-btn-text\"><span>$AMOUNT$</span> $UNIT$ $DESCRIPTION$</span>" +
-             "<span class=\"ui-icon ui-icon-checkbox-off ui-icon-shadow\">&nbsp;</span></span></label></div>";
+             "<span class=\"ui-icon ui-icon-checkbox-off ui-icon-shadow\">&nbsp;</span></span></label>";
 
         function EditRecipe(){}
 
-        EditRecipe.prototype.removeIngredient =  function(id, ingredientId) {
-                $.ajax({
-                    type: "POST",
-                    url: "/recipes/removeIngredient",
-                    data: "recipeId=" + id + "&ingredientId=" + ingredientId,
-                    dataType: "xml"
-
-                });
-            }
-
-
-
-
-EditRecipe.prototype.addIngredient = function(amount, unit, description) {
-        $.ajax({
-            type: "POST",
-            url: "/recipes/addIngredient",
-            data: "id=" + $("#editRecipe").attr("data-recipe-id") +"&amount=" + amount + "&unit=" + unit + "&description=" + description,
-            dataType: "xml"
-
-        }).always(function (data) {
-                editRecipe.injectTaskFormRecipe(data.responseText, amount, unit, description);
-
-            });
-    }
-
-
-EditRecipe.prototype.addTag =  function(tag) {
-        $.ajax({
-            type: "POST",
-            url: "/recipes/addTag",
-            data: "id=" + $("#editRecipe").attr("data-recipe-id") +"&tag=" + tag,
-            dataType: "xml"
-
-        });
-    }
-
-EditRecipe.prototype.removeTag = function(tag) {
-        $.ajax({
-            type: "POST",
-            url: "/recipes/removeTag",
-            data: "id=" + $("#editRecipe").attr("data-recipe-id") +"&tag=" + tag,
-            dataType: "xml"
-
-        });
-    }
 
 EditRecipe.prototype.injectTag = function(tag) {
     var tagTemplate = "<a data-role=\"button\" data-theme=\"c\" data-icon=\"delete\" data-iconpos=\"right\" href=\"#\">" +
@@ -113,20 +67,12 @@ EditRecipe.prototype.injectTag = function(tag) {
 
 }
 
-EditRecipe.prototype.updateField = function(element) {
-        $.ajax({
-            type: "POST",
-            url: "/recipes/update" + $(element).attr("id"),
-            data: "id=" + $("#editRecipe").attr("data-recipe-id") +"&" + $(element).attr("id") + "=" + $(element).val(),
-            dataType: "xml"
 
-        });
-    }
 
 EditRecipe.prototype.injectTaskFormRecipe = function(id, amount, unit, description) {
         var injectString = taskTemplateRecipe.replace("$ID$", id).replace("$AMOUNT$", amount).replace("$UNIT$", unit).replace("$DESCRIPTION$", description);
 
-    this.injectFormRecipe($('<div/>').html(injectString), "#ingredient-tasks");
+    editRecipe.injectFormRecipe($("<div class=\"ui-checkbox\">").html(injectString), "#ingredient-tasks");
 
     }
 
@@ -174,19 +120,19 @@ return EditRecipe;
 $(document).on('pageinit', "#editRecipe", function () {
 
          $(document).typing({target:"#editRecipe input#title", stop: function (event, $elem) {
-             editRecipe.updateField(event.target)
+             services.updateRecipeField($("#editRecipe").attr("data-recipe-id"), $(event.target).attr("id"), $(event.target).val() )
          }, delay: 2000});
          $(document).typing({target:"#editRecipe textarea#description", stop: function (event, $elem) {
-             editRecipe.updateField(event.target)
+             services.updateRecipeField($("#editRecipe").attr("data-recipe-id"), $(event.target).attr("id"), $(event.target).val() )
          }, delay: 2000});
          $(document).typing({target: "input#serves", stop: function (event, $elem) {
-             editRecipe.updateField(event.target)
+             services.updateRecipeField($("#editRecipe").attr("data-recipe-id"), $(event.target).attr("id"), $(event.target).val() )
          }, delay: 2000});
          $(document).typing({target: "input#servesUnit", stop: function (event, $elem) {
-             editRecipe.updateField(event.target)
+             services.updateRecipeField($("#editRecipe").attr("data-recipe-id"), $(event.target).attr("id"), $(event.target).val() )
          }, delay: 2000});
          $(document).typing({target: "textarea#steps", stop: function (event, $elem) {
-             editRecipe.updateField(event.target)
+             services.updateRecipeField($("#editRecipe").attr("data-recipe-id"), $(event.target).attr("id"), $(event.target).val() )
          }, delay: 2000});
 
          $(document).on('vclick', "#editRecipe #addIngredientButton", function (e) {
@@ -194,7 +140,7 @@ $(document).on('pageinit', "#editRecipe", function () {
              var unitInput = $("#editRecipe .addTask input#add-unit");
              var descriptionInput = $("#editRecipe .addTask input#add-description");
 
-             editRecipe.addIngredient(amountInput.val(), unitInput.val(), descriptionInput.val());
+             services.addIngredientToRecipe($("#editRecipe").attr("data-recipe-id"), amountInput.val(), unitInput.val(), descriptionInput.val(), editRecipe.injectTaskFormRecipe);
              amountInput.val("");
              unitInput.val("");
              descriptionInput.val("");
@@ -202,35 +148,35 @@ $(document).on('pageinit', "#editRecipe", function () {
 
          });
 
-         $(document).on('vclick', "#editRecipe .ui-icon-checkbox-off",  function () {
-             editRecipe.removeIngredient($("#editRecipe").attr("data-recipe-id"), $(this).parent().parent().attr("for"));
+         $(document).on('click', "#editRecipe .ui-icon-checkbox-off",  function () {
+             services.removeIngredientFromRecipe($("#editRecipe").attr("data-recipe-id"), $(this).parent().parent().attr("for"));
              var taskItem = $(this).parent().parent().parent().detach();
              editRecipe.moveTaskFormRecipe(taskItem);
              return false;
          });
-    $(document).on('vclick', "#editRecipe .ui-checkbox",  function () {
-        editRecipe.removeIngredient($("#editRecipe").attr("data-recipe-id"), $(this).find("label").attr("for"));
+    $(document).on('click', "#editRecipe .ui-checkbox",  function () {
+        services.removeIngredientFromRecipe($("#editRecipe").attr("data-recipe-id"), $(this).find("label").attr("for"));
         var taskItem = $(this).detach();
         editRecipe.moveTaskFormRecipe(taskItem);
         return false;
     });
     $(document).on('vclick', "#editRecipe .tagger .tagButton",  function () {
-        editRecipe.removeTag($(this).find(".tagit-label").text());
+        services.removeTagFromRecipe($("#editRecipe").attr("data-recipe-id"), $(this).find(".tagit-label").text());
         var taskItem = $(this).detach();
         return false;
     });
 
-         $("#editRecipe #add-description").autocomplete({
-      				target: $('#ingredientSuggestions'),
-      				source: '/ingredients/autocompleteDescriptions',
-      				link: '',
-                      callback: function(e) {
-                              var $a = $(e.currentTarget); // access the selected item
-                              $('#editRecipe #add-description').val($a.text()); // place the value of the selection into the search box
-                              $("#editRecipe #add-description").autocomplete('clear'); // clear the listview
-                          },
-      				minLength: 1
-      			});
+     $("#editRecipe #add-description").autocomplete({
+                target: $('#ingredientSuggestions'),
+                source: '/ingredients/autocompleteDescriptions',
+                link: '',
+                  callback: function(e) {
+                          var $a = $(e.currentTarget); // access the selected item
+                          $('#editRecipe #add-description').val($a.text()); // place the value of the selection into the search box
+                          $("#editRecipe #add-description").autocomplete('clear'); // clear the listview
+                      },
+                minLength: 1
+            });
 
     $("#editRecipe .taggListe #add-tag-input").autocomplete({
  				target: $('#tagSuggestions'),
@@ -238,7 +184,7 @@ $(document).on('pageinit', "#editRecipe", function () {
  				link: '',
                  callback: function(e) {
                          var $a = $(e.currentTarget); // access the selected item
-                     editRecipe.addTag($a.text());
+                     services.addTagToRecipe($("#editRecipe").attr("data-recipe-id"), $a.text());
                      editRecipe.injectTag($a.text());
 
                         $("#editRecipe .taggListe #add-tag-input").val(""); // place the value of the selection into the search box

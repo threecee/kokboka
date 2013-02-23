@@ -2,45 +2,20 @@
   
     var EditProfile = (function() {
 
-     var taskTemplateRecipe = "<div class=\"ui-checkbox\">" +
+     var taskTemplateRecipe =
              "<input id=\"$ID$\" name=\"\" type=\"checkbox\">" +
              "<label for=\"$ID$\" data-corners=\"true\" data-shadow=\"false\" data-iconshadow=\"true\" data-wrapperels=\"span\" data-icon=\"checkbox-off\" data-theme=\"c\" class=\"ui-btn ui-btn-icon-left ui-checkbox-off ui-btn-up-c\">" +
              "<span class=\"ui-btn-inner\"><span class=\"ui-btn-text\"><span>$AMOUNT$</span> $UNIT$ $DESCRIPTION$</span>" +
-             "<span class=\"ui-icon ui-icon-checkbox-off ui-icon-shadow\">&nbsp;</span></span></label></div>";
+             "<span class=\"ui-icon ui-icon-checkbox-off ui-icon-shadow\">&nbsp;</span></span></label>";
 
         function EditProfile(){}
 
- EditProfile.prototype.removeIngredient =  function(id) {
-     $.ajax({
-         type: "POST",
-         url: "/users/removeIngredient",
-         data: "id=" + id,
-         dataType: "xml"
-
-     });
-
-            }
-
-
-
-EditProfile.prototype.addIngredient = function(amount, unit, description) {
-        $.ajax({
-            type: "POST",
-            url: "/users/addIngredient",
-            data: "amount=" + amount + "&unit=" + unit + "&description=" + description,
-            dataType: "xml"
-
-        }).always(function (data) {
-                editProfile.injectTaskFormRecipe(data.responseText, amount, unit, description);
-
-            });
-    }
 
 
 EditProfile.prototype.injectTaskFormRecipe = function(id, amount, unit, description) {
         var injectString = taskTemplateRecipe.replace("$ID$", id).replace("$AMOUNT$", amount).replace("$UNIT$", unit).replace("$DESCRIPTION$", description);
 
-    this.injectFormRecipe($('<div/>').html(injectString), "#ingredient-tasks");
+    editProfile.injectFormRecipe($("<div class=\"ui-checkbox\"/>").html(injectString), "#ingredient-tasks");
 
     }
 
@@ -92,7 +67,7 @@ return EditProfile;
             var mengde = $(this).parent().find(".mengde");
             var number = parseInt($(mengde).text());
             var newNumber = number + 1;
-            editProfile.changePreferredServings(newNumber);
+            services.changeUserPreferredServings(newNumber);
             $(this).parent().parent().parent().find(".mengde").each( function(){ $(this).text(newNumber); });
             return false;
         });
@@ -102,7 +77,7 @@ return EditProfile;
             var number = parseInt($(mengde).text());
             if (number > 0) {
                 var newNumber = number - 1;
-                editProfile.changePreferredServings(newNumber);
+                services.changeUserPreferredServings(newNumber);
                 $(this).parent().parent().parent().find(".mengde").each( function(){ $(this).text(newNumber); });
             }
             return false;
@@ -114,7 +89,7 @@ return EditProfile;
             var unitInput = $("#profil .addTask input#add-unit");
             var descriptionInput = $("#profil .addTask input#add-description");
 
-            editProfile.addIngredient(amountInput.val(), unitInput.val(), descriptionInput.val());
+            services.addUserPreferredIngredient(amountInput.val(), unitInput.val(), descriptionInput.val(),  editProfile.injectTaskFormRecipe);
             amountInput.val("");
             unitInput.val("");
             descriptionInput.val("");
@@ -123,20 +98,20 @@ return EditProfile;
         });
 
         $(document).on('click', "#profil .ui-icon-checkbox-off",  function () {
-            editProfile.removeIngredient($(this).parent().parent().attr("for"));
+            services.removeUserPreferredIngredient($(this).parent().parent().attr("for"));
             var taskItem = $(this).parent().parent().parent().detach();
             editProfile.moveTaskFormRecipe(taskItem);
             return false;
         });
    $(document).on('click', "#profil .ui-checkbox",  function () {
-       editProfile.removeIngredient($(this).find("label").attr("for"));
+       services.removeUserPreferredIngredient($(this).find("label").attr("for"));
        var taskItem = $(this).detach();
        editProfile.moveTaskFormRecipe(taskItem);
        return false;
    });
 
         $("#profil #add-description").autocomplete({
-     				target: $('#suggestions'),
+     				target: $('#profil #ingredientSuggestions'),
      				source: '/ingredients/autocompleteDescriptions',
      				link: '',
                      callback: function(e) {
@@ -153,14 +128,7 @@ return EditProfile;
 
 
 
-    function changePreferredServings(amount) {
-        $.ajax({
-            type: "POST",
-            url: "/users/preferredservings",
-            data: "amount=" + amount,
-            dataType: "xml"
-        });
-    }
+
     <!-- PROFIL END -->
 
 

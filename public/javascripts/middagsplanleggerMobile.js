@@ -150,23 +150,17 @@
     var groupTemplate = "<div id=\"$ID$\" data-role=\"fieldcontain\" class=\"ui-field-contain ui-body ui-br\"><fieldset data-role=\"controlgroup\" data-type=\"vertical\" class=\"ui-corner-all ui-controlgroup ui-controlgroup-vertical\"><div class=\"ui-controlgroup-controls\"><label>$DESCRIPTION$</label></div></fieldset></div>";
 
 
-    var taskTemplateNEW = "<div class=\"ui-checkbox\">" +
+    var taskTemplateNEW =
             "<input id=\"$ID$\" name=\"\" type=\"checkbox\">" +
             "<label for=\"$ID$\" data-corners=\"true\" data-shadow=\"false\" data-iconshadow=\"true\" data-wrapperels=\"span\" data-icon=\"checkbox-off\" data-theme=\"c\" class=\"ui-btn ui-btn-icon-left ui-checkbox-off ui-btn-up-c\">" +
             "<span class=\"ui-btn-inner\"><span class=\"ui-btn-text\">$DESCRIPTION$</span>" +
-            "<span class=\"ui-icon ui-icon-checkbox-off ui-icon-shadow\">&nbsp;</span></span></label></div>";
+            "<span class=\"ui-icon ui-icon-checkbox-off ui-icon-shadow\">&nbsp;</span></span></label>";
 
-    var taskTemplate = "<li class=\"task-item\" id=\"$ID$\">" +
-            "<div class=\"task-body\"><a class=\"task-checkbox\"><span class=\"icon task-checkbox \"></span></a> " +
-            "<a class=\"icon task-separator\"></a>" +
-            "<div class=\"title-wrapper\"><span" +
-            "  class=\"title\">$DESCRIPTION$</span>" +
-            "</div>" +
-            "</div>" +
-            "</li>";
+
     function injectTask(id, description) {
-        var injectString = taskTemplateNEW.replace("$ID$", id).replace("$DESCRIPTION$", description);
-        inject($('<div/>').html(injectString), "#ingredient-tasks");
+        alert("injecting " + id);
+        var injectString = taskTemplateNEW.replace("$ID$", id).replace("$ID$", id).replace("$DESCRIPTION$", description);
+        inject($("<div class=\"ui-checkbox\"/>").html(injectString), "#ingredient-tasks");
     }
     function injectGroup(id, description) {
         if (!$(id).length) {

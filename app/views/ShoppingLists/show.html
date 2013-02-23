@@ -32,7 +32,7 @@
 
         $("input#addtask").keypress(function (e) {
             if (e.which == 13) {
-                addOnTheFlyIngredient(${menu?.shoppingList?.id}, $(this).val());
+                addOnTheFlyIngredient(${menu?.id}, $(this).val());
                 $(this).val("");
 
             }

@@ -17,6 +17,8 @@ var Views = (function () {
 
          if (varetype == null ) varetype = "";
          if (recipe == null ) recipe = "";
+        if (amount == null ) amount = "";
+        if (unit == null ) unit = "";
 
          var injectString = shoppingListItemTemplate.replace("$ID$", id).replace("$ID$", id).replace("$DESCRIPTION$", description).replace("$DESCRIPTION$", description).replace("$VARETYPE$", varetype).replace("$RECIPE$", recipe).replace("$AMOUNT$", amount).replace("$UNIT$", unit);
          if(checked != null)

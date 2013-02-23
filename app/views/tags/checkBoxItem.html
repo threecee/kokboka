@@ -26,6 +26,6 @@
        data-description="${ingredient.description}"
         >
 <label for="${ingredient.id}">
-        <span>${amount}</span> ${ingredient.type.equals(models.ShoppingListItemType.onthefly)?'':ingredient.unit} ${ingredient.description}
+        <span>${amount}</span> ${ingredient instanceof models.ShoppingListIngredient && ingredient.type.equals(models.ShoppingListItemType.onthefly)?'':ingredient.unit} ${ingredient.description}
 </label>
 #{/if}

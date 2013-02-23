@@ -193,7 +193,7 @@ public class ShoppingLists extends CRUD {
         shoppingListIngredient.save();
     }
 
-    public static void save(Long id, Long[] includeRecipes, String includePreferredRecipes) {
+    public static void save(Long id, boolean isMobile, Long[] includeRecipes, String includePreferredRecipes) {
         User user = User.find("byEmail", Security.connected()).first();
         Menu menu = Menu.findById(id);
 
@@ -249,6 +249,11 @@ public class ShoppingLists extends CRUD {
 
         menu.shoppingList.save();
 
+        if(isMobile){
+            showMobile(menu.id, null);
+        }
+        else{
         show(menu.id);
+        }
     }
 }

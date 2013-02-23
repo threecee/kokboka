@@ -21,7 +21,7 @@
                 <li>
                     <a href="@{ShoppingLists.showMobile(menu.id, "type")}"
                        class="${sortering == 'type'?'ui-btn-active ui-state-persist':''}" id="sorter-type"
-                       data-transition="flip"
+                       data-transition="fade"
                        data-theme="">
                         Type
                     </a>
@@ -29,7 +29,7 @@
                 <li>
                     <a href="@{ShoppingLists.showMobile(menu.id, "oppskrift")}"
                        class="${sortering == 'oppskrift'?'ui-btn-active ui-state-persist':''}" id="sorter-oppskrift"
-                       data-transition="flip" data-theme="">
+                       data-transition="fade" data-theme="">
                         Oppskrift
                     </a>
                 </li>
@@ -126,7 +126,13 @@
             </fieldset>
         </div>
 
+        <a data-role="button" href="@{ShoppingLists.listMobile(menu.id)}" data-icon="grid" data-iconpos="right">
+            Velg oppskrifter på nytt
+        </a>
+
     </div>
+
+
 #{footerMobile /}
 </div>
 

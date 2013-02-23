@@ -1,8 +1,3 @@
-
-
-
-
-
     $(document).bind('pageinit', "#tasksPage", function () {
 
         $(document).on('change', "#tasksPage div.ui-checkbox input:checkbox", function (event) {
@@ -19,11 +14,11 @@
                 var taskItem = box.detach();
 
                 if (sortering != null && sortering == "oppskrift") {
-
                     $("#tasksPage #" + taskItem.find("input").attr("id")).parent().remove();
                 }
 
-                move(taskItem, fromId, "#completed-tasks");
+                injectRegularTask("#completed-tasks", taskItem, "checked");
+
             }
             else {
                 services.unCheckShoppingListIngredient(box.find("input").attr("id"));
@@ -60,19 +55,14 @@
                 if (toId instanceof Array) {
                     for(var i = 0; i < toId.length; i++)
                     {
-                        var newItem = taskItem.clone();
-                        newItem.find("label").removeClass("ui-checkbox-on");
-                        newItem.find("label").addClass("ui-checkbox-off");
-                        newItem.find("span.ui-icon-checkbox-on").removeClass("ui-icon-checkbox-on").addClass("ui-icon-checkbox-off");
-
-                        move(newItem, fromId, toId[i]);
+                        injectRegularTask(toId[i], taskItem);
                     }
-
 
                 }
                  else {
-                    move(taskItem, fromId, toId);
+                    injectRegularTask(toId, taskItem);
                 }
+
             }
 
         }
@@ -80,7 +70,7 @@
 
         $(document).on('keypress', "#tasksPage input#add-task-input", function (e) {
             if (e.which == 13) {
-                 services.addOnTheFlyShoppingListIngredient($("#tasksPage").attr("data-menu-id"), $(this).val(), injectTask);
+                 services.addOnTheFlyShoppingListIngredient($("#tasksPage").attr("data-menu-id"), $(this).val(), injectOnTheFlyTask);
                 $(this).val("");
 
             }
@@ -88,42 +78,29 @@
 
     });
 
-    function move(taskItem, anchorFrom, anchorTo) {
-        //if taskItem is om top
-        if (taskItem.find("label").hasClass("ui-corner-top")) { //&& !($("#ingredient-tasks:not(:has(*))"))) {
 
-            $("#tasksPage " + anchorFrom + " div.ui-controlgroup-controls div.ui-checkbox:first").find("label").addClass("ui-corner-top");
-        }
-
-        if (taskItem.find("label").hasClass("ui-corner-bottom")) {
-            $("#tasksPage " + anchorFrom + " div.ui-controlgroup-controls div.ui-checkbox:last").find("label").addClass("ui-corner-bottom").addClass("ui-controlgroup-last");
-        }
-        inject(taskItem, anchorTo);
-
-    }
 
     function inject(taskItem, anchorTo) {
-
-        taskItem.find("label").addClass("ui-corner-top");
-        taskItem.find("label").removeClass("ui-corner-bottom").removeClass("ui-controlgroup-last");
-
-
-        if (!$("#tasksPage " + anchorTo + " div.ui-controlgroup-controls div.ui-checkbox").length) {
-            taskItem.find("label").addClass("ui-corner-bottom").addClass("ui-controlgroup-last");
-        }
-        else {
-            $("#tasksPage " + anchorTo + " div.ui-controlgroup-controls div.ui-checkbox:first").find("label").removeClass("ui-corner-top");
-
-        }
-
-        taskItem.prependTo("#tasksPage " + anchorTo + " div.ui-controlgroup-controls");
-
-
+      $("#tasksPage " + anchorTo + " .ui-controlgroup-controls").prepend(taskItem).parent().trigger("create")
+        $("#tasksPage fieldset").controlgroup("refresh");
     }
 
 
 
     var groupTemplate = "<div id=\"$ID$\" data-role=\"fieldcontain\" class=\"ui-field-contain ui-body ui-br\"><fieldset data-role=\"controlgroup\" data-type=\"vertical\" class=\"ui-corner-all ui-controlgroup ui-controlgroup-vertical\"><div class=\"ui-controlgroup-controls\"><label>$DESCRIPTION$</label></div></fieldset></div>";
+
+    var shoppingListItemOnTheFlyTemplate =
+        "<input id=\"$ID$\" name=\"$DESCRIPTION$\" type=\"checkbox\""+
+                   "data-varetype=\"$VARETYPE$\""   +
+                   "data-recipe=\"$RECIPE$\" />"       +
+            "<label for=\"$ID$\">$DESCRIPTION$</label>";
+
+    var shoppingListItemTemplate =
+        "<input id=\"$ID$\" name=\"$DESCRIPTION$\" type=\"checkbox\" $CHECKED$ "+
+                   "data-varetype=\"$VARETYPE$\""   +
+                   "data-recipe=\"$RECIPE$\" />"       +
+            "<label for=\"$ID$\"><span>$AMOUNT$</span> $UNIT$ $DESCRIPTION$</label>";
+
 
 
     var taskTemplateNEW =
@@ -133,11 +110,39 @@
             "<span class=\"ui-icon ui-icon-checkbox-off ui-icon-shadow\">&nbsp;</span></span></label>";
 
 
-    function injectTask(id, description) {
-        alert("injecting " + id);
-        var injectString = taskTemplateNEW.replace("$ID$", id).replace("$ID$", id).replace("$DESCRIPTION$", description);
-        inject($("<div class=\"ui-checkbox\"/>").html(injectString), "#ingredient-tasks");
+    function injectRegularTask(target, taskItem, checked) {
+        var inputItem = taskItem.find("input");
+
+        var id = inputItem.attr("id");
+        var amount = inputItem.attr("data-amount");
+        var unit = inputItem.attr("data-unit");
+        var description = inputItem.attr("data-description");
+        var varetype = inputItem.attr("data-varetype");
+        var recipe = inputItem.attr("data-recipe");
+
+
+        if (varetype == null ) varetype = "";
+        if (recipe == null ) recipe = "";
+
+        var injectString = shoppingListItemTemplate.replace("$ID$", id).replace("$ID$", id).replace("$DESCRIPTION$", description).replace("$DESCRIPTION$", description).replace("$VARETYPE$", varetype).replace("$RECIPE$", recipe).replace("$AMOUNT$", amount).replace("$UNIT$", unit);
+        if(checked != null)
+        {
+            injectString = injectString.replace("$CHECKED$","checked=\"true\"");
+        }
+        else{
+            injectString = injectString.replace("$CHECKED$","");
+        }
+
+        inject(injectString, target);
     }
+
+    function injectOnTheFlyTask(id, description) {
+        var injectString = shoppingListItemOnTheFlyTemplate.replace("$ID$", id).replace("$ID$", id).replace("$DESCRIPTION$", description).replace("$DESCRIPTION$", description);
+        inject(injectString, "#ingredient-tasks");
+    }
+
+
+
     function injectGroup(id, description) {
         if (!$(id).length) {
             var injectString = groupTemplate.replace("$ID$", id).replace("$DESCRIPTION$", description);

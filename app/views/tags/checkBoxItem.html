@@ -1,15 +1,31 @@
 #{if ingredient != null}
-<input id="${ingredient.id}" class="${deletable != null && deletable?'deletableCheckbox':''}" name="${ingredient.description}" type="checkbox"
-       data-varetype="${ingredient instanceof models.ShoppingListIngredient?models.IngredientType.findForDescription(ingredient.description)?.toArrayString():''}"
-       data-recipe="${menu!=null?ingredient.findRecipeAsString(menu):''}">
-<label for="${ingredient.id}">
+
+
     #{if scaling != null && scaling}
-    <span>#{if menu != null}${utils.Currency.prettyDouble(ingredient.getScaledAmount(menu))}#{/if}
-        #{else }${utils.Currency.prettyDouble(ingredient.getScaledAmount(user))}#{/else}</span> ${ingredient.unit}
+        #{if menu != null}
+           #{set amount:utils.Currency.prettyDouble(ingredient.getScaledAmount(menu))/}
+        #{/if}
+        #{else }
+            #{set amount:utils.Currency.prettyDouble(ingredient.getScaledAmount(user))/}
+        #{/else}
     #{/if}
     #{elseif !(ingredient instanceof models.ShoppingListIngredient) || (ingredient instanceof models.ShoppingListIngredient && !ingredient.type.equals(models.ShoppingListItemType.onthefly)) }
-        <span>${utils.Currency.prettyDouble(ingredient.amount)}</span> ${ingredient.unit}
+        #{set amount:utils.Currency.prettyDouble(ingredient.amount)/}
     #{/elseif}
-${ingredient.description}
+
+
+<input id="${ingredient.id}" class="${deletable != null && deletable?'deletableCheckbox':''}"
+       name="${ingredient.description}" type="checkbox"
+    #{if checked}
+    checked="true"
+    #{/if}
+       data-varetype="${ingredient instanceof models.ShoppingListIngredient?models.IngredientType.findForDescription(ingredient.description)?.toArrayString():''}"
+       data-recipe="${menu!=null?ingredient.findRecipeAsString(menu):''}"
+       data-amount="${amount}"
+       data-unit="${ingredient.unit}"
+       data-description="${ingredient.description}"
+        >
+<label for="${ingredient.id}">
+        <span>${amount}</span> ${ingredient.type.equals(models.ShoppingListItemType.onthefly)?'':ingredient.unit} ${ingredient.description}
 </label>
 #{/if}

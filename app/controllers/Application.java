@@ -1,11 +1,15 @@
 package controllers;
 
 import models.User;
+import play.mvc.After;
 import play.mvc.Before;
 import play.mvc.Controller;
+import play.mvc.Http;
 import utils.Device;
 
-public class Application extends Controller {
+import java.util.ArrayList;
+
+public class Application extends ParentController {
 
     @Before
     static void setConnectedUser() {

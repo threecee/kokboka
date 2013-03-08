@@ -4,13 +4,15 @@ import models.*;
 import play.db.jpa.Blob;
 import play.mvc.Before;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.With;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @With(Secure.class)
-public class Admin extends Controller {
+public class Admin extends ParentController {
 
     @Before
     static void setConnectedUser() {
@@ -20,6 +22,7 @@ public class Admin extends Controller {
                 renderArgs.put("user", user.fullname);
         }
     }
+
 
     public static void index() {
         String user = Security.connected();

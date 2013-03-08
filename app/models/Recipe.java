@@ -21,8 +21,6 @@ public class Recipe extends Model {
     @ManyToOne
     public User author;
 
-    @ManyToMany
-    public List<User> favorited;
 
 
     public String source;

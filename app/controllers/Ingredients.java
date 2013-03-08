@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Ingredients extends CRUD {
+public class Ingredients extends ParentControllerCRUD {
 
     public static void index()
     {

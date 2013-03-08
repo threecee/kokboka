@@ -1,11 +1,16 @@
 package controllers;
 
 import models.User;
-import play.libs.Crypto;
-import play.mvc.Http;
-import utils.Device;
+import play.mvc.Before;
+import utils.CORSResolver;
 
 public class Security extends Secure.Security {
+
+    @Before
+    public static void setCORS() {
+        CORSResolver.resolve(response, request);
+    }
+
 
     static boolean authenticate(String username, String password) {
 

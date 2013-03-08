@@ -1,6 +1,7 @@
 package controllers;
 
 
+import flexjson.JSONSerializer;
 import models.*;
 import play.Logger;
 import play.db.jpa.Blob;
@@ -13,7 +14,7 @@ import java.util.*;
 
 
 @With(Secure.class)
-public class Recipes extends CRUD {
+public class Recipes extends ParentControllerCRUD {
 
     @Before
     static void setConnectedUser() {
@@ -114,6 +115,21 @@ public class Recipes extends CRUD {
     public static void ingredients() {
         List<Ingredient> ingredients = Ingredient.findAll();
         renderJSON(ingredients);
+    }
+
+    public static void getRecipesJSON(String callback) {
+        List<Recipe> recipes = Recipe.findAll();
+        JSONSerializer serializer = new JSONSerializer().include("title").include("id").exclude("*");
+
+         response.setContentTypeIfNotSet("application/json");
+        response.print(callback + "(" + serializer.serialize(recipes) + ");");
+    }
+    public static void getRecipeJSON(String callback, Long id) {
+        Recipe recipe = Recipe.findById(id);
+        JSONSerializer serializer = new JSONSerializer().exclude("author");
+
+         response.setContentTypeIfNotSet("application/json");
+        response.print(callback + "(" + serializer.serialize(recipe) + ");");
     }
 
 

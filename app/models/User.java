@@ -1,5 +1,6 @@
 package models;
 
+import flexjson.JSON;
 import org.hibernate.annotations.ManyToAny;
 import play.db.jpa.Model;
 
@@ -12,7 +13,9 @@ import java.util.List;
 public class User extends Model {
 
     public String email;
+
     public String password;
+
     public String fullname;
     public boolean isAdmin;
     public Double preferredServings;

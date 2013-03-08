@@ -2,6 +2,25 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+OPTIONS /json/shoppinglists/shoppinglistitem json.ShoppingLists.shoppinglistitem
+
+#PUT     /json/shoppinglists/shoppinglistitem json.ShoppingLists.shoppinglistitem
+#POST     /json/shoppinglists/shoppinglistitem json.ShoppingLists.shoppinglistitem
+#DELETE     /json/shoppinglists/shoppinglistitem json.ShoppingLists.shoppinglistitem
+#GET     /json/shoppinglists/shoppinglistitem json.ShoppingLists.shoppinglistitem
+
+
+#OPTIONS /json/shoppinglists/shoppinglistitem json.ShoppingLists.getShoppinglistItem
+PUT     /json/shoppinglists/shoppinglistitem json.ShoppingLists.saveShoppinglistItem
+POST     /json/shoppinglists/shoppinglistitem json.ShoppingLists.createShoppinglistItem
+DELETE     /json/shoppinglists/shoppinglistitem json.ShoppingLists.deleteShoppinglistItem
+GET     /json/shoppinglists/shoppinglistitem json.ShoppingLists.getShoppinglistItem
+
+*     /json/shoppinglists json.ShoppingLists.getShoppingListJSON
+
+
+
+
 GET     /mobile Application.indexMobile
 
 GET     /meny/{<[0-9]+>menuId}/dag/{<[0-9]+>index} Menus.showInMenu
@@ -26,7 +45,6 @@ GET     /oppskrifter/tags/{tag}                    Recipes.listTagged
 GET     /oppskrifter                            Recipes.index
 
 
-GET     /mobile/handlelapp
 GET     /mobile/handlelapp/lag/{<[0-9]+>menuId}         ShoppingLists.listMobile
 GET     /mobile/handlelapp/{<[0-9]+>id}         ShoppingLists.showMobile
 GET     /mobile/handlelapp/ukens         ShoppingLists.showCurrentMobile
@@ -55,7 +73,9 @@ GET     /favicon.ico                            404
 
 
 # Import Secure routes
-*       /                                       module:secure
+GET			/login			Secure.login
+POST        /login          Secure.authenticate
+GET         /logout         Secure.logout
 
 # Administration
 GET     /admin/?                                Admin.index

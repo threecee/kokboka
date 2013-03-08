@@ -9,7 +9,7 @@ import play.mvc.*;
 import java.util.List;
 
 @With(Secure.class)
-public class Tags extends CRUD {
+public class Tags extends ParentControllerCRUD {
 
     public static void autocompleteTags(String term){
 

@@ -3,6 +3,6 @@
 require:
     - play
     - play -> crud
-    - play -> secure
     - net.sourceforge.htmlcleaner -> htmlcleaner 2.2
     - commons-net -> commons-net 3.1
+    - net.sf.flexjson -> flexjson 2.1

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Images extends Controller {
+public class Images extends ParentController {
 
 
 	public String form() {

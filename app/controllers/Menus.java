@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @With(Secure.class)
-public class Menus extends CRUD {
+public class Menus extends ParentControllerCRUD {
 
     @Before
     static void setConnectedUser() {

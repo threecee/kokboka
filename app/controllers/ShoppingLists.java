@@ -1,6 +1,7 @@
 package controllers;
 
 
+import flexjson.JSONSerializer;
 import models.*;
 import play.Logger;
 import play.mvc.Before;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @With(Secure.class)
-public class ShoppingLists extends CRUD {
+public class ShoppingLists extends ParentControllerCRUD {
 
     @Before
     static void setConnectedUser() {
@@ -23,6 +24,24 @@ public class ShoppingLists extends CRUD {
                 renderArgs.put("user", user.fullname);
         }
     }
+
+    public static void getShoppingListJSON(String callback) {
+        User user = User.find("byEmail", Security.connected()).first();
+        Date startingDay = DateUtil.getStartingDayForWeek(8);
+
+        Menu menu = Menu.find("usedFromDate = ?", startingDay).first();
+        if (menu == null) {
+            menu = new Menu(user, startingDay).save();
+        }
+        ShoppingList shoppingListItem = menu.shoppingList;
+        List<ShoppingListIngredient> shoppingList = ShoppingListIngredient.find("shoppingList is ? order by description", shoppingListItem).fetch();
+
+         JSONSerializer serializer = new JSONSerializer();//.include("title").include("id").exclude("*");
+
+          response.setContentTypeIfNotSet("application/json");
+         response.print(callback + "(" + serializer.serialize(shoppingList) + ");");
+     }
+
 
 
     public static void uke(int uke) {

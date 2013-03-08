@@ -9,7 +9,7 @@ import play.mvc.With;
 import java.util.List;
 
 @With(Secure.class)
-public class Users extends CRUD {
+public class Users extends ParentControllerCRUD {
 
     @Before
     static void setConnectedUser() {

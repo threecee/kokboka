@@ -189,8 +189,13 @@ public class ShoppingLists extends ParentControllerCRUD {
     }
 
     public static void addOnTheFly(Long id, String description) {
-        Menu menu = Menu.findById(id);
+        if(description == null || description.trim().length() == 0)
+        {
+            ok();
+            return;
+        }
 
+        Menu menu = Menu.findById(id);
 
         ShoppingList shoppingList = menu.shoppingList;
         ShoppingListIngredient ingredient = shoppingList.addOnTheFly(description);

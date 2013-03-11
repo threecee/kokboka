@@ -7,10 +7,7 @@ import controllers.ParentControllerCRUD;
 import controllers.Secure;
 import controllers.Security;
 import flexjson.JSONSerializer;
-import models.Menu;
-import models.ShoppingList;
-import models.ShoppingListIngredient;
-import models.User;
+import models.*;
 import play.Logger;
 import play.mvc.Before;
 import play.mvc.Http;
@@ -42,10 +39,11 @@ public class ShoppingLists extends ParentControllerCRUD {
         if (menu == null) {
             menu = new Menu(user, startingDay).save();
         }
-        ShoppingList shoppingListItem = menu.shoppingList;
-        List<ShoppingListIngredient> shoppingList = ShoppingListIngredient.find("shoppingList is ? order by description", shoppingListItem).fetch();
+        ShoppingList shoppingList = ShoppingList.findById(menu.shoppingList.id);
+        List<ShoppingListIngredient> shoppingListIngredients = ShoppingListIngredient.find("shoppingList is ? order by description", shoppingList).fetch();
 
-        JSONSerializer serializer = new JSONSerializer();//.include("title").include("id").exclude("*");
+        shoppingList.shoppingListIngredients = shoppingListIngredients;
+        JSONSerializer serializer = new JSONSerializer().include("shoppingListIngredients");
 
         renderFlex(shoppingList, serializer);
     }
@@ -88,9 +86,19 @@ public class ShoppingLists extends ParentControllerCRUD {
         ingredient.save();
     }
 
-    public static void createShoppinglistItem(String data, String callback) {
-        Logger.debug(data);
-        //data.save();
+    public static void createShoppinglistItem(String body) {
+        Gson gson = new Gson();
+
+        ShoppingListIngredient item = gson.fromJson(body, ShoppingListIngredient.class);
+
+        ShoppingListIngredient ingredient = new ShoppingListIngredient(item.shoppingList, item.amount, item.unit, item.description, item.type, item.checked );
+
+        ingredient.description = item.description;
+        ingredient.amount = item.amount;
+        ingredient.unit = item.unit;
+        ingredient.checked = item.checked;
+
+        ingredient.save();
     }
 
     public static void uncheck(Long id) {

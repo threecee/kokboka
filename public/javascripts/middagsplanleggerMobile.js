@@ -72,7 +72,7 @@
             if (e.which == 13) {
                  services.addOnTheFlyShoppingListIngredient($("#tasksPage").attr("data-menu-id"), $(this).val(), injectOnTheFlyTask);
                 $(this).val("");
-
+                return false;
             }
         });
 

@@ -4,10 +4,13 @@
 
 OPTIONS /json/shoppinglists/shoppinglistitem json.ShoppingLists.shoppinglistitem
 
-#PUT     /json/shoppinglists/shoppinglistitem json.ShoppingLists.shoppinglistitem
-#POST     /json/shoppinglists/shoppinglistitem json.ShoppingLists.shoppinglistitem
-#DELETE     /json/shoppinglists/shoppinglistitem json.ShoppingLists.shoppinglistitem
-#GET     /json/shoppinglists/shoppinglistitem json.ShoppingLists.shoppinglistitem
+GET     /json/menus/{<[0-9]+>uke} json.Menus.getUke
+GET     /json/menus json.Menus.getAll
+
+
+GET     /json/recipes/{<[0-9]+>id} json.Recipes.getRecipe
+GET     /json/recipes json.Recipes.getRecipes
+
 
 
 #OPTIONS /json/shoppinglists/shoppinglistitem json.ShoppingLists.getShoppinglistItem

@@ -48,11 +48,6 @@ public class ShoppingLists extends ParentControllerCRUD {
         renderFlex(shoppingList, serializer);
     }
 
-    private static void renderFlex(Object renderable, JSONSerializer serializer) {
-        response.setContentTypeIfNotSet("application/json");
-        response.print(serializer.serialize(renderable));
-
-    }
 
 
     public static void shoppinglistitem()
@@ -89,6 +84,8 @@ public class ShoppingLists extends ParentControllerCRUD {
     public static void createShoppinglistItem(String body) {
         Gson gson = new Gson();
 
+       // String shoppingListId =  body.indexOf("\"shoppingList\"")
+
         ShoppingListIngredient item = gson.fromJson(body, ShoppingListIngredient.class);
 
         ShoppingListIngredient ingredient = new ShoppingListIngredient(item.shoppingList, item.amount, item.unit, item.description, item.type, item.checked );
@@ -99,6 +96,11 @@ public class ShoppingLists extends ParentControllerCRUD {
         ingredient.checked = item.checked;
 
         ingredient.save();
+
+        JSONSerializer serializer = new JSONSerializer();//.include("title").include("id").exclude("*");
+
+        renderFlex(ingredient, serializer);
+
     }
 
     public static void uncheck(Long id) {
